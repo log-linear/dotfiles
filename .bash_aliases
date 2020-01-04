@@ -1,0 +1,7 @@
+alias bashrc='micro ~/.bashrc && source ~/.bashrc'
+alias ..='cd ..'
+alias bash_aliases='micro ~/.bash_aliases && source ~/.bash_aliases'
+alias aliases='micro ~/.bash_aliases && source ~/.bash_aliases'
+alias profile='micro ~/.profile && source ~/.profile'
+alias rm='rm -I'
+alias df='df -h'
