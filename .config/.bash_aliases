@@ -13,7 +13,6 @@ alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
 alias R='R --no-save --no-restore-data'
-alias r='R --no-save --no-restore-data'
 alias open='xdg-open'
 
 # System specific commands
