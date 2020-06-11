@@ -16,10 +16,6 @@ alias R='R --no-save --no-restore-data'
 alias r='R --no-save --no-restore-data'
 alias open='xdg-open'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # System specific commands
 alias vivo='sudo python ~/bin/vivosmart/send_command.py'
 alias tuir='conda activate tuir && tuir && conda deactivate'
