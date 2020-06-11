@@ -16,6 +16,6 @@ alias R='R --no-save --no-restore-data'
 alias open='xdg-open'
 
 # System specific commands
-alias vivo='sudo python ~/bin/vivosmart/send_command.py'
+alias vivo='sudo python vivosmart/send_command.py'
 alias tuir='conda activate tuir && tuir && conda deactivate'
-alias scc='~/bin/sc-controller-0.4.7/run.sh'
+alias scc='sc-controller-0.4.7/run.sh'
