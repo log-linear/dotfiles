@@ -26,4 +26,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export EDITOR="micro"
+export EDITOR="nvim"
+export BROWSER="firefox"
+
