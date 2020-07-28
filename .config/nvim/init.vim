@@ -23,6 +23,6 @@ set wildmenu
 set incsearch
 set hlsearch
 
-" yank to system clipboard
+" yank to system clipboard - requires xclip or xsel
 set clipboard+=unnamedplus
 
