@@ -11,4 +11,3 @@ alias ls='ls -l'
 alias R='R --no-save --no-restore-data'
 alias open='xdg-open'
 alias vim='nvim'
-alias x='startx ~/.xinitrc'      # Type name of desired desktop after x, xinitrc is configured for it
