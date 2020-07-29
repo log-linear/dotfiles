@@ -26,6 +26,27 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Defaults
+export TERMINAL="termite"
 export EDITOR="nvim"
 export BROWSER="firefox"
+
+# $HOME cleanup
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
+export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+#export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/wineprefixes/default"
+export KODI_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/kodi"
+export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+export ANDROID_SDK_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
+export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
+export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
+export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
+export UNISON="${XDG_DATA_HOME:-$HOME/.local/share}/unison"
+export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 
