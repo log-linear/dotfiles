@@ -53,6 +53,7 @@ bindkey '^H' backward-kill-word                                 # delete previou
 bindkey '^[[Z' undo                                             # Shift+tab undo last action
 
 ## Alias section 
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
 alias cp="cp -iv"                                                # Confirm before overwriting something
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
