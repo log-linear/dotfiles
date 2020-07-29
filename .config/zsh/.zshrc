@@ -65,6 +65,7 @@ alias du='du -h'
 alias ls='ls -l'
 alias R='R --no-save --no-restore-data'
 alias open='xdg-open'
+alias vim='nvim'
 
 # Theming section  
 autoload -U compinit colors zcalc
