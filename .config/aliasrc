@@ -2,6 +2,7 @@ alias cp="cp -iv"                                                # Confirm befor
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
+alias ls='ls -l'
 alias ll='ls -al'
 alias ..='cd ..'
 alias mv='mv -iv'
@@ -11,3 +12,4 @@ alias ls='ls -l'
 alias R='R --no-save --no-restore-data'
 alias open='xdg-open'
 alias vim='nvim'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
