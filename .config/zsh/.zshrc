@@ -1,3 +1,6 @@
+# Disable ctrl+s ctrl+q terminal input disabling
+stty -ixon
+
 ## Options section
 setopt correct                                                  # Auto correct mistakes
 setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
@@ -23,6 +26,7 @@ SAVEHIST=500
 #export EDITOR=/usr/bin/nano
 #export VISUAL=/usr/bin/nano
 WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
+
 
 
 ## Keybindings section
@@ -206,5 +210,5 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
 esac
 
 # Import colorscheme from 'wal'
-[ -f "/usr/bin/wal" ] && cat /home/victor/.cache/wal/sequences
+cat /home/victor/.cache/wal/sequences
 
