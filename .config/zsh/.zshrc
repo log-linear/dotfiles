@@ -27,10 +27,8 @@ SAVEHIST=500
 #export VISUAL=/usr/bin/nano
 WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
 
-
-
 ## Keybindings section
-bindkey -e
+bindkey -v
 bindkey '^[[7~' beginning-of-line                               # Home key
 bindkey '^[[H' beginning-of-line                                # Home key
 if [[ "${terminfo[khome]}" != "" ]]; then
@@ -58,20 +56,7 @@ bindkey '^[[Z' undo                                             # Shift+tab undo
 
 ## Alias section 
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
-alias cp="cp -iv"                                                # Confirm before overwriting something
-alias df='df -h'                                                # Human-readable sizes
-alias free='free -m'                                            # Show sizes in MB
-alias gitu='git add . && git commit && git push'
-alias ll='ls -al'
-alias ..='cd ..'
-alias mv='mv -iv'
-alias rm='rm -I'
-alias du='du -h'
-alias ls='ls -l'
-alias R='R --no-save --no-restore-data'
-alias open='xdg-open'
-alias vim='nvim'
-
+ 
 # Theming section  
 autoload -U compinit colors zcalc
 compinit -d
