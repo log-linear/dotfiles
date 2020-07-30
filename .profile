@@ -56,4 +56,6 @@ export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export LESSHISTFILE=-
 export R_LIBS_USER=$XDG_DATA_HOME/R/%p-library/%v
 export PYLINTHOME="$XDG_CACHE_HOME"/pylint
+export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
+export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/py_hist_path.py
 
