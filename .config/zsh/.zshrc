@@ -204,3 +204,7 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
   		ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
     ;;
 esac
+
+# Import colorscheme from 'wal'
+[ -f "/usr/bin/wal" ] && cat /home/victor/.cache/wal/sequences
+
