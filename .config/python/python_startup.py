@@ -6,9 +6,7 @@ import os
 import readline
 import rlcompleter
 
-
-def import_pprint():
-    from pprint import pprint
+from pprint import pprint  # auto-import pprint
 
 
 def set_tab_complete():
@@ -72,7 +70,6 @@ def set_autoindent():
 
 
 # Run configs
-import_pprint()
 set_tab_complete()
 set_python_history()
 set_autoindent()
