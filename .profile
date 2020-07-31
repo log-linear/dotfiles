@@ -59,4 +59,5 @@ export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/py_hist_path.py
 export IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
+export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 
