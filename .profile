@@ -65,5 +65,3 @@ export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 
-# Switch escape and caps if tty and no passwd required:
-sudo -n loadkeys ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/ttymaps.kmap 2>/dev/null
