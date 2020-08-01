@@ -16,7 +16,6 @@ def set_tab_complete():
 def set_python_history():
     """
     Set .python_history location
-    Adapted from https://docs.python.org/3/library/readline.html?highlight=readline#example
     """
     histfile = os.environ.get('XDG_CACHE_HOME') + '/' + '.python_history'
     try:
@@ -32,7 +31,6 @@ def set_python_history():
 def set_autoindent():
     """
     contextual auto indent, taken from
-    https://github.com/brandoninvergo/python-startup/blob/master/python-startup.py
     """
 
     def rl_autoindent():
@@ -73,4 +71,11 @@ def set_autoindent():
 set_tab_complete()
 set_python_history()
 set_autoindent()
+
+#===============================================================================
+# Sources
+#===============================================================================
+
+# https://docs.python.org/3/library/readline.html?highlight=readline#example
+# https://github.com/brandoninvergo/python-startup/blob/master/python-startup.py
 
