@@ -1,5 +1,1 @@
-env_dirs:
-  - ~/.local/share/conda/envs
-pkg_dirs:
-  - ~/.local/share/conda/pkgs
 auto_activate_base: false
