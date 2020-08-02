@@ -195,5 +195,8 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
 esac
 
 # Import colorscheme from 'wal'
-cat /home/victor/.cache/wal/sequences
+[ -f /usr/bin/wal ] && cat ~/.cache/wal/sequences
+
+# Run conda init script if exists
+[ -f ~/.config/conda/conda_init ] && source ~/.config/conda/conda_init
 
