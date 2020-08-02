@@ -110,5 +110,13 @@ fi
 
 if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte.sh; fi # Ubuntu Budgie END
 
+## Application specific edits
+
+# Import colorscheme from 'wal'
+[ -f /usr/bin/wal ] && cat ~/.cache/wal/sequences
+
+# Run conda init script if exists
+[ -f ~/.config/conda/conda_init ] && source ~/.config/conda/conda_init
 # neoftetch on login
 neofetch
+
