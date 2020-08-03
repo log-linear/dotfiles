@@ -1,0 +1,8 @@
+## App specific tweaks
+
+# Run sxhkd on startup
+sxhkd &
+
+# Run wal on startup
+wal -i "$(< "${HOME}/.cache/wal/wal")"
+
