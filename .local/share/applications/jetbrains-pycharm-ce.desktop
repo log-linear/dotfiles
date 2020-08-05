@@ -1,0 +1,11 @@
+# Workaround for running PyCharm using Material Shell
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PyCharm Community Edition
+Icon=/opt/pycharm-community-2020.2/bin/pycharm.svg
+Exec="/usr/local/bin/charm" .local/share/JetBrains/dummy_project/
+Comment=Python IDE for Professional Developers
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-pycharm-ce
