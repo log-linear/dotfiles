@@ -55,9 +55,6 @@ export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export LESSHISTFILE=-
 export R_ENVIRON=$XDG_CONFIG_HOME/R/.Renviron
-export R_HISTFILE=$XDG_CACHE_HOME/.Rhistory
-export R_LIBS_USER=$XDG_DATA_HOME/R/%p-library/%v
-export R_PROFILE=$XDG_CONFIG_HOME/R/.Rprofile
 export PYLINTHOME="$XDG_CACHE_HOME"/pylint
 export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/python_startup.py
@@ -66,4 +63,5 @@ export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export CONDARC=$XDG_CONFIG_HOME/conda/.condarc
+export _JAVA_AWT_WM_NONREPARENTING=1
 
