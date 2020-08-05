@@ -34,10 +34,18 @@ utils::rc.settings(ipck = T)
   }
 }
 
+# Set CRAN mirror:
+local({
+  r <- getOption("repos")
+  r["CRAN"] <- "https://cloud.r-project.org/"
+  options(repos = r)
+})
+
 #===============================================================================
 # Sources:
 #===============================================================================
 
 # stackoverflow.com/questions/4996090/how-to-disable-save-workspace-image-prompt-in-r
 # https://www.r-bloggers.com/fun-with-rprofile-and-customizing-r-startup/
+# https://wiki.archlinux.org/index.php/R#Adding_a_graphical_frontend_to_R
 
