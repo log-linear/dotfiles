@@ -54,8 +54,8 @@ nnoremap S :%s//g<Left><Left>
 " Save file as sudo on files that require root permission
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
-" Goyo plugin makes text more readable when writing prose:
-map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
+" Set Goyo plugin 
+map <leader>f :Goyo \| set linebreak<CR>
 
 " Splits open at the bottom and right 
 set splitbelow splitright
