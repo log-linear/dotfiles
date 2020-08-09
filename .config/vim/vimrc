@@ -1,11 +1,33 @@
+" Environment
+set undodir=$XDG_DATA_HOME/vim/undo
+set directory=$XDG_DATA_HOME/vim/swap
+set backupdir=$XDG_DATA_HOME/vim/backup
+set viewdir=$XDG_DATA_HOME/vim/view
+set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
+
+" Plugins
+if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim"'))
+  echo "Downloading junegunn/vim-plug to manage plugins..."
+  silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/
+  silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim
+	autocmd VimEnter * PlugInstall
+endif 
+
+call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'))
+  Plug 'junegunn/goyo.vim'
+  Plug 'tpope/vim-commentary'
+  Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
+call plug#end()
+
 " tabs to spaces
 set softtabstop=4
 
 " Tabs are space
 set expandtab
 
-" line numbers
-set number
+" relative line numbers
+set number relativenumber
 
 " Cursor line highlight 
 set cursorline
@@ -26,11 +48,15 @@ set hlsearch
 " yank to system clipboard - requires xclip or xsel
 set clipboard+=unnamedplus
 
-" Environment
-set undodir=$XDG_DATA_HOME/vim/undo
-set directory=$XDG_DATA_HOME/vim/swap
-set backupdir=$XDG_DATA_HOME/vim/backup
-set viewdir=$XDG_DATA_HOME/vim/view
-set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
-set runtimepath=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
+" Replace all is aliased to S.
+nnoremap S :%s//g<Left><Left>
+
+" Save file as sudo on files that require root permission
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" Goyo plugin makes text more readable when writing prose:
+map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
+
+" Splits open at the bottom and right 
+set splitbelow splitright
 

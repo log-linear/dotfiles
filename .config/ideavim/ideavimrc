@@ -1,0 +1,33 @@
+" Config files for IntelliJ's IdeaVim plugin
+
+" tabs to spaces
+set softtabstop=4
+
+" Tabs are space
+set expandtab
+
+" relative line numbers
+set number relativenumber
+
+" Cursor line highlight 
+set cursorline
+
+" show command
+set showcmd
+
+" filetype detection
+filetype indent on
+
+" autocompletion
+set wildmenu
+
+" search tweaks
+set incsearch
+set hlsearch
+
+" yank to system clipboard - requires xclip or xsel
+set clipboard+=unnamedplus
+
+" Replace all is aliased to S.
+nnoremap S :%s//g<Left><Left>
+
