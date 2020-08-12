@@ -64,4 +64,6 @@ export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export CONDARC=$XDG_CONFIG_HOME/conda/.condarc
 export _JAVA_AWT_WM_NONREPARENTING=1
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch/notmuchrc
+export NMBGIT="$XDG_DATA_HOME"/notmuch/nmbug
 
