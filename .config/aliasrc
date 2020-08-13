@@ -17,7 +17,7 @@ alias md='mullvad disconnect'
 
 # Used for $HOME cleanup
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
-alias mbsync='mbsync - c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
+alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
