@@ -1,4 +1,4 @@
-alias cp="cp -iv"                                                # Confirm before overwriting something
+alias cp="cp -iv"                                               # Confirm before overwriting something
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
@@ -9,12 +9,15 @@ alias du='du -h'
 alias ls='ls -l'
 alias open='xdg-open'
 alias vim='nvim'
-alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias v='nvim'
 alias e='$EDITOR'
 alias rstudio='rstudio-bin'
 alias mc='mullvad connect'
 alias md='mullvad disconnect'
+
+# Used for $HOME cleanup
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias mbsync='mbsync - c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
