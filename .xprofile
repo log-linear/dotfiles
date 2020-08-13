@@ -6,4 +6,3 @@
 # Run wal on startup
 #wal -i "$(< "${HOME}/.cache/wal/wal")"
 
-hydroxide serve &
