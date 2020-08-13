@@ -13,6 +13,8 @@ alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias v='nvim'
 alias e='$EDITOR'
 alias rstudio='rstudio-bin'
+alias mc='mullvad connect'
+alias md='mullvad disconnect'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then

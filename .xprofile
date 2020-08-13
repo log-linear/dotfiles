@@ -4,5 +4,6 @@
 #sxhkd &
 
 # Run wal on startup
-wal -i "$(< "${HOME}/.cache/wal/wal")"
+#wal -i "$(< "${HOME}/.cache/wal/wal")"
 
+hydroxide serve
