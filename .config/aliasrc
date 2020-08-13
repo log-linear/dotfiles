@@ -14,7 +14,7 @@ alias e='$EDITOR'
 alias rstudio='rstudio-bin'
 alias mc='mullvad connect'
 alias md='mullvad disconnect'
-alias mutt='neomutt'
+alias mutt='mbsync vfaner && neomutt'
 
 # Used for $HOME cleanup
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
