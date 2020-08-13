@@ -6,3 +6,5 @@
 # Run wal on startup
 #wal -i "$(< "${HOME}/.cache/wal/wal")"
 
+# Run mbsync on startup
+mbsync vfaner &
