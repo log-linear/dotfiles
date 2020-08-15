@@ -29,7 +29,7 @@ utils::rc.settings(ipck = T)
 .Last <- function(){
   if(interactive()){
     hist_file <- Sys.getenv("R_HISTFILE")
-    if(hist_file == "") hist_file <- "~/.cache/.Rhistory"
+    if(hist_file=="") hist_file <- "~/.cache/.Rhistory"
     savehistory(hist_file)
   }
 }
