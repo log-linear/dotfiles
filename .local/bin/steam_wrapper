@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+# Wrapper to allow moving $HOME/.steam* files to a different location 
+HOME=$HOME/.local/share/steam_home
+exec /usr/bin/steam "$@"

@@ -204,5 +204,5 @@ esac
 [ -f /usr/bin/wal ] && cat ~/.cache/wal/sequences
 
 # Run conda init script if exists
-[ -f ~/.config/conda/conda_init ] && source ~/.config/conda/conda_init
+[ -f ~/.local/bin/conda_init ] && source ~/.local/bin/conda_init
 
