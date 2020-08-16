@@ -6,3 +6,6 @@
 # Run wal on startup
 #wal -i "$(< "${HOME}/.cache/wal/wal")"
 
+# Run protonmail-bridge on startup
+protonmail-bridge --no-window &
+
