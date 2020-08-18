@@ -16,6 +16,9 @@ def set_python_history():
     Set .python_history location
     """
     histfile = os.environ.get('XDG_CACHE_HOME') + '/' + '.python_history'
+    if histfile in ('', None):
+        histfile = '~/.cache/.python_history'
+
     try:
         readline.read_history_file(histfile)
         # default history len is -1 (infinite), which may grow unruly
