@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Connect/disconnect from mullvad
+if [[ $(mullvad status) = "Tunnel status: Disconnected" ]] ; then
+        mullvad connect
+else
+        mullvad disconnect
+fi
+
