@@ -12,8 +12,8 @@ alias vim='nvim'
 alias v='nvim'
 alias e='$EDITOR'
 alias rstudio='rstudio-bin'
-alias mc='mullvad connect'
-alias md='mullvad disconnect'
+alias ms='mullvad status'
+alias mh='mullvad_helper'
 alias mutt='mbsync vfaner && neomutt'
 
 # Used for $HOME cleanup
