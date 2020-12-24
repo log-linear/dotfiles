@@ -27,7 +27,7 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Defaults
-export TERMINAL="termite"
+export TERMINAL="alacritty"
 export EDITOR="nvim"
 export BROWSER="firefox"
 
