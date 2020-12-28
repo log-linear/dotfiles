@@ -4,9 +4,9 @@ auto-reload yes
 max-items 50
 
 # externel browser
-browser '/usr/bin/lynx %u'
-macro m set browser '/usr/local/bin/mpv %u'; open-in-browser ; set browser '/usr/bin/lynx %u'
-macro l set browser '/usr/bin/firefox %u'; open-in-browser ; set browser '/usr/bin/lynx %u'
+browser "/usr/bin/lynx %u"
+macro m set browser "/usr/local/bin/mpv %u"; open-in-browser ; set browser "/usr/bin/lynx %u"
+macro l set browser "/usr/bin/firefox %u"; open-in-browser ; set browser "/usr/bin/lynx %u"
 
 # unbind keys
 unbind-key ENTER
@@ -31,6 +31,6 @@ color info               default   black
 color article            default   default
 
 # highlights
-highlight article '^(Title):.*$' blue default
-highlight article 'https?://[^ ]+' red default
-highlight article '\\[image\\ [0-9]+\\]' green default
+highlight article "^(Title):.*$" blue default
+highlight article "https?://[^ ]+" red default
+highlight article "\\[image\\ [0-9]+\\]" green default
