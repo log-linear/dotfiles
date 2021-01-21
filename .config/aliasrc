@@ -15,6 +15,8 @@ alias rstudio='rstudio-bin'
 alias ms='mullvad status'
 alias mh='mullvad_helper'
 alias mutt='mbsync vfaner && neomutt'
+alias tmux='tmux -f ${XDG_CONFIG_HOME}/tmux/tmux.conf'
+alias vc='veracrypt'
 
 # Used for $HOME cleanup
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
