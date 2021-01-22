@@ -61,3 +61,5 @@ map <leader>f :Goyo \| set linebreak<CR>
 " Splits open at the bottom and right 
 set splitbelow splitright
 
+" Enable mouse support
+set mouse=nv
