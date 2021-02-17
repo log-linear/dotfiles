@@ -19,7 +19,11 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'tpope/vim-commentary'
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 call plug#end()
+
+" remap <leader>
+let mapleader=","
 
 " tabs to spaces
 set softtabstop=4
