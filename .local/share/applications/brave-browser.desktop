@@ -1,3 +1,5 @@
+# Custom Desktop entry to force running brave with a SOCKS5 proxy. 
+# Overrides /usr/share/applications/brave-browser.desktop
 [Desktop Entry]
 Version=1.0
 Name=Brave
