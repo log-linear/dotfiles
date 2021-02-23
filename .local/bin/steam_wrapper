@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
 # Wrapper to allow moving $HOME/.steam* files to a different location 
+# Taken from 
+# https://github.com/ValveSoftware/steam-for-linux/issues/1890#issuecomment-394128930
 HOME=$HOME/.local/share/steam_home
 exec /usr/bin/steam "$@"
