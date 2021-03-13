@@ -18,8 +18,16 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'junegunn/goyo.vim'
   Plug 'tpope/vim-commentary'
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-r-lsp', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-sh', {'do': 'yarn install --frozen-lockfile'} 
+  Plug 'neoclide/coc-sql', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'} 
+  Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'} 
+  Plug 'neoclide/coc-texlab', {'do': 'yarn install --frozen-lockfile'} 
+  Plug 'neoclide/coc-markdownlint', {'do': 'yarn install --frozen-lockfile'} 
 call plug#end()
 
 " remap <leader>
