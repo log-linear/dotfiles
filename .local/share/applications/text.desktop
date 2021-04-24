@@ -1,4 +1,0 @@
-[Desktop Entry]
-Name=Text editor
-Type=Application
-Exec=/usr/bin/termite -e nvim %u
