@@ -1,0 +1,23 @@
+#!/bin/sh
+
+if [ -t 0 ]; then
+    if [ -n "$1" ]; then
+        $BROWSER $1
+    else
+        cat <<usage
+
+Usage: browser
+       pipe html to a browser
+
+$ echo '<h1>hi mom!</h1>' | browser
+$ ron -5 man/rip.5.ron | browser
+
+usage
+
+fi  
+else
+        file_path="/tmp/${RANDOM}.html"
+        cat $1 > $file_path
+        $BROWSER $file_path
+fi
+
