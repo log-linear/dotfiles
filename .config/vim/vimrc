@@ -75,3 +75,7 @@ set splitbelow splitright
 
 " Enable mouse support
 set mouse=nv
+
+" Add visual margin guiding new line breaks
+set colorcolumn=80
+highlight ColorColumn ctermbg=blue
