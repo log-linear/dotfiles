@@ -18,31 +18,12 @@ options(scipen = 10)
 # Enable tab-completion for library() and require() calls
 utils::rc.settings(ipck = T)
 
-# Print timestamp to console
-.First <- function(){
-  if(interactive()){
-    utils::timestamp(,prefix=paste("##------ [",getwd(),"] ",sep=""))
-  }
-}
-
-# Print commands to R_HISTFILE
-.Last <- function(){
-  if(interactive()){
-    hist_file <- Sys.getenv("R_HISTFILE")
-    if(hist_file=="") hist_file <- "~/.cache/.Rhistory"
-    savehistory(hist_file)
-  }
-}
-
 # Set CRAN mirror:
 local({
   r <- getOption("repos")
   r["CRAN"] <- "https://cloud.r-project.org/"
   options(repos = r)
 })
-
-# Case-insensitive View()
-view <- function(x) View(x)
 
 #===============================================================================
 # Sources:
