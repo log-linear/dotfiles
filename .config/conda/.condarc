@@ -1,1 +1,3 @@
 auto_activate_base: false
+env_dirs:
+        - ~/.local/share/.conda
