@@ -1,6 +1,9 @@
 # Disable ctrl+s ctrl+q terminal input disabling
 stty -ixon
 
+# Disable zsh built-in command `r`
+disable r
+
 ## Options section
 setopt correct                                                  # Auto correct mistakes
 setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
@@ -20,12 +23,9 @@ zstyle ':completion:*' rehash true                              # automatically 
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
-
-# Move history file to ~/.cache
 HISTFILE=~/.cache/history
 HISTSIZE=1000
 SAVEHIST=500
-
 #export EDITOR=/usr/bin/nano
 #export VISUAL=/usr/bin/nano
 WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
@@ -204,5 +204,6 @@ esac
 [ -f /usr/bin/wal ] && cat ~/.cache/wal/sequences
 
 # Run conda init script if exists
-[ -f ~/.local/bin/conda_init ] && source ~/.local/bin/conda_init
+[ -f ~/.config/conda/conda_init ] && source ~/.config/conda/conda_init
 
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
