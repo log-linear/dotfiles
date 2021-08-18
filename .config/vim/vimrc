@@ -86,11 +86,10 @@ let R_min_editor_width = 80
 " make sure the console is at the bottom by making it really wide
 let R_rconsole_width = 1000
 
-" show arguments for functions during omnicompletion
-let R_show_args = 1
-
 " Don't expand a dataframe to show columns by default
 let R_objbr_opendf = 0
+
+let R_pdfviewer = "evince"
 
 " Press the space bar to send lines and selection to R console
 vmap <Space> <Plug>RDSendSelection
