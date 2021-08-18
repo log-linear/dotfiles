@@ -1,5 +1,4 @@
-" Environment
-set undodir=$XDG_DATA_HOME/vim/undo
+" Environment set undodir=$XDG_DATA_HOME/vim/undo
 set directory=$XDG_DATA_HOME/vim/swap
 set backupdir=$XDG_DATA_HOME/vim/backup
 set viewdir=$XDG_DATA_HOME/vim/view
@@ -52,6 +51,15 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Make adjusing split sizes a bit more friendly
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize -3<CR>
+noremap <silent> <C-Down> :resize +3<CR>
+
+" <Ctrl + P> = R base pipe |>
+imap <C-p> <space>\|><space>
+
 " Enable mouse support
 set mouse=nv
 
@@ -70,11 +78,26 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'junegunn/goyo.vim'
   Plug 'tpope/vim-commentary'
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
-  Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+  Plug 'python-mode/python-mode', {'for': 'python', 'branch': 'develop'}
+  Plug 'preservim/nerdtree'
+  Plug 'vim-airline/vim-airline'
+  Plug 'jreybert/vimagit'
 call plug#end()
 
-" Goyo========================================================================
+" vim-slime ==================================================================
+let g:slime_target = "neovim"
+
+" Goyo =======================================================================
 map <leader>f :Goyo \| set linebreak<CR>
+
+" Nerd tree ==================================================================
+map <leader>n :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+if has('nvim')
+    let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
+else
+    let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
+endif
 
 " Nvim-R =====================================================================
 " press -- to have Nvim-R insert the assignment operator: <-
@@ -89,6 +112,7 @@ let R_rconsole_width = 1000
 " Don't expand a dataframe to show columns by default
 let R_objbr_opendf = 0
 
+" Set PDF Reader
 let R_pdfviewer = "evince"
 
 " Press the space bar to send lines and selection to R console
@@ -134,7 +158,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'r_language_server'}
+local servers = { 'pyright', 'r_language_server', 'bashls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
