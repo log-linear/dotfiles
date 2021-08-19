@@ -59,6 +59,13 @@ noremap <silent> <C-Down> :resize +3<CR>
 " Enable mouse support
 set mouse=nv
 
+" Start terminals
+map <Leader>tt :new term://zsh<CR>
+map <Leader>tp :new term://zsh<CR>ipython3<CR><C-\><C-n><C-w>k
+
+" Exit terminal mode
+tnoremap <C-x> <C-\><C-n>
+
 " Filetype-specific settings =================================================
 
 """ R 
@@ -80,8 +87,9 @@ autocmd FileType sh setlocal shiftwidth=2 tabstop=2
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim"'))
   echo "Downloading junegunn/vim-plug to manage plugins..."
   silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/
-  silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim
-	autocmd VimEnter * PlugInstall
+  silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" 
+      \ > ${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim
+  autocmd VimEnter * PlugInstall
 endif 
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'))
@@ -93,13 +101,9 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'vim-airline/vim-airline'
   Plug 'jreybert/vimagit'
   Plug 'hrsh7th/nvim-compe'
+  Plug 'karoliskoncevicius/vim-sendtowindow'
+  Plug 'tpope/vim-dadbod'
 call plug#end()
-
-""" vim-repl
-nnoremap <leader>r :REPLToggle
-
-""" vim-slime 
-let g:slime_target = "neovim"
 
 """ Goyo 
 map <leader>f :Goyo \| set linebreak<CR>
@@ -107,6 +111,7 @@ map <leader>f :Goyo \| set linebreak<CR>
 "" Nerd tree 
 map <leader>n :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 if has('nvim')
   let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
 else
@@ -213,12 +218,12 @@ local t = function(str)
 end
 
 local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
+  local col = vim.fn.col('.') - 1
+  if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+    return true
+  else
+    return false
+  end
 end
 
 -- Use (s-)tab to:
