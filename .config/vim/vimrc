@@ -51,17 +51,21 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Remap split adjustments to CTRL + arrow keys
-noremap <silent> <C-Left> :vertical resize +3<CR>
-noremap <silent> <C-Right> :vertical resize -3<CR>
-noremap <silent> <C-Up> :resize -3<CR>
-noremap <silent> <C-Down> :resize +3<CR>
+noremap <silent> <A-h> :vertical resize +3<CR>
+noremap <silent> <A-l> :vertical resize -3<CR>
+noremap <silent> <A-k> :resize -3<CR>
+noremap <silent> <A-j> :resize +3<CR>
+
+" Swap horiz/vert window splits
+map <Leader>th <C-w>t<C-w>H
+map <Leader>tk <C-w>t<C-w>K
 
 " Enable mouse support
 set mouse=nv
 
 " Start terminals
 map <Leader>tt :new term://zsh<CR>
-map <Leader>tp :new term://zsh<CR>ipython3<CR><C-\><C-n><C-w>k
+map <Leader>tp :new term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
 
 " Exit terminal mode
 tnoremap <C-x> <C-\><C-n>
@@ -99,10 +103,11 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
   Plug 'preservim/nerdtree'
   Plug 'vim-airline/vim-airline'
-  Plug 'jreybert/vimagit'
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
   Plug 'hrsh7th/nvim-compe'
   Plug 'karoliskoncevicius/vim-sendtowindow'
-  Plug 'tpope/vim-dadbod'
+  Plug 'mhinz/vim-startify'
 call plug#end()
 
 """ Goyo 
@@ -137,6 +142,16 @@ let R_pdfviewer = "evince"
 " Press the bar to send lines and selection to R console
 vmap <Space> <Plug>RDSendSelection
 nmap <Space> <Plug>RDSendLine
+
+""" gitgutter
+let g:gitgutter_async = 0 
+
+""" startify
+let g:startify_lists = [
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'files',     'header': ['   Recent']            },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
 
 " LSP ========================================================================
 
