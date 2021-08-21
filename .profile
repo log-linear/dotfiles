@@ -16,6 +16,15 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+# if running zsh
+if [ -n "$ZSH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.config/zsh/.zshrc" ]; then
+	. "$HOME/.config/zsh/.zshrc"
+    fi
+fi
+
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -66,7 +75,10 @@ export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export CONDARC=$XDG_CONFIG_HOME/conda/.condarc
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/.java
 export _JAVA_AWT_WM_NONREPARENTING=1
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch/notmuchrc
 export NMBGIT="$XDG_DATA_HOME"/notmuch/nmbug
+export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc 
 

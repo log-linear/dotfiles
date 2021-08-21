@@ -58,7 +58,7 @@ noremap <silent> <A-j> :resize +3<CR>
 
 " Swap horiz/vert window splits
 map <Leader>th <C-w>t<C-w>H
-map <Leader>tk <C-w>t<C-w>K
+map <Leader>tv <C-w>t<C-w>K
 
 " Enable mouse support
 set mouse=nv
@@ -67,8 +67,9 @@ set mouse=nv
 map <Leader>tt :new term://zsh<CR>
 map <Leader>tp :new term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
 
-" Exit terminal mode
-tnoremap <C-x> <C-\><C-n>
+" Visual line guide at 80 characters
+set colorcolumn=80
+highlight ColorColumn ctermbg=238
 
 " Filetype-specific settings =================================================
 
@@ -108,6 +109,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'hrsh7th/nvim-compe'
   Plug 'karoliskoncevicius/vim-sendtowindow'
   Plug 'mhinz/vim-startify'
+  Plug 'chrisbra/csv.vim'
 call plug#end()
 
 """ Goyo 
@@ -130,14 +132,14 @@ let R_assign_map = "--"
 " set a minimum source editor width
 let R_min_editor_width = 80
 
-" make sure the console is at the bottom by making it really wide
-let R_rconsole_width = 1000
-
 " Don't expand a dataframe to show columns by default
 let R_objbr_opendf = 0
 
 " Set PDF Reader
 let R_pdfviewer = "evince"
+
+" Set data.frame/matrix viewer
+let R_csv_app = "terminal:vd"
 
 " Press the bar to send lines and selection to R console
 vmap <Space> <Plug>RDSendSelection
@@ -190,6 +192,13 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
 end
+
+-- Disable inline error messages
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = false
+    }
+)
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
