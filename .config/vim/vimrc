@@ -28,6 +28,9 @@ filetype indent on
 " autocompletion
 set wildmenu
 
+" Allow timeout
+set notimeout
+
 " search tweaks
 set incsearch
 set hlsearch
@@ -42,7 +45,7 @@ nnoremap S :%s//g<Left><Left>
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Splits open at the bottom and right 
-set splitbelow splitright
+set splitbelow splitright 
 
 " Remap split navigation to CTRL + hjkl
 nnoremap <C-h> <C-w>h
@@ -56,16 +59,14 @@ noremap <silent> <A-l> :vertical resize -3<CR>
 noremap <silent> <A-k> :resize -3<CR>
 noremap <silent> <A-j> :resize +3<CR>
 
-" Swap horiz/vert window splits
-map <Leader>th <C-w>t<C-w>H
-map <Leader>tv <C-w>t<C-w>K
-
 " Enable mouse support
 set mouse=nv
 
 " Start terminals
 map <Leader>tt :new term://zsh<CR>
-map <Leader>tp :new term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
+
+" Escape terminal mode
+tnoremap <C-space> <C-\><C-n>
 
 " Visual line guide at 80 characters
 set colorcolumn=80
@@ -132,7 +133,7 @@ endif
 
 """ Nvim-R 
 " Use radian console
-let R_app = "radian"
+let R_app = "radian --no-history"
 let R_cmd = "R"
 let R_hl_term = 0
 let R_args = []  " if you had set any
@@ -150,12 +151,12 @@ let R_objbr_opendf = 0
 " Set PDF Reader
 let R_pdfviewer = "evince"
 
-" Set data.frame/matrix viewer
-let R_csv_app = "terminal:vd"
+" Use visidata as data.frame/matrix viewer
+let R_csv_app = "terminal:vd" 
 
 " Press spacebar to send lines and selection to R console
-vmap <Space> <Plug>RDSendSelection
-nmap <Space> <Plug>RDSendLine
+vmap <CR> <Plug>RDSendSelection
+nmap <CR> <Plug>RDSendLine
 
 """ gitgutter
 let g:gitgutter_async = 0 
