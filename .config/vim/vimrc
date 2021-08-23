@@ -98,6 +98,11 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoloa
   autocmd VimEnter * PlugInstall
 endif 
 
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'))
   Plug 'neovim/nvim-lspconfig'
   Plug 'junegunn/goyo.vim'
@@ -110,13 +115,12 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'hrsh7th/nvim-compe'
   Plug 'karoliskoncevicius/vim-sendtowindow'
   Plug 'mhinz/vim-startify'
-  Plug 'chrisbra/csv.vim'
-  Plug 'tomasiser/vim-code-dark'
+  Plug 'morhetz/gruvbox'
 call plug#end()
 
 """ Vim-code-dark
-colorscheme codedark
-let g:airline_theme = 'codedark'
+colorscheme gruvbox
+let g:airline_theme = 'gruvbox'
 
 """ Goyo 
 map <leader>f :Goyo \| set linebreak<CR>
@@ -131,7 +135,14 @@ else
   let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
 endif
 
+" enable relative line numbers
+let NERDTreeShowLineNumbers=1
+autocmd FileType nerdtree setlocal relativenumber
+
 """ Nvim-R 
+" Auto start
+let R_auto_start = 2
+
 " Use radian console
 let R_app = "radian --no-history"
 let R_cmd = "R"
@@ -139,11 +150,14 @@ let R_hl_term = 0
 let R_args = []  " if you had set any
 let R_bracketed_paste = 1"
 
-" press -- to have Nvim-R insert the assignment operator: <-
+" type -- to assignment operator: <-
 let R_assign_map = "--"
 
 " set a minimum source editor width
 let R_min_editor_width = 80
+
+" make sure the console is at the bottom by making it really wide
+let R_objbr_place = 'script,right'
 
 " Don't expand a dataframe to show columns by default
 let R_objbr_opendf = 0
