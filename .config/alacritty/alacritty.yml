@@ -1,7 +1,13 @@
-background_opacity: 0.9
 window:
   decorations: none
 font:
   normal:
-    familY: terminus-font
+    family: "JetBrains Mono"
+    style: Regular
+  bold:
+    family: "JetBrains Mono"
+    style: Bold
+  italic:
+    family: "JetBrains Mono"
+    style: Italic
   size: 10.0
