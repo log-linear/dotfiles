@@ -88,16 +88,20 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 \| endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'))
+
+  " Functionality
   Plug 'neovim/nvim-lspconfig'
-  Plug 'junegunn/goyo.vim'
+  Plug 'hrsh7th/nvim-compe'
   Plug 'tpope/vim-commentary'
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
   Plug 'preservim/nerdtree'
-  Plug 'vim-airline/vim-airline'
   Plug 'tpope/vim-fugitive'
   Plug 'airblade/vim-gitgutter'
-  Plug 'hrsh7th/nvim-compe'
   Plug 'karoliskoncevicius/vim-sendtowindow'
+
+  " Aesthetics
+  Plug 'vim-airline/vim-airline'
+  Plug 'junegunn/goyo.vim'
   Plug 'mhinz/vim-startify'
   Plug 'morhetz/gruvbox'
 call plug#end()
@@ -145,6 +149,9 @@ nmap <CR> <Plug>RDSendLine
 
 """ gitgutter
 let g:gitgutter_async = 0 
+
+""" fugitive
+nmap <leader>vd :Gvdiffsplit<CR>
 
 """ startify
 let g:startify_lists = [
