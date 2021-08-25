@@ -90,14 +90,14 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'))
 
   " Functionality
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/nvim-compe'
-  Plug 'tpope/vim-commentary'
-  Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
-  Plug 'preservim/nerdtree'
-  Plug 'tpope/vim-fugitive'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'karoliskoncevicius/vim-sendtowindow'
+  Plug 'neovim/nvim-lspconfig'  " native nvim language server
+  Plug 'hrsh7th/nvim-compe'  " code autocomplete
+  Plug 'tpope/vim-commentary'  " easy code commenting
+  Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}  " R support
+  Plug 'preservim/nerdtree'  " file browser
+  Plug 'tpope/vim-fugitive'  " git command support
+  Plug 'airblade/vim-gitgutter'  " line-by-line git diff marks
+  Plug 'karoliskoncevicius/vim-sendtowindow'  " General REPL
 
   " Aesthetics
   Plug 'vim-airline/vim-airline'
@@ -106,6 +106,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'morhetz/gruvbox'
   Plug 'ryanoasis/vim-devicons'  " Requires Nerd Font compatible font
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  Plug 'ryanoasis/vim-devicons'  " Always load last
 call plug#end()
 
 """ Vim-code-dark
@@ -153,7 +154,7 @@ nmap <CR> <Plug>RDSendLine
 let g:gitgutter_async = 0 
 
 """ fugitive
-nmap <leader>vd :Gvdiffsplit<CR>
+nnoremap <leader>vd :Gvdiffsplit<CR>
 
 """ startify
 let g:startify_lists = [
