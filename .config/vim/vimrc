@@ -104,6 +104,8 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'junegunn/goyo.vim'
   Plug 'mhinz/vim-startify'
   Plug 'morhetz/gruvbox'
+  Plug 'ryanoasis/vim-devicons'  " Requires Nerd Font compatible font
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 call plug#end()
 
 """ Vim-code-dark
