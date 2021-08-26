@@ -14,6 +14,7 @@ set splitbelow splitright  " Splits open at the bottom and right
 set mouse=nv  " Enable mouse support
 set scrolloff=1  " Always show one line above/below character
 set number relativenumber 
+set hidden  " Allow switching buffers before saving
 
 " tabs to spaces
 set expandtab
@@ -22,6 +23,7 @@ set shiftwidth=4
 
 " search tweaks
 set incsearch
+set showmatch
 set hlsearch
 
 " Visual line guide at 80 characters
@@ -50,11 +52,19 @@ noremap <silent> <A-l> :vertical resize -3<CR>
 noremap <silent> <A-k> :resize -3<CR>
 noremap <silent> <A-j> :resize +3<CR>
 
+" Simple buffer switching
+nnoremap <leader>q :bp <BAR> bd #<CR>
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
+
 " Start terminals
 map <Leader>tt :new term://zsh<CR>
 
 " Escape terminal mode
 tnoremap <C-space> <C-\><C-n>
+
+" Activate ex mode with gq
+map Q gQ  
 
 " Filetype-specific settings =================================================
 
@@ -70,6 +80,10 @@ autocmd FileType rmd setlocal shiftwidth=2 tabstop=2
 """ sh 
 " adjust tab widths
 autocmd FileType sh setlocal shiftwidth=2 tabstop=2
+
+""" md 
+" adjust tab widths
+autocmd FileType markdown setlocal shiftwidth=2 tabstop=2
 
 " Plugins ====================================================================
 
@@ -98,6 +112,8 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'tpope/vim-fugitive'  " git command support
   Plug 'airblade/vim-gitgutter'  " line-by-line git diff marks
   Plug 'karoliskoncevicius/vim-sendtowindow'  " General REPL
+  Plug 'tpope/vim-surround'  " Easisly change brackets, quotes, parentheses, etc
+  Plug 'tpope/vim-repeat'  " Use . to repeat plugin keymaps
 
   " Aesthetics
   Plug 'vim-airline/vim-airline'
@@ -107,7 +123,15 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'ryanoasis/vim-devicons'  " Requires Nerd Font compatible font
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'ryanoasis/vim-devicons'  " Always load last
+  Plug 'Yggdroot/indentLine'
 call plug#end()
+
+""" Vim-airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+""" indentline
+let g:indentLine_char = '▏'
 
 """ Vim-code-dark
 colorscheme gruvbox
@@ -125,6 +149,9 @@ if has('nvim')
 else
   let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
 endif
+
+" Show hidden files by default
+let NERDTreeShowHidden=1
 
 " enable relative line numbers
 let NERDTreeShowLineNumbers=1
@@ -185,7 +212,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<C-m>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
