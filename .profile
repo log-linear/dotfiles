@@ -1,3 +1,5 @@
+# This file is not read when running wayland. One workaround is to have 
+# /etc/profile source it, e.g. . ~/.profile
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
@@ -75,7 +77,7 @@ export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export CONDARC=$XDG_CONFIG_HOME/conda/.condarc
-export CONDA_ENVS_PATH=$XDG_DATA_HOME/.conda/envs
+export CONDA_ENVS_PATH=$XDG_DATA_HOME/conda/envs
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/.java
 export _JAVA_AWT_WM_NONREPARENTING=1
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch/notmuchrc
