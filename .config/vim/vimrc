@@ -12,7 +12,8 @@ set notimeout  " No key sequence timeout
 set clipboard+=unnamedplus  " yank to system clipboard via wl-clipboard or xclip 
 set splitbelow splitright  " Splits open at the bottom and right 
 set mouse=nv  " Enable mouse support
-set scrolloff=1  " Always show one line above/below character
+set scrolloff=3  " Always show one line above/below character
+set sidescroll=3  " Ditto for horizontal scrolling
 set number relativenumber 
 set hidden  " Allow switching buffers before saving
 
@@ -56,6 +57,8 @@ noremap <silent> <A-j> :resize +3<CR>
 nnoremap <leader>q :bp <BAR> bd #<CR>
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
+nnoremap <leader>vs :vsplit<CR>
+nnoremap <leader>hs :split<CR>
 
 " Start terminals
 map <Leader>tt :new term://zsh<CR>
@@ -63,8 +66,8 @@ map <Leader>tt :new term://zsh<CR>
 " Escape terminal mode
 tnoremap <C-space> <C-\><C-n>
 
-" Activate ex mode with gq
-map Q gQ  
+" Disable ex mode
+nnoremap Q <Nop>
 
 " Filetype-specific settings =================================================
 
@@ -88,30 +91,33 @@ autocmd FileType markdown setlocal shiftwidth=2 tabstop=2
 " Plugins ====================================================================
 
 " Install vim-plug if not already available
-if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim"'))
+if ! filereadable(system(
+    \ 'echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim"'))
   echo "Downloading junegunn/vim-plug to manage plugins..."
   silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/
-  silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" 
+  silent !curl 
+      \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" 
       \ > ${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim
   autocmd VimEnter * PlugInstall
 endif 
 
 " Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif
+  \| PlugInstall --sync | source $MYVIMRC | endif
 
-call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'))
+call plug#begin(system(
+  \ 'echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'))
 
   " Functionality
   Plug 'neovim/nvim-lspconfig'  " native nvim language server
-  Plug 'hrsh7th/nvim-compe'  " code autocomplete
+  Plug 'hrsh7th/nvim-cmp'  " code autocomplete
+  Plug 'hrsh7th/cmp-nvim-lsp'  " code autocomplete
   Plug 'tpope/vim-commentary'  " easy code commenting
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}  " R support
   Plug 'preservim/nerdtree'  " file browser
   Plug 'tpope/vim-fugitive'  " git command support
   Plug 'airblade/vim-gitgutter'  " line-by-line git diff marks
-  Plug 'karoliskoncevicius/vim-sendtowindow'  " General REPL
+  Plug 'karoliskoncevicius/vim-sendtowindow'  " Basic REPLing
   Plug 'tpope/vim-surround'  " Easisly change brackets, quotes, parentheses, etc
   Plug 'tpope/vim-repeat'  " Use . to repeat plugin keymaps
 
@@ -126,23 +132,24 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'
   Plug 'Yggdroot/indentLine'
 call plug#end()
 
-""" Vim-airline
+" Vim-airline ----------------------------------------------------------------
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-""" indentline
+""" indentline ---------------------------------------------------------------
 let g:indentLine_char = '▏'
 
-""" Vim-code-dark
+""" Vim-code-dark ------------------------------------------------------------
 colorscheme gruvbox
 let g:airline_theme = 'gruvbox'
 
-""" Goyo 
+""" Goyo ---------------------------------------------------------------------
 map <leader>f :Goyo \| set linebreak<CR>
 
-"" Nerd tree 
+"" Nerd tree -----------------------------------------------------------------
 map <leader>n :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 
+  \ && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 if has('nvim')
   let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
@@ -163,7 +170,7 @@ let R_assign_map = "--"  " type -- for assignment operator: <-
 let R_min_editor_width = 80  " set a minimum source editor width
 let R_objbr_place = 'script,right'  " Open obj explorer on right
 let R_objbr_opendf = 0  " Don't expand a dataframe to show columns by default
-let R_pdfviewer = "zathura"  
+let R_pdfviewer = "zathura"  " zathura as default PDF reader
 let R_csv_app = "terminal:vd"  " Use visidata as data.frame/matrix viewer
 
 " Use radian console
@@ -248,69 +255,53 @@ for _, lsp in ipairs(servers) do
 end
 EOF
 
-" nvim-compe -----------------------------------------------------------------
+" nvim-cmp -----------------------------------------------------------------
 
 lua << EOF
--- Compe setup
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
 
-  source = {
-    path = true;
-    nvim_lsp = true;
-  };
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+      elseif luasnip.expand_or_jumpable() then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+      elseif luasnip.jumpable(-1) then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
 }
-
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-  local col = vim.fn.col('.') - 1
-  if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-    return true
-  else
-    return false
-  end
-end
-
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-_G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  else
-    return t "<S-Tab>"
-  end
-end
-
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-
---This line is important for auto-import
-vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
-vim.api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', { expr = true })
 EOF
