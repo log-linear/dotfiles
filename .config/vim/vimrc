@@ -117,7 +117,7 @@ call plug#begin(system(
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}  " R support
   Plug 'preservim/nerdtree'  " file browser
   Plug 'tpope/vim-fugitive'  " git command support
-  Plug 'airblade/vim-gitgutter'  " line-by-line git diff marks
+  Plug 'mhinz/vim-signify'  " line-by-line git diff marks
   Plug 'karoliskoncevicius/vim-sendtowindow'  " Basic REPLing
   Plug 'tpope/vim-surround'  " Easisly change brackets, quotes, parentheses, etc
   Plug 'tpope/vim-repeat'  " Use . to repeat plugin keymaps
@@ -137,17 +137,17 @@ call plug#end()
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-""" indentline ---------------------------------------------------------------
+" indentline -----------------------------------------------------------------
 let g:indentLine_char = '▏'
 
-""" Vim-code-dark ------------------------------------------------------------
+" gruvbox --------------------------------------------------------------------
 colorscheme gruvbox
 let g:airline_theme = 'gruvbox'
 
-""" Goyo ---------------------------------------------------------------------
+" Goyo -----------------------------------------------------------------------
 map <leader>f :Goyo \| set linebreak<CR>
 
-"" Nerd tree -----------------------------------------------------------------
+" Nerd tree ------------------------------------------------------------------
 map <leader>n :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 
   \ && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -165,7 +165,7 @@ let NERDTreeShowHidden=1
 let NERDTreeShowLineNumbers=1
 autocmd FileType nerdtree setlocal relativenumber
 
-""" Nvim-R 
+" Nvim-R ---------------------------------------------------------------------
 let R_auto_start = 2  " Auto start on all .R/.Rmd files
 let R_assign_map = '--'  " type -- for assignment operator: <-
 let R_min_editor_width = 80  " set a minimum source editor width
@@ -185,13 +185,13 @@ let R_bracketed_paste = 1
 vmap <CR> <Plug>RDSendSelection
 nmap <CR> <Plug>RDSendLine
 
-""" gitgutter
-let g:gitgutter_async = 0 
+" signify --------------------------------------------------------------------
+map <leader>hu SignifyUndo
 
-""" fugitive
+" fugitive -------------------------------------------------------------------
 nnoremap <leader>vd :Gvdiffsplit<CR>
 
-""" startify
+" startify -------------------------------------------------------------------
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
       \ { 'type': 'files',     'header': ['   Recent']            },
