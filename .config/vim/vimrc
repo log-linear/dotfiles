@@ -110,8 +110,9 @@ call plug#begin(system(
 
   " Functionality
   Plug 'neovim/nvim-lspconfig'  " native nvim language server
-  Plug 'hrsh7th/nvim-cmp'  " code autocomplete
-  Plug 'hrsh7th/cmp-nvim-lsp'  " code autocomplete
+  Plug 'hrsh7th/nvim-cmp'  " lsp autocomplete engine
+  Plug 'hrsh7th/cmp-nvim-lsp'  " lsp autocomplete source
+  Plug 'ray-x/lsp_signature.nvim'  " signature support
   Plug 'tpope/vim-commentary'  " easy code commenting
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}  " R support
   Plug 'preservim/nerdtree'  " file browser
@@ -120,12 +121,12 @@ call plug#begin(system(
   Plug 'karoliskoncevicius/vim-sendtowindow'  " Basic REPLing
   Plug 'tpope/vim-surround'  " Easisly change brackets, quotes, parentheses, etc
   Plug 'tpope/vim-repeat'  " Use . to repeat plugin keymaps
-  Plug 'mhinz/vim-startify'
+  Plug 'mhinz/vim-startify'  " fancy startup menu
 
   " Aesthetics
-  Plug 'vim-airline/vim-airline'
-  Plug 'junegunn/goyo.vim'
-  Plug 'morhetz/gruvbox'
+  Plug 'vim-airline/vim-airline'  " status bar
+  Plug 'junegunn/goyo.vim'  " zen mode
+  Plug 'morhetz/gruvbox'  " theme
   Plug 'ryanoasis/vim-devicons'  " Requires Nerd Font compatible font
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'ryanoasis/vim-devicons'  " Always load last
@@ -208,6 +209,14 @@ local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
+  -- Signatures
+  lsp_cfg = {
+      hi_parameter = "Search",
+      max_width = 72, 
+      trigger_on_newline = true,
+  }
+  require "lsp_signature".on_attach(lsp_cfg)
+
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -282,3 +291,4 @@ cmp.setup {
   },
 }
 EOF
+
