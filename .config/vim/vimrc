@@ -61,10 +61,10 @@ nnoremap <leader>vs :vsplit<CR>
 nnoremap <leader>hs :split<CR>
 
 " Start terminals
-map <Leader>tt :new term://zsh<CR>
+map <Leader>tt :new term://zsh<CR><C-\><C-n><C-w>k
 
 " Escape terminal mode
-tnoremap <C-space> <C-\><C-n>
+tnoremap <C-q> <C-\><C-n>
 
 " Disable ex mode
 nnoremap Q <Nop>
@@ -186,7 +186,7 @@ vmap <CR> <Plug>RDSendSelection
 nmap <CR> <Plug>RDSendLine
 
 " signify --------------------------------------------------------------------
-map <leader>hu SignifyUndo
+map <leader>hu :SignifyHunkUndo<CR>
 
 " fugitive -------------------------------------------------------------------
 nnoremap <leader>vd :Gvdiffsplit<CR>
