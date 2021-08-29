@@ -123,6 +123,7 @@ call plug#begin(system(
   Plug 'tpope/vim-surround'  " Easisly change brackets, quotes, parentheses, etc
   Plug 'tpope/vim-repeat'  " Use . to repeat plugin keymaps
   Plug 'mhinz/vim-startify'  " fancy startup menu
+  Plug 'ferrine/md-img-paste.vim'  " Paste images into md files
 
   " Aesthetics
   Plug 'vim-airline/vim-airline'  " status bar
@@ -131,11 +132,11 @@ call plug#begin(system(
   Plug 'ryanoasis/vim-devicons'  " Requires Nerd Font compatible font
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'ryanoasis/vim-devicons'  " Always load last
-  Plug 'Yggdroot/indentLine'
+  Plug 'Yggdroot/indentLine'  " Visual line indents
 call plug#end()
 
-" sendtowindow ---------------------------------------------------------------
-
+" md-img-paste ---------------------------------------------------------------
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 
 " Vim-airline ----------------------------------------------------------------
 let g:airline#extensions#tabline#enabled = 1
@@ -177,6 +178,7 @@ let R_objbr_place = 'script,right'  " Open obj explorer on right
 let R_objbr_opendf = 0  " Don't expand a dataframe to show columns by default
 let R_pdfviewer = 'zathura'  " zathura as default PDF reader
 let R_csv_app = 'terminal:vd'  " Use visidata as data.frame/matrix viewer
+let R_esc_term = 0
 
 " Use radian console
 let R_app = 'radian --no-history'
