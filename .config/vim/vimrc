@@ -62,9 +62,10 @@ nnoremap <leader>hs :split<CR>
 
 " Start terminals
 map <Leader>tt :new term://zsh<CR><C-\><C-n><C-w>k
+map <Leader>tp :new term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
 
 " Escape terminal mode
-tnoremap <C-q> <C-\><C-n>
+tnoremap <C-x> <C-\><C-n>
 
 " Disable ex mode
 nnoremap Q <Nop>
@@ -132,6 +133,9 @@ call plug#begin(system(
   Plug 'ryanoasis/vim-devicons'  " Always load last
   Plug 'Yggdroot/indentLine'
 call plug#end()
+
+" sendtowindow ---------------------------------------------------------------
+
 
 " Vim-airline ----------------------------------------------------------------
 let g:airline#extensions#tabline#enabled = 1

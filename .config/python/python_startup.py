@@ -5,6 +5,7 @@ import atexit
 import os
 import readline
 import rlcompleter
+import sys
 
 
 def set_tab_complete():
@@ -73,6 +74,15 @@ from pprint import pprint  # auto-import pprint
 set_tab_complete()
 set_python_history()
 set_autoindent()
+
+# Use ptpython, if available
+import sys
+try:
+    from ptpython.repl import embed
+except ImportError:
+    print("ptpython is not available: falling back to standard prompt")
+else:
+    sys.exit(embed(globals(), locals(), vi_mode=True))
 
 #===============================================================================
 # Sources
