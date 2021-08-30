@@ -63,7 +63,6 @@ nnoremap <leader>hs :split<CR>
 
 " Start terminals
 map <Leader>tt :new term://zsh<CR><C-\><C-n><C-w>k
-map <Leader>tp :new term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
 
 " Escape terminal mode
 tnoremap <C-x> <C-\><C-n>
@@ -118,7 +117,7 @@ call plug#begin(system(
   Plug 'preservim/nerdtree'  " file browser
   Plug 'tpope/vim-fugitive'  " git command support
   Plug 'mhinz/vim-signify'  " line-by-line git diff marks
-  Plug 'karoliskoncevicius/vim-sendtowindow'  " Basic REPLing
+  Plug 'urbainvaes/vim-ripple'  " Basic REPLing
   Plug 'tpope/vim-surround'  " Easisly change brackets, quotes, parentheses, etc
   Plug 'tpope/vim-repeat'  " Use . to repeat plugin keymaps
   Plug 'mhinz/vim-startify'  " fancy startup menu
@@ -133,6 +132,10 @@ call plug#begin(system(
   Plug 'ryanoasis/vim-devicons'  " Always load last
   Plug 'Yggdroot/indentLine'  " Visual line indents
 call plug#end()
+
+" vim-ripple ----------------------------------------------------------------
+nmap <Space> <Plug>(ripple_send_motion)
+vmap <Space> <Plug>(ripple_send_selection)
 
 " md-img-paste ---------------------------------------------------------------
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
@@ -190,13 +193,13 @@ let R_bracketed_paste = 1
 vmap <CR> <Plug>RDSendSelection
 nmap <CR> <Plug>RDSendLine
 
-" signify --------------------------------------------------------------------
+" vim-signify ----------------------------------------------------------------
 map <leader>hu :SignifyHunkUndo<CR>
 
-" fugitive -------------------------------------------------------------------
+" vim-fugitive ---------------------------------------------------------------
 nnoremap <leader>vd :Gvdiffsplit<CR>
 
-" startify -------------------------------------------------------------------
+" vim- startify --------------------------------------------------------------
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
       \ { 'type': 'files',     'header': ['   Recent']            },
