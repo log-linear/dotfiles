@@ -17,6 +17,11 @@ set sidescroll=3  " Ditto for horizontal scrolling
 set number relativenumber 
 set hidden  " Allow switching buffers before saving
 set signcolumn=auto:9  " sign column for gitgutter, coc, etc
+set cmdheight=2  " Give more space for displaying messages.
+set nobackup  " Fix breakages with certain coc lsps
+set nowritebackup  " Fix breakages with certain coc lsps
+set updatetime=300  " Reduce coc.nvim lag
+set shortmess+=c  " Don't pass messages to |ins-completion-menu|.
 
 " tabs to spaces
 set expandtab
@@ -88,7 +93,9 @@ autocmd FileType sh setlocal shiftwidth=2 tabstop=2
 """ md 
 " adjust tab widths
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2
-" autocmd FileType markdown call ':!mlp %<CR>'
+
+" Run markdown preview, requires mlp python package
+au BufEnter *.md call jobstart('mlp '.expand('%'))
 
 " Plugins ====================================================================
 
@@ -140,7 +147,7 @@ vmap <Space> <Plug>(ripple_send_selection)
 " md-img-paste ---------------------------------------------------------------
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 
-" Vim-airline ----------------------------------------------------------------
+" vim-airline ----------------------------------------------------------------
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
@@ -206,21 +213,7 @@ let g:startify_lists = [
       \ { 'type': 'commands',  'header': ['   Commands']       },
       \ ]
 
-" coc.nvim ===================================================================
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
+" coc.nvim -------------------------------------------------------------------
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
