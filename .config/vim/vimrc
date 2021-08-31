@@ -1,9 +1,4 @@
 " General settings ===========================================================
-set directory=$XDG_DATA_HOME/vim/swap
-set backupdir=$XDG_DATA_HOME/vim/backup
-set viewdir=$XDG_DATA_HOME/vim/view
-set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
-set runtimepath=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
 let mapleader=","  " remap <leader>
 set cursorline  " Cursor line highlight 
 set showcmd  " show commands in status line
@@ -94,7 +89,7 @@ autocmd FileType sh setlocal shiftwidth=2 tabstop=2
 " adjust tab widths
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2
 
-" Run markdown preview, requires mlp python package
+" Run markdown preview, requires mlp python package, only works on nvim, not vim
 au BufEnter *.md call jobstart('mlp '.expand('%'))
 
 " Plugins ====================================================================
