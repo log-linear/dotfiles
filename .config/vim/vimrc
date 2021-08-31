@@ -17,16 +17,19 @@ set nobackup  " Fix breakages with certain coc lsps
 set nowritebackup  " Fix breakages with certain coc lsps
 set updatetime=300  " Reduce coc.nvim lag
 set shortmess+=c  " Don't pass messages to |ins-completion-menu|.
+set autoindent smartindent
 
 " tabs to spaces
 set expandtab
 set tabstop=4
 set shiftwidth=4
 
-" search tweaks
+" search tweaks - highlighting, semi-case-insensitive search, etc
 set incsearch
 set showmatch
 set hlsearch
+set ignorecase
+set smartcase
 
 " Visual line guide at 80 characters
 set colorcolumn=80
@@ -78,16 +81,16 @@ autocmd FileType r imap >> <space>\|><space>
 autocmd FileType rmd imap >> <space>\|><space>
 
 " adjust tab widths
-autocmd FileType r setlocal shiftwidth=2 tabstop=2
-autocmd FileType rmd setlocal shiftwidth=2 tabstop=2
+autocmd FileType r setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType rmd setlocal expandtab shiftwidth=2 tabstop=2
 
 """ sh 
 " adjust tab widths
-autocmd FileType sh setlocal shiftwidth=2 tabstop=2
+autocmd FileType sh setlocal expandtab shiftwidth=2 tabstop=2
 
 """ md 
 " adjust tab widths
-autocmd FileType markdown setlocal shiftwidth=2 tabstop=2
+autocmd FileType markdown setlocal expandtab shiftwidth=2 tabstop=2
 
 " Run markdown preview, requires mlp python package, only works on nvim, not vim
 au BufEnter *.md call jobstart('mlp '.expand('%'))
@@ -177,6 +180,7 @@ let R_objbr_opendf = 0  " Don't expand a dataframe to show columns by default
 let R_pdfviewer = 'zathura'  " zathura as default PDF reader
 let R_csv_app = 'terminal:vd'  " Use visidata as data.frame/matrix viewer
 let R_esc_term = 0
+let r_indent_align_args = 0
 
 " Use radian console
 let R_app = 'radian --no-history'
@@ -339,4 +343,15 @@ nnoremap <silent><nowait> <space>J  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>K  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" Helper function + mapping to disable COC on the fly
+function! CocToggle()
+    if g:coc_enabled
+        CocDisable
+    else
+        CocEnable
+    endif
+endfunction
+command! CocToggle :call CocToggle()
+nmap <leader><leader> :CocToggle<CR>
 
