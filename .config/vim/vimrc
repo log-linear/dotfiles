@@ -2,7 +2,7 @@
 let mapleader=","  " remap <leader>
 set cursorline  " Cursor line highlight 
 set showcmd  " show commands in status line
-filetype on  " filetype detection
+filetype plugin indent on  " filetype detection
 set notimeout  " No key sequence timeout
 set clipboard+=unnamedplus  " yank to system clipboard via wl-clipboard or xclip 
 set splitbelow splitright  " Splits open at the bottom and right 
@@ -33,11 +33,11 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=238
 
 " Replace all aliased to S.
-nnoremap S :%s//g<Left><Left>  
+nnoremap S :%s//g<Left><Left>
 
 " Esc/Ctrl + [ clears last search highlighting
-noremap <esc> :let @/=""<CR>
-noremap <C-[> :let @/=""<CR>
+noremap <esc> :noh<CR>
+noremap <C-[> :noh<CR>
 
 " Save file as sudo on files that require root permission
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
