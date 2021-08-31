@@ -100,23 +100,17 @@ au BufEnter *.md call jobstart('mlp '.expand('%'))
 " Plugins ====================================================================
 
 " Install vim-plug if not already available
-if ! filereadable(system(
-    \ 'echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim"'))
-  echo "Downloading junegunn/vim-plug to manage plugins..."
-  silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/
-  silent !curl 
-      \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" 
-      \ > ${XDG_CONFIG_HOME:-$HOME/.config}/vim/autoload/plug.vim
-  autocmd VimEnter * PlugInstall
-endif 
+if empty(glob('~/.config/vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
 
 " Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC | endif
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
 
-call plug#begin(system(
-  \ 'echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/vim/plugged"'))
-
+call plug#begin('~/.config/vim/plugged')
   " Functionality
   Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Code completion
   Plug 'tpope/vim-commentary'  " easy code commenting
