@@ -82,7 +82,9 @@ autocmd FileType rmd imap >> <space>\|><space>
 
 " adjust tab widths
 autocmd FileType r setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType r setlocal autoindent cindent
 autocmd FileType rmd setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType rmd setlocal autoindent cindent
 
 """ sh 
 " adjust tab widths
