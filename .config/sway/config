@@ -30,6 +30,20 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 output * bg /home/victor/Pictures/Wallpapers/xavier-cuenca-w4-3.jpg fill
+
+# Remove title bar, set border size
+default_border pixel 3
+
+# Colorscheme
+client.focused #b8bb26 #b8bb26   #fbf1c7 #fb4934
+client.unfocused #000000 #282828 #7c6f64
+
+# Gaps
+smart_gaps on
+gaps inner 20
+gaps horizontal 0
+gaps vertical 0
+
 #
 # Example configuration:
 #
@@ -63,11 +77,11 @@ exec swayidle -w \
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-# Swap caps ctrl, lalt/lwin
+
+# Swap caps ctrl, lalt/lwin, lshift+rshift = switch to intl keyboard
 input "type:keyboard" {
-    xkb_layout us,de
-    xkb_variant ,nodeadkeys
-    xkb_options altwin:swap_lalt_lwin,ctrl:swapcaps
+    xkb_layout us,us(intl)
+    xkb_options altwin:swap_lalt_lwin,ctrl:swapcaps,grp:shifts_toggle
 }
 
 ### Key bindings
@@ -165,8 +179,8 @@ input "type:keyboard" {
     bindsym $mod+ctrl+j splitv
 
     # Switch the current container between different layout styles
-    # bindsym $mod+s layout stacking
-    # bindsym $mod+t layout tabbed
+    bindsym $mod+s layout stacking
+    bindsym $mod+t layout tabbed
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
@@ -253,27 +267,26 @@ include /etc/sway/config.d/*
 # Other settings
 #
 
-    # Clipboard
-    exec wl-paste -t text --watch clipman store
+# Enable numlock on start
+input * xkb_numlock enable
     
-    # Enable numlock on start
-    input * xkb_numlock enable
-    
-    # Take screenshots
-    bindsym $mod+Shift+s grim screenshot.png
+#
+# Screen capture
+#
+set $ps1 Print
+set $ps2 Control+Print
+set $ps3 Alt+Print
+set $ps4 Alt+Control+Print
 
-# Gaps
-smart_gaps on
-gaps inner 20
-gaps horizontal 0
-gaps vertical 0
+bindsym $ps1 exec grim - | wl-copy
+bindsym $ps2 exec grim -g "$(slurp)" - | wl-copy
+bindsym $ps3 exec grim $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png
+bindsym $ps4 exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png
 
 # use xwayland
 xwayland enable
 
-#
 # swaynagmode
-#
 set $nag exec swaynagmode
 mode "nag" {
   bindsym {
@@ -296,5 +309,16 @@ mode "nag" {
   }
 }
 
+# 
+# External programs
+#
+
+# Clipboard
+exec wl-paste -t text --watch clipman store
+    
 # wlsunset - redshift-esque program
 exec wlsunset -l 32.8, -L 96.8
+
+# mullvad
+exec mullvad
+
