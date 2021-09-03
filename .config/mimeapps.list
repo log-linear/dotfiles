@@ -1,6 +1,6 @@
 [Default Applications]
 text/x-shellscript=text.desktop;
-inode/directory=file.desktop
+inode/directory=ranger.desktop
 text/html=firefox.desktop
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
