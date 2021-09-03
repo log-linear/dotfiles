@@ -57,7 +57,7 @@ noremap <silent> <A-l> :vertical resize -3<CR>
 noremap <silent> <A-k> :resize -3<CR>
 noremap <silent> <A-j> :resize +3<CR>
 
-" Simple buffer switching
+" Simple buffer management
 nnoremap <leader>q :bp <BAR> bd #<CR>
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
@@ -135,6 +135,7 @@ call plug#begin('~/.config/vim/plugged')
   Plug 'tpope/vim-repeat'  " Use . to repeat plugin keymaps
   Plug 'mhinz/vim-startify'  " fancy startup menu
   Plug 'ferrine/md-img-paste.vim'  " Paste images into md files
+  Plug 'junegunn/vim-easy-align'
 
   " Aesthetics
   Plug 'vim-airline/vim-airline'  " status bar
@@ -146,7 +147,14 @@ call plug#begin('~/.config/vim/plugged')
   Plug 'Yggdroot/indentLine'  " Visual line indents
 call plug#end()
 
-" vim-ripple ----------------------------------------------------------------
+" vim-easy-align -------------------------------------------------------------
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" vim-ripple -----------------------------------------------------------------
 nmap <Space> <Plug>(ripple_send_motion)
 vmap <Space> <Plug>(ripple_send_selection)
 
