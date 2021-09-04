@@ -83,4 +83,5 @@ export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch/notmuchrc
 export NMBGIT="$XDG_DATA_HOME"/notmuch/nmbug
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc 
+export SDL_VIDEODRIVER="wayland"
 

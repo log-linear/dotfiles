@@ -33,6 +33,7 @@ output * bg /home/victor/Pictures/Wallpapers/xavier-cuenca-w4-3.jpg fill
 
 # Remove title bar, set border size
 default_border pixel 3
+default_floating_border pixel 3
 
 # Colorscheme
 client.focused #b8bb26 #b8bb26   #fbf1c7 #fb4934
@@ -56,9 +57,9 @@ gaps vertical 0
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+        timeout 300 'swaylock -f -c 000000' \
+        timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+        before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -89,7 +90,7 @@ input "type:keyboard" {
 # Basics:
 
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+t exec $term
 
     # File manager
     bindsym $mod+f exec $term -e $filemgr
@@ -179,8 +180,8 @@ input "type:keyboard" {
     bindsym $mod+ctrl+j splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+t layout tabbed
+    bindsym $mod+w layout stacking
+    bindsym $mod+r layout tabbed
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
@@ -229,7 +230,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $mod+return mode "resize"
 #
 # Custom keys (e.g. volume controls)
 #
@@ -310,15 +311,15 @@ mode "nag" {
 }
 
 # 
-# External programs
+# Startup programs
 #
 
 # Clipboard
 exec wl-paste -t text --watch clipman store
     
 # wlsunset - redshift-esque program
-exec wlsunset -l 32.8, -L 96.8
+exec wlsunset -S 06:30 -s 20:30
 
 # mullvad
-exec mullvad
+exec mullvad-vpn
 
