@@ -20,6 +20,19 @@ set $filemgr ranger
 # Browser
 set $browser firefox
 
+# Colors
+
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $bghard #1d2021
+set $white #ebdbb2#
+
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -102,7 +115,7 @@ input "type:keyboard" {
     bindsym $mod+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+slash exec $menu
 
     # Mullvad
     bindsym $mod+v exec mullvad_helper
@@ -250,16 +263,18 @@ bindsym $mod+return mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-
+    status_command /usr/bin/i3status-rs $HOME/.config/i3status-rust/config.toml
     colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        separator $bghard
+        background $bg
+	statusline $bg
+        focused_workspace    $yellow $bghard $yellow
+        inactive_workspace   $bg $bg $yellow
+        active_workspace     $bg $bg $yellow
+        urgent_workspace     $red $red $bg
     }
+   # output primary
+    tray_output none
 }
 
 include /etc/sway/config.d/*
