@@ -207,3 +207,7 @@ esac
 [ -f ~/.config/conda/conda_init ] && source ~/.config/conda/conda_init
 
 [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+
+# Keychain - Stores ssh pw's per each login, needed when using e.g. sway
+eval $(keychain --eval --quiet id_ed25519)
+
