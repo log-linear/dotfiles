@@ -336,3 +336,16 @@ exec wlsunset -S 06:30 -s 20:30
 # mullvad
 exec mullvad-vpn
 
+# Workspace programs
+workspace 1
+exec alacritty
+exec firefox
+
+workspace 2
+exec electron-mail
+exec electron-mail
+exec keepassxc
+
+workspace 3
+exec discord
+

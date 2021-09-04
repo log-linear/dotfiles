@@ -46,7 +46,7 @@ step_width = 3
 
 [[block]]
 block = "time"
-format = "%a %d/%m %R"
+format = "%Y-%m-%d %h:%M:%S %Z"
 timezone = "US/Central"
 interval = 60
 locale = "en_US"
