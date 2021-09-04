@@ -273,8 +273,6 @@ bar {
         active_workspace     $bg $bg $yellow
         urgent_workspace     $red $red $bg
     }
-   # output primary
-    tray_output none
 }
 
 include /etc/sway/config.d/*
