@@ -39,7 +39,7 @@ format_singular = "{both} update available"
 format_up_to_date = "ok"
 critical_updates_regex = "(linux|linux-lts|linux-zen)"
 # aur_command should output available updates to stdout (ie behave as echo -ne "update\n")
-aur_command = "pikaur -Qua"
+aur_command = "paru -Qua"
 
 [[block]]
 block = "sound"
@@ -51,7 +51,7 @@ step_width = 3
 
 [[block]]
 block = "time"
-format = "%Y-%m-%d ▏%I:%M %p"
+format = "%Y-%m-%d │ %I:%M %p"
 timezone = "US/Central"
 interval = 60
 locale = "en_US"
