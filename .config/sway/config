@@ -262,12 +262,13 @@ bindsym $mod+return mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
+    font JetBrainsMono NF 10
     position top
     status_command /usr/bin/i3status-rs $HOME/.config/i3status-rust/config.toml
     colors {
         separator $bghard
         background $bg
-	statusline $bg
+    	statusline $bg
         focused_workspace    $yellow $bghard $yellow
         inactive_workspace   $bg $bg $yellow
         active_workspace     $bg $bg $yellow
