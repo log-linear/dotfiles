@@ -48,13 +48,13 @@ output * bg /home/victor/Pictures/Wallpapers/xavier-cuenca-w4-3.jpg fill
 default_border pixel 3
 default_floating_border pixel 3
 
-# Colorscheme
+# Window colorscheme
 client.focused #b8bb26 #b8bb26   #fbf1c7 #fb4934
 client.unfocused #000000 #282828 #7c6f64
 
 # Gaps
 smart_gaps on
-gaps inner 20
+gaps inner 10
 gaps horizontal 0
 gaps vertical 0
 
