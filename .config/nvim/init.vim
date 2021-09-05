@@ -113,7 +113,7 @@ autocmd FileType python nmap <leader>py :w! \| !python %<CR>
 
 " Install vim-plug if not already available
 if empty(glob('~/.config/vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+  silent !curl -fLo ~/.config/vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
