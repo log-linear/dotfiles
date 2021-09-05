@@ -18,6 +18,7 @@ alias mutt='mbsync vfaner && neomutt'
 alias tmux='tmux -f ${XDG_CONFIG_HOME}/tmux/tmux.conf'
 alias unlock='loginctl unlock-sessions'
 alias dlalbum='youtube-dl --ignore-errors -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 -o "%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"'
+alias kpc='keepassxc-cli clip ~/Sync/Stuff/KeePass.kdbx'
 
 # Used for $HOME cleanup
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
