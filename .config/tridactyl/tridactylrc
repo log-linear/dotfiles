@@ -6,8 +6,8 @@ set theme dark
 bind O fillcmdline tabopen
 bind t tabopen
 bind o fillcmdline open
-bind K tabprev
-bind J tabnext
+bind J tabprev
+bind K tabnext
 bind go current_url open
 bind gO current_url tabopen
 bind q tabclose
@@ -54,17 +54,19 @@ bind H back
 bind L forward
 bind <C-o> jumpprev
 bind <C-i> jumpnext
-bind d tabclose
-bind D composite tabprev; tabclose #
+bind u scrollpage -0.5
+bind d scrollpage 0.5 
+unbind D
 bind gx0 tabclosealltoleft
 bind gx$ tabclosealltoright
 bind << tabmove -1
 bind >> tabmove +1
-bind u undo
-bind U undo window
+bind Q undo
+unbind U
 bind r reload
 bind R reloadhard
 bind x stop
+unbind X
 bind gi focusinput -l
 bind g? rot13
 bind g! jumble
@@ -115,8 +117,6 @@ bind ;O hint -W fillcmdline_notrail open
 bind ;W hint -W fillcmdline_notrail winopen 
 bind ;T hint -W fillcmdline_notrail tabopen 
 bind ;z hint -z
-bind ;m composite hint -Jpipe img src | open images.google.com/searchbyimage?image_url=
-bind ;M composite hint -Jpipe img src | tabopen images.google.com/searchbyimage?image_url=
 bind ;gi hint -qi
 bind ;gI hint -qI
 bind ;gk hint -qk
@@ -153,7 +153,6 @@ bind zz zoom 1
 bind zI zoom 3
 bind zO zoom 0.3
 bind . repeat
-bind <AS-ArrowUp><AS-ArrowUp><AS-ArrowDown><AS-ArrowDown><AS-ArrowLeft><AS-ArrowRight><AS-ArrowLeft><AS-ArrowRight>ba open https://www.youtube.com/watch?v=M3iOROuTuMA
 bind + zoom +10 true
 bind - zoom -10 true
 bind = zoom 100
