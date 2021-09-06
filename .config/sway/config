@@ -52,6 +52,10 @@ default_floating_border pixel 3
 client.focused #b8bb26 #b8bb26   #fbf1c7 #fb4934
 client.unfocused #000000 #282828 #7c6f64
 
+# Hide mouse when not inuse
+seat * hide_cursor 8000
+seat * hide_cursor when-typing enable
+
 # Gaps
 smart_gaps on
 gaps inner 10
@@ -299,6 +303,10 @@ bindsym $ps4 exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d
 # use xwayland
 xwayland enable
 
+# 
+# Startup/external programs
+#
+
 # swaynagmode
 set $nag exec swaynagmode
 mode "nag" {
@@ -321,10 +329,6 @@ mode "nag" {
     Down      $nag --select prev
   }
 }
-
-# 
-# Startup programs
-#
 
 # udiskie - automounting
 exec udiskie -t 
