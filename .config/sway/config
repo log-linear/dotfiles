@@ -187,16 +187,13 @@ input "type:keyboard" {
 #
 # Layout stuff:
 #
-    # You can "split" the current object of your focus with
-    # $mod+ctrl+l or $mod+ctrl+j, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+ctrl+l splith
-    bindsym $mod+ctrl+j splitv
+    # Toggle new window split direction
+    bindsym $mod+i split toggle
 
     # Switch the current container between different layout styles
     bindsym $mod+w layout stacking
     bindsym $mod+s layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+o layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+m fullscreen
