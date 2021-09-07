@@ -1,6 +1,7 @@
 " General Settings
 set newtab about:blank
 set theme dark
+set editorcmd alacritty -e nvim 
 
 " Bindings
 bind O fillcmdline tabopen
@@ -57,8 +58,8 @@ bind <C-i> jumpnext
 bind u scrollpage -0.5
 bind d scrollpage 0.5 
 unbind D
-bind gx0 tabclosealltoleft
-bind gx$ tabclosealltoright
+bind gq0 tabclosealltoleft
+bind gq$ tabclosealltoright
 bind << tabmove -1
 bind >> tabmove +1
 bind Q undo
@@ -155,7 +156,9 @@ bind zO zoom 0.3
 bind . repeat
 bind + zoom +10 true
 bind - zoom -10 true
-bind = zoom 100
+bind _ zoom -10 true
+bind = zoom +10 true
+bind 0 zoom 100
 bind gc tabduplicate
 bind gC tabduplicate
 bind <C-p> pin
@@ -163,7 +166,7 @@ bind / fillcmdline find
 bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
-bind \<Space> nohlsearch
+bind <C-[> nohlsearch
 
 " For syntax highlighting see https://github.com/tridactyl/vim-tridactyl
 " vim: set filetype=tridactyl
