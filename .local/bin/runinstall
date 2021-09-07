@@ -1,0 +1,6 @@
+#!/usr/bin/Rscript
+
+# R script to install R packages via CLI
+pkgs <- commandArgs(trailingOnly = T)
+remove.packages(pkgs)
+

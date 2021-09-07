@@ -58,7 +58,7 @@ seat * hide_cursor when-typing enable
 
 # Gaps
 smart_gaps on
-gaps inner 10
+gaps inner 15
 gaps horizontal 0
 gaps vertical 0
 
