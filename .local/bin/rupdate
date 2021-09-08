@@ -1,6 +1,7 @@
 #!/usr/bin/Rscript
-
+#
 # R script to update R packages via CLI
+#
 update.packages(.libPaths()[1], ask = F)
 remotes::update_packages(.libPaths()[1], ask = F)
 

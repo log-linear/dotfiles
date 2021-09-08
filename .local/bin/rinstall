@@ -1,11 +1,18 @@
 #!/usr/bin/Rscript
-
+#
 # R script to install R packages via CLI
+#
 pkgs <- commandArgs(trailingOnly = T)
 
-git <- grep("/", pkgs)
+gh <- grep("/", pkgs)
+cran_pkgs <- pkgs[!gh]
+gh_pkgs <- pkgs[gh]
 
-if (length(git) > 0) {
-  remotes::install_github(pkgs[git])
-} else install.packages(pkgs)
+if (length(cran_pkgs) > 0) { 
+  install.packages(cran_pkgs) 
+} else if (length(gh_pkgs) > 0) {
+  remotes::install_github(gh_pkgs) 
+} else {
+  install.packages(pkgs)
+}
 
