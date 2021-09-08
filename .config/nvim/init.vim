@@ -66,6 +66,8 @@ nnoremap <leader>hs :split<CR>
 
 " Start terminals
 map <Leader>tt :new term://zsh<CR><C-\><C-n><C-w>k
+map <Leader>tp :new term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
+map <Leader>tr :new term://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
 
 " Escape terminal mode
 tnoremap <C-x> <C-\><C-n>
@@ -130,7 +132,7 @@ call plug#begin('~/.config/vim/plugged')
   Plug 'preservim/nerdtree'  " file browser
   Plug 'tpope/vim-fugitive'  " git command support
   Plug 'mhinz/vim-signify'  " line-by-line git diff marks
-  Plug 'urbainvaes/vim-ripple'  " Basic REPLing
+  Plug 'karoliskoncevicius/vim-sendtowindow'  " Basic REPLing
   Plug 'tpope/vim-surround'  " Easisly change brackets, quotes, parentheses, etc
   Plug 'tpope/vim-repeat'  " Use . to repeat plugin keymaps
   Plug 'mhinz/vim-startify'  " fancy startup menu
@@ -153,10 +155,6 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-" vim-ripple -----------------------------------------------------------------
-nmap <Space> <Plug>(ripple_send_motion)
-vmap <Space> <Plug>(ripple_send_selection)
 
 " md-img-paste ---------------------------------------------------------------
 autocmd FileType markdown 
