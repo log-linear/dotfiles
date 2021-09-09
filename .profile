@@ -75,6 +75,7 @@ export IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
+export CONDA_ROOT="$XDG_DATA_HOME/miniconda3/"
 export CONDARC=$XDG_CONFIG_HOME/conda/.condarc
 export CONDA_ENVS_PATH=$XDG_DATA_HOME/conda/envs
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/.java

@@ -204,9 +204,7 @@ esac
 [ -f /usr/bin/wal ] && cat ~/.cache/wal/sequences
 
 # Run conda init script if exists
-[ -f ~/.config/conda/conda_init ] && source ~/.config/conda/conda_init
-
-[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+[ -f "${HOME}/.local/bin/conda_init" ] && source "${HOME}/.local/bin/conda_init"
 
 # Keychain - Stores ssh pw's per each login, needed when using e.g. sway
 eval $(keychain --eval --quiet id_ed25519)
