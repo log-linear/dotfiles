@@ -101,10 +101,10 @@ autocmd FileType markdown setlocal expandtab shiftwidth=2 tabstop=2
 au FileType markdown nmap <leader>mlp :call jobstart('mlp '.expand('%'))<CR>
 
 " Convert to html, pdf, or docx using pandoc
-autocmd FileType markdown nmap <leader>mh :w! \| !pandoc % -o %:r\.html<CR>
-autocmd FileType markdown nmap <leader>mw :w! \| !pandoc % -o %:r\.docx<CR>
+autocmd FileType markdown nmap <leader>mh :w! \| !pandoc "%" -o "%:r.html"<CR>
+autocmd FileType markdown nmap <leader>mw :w! \| !pandoc "%" -o "%:r.docx"<CR>
 autocmd FileType markdown 
-  \ nmap <leader>mp :w! \| !pandoc % --pdf-engine=xelatex -o %:r\.pdf <CR>
+  \ nmap <leader>mp :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
 
 """ Python
 
