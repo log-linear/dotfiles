@@ -15,9 +15,10 @@ scroll_down_page	C-j
 toggle_aliasing		A
 toggle_filenames	d
 toggle_pointer		o
-toggle_fullscreen	f
+toggle_fullscreen	m
 
 zoom_in		plus
+zoom_in     equal
 zoom_out	minus
 
 next_img	L
@@ -31,7 +32,7 @@ orient_1	parenleft
 flip		underscore
 mirror		bar
 remove		Delete
-zoom_fit	s
+zoom_fit	f
 zoom_default	a
 
 close	q Q
