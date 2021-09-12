@@ -85,6 +85,7 @@ export NMBGIT="$XDG_DATA_HOME"/notmuch/nmbug
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc 
 export MOZ_ENABLE_WAYLAND=1
+export SDL_VIDEODRIVER="wayland"
 
 # auto-start sway
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
