@@ -52,10 +52,6 @@ default_floating_border pixel 3
 client.focused #b8bb26 #b8bb26   #fbf1c7 #fb4934
 client.unfocused #000000 #282828 #7c6f64
 
-# Hide mouse when not inuse
-seat * hide_cursor 8000
-seat * hide_cursor when-typing enable
-
 # Gaps
 smart_gaps on
 gaps inner 15
