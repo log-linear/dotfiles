@@ -125,7 +125,7 @@ input "type:keyboard" {
     # Mullvad
     bindsym $mod+v exec mullvad_helper
 
-    # Drag ndows by holding down $mod and left mouse button.
+    # Drag winndows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
     # Change normal to inverse to use left mouse button for resizing and right
@@ -137,6 +137,9 @@ input "type:keyboard" {
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynagmode -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+    # Lock sway
+    bindsym $mod+escape exec swaylock
 
 # Moving around:
 

@@ -100,7 +100,7 @@ autocmd FileType markdown setlocal expandtab shiftwidth=2 tabstop=2
 " Run markdown preview, requires mlp python package, only works on nvim, not vim
 au FileType markdown nmap <leader>mlp :call jobstart('mlp '.expand('%'))<CR>
 
-" Convert to html, pdf, or docx using pandoc
+" Convert md to html, pdf, or docx using pandoc
 autocmd FileType markdown nmap <leader>mh :w! \| !pandoc "%" -o "%:r.html"<CR>
 autocmd FileType markdown nmap <leader>mw :w! \| !pandoc "%" -o "%:r.docx"<CR>
 autocmd FileType markdown 

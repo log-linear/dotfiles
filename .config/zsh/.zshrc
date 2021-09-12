@@ -197,7 +197,6 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
     ;;
 esac
 
-
 ## Application specific edits
 
 # Import colorscheme from 'wal'
