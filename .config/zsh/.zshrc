@@ -80,15 +80,15 @@ echo $USER@$HOST  $(uname -srm) $(lsb_release -rs)
 # - is invisible, if neither is the case
 
 # Modify the colors and symbols in these variables as desired.
-GIT_PROMPT_SYMBOL="%{$fg[blue]%}="                          # =          - clean repo
+GIT_PROMPT_SYMBOL="%{$fg[blue]%}="                          # =        - clean repo
 GIT_PROMPT_PREFIX="%{$fg[green]%}[%{$reset_color%}"
 GIT_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
-GIT_PROMPT_AHEAD="%{$fg[red]%}ANUM%{$reset_color%}"         # A"NUM"     - ahead by "NUM" commits
-GIT_PROMPT_BEHIND="%{$fg[cyan]%}BNUM%{$reset_color%}"       # B"NUM"     - behind by "NUM" commits
-GIT_PROMPT_MERGING="%{$fg_bold[magenta]%}!%{$reset_color%}" # ! - merge conflict
-GIT_PROMPT_UNTRACKED="%{$fg_bold[red]%}~%{$reset_color%}"   # red ~      - untracked files
-GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%}~%{$reset_color%}" # yellow ~   - tracked files modified
-GIT_PROMPT_STAGED="%{$fg_bold[green]%}~%{$reset_color%}"    # green ~    - staged changes present = ready for "git push"
+GIT_PROMPT_AHEAD="%{$fg[red]%}ANUM%{$reset_color%}"         # A"NUM"   - ahead by "NUM" commits
+GIT_PROMPT_BEHIND="%{$fg[cyan]%}BNUM%{$reset_color%}"       # B"NUM"   - behind by "NUM" commits
+GIT_PROMPT_MERGING="%{$fg_bold[magenta]%}!%{$reset_color%}" # !        - merge conflict
+GIT_PROMPT_UNTRACKED="%{$fg_bold[red]%}~%{$reset_color%}"   # red ~    - untracked files
+GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%}~%{$reset_color%}" # yellow ~ - tracked files modified
+GIT_PROMPT_STAGED="%{$fg_bold[green]%}~%{$reset_color%}"    # green ~  - staged changes present = ready for "git push"
 
 parse_git_branch() {
   # Show Git branch/tag, or name-rev if on detached head
@@ -192,6 +192,27 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
     ;;
 esac
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # Application-specific section =================================================
 # Import colorscheme from 'wal'
