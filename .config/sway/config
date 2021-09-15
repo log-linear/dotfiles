@@ -42,7 +42,7 @@ set $menu bemenu-run | xargs swaymsg exec --
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg /home/victor/Pictures/Wallpapers/xavier-cuenca-w4-3.jpg fill
+output * bg ~/.local/share/backgrounds/2021-08-23-19-45-35-xavier-cuenca-w4-3.jpg fill
 
 # Remove title bar, set border size
 default_border pixel 3
