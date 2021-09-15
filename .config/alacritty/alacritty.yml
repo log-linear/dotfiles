@@ -1,5 +1,7 @@
 window:
   decorations: none
+scrolling:
+  history: 50000 
 font:
   normal:
     family: "JetBrainsMono Nerd Font Mono"
@@ -11,6 +13,11 @@ font:
     family: "JetBrainsMono Nerd Font Mono"
     style: Italic
   size: 10.0
+cursor:
+  vi_mode_style: block
+  blink_interval: 600
+shell:
+  program: /bin/zsh
 # BEGIN ACE
 colors:
   primary:
