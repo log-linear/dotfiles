@@ -114,8 +114,8 @@ autocmd FileType python nmap <leader>py :w! \| !python %<CR>
 " Plugins ====================================================================
 
 " Install vim-plug if not already available
-if empty(glob('~/.config/vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/site/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
@@ -124,7 +124,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
-call plug#begin('~/.config/vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
   " Functionality
   Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Code completion
   Plug 'tpope/vim-commentary'  " easy code commenting
