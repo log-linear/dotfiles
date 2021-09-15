@@ -72,7 +72,8 @@ output HDMI-A-1 resolution 2560x1440 position 0,0
 #
 exec swayidle -w \
         timeout 300 'swaylock -f -c 000000' \
-        timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+        timeout 600 'swaymsg "output * dpms off"' \
+        resume 'swaymsg "output * dpms on"' \
         before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -330,7 +331,7 @@ mode "nag" {
 }
 
 # udiskie - automounting
-exec udiskie -t 
+exec udiskie &
 
 # Clipboard
 exec wl-paste -t text --watch clipman store
