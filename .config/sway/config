@@ -19,6 +19,10 @@ set $term alacritty
 set $filemgr ranger
 # Browser
 set $browser firefox
+# Network Manager
+set $netmgr nm-connection-editor
+# Bluetooth Manager
+set $btmgr blueman-manager
 
 # Colors
 
@@ -111,7 +115,7 @@ input "type:keyboard" {
     bindsym $mod+f exec $term -e $filemgr
     
     # Browser
-    bindsym $mod+b exec $browser
+    bindsym $mod+w exec $browser
 
     # Kill focused window
     bindsym $mod+q kill
@@ -121,6 +125,12 @@ input "type:keyboard" {
 
     # Mullvad
     bindsym $mod+v exec mullvad_helper
+
+    # network manager
+    bindsym $mod+n exec $netmgr
+
+    # bluetooth-manager
+    bindsym $mod+b exec $btmgr
 
     # Drag winndows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -192,12 +202,12 @@ input "type:keyboard" {
 # Layout stuff:
 #
     # Toggle new window split direction
-    bindsym $mod+i split toggle
+    bindsym $mod+u split toggle
 
     # Switch the current container between different layout styles
-    bindsym $mod+w layout stacking
-    bindsym $mod+s layout tabbed
-    bindsym $mod+o layout toggle split
+    bindsym $mod+p layout stacking
+    bindsym $mod+i layout tabbed
+    bindsym $mod+o layout toggle 
 
     # Make the current focus fullscreen
     bindsym $mod+m fullscreen

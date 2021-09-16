@@ -24,12 +24,15 @@ block = "cpu"
 interval = 1
 format = "{barchart} {utilization} {frequency}"
 
-#[[block]]
-#block = "networkmanager"
-#on_click = "alacritty -e nmtui"
-#interface_name_include = ["wlan0|azirevpn"]
-#interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
-#ap_format = "{ssid^10}"
+[[block]]
+block = "networkmanager"
+on_click = "nm-connection-editor"
+ap_format = "{ssid^10}"
+
+[[block]]
+block = "custom"
+command = 'echo "\xE1\x9A\xBC\xE1\x9B\x92luetooth"'
+on_click = "blueman-manager"
 
 [[block]]
 block = "pacman"
