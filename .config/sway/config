@@ -19,10 +19,6 @@ set $term alacritty
 set $filemgr ranger
 # Browser
 set $browser firefox
-# Network Manager
-set $netmgr nm-connection-editor
-# Bluetooth Manager
-set $btmgr blueman-manager
 
 # Colors
 
@@ -116,7 +112,7 @@ input "type:keyboard" {
     bindsym $mod+f exec kitty -c $HOME/.config/kitty/kitty.conf -e $filemgr
     
     # Browser
-    bindsym $mod+w exec $browser
+    bindsym $mod+b exec $browser
 
     # Kill focused window
     bindsym $mod+q kill
@@ -126,12 +122,6 @@ input "type:keyboard" {
 
     # Mullvad
     bindsym $mod+v exec mullvad_helper
-
-    # network manager
-    bindsym $mod+n exec $netmgr
-
-    # bluetooth-manager
-    bindsym $mod+b exec $btmgr
 
     # Drag winndows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
