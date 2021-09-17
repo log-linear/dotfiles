@@ -88,6 +88,7 @@ export MOZ_ENABLE_WAYLAND=1
 export SDL_VIDEODRIVER="wayland"
 export BEMENU_BACKEND="wayland"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+export FZF_DEFAULT_OPTS='--bind=ctrl-d:half-page-down,ctrl-u:half-page-up'
 
 # auto-start sway
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
