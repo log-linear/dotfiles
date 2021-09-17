@@ -87,6 +87,7 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export MOZ_ENABLE_WAYLAND=1
 export SDL_VIDEODRIVER="wayland"
 export BEMENU_BACKEND="wayland"
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 # auto-start sway
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then

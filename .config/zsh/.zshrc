@@ -160,6 +160,10 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up      
 bindkey '^[[B' history-substring-search-down
 
+# fzf
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
 # Apply different settings for different terminals
 case $(basename "$(cat "/proc/$PPID/comm")") in
   login)
