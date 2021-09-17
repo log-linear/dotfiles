@@ -77,39 +77,37 @@ nnoremap Q <Nop>
 
 " Filetype-specific settings =================================================
 
-""" R 
 " >> hotkey for R base pipe |>
-autocmd FileType r imap -- <space><-<space>
-autocmd FileType r imap >> <space>\|><space>
-autocmd FileType rmd imap >> <space>\|><space>
+au FileType r imap -- <space><-<space>
+au FileType r imap >> <space>\|><space>
+au FileType rmd imap >> <space>\|><space>
 
-" adjust tab widths
-autocmd FileType r setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType r setlocal autoindent cindent
-autocmd FileType rmd setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType rmd setlocal autoindent cindent
+" adjust R tab widths
+au FileType r setlocal expandtab shiftwidth=2 tabstop=2
+au FileType r setlocal autoindent cindent
+au FileType rmd setlocal expandtab shiftwidth=2 tabstop=2
+au FileType rmd setlocal autoindent cindent
 
-""" sh 
-" adjust tab widths
-autocmd FileType sh setlocal expandtab shiftwidth=2 tabstop=2
+" adjust sh tab widths
+au FileType sh setlocal expandtab shiftwidth=2 tabstop=2
 
-""" md 
-" adjust tab widths
-autocmd FileType markdown setlocal expandtab shiftwidth=2 tabstop=2
+" adjust md tab widths
+au FileType markdown setlocal expandtab shiftwidth=2 tabstop=2
 
 " Run markdown preview, requires mlp python package, only works on nvim, not vim
 au FileType markdown nmap <leader>mlp :call jobstart('mlp '.expand('%'))<CR>
 
 " Convert md to html, pdf, or docx using pandoc
-autocmd FileType markdown nmap <leader>mh :w! \| !pandoc "%" -o "%:r.html"<CR>
-autocmd FileType markdown nmap <leader>mw :w! \| !pandoc "%" -o "%:r.docx"<CR>
-autocmd FileType markdown 
+au FileType markdown nmap <leader>mh :w! \| !pandoc "%" -o "%:r.html"<CR>
+au FileType markdown nmap <leader>mw :w! \| !pandoc "%" -o "%:r.docx"<CR>
+au FileType markdown 
   \ nmap <leader>mp :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
 
-""" Python
+" Run current python file
+au FileType python nmap <leader>py :w! \| !python %<CR>
 
-" Run current file
-autocmd FileType python nmap <leader>py :w! \| !python %<CR>
+" Use actual tsv tabs
+au BufEnter *.tsv setlocal noexpandtab
 
 " Plugins ====================================================================
 
@@ -120,7 +118,7 @@ if empty(glob('~/.config/nvim/site/autoload/plug.vim'))
 endif
 
 " Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+au VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
@@ -157,7 +155,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " md-img-paste ---------------------------------------------------------------
-autocmd FileType markdown 
+au FileType markdown 
   \ nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 
 " vim-airline ----------------------------------------------------------------
@@ -177,7 +175,7 @@ map <leader>z :Goyo \| set linebreak<CR>
 
 " Nerd tree ------------------------------------------------------------------
 map <leader>n :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 
+au bufenter * if (winnr("$") == 1 
   \ && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 if has('nvim')
@@ -191,7 +189,7 @@ let NERDTreeShowHidden=1
 
 " enable relative line numbers
 let NERDTreeShowLineNumbers=1
-autocmd FileType nerdtree setlocal relativenumber
+au FileType nerdtree setlocal relativenumber
 
 " Nvim-R ---------------------------------------------------------------------
 let R_auto_start = 2  " Auto start on all .R/.Rmd files
@@ -277,7 +275,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+au CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -287,11 +285,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
+  au!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  au FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
