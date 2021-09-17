@@ -25,7 +25,7 @@ local({
   options(repos = r)
 })
 
-library(rvisidata)
+require(rvisidata)
 
 #===============================================================================
 # Sources:
