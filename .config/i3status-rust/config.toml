@@ -25,16 +25,6 @@ interval = 1
 format = "{barchart} {utilization} {frequency}"
 
 [[block]]
-block = "networkmanager"
-on_click = "nm-connection-editor"
-ap_format = "{ssid^10}"
-
-[[block]]
-block = "custom"
-command = 'echo "\xE1\x9A\xBC\xE1\x9B\x92luetooth"'
-on_click = "blueman-manager"
-
-[[block]]
 block = "pacman"
 interval = 600
 format = "{pacman} + {aur} = {both} updates available"
@@ -45,12 +35,21 @@ critical_updates_regex = "(linux|linux-lts|linux-zen)"
 aur_command = "paru -Qua"
 
 [[block]]
+block = "networkmanager"
+on_click = "nm-connection-editor"
+ap_format = "{ssid^10}"
+
+[[block]]
 block = "sound"
 step_width = 3
 
 # [[block]]
 # block = "backlight"
 # device = "intel_backlight"
+
+# [[block]]
+# block = "battery"
+# interval = 10
 
 [[block]]
 block = "time"
@@ -59,7 +58,12 @@ timezone = "US/Central"
 interval = 60
 locale = "en_US"
 
-# [[block]]
-# block = "battery"
-# interval = 10
+[[block]]
+block = "custom"
+command = 'echo "\xE2\x98\xB0"'
+on_click = "nwggrid"
 
+[[block]]
+block = "custom"
+command = 'echo "\xE2\x8F\xBB" │'
+on_click = "nwgbar"
