@@ -135,7 +135,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-repeat'  " Use . to repeat plugin keymaps
   Plug 'mhinz/vim-startify'  " fancy startup menu
   Plug 'ferrine/md-img-paste.vim'  " Paste images into md files
-  Plug 'junegunn/vim-easy-align'
+  Plug 'junegunn/vim-easy-align'  " Text alignment
+  Plug 'junegunn/fzf.vim'  " fzf convenience functions
 
   " Aesthetics
   Plug 'vim-airline/vim-airline'  " status bar
@@ -146,6 +147,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'ryanoasis/vim-devicons'  " Always load last
   Plug 'Yggdroot/indentLine'  " Visual line indents
 call plug#end()
+
+" fzf.vim --------------------------------------------------------------------
+nnoremap <leader>f :Files<CR>
 
 " vim-easy-align -------------------------------------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -281,8 +285,8 @@ au CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader><space>f <Plug>(coc-format-selected)
+nmap <leader><space>f <Plug>(coc-format-selected)
 
 augroup mygroup
   au!
