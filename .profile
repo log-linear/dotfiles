@@ -88,7 +88,7 @@ export MOZ_ENABLE_WAYLAND=1
 export SDL_VIDEODRIVER="wayland"
 export BEMENU_BACKEND="wayland"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-export FZF_DEFAULT_OPTS='--bind=ctrl-d:half-page-down,ctrl-u:half-page-up'
+export FZF_DEFAULT_OPTS="--bind=ctrl-d:half-page-down,ctrl-u:half-page-up --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 # auto-start sway
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
