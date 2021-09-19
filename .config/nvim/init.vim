@@ -59,8 +59,8 @@ noremap <silent> <A-j> :resize +3<CR>
 
 " Simple buffer management
 nnoremap <leader>q :bp <BAR> bd #<CR>
-nnoremap <C-n> :bn<CR>
-nnoremap <C-p> :bp<CR>
+nnoremap ]b :bn<CR>
+nnoremap [b :bp<CR>
 nnoremap <leader>vs :vsplit<CR>
 nnoremap <leader>hs :split<CR>
 
