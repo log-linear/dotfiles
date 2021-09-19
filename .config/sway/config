@@ -23,7 +23,6 @@ set $browser firefox
 set $nag exec swaynagmode
 
 # Colors
-
 set $bg #282828
 set $red #cc241d
 set $green #98971a
@@ -269,7 +268,8 @@ bindsym $mod+return mode "resize"
 bar {
     font JetBrainsMono NF 10
     position top
-    status_command /usr/bin/i3status-rs $HOME/.config/i3status-rust/config.toml
+    status_padding 0
+    status_command i3status-rs $HOME/.config/i3status-rust/config.toml
     colors {
         separator $bghard
         background $bg

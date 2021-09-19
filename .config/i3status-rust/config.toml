@@ -1,5 +1,7 @@
-theme = "gruvbox-dark"
 icons = "awesome5"
+
+[theme]
+name="gruvbox-dark"
 
 [[block]]
 block = "keyboard_layout"
@@ -58,12 +60,31 @@ timezone = "US/Central"
 interval = 60
 locale = "en_US"
 
+# Launcher block
 [[block]]
 block = "custom"
-command = 'echo "\xE2\x98\xB0"'
-on_click = "nwggrid"
+command = 'echo "\xF0\x9F\x9A\x80 Apps"'
+on_click = 'swaymsg "exec alacritty --class=launcher -e /usr/bin/sway-launcher-desktop"'
+
+# Lock, reboot, power blocks
+[[block]]
+block = "custom"
+command = 'echo "\xE2\x8C\x80"'
+on_click = "exec swaynagmode -t warning -m 'Logout?' -b 'Yes, logout' 'swaymsg exit'"
+[block.theme_overrides]
+idle_bg = "#b16286"
 
 [[block]]
 block = "custom"
-command = 'echo "\xE2\x8F\xBB" │'
-on_click = "nwgbar"
+command = 'echo "\xE2\x8F\xBC"'
+on_click = "exec swaynagmode -t warning -m 'Reboot sytem?' -b 'Yes, reboot system' 'systemctl reboot'"
+[block.theme_overrides]
+idle_bg = "#b16286"
+
+[[block]]
+block = "custom"
+command = 'echo "\xE2\x8F\xBB"'
+on_click = "exec swaynagmode -t warning -m 'Shutdown system?' -b 'Yes, shutdown system' 'systemctl -i poweroff'"
+[block.theme_overrides]
+idle_bg = "#b16286"
+
