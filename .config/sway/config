@@ -51,7 +51,7 @@ default_border pixel 3
 default_floating_border pixel 3
 
 # Window colorscheme
-client.focused #b8bb26 #b8bb26   #fbf1c7 #fb4934
+client.focused #d79921 #d79921 #fbf1c7 #fb4934
 client.unfocused #000000 #282828 #7c6f64
 
 # Gaps
