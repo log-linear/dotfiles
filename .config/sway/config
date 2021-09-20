@@ -266,7 +266,7 @@ bindsym $mod+return mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    font JetBrainsMono NerdFont 11.8
+    font JetBrainsMono NerdFont 12
     height 21
     position top
     status_padding 0
