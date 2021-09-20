@@ -56,7 +56,7 @@ client.unfocused #000000 #282828 #7c6f64
 
 # Gaps
 smart_gaps on
-gaps inner 15
+gaps inner 10
 gaps horizontal 0
 gaps vertical 0
 
@@ -266,7 +266,8 @@ bindsym $mod+return mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    font JetBrainsMono NF 10
+    font JetBrainsMono NerdFont 11.8
+    height 21
     position top
     status_padding 0
     status_command i3status-rs $HOME/.config/i3status-rust/config.toml
@@ -351,8 +352,8 @@ exec mullvad-vpn
 
 # Workspace programs
 workspace 1
-exec alacritty
-exec firefox
+exec $term
+exec $browser
 
 workspace 2
 exec electron-mail

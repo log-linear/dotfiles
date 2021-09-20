@@ -1,7 +1,10 @@
-icons = "awesome5"
+icons = "material-nf"
 
 [theme]
-name="gruvbox-dark"
+name = "gruvbox-dark"
+
+[theme.overrides]
+separator = ""
 
 [[block]]
 block = "keyboard_layout"
@@ -33,17 +36,18 @@ format = "{pacman} + {aur} = {both} updates available"
 format_singular = "{both} update available"
 format_up_to_date = "ok"
 critical_updates_regex = "(linux|linux-lts|linux-zen)"
-# aur_command should output available updates to stdout (ie behave as echo -ne "update\n")
 aur_command = "paru -Qua"
+hide_when_uptodate = true
+
+[[block]]
+block = "sound"
+step_width = 5
 
 [[block]]
 block = "networkmanager"
 on_click = "nm-connection-editor"
 ap_format = "{ssid^10}"
-
-[[block]]
-block = "sound"
-step_width = 3
+interface_name_exclude = ["mullvad"]
 
 # [[block]]
 # block = "backlight"
@@ -59,6 +63,8 @@ format = "%Y-%m-%d │ %I:%M %p"
 timezone = "US/Central"
 interval = 60
 locale = "en_US"
+[block.theme_overrides]
+idle_bg = "#458588"
 
 # Launcher block
 [[block]]
@@ -66,27 +72,13 @@ block = "custom"
 command = 'echo ""'
 on_click = 'swaymsg "exec alacritty --class=launcher -e /usr/bin/sway-launcher-desktop"'
 [block.theme_overrides]
-idle_bg = "#b16286"
+idle_bg = "#d79921"
 
 # Lock, reboot, power blocks
 [[block]]
 block = "custom"
-command = 'echo "︁"'
-on_click = "exec swaynagmode -t warning -m 'Logout?' -b 'Yes, logout' 'swaymsg exit'"
-[block.theme_overrides]
-idle_bg = "#b16286"
-
-[[block]]
-block = "custom"
-command = 'echo "🗘︁"'
-on_click = "exec swaynagmode -t warning -m 'Reboot sytem?' -b 'Yes, reboot system' 'systemctl reboot'"
-[block.theme_overrides]
-idle_bg = "#b16286"
-
-[[block]]
-block = "custom"
 command = 'echo ""'
-on_click = "exec swaynagmode -t warning -m 'Shutdown system?' -b 'Yes, shutdown system' 'systemctl -i poweroff'"
+on_click = "exec swaynagmode -t warning -m '' -b 'Logout' 'swaymsg exit' -b 'Reboot' 'systemctl reboot' -b 'Power off' 'systemctl -i poweroff'"
 [block.theme_overrides]
 idle_bg = "#b16286"
 
