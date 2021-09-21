@@ -1,7 +1,8 @@
-icons = "material-nf"
-
 [theme]
 name = "gruvbox-dark"
+
+[icons]
+name = "material-nf_bat_patch"
 
 [theme.overrides]
 separator = ""
