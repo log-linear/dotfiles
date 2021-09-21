@@ -94,6 +94,13 @@ idle_bg = "#d79921"
 
 [[block]]
 block = "custom"
+command = 'echo ""'
+on_click = 'exec alacritty -e ranger'
+[block.theme_overrides]
+idle_bg = "#d79921"
+
+[[block]]
+block = "custom"
 command = 'echo ""'
 on_click = 'swaymsg "exec alacritty --class=launcher -e /usr/bin/sway-launcher-desktop"'
 [block.theme_overrides]
@@ -102,7 +109,7 @@ idle_bg = "#d79921"
 [[block]]
 block = "custom"
 command = 'echo ""'
-on_click = "exec swaynagmode -t warning -m '' -b 'Logout' 'swaymsg exit' -b 'Reboot' 'systemctl reboot' -b 'Power off' 'systemctl -i poweroff'"
+on_click = "exec swaynagmode -t warning -m '' -b ' Logout ' 'swaymsg exit' -b ' Reboot ' 'systemctl reboot' -b ' Power off ' 'systemctl -i poweroff'"
 [block.theme_overrides]
 idle_bg = "#d79921"
 
