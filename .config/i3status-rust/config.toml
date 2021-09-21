@@ -5,7 +5,7 @@ name = "gruvbox-dark"
 
 [theme.overrides]
 separator = ""
-idle_bg = "#504945"
+idle_bg = "#3c3836"
 
 [[block]]
 block = "keyboard_layout"
@@ -14,8 +14,8 @@ format = "\u2328 {variant}"
 
 [[block]]
 block = "memory"
-format_mem = "{mem_used} /{mem_total}"
-format_swap = "{swap_used}/{swap_total}"
+format_mem = "{mem_used_percents}"
+format_swap = "{swap_used_percents}"
 display_type = "memory"
 icons = true
 clickable = true
@@ -40,27 +40,32 @@ critical_updates_regex = "(linux|linux-lts|linux-zen)"
 aur_command = "paru -Qua"
 hide_when_uptodate = true
 
+# [[block]]
+# block = "backlight"
+# device = "intel_backlight"
+
+[[block]]
+block = "battery"
+interval = 10
+hide_missing = true
+allow_missing = true
+[block.theme_overrides]
+idle_bg = "#504945"
+
 [[block]]
 block = "networkmanager"
+primary_only = true
 on_click = "nm-connection-editor"
-ap_format = "{ssid}"
-interface_name_exclude = ["mullvad"]
+ap_format = "{freq}"
+device_format = "{icon}{name}"
 [block.theme_overrides]
-idle_bg = "#689d6a"
+good_bg = "#504945"
 
 [[block]]
 block = "sound"
 step_width = 5
 [block.theme_overrides]
-idle_bg = "#b16286"
-
-# [[block]]
-# block = "backlight"
-# device = "intel_backlight"
-
-# [[block]]
-# block = "battery"
-# interval = 10
+idle_bg = "#665c65"
 
 [[block]]
 block = "time"
@@ -69,7 +74,7 @@ timezone = "US/Central"
 interval = 60
 locale = "en_US"
 [block.theme_overrides]
-idle_bg = "#458588"
+idle_bg = "#7c6f64"
 
 # Launcher block
 [[block]]
