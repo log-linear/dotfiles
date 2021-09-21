@@ -66,7 +66,7 @@ good_bg = "#504945"
 block = "sound"
 step_width = 5
 [block.theme_overrides]
-idle_bg = "#665c65"
+idle_bg = "#504945"
 
 [[block]]
 block = "time"
@@ -75,9 +75,23 @@ timezone = "US/Central"
 interval = 60
 locale = "en_US"
 [block.theme_overrides]
-idle_bg = "#7c6f64"
+idle_bg = "#665c54"
 
-# Launcher block
+# terminal, browser, launcher, lock, reboot, power blocks
+[[block]]
+block = "custom"
+command = 'echo ""'
+on_click = 'swaymsg "exec alacritty"'
+[block.theme_overrides]
+idle_bg = "#d79921"
+
+[[block]]
+block = "custom"
+command = 'echo ""'
+on_click = 'exec firefox'
+[block.theme_overrides]
+idle_bg = "#d79921"
+
 [[block]]
 block = "custom"
 command = 'echo ""'
@@ -85,7 +99,6 @@ on_click = 'swaymsg "exec alacritty --class=launcher -e /usr/bin/sway-launcher-d
 [block.theme_overrides]
 idle_bg = "#d79921"
 
-# Lock, reboot, power blocks
 [[block]]
 block = "custom"
 command = 'echo ""'
