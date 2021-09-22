@@ -84,11 +84,15 @@ export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch/notmuchrc
 export NMBGIT="$XDG_DATA_HOME"/notmuch/nmbug
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc 
+
+# Wayland support
 export MOZ_ENABLE_WAYLAND=1
 export SDL_VIDEODRIVER="wayland"
 export BEMENU_BACKEND="wayland"
+
+# fzf
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-export FZF_DEFAULT_OPTS="--bind=ctrl-d:half-page-down,ctrl-u:half-page-up --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+export FZF_DEFAULT_OPTS="--bind=ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-h:backward-char,ctrl-l:forward-char,ctrl-b:backward-word,ctrl-e:forward-word,ctrl-w:forward-word"
 
 # auto-start sway
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then

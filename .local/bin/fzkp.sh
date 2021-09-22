@@ -13,27 +13,34 @@
 #
 ##############################################################################
 
-if [ ! -f "${KPDB}" ];then 
-    KPDB=$(rg kdbx "${HOME}" | fzf --no-hscroll -m --height 50%  --ansi --no-bold --border --header "Enter the path to the database")
-fi 
+while [ ! -f "${KPDB}" ]; do
+  echo "Please enter a valid path to a KeePassX database."
+  read KPDB
+done
 
-if [ -z "${KPPW}" ];then
-    echo "Please enter the password for the KeepassX database."
-    read -s KPPW
+if [ -z "${KPPW}" ]; then
+  echo "Please enter the password."
+  read -s KPPW
 fi
+
+while [ "$(echo ${KPPW} | keepassxc-cli open ${KPDB} -q)" = "> " ]; do
+  echo "Password Incorrect. Please re-enter the password for ${KPDB}"
+  read -s KPPW
+done
 
 clear
 export KPPW=${KPPW}
 export KPDB=${KPDB}
 
-if [ ! -z "${1}" ];then 
-    echo "${KPPW}" | keepassxc-cli show -s "${KPDB}" "${1}" 2> /dev/null
-    exit
+if [ ! -z "${1}" ]; then 
+  echo "${KPPW}" | keepassxc-cli show -s "${KPDB}" "${1}" 2> /dev/null
+  exit
 else
-    SCRIPTNAME=$(realpath "$0")
-    KPVALUE=$(echo "${KPPW}" | keepassxc-cli ls --recursive --flatten "${KPDB}" | fzf --no-hscroll -m --ansi --no-bold --preview="$SCRIPTNAME {}" )
-    echo "${KPPW}" | keepassxc-cli show -s "${KPDB}" "${KPVALUE}" -a password 2> /dev/null | wl-copy
-    printf "\nThe password is copied to the clipboard.\n"
-    printf "Username is %s\n"  "$(echo "${KPPW}" | keepassxc-cli show -s "${KPDB}" "${KPVALUE}" -a username 2> /dev/null)"
-    printf "TOTP (if existing) is %s"  "$(echo "${KPPW}" | keepassxc-cli show -s "${KPDB}" "${KPVALUE}" --totp 2> /dev/null)"
+  SCRIPTNAME=$(realpath "$0")
+  KPVALUE=$(echo "${KPPW}" | keepassxc-cli ls --recursive --flatten "${KPDB}" | fzf --no-hscroll -m --ansi --no-bold --preview="$SCRIPTNAME {}" )
+  echo "${KPPW}" | keepassxc-cli show -s "${KPDB}" "${KPVALUE}" -a password 2> /dev/null | wl-copy
+  printf "\nPassword has been copied to the clipboard.\n"
+  printf "Username is %s\n"  "$(echo "${KPPW}" | keepassxc-cli show -s "${KPDB}" "${KPVALUE}" -a username 2> /dev/null)"
+  printf "TOTP (if existing) is %s"  "$(echo "${KPPW}" | keepassxc-cli show -s "${KPDB}" "${KPVALUE}" --totp 2> /dev/null)"
 fi
+
