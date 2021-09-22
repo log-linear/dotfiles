@@ -9,6 +9,16 @@ separator = ""
 idle_bg = "#3c3836"
 
 [[block]]
+block = "pacman"
+interval = 600
+format = "{pacman} + {aur} = {both} updates available"
+format_singular = "{both} update available"
+format_up_to_date = "ok"
+critical_updates_regex = "(linux|linux-lts|linux-zen)"
+aur_command = "paru -Qua"
+hide_when_uptodate = true
+
+[[block]]
 block = "keyboard_layout"
 driver = "sway"
 format = "\u2328 {variant}"
@@ -30,16 +40,6 @@ critical_swap = 95
 block = "cpu"
 interval = 1
 format = "{utilization} {frequency}"
-
-[[block]]
-block = "pacman"
-interval = 600
-format = "{pacman} + {aur} = {both} updates available"
-format_singular = "{both} update available"
-format_up_to_date = "ok"
-critical_updates_regex = "(linux|linux-lts|linux-zen)"
-aur_command = "paru -Qua"
-hide_when_uptodate = true
 
 # [[block]]
 # block = "backlight"
