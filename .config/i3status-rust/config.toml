@@ -87,7 +87,7 @@ idle_bg = "#d79921"
 
 [[block]]
 block = "custom"
-command = 'echo ""'
+command = 'echo "爵"'
 on_click = 'exec firefox'
 [block.theme_overrides]
 idle_bg = "#d79921"
