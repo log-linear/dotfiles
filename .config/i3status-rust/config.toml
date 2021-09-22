@@ -80,7 +80,7 @@ idle_bg = "#665c54"
 # terminal, browser, launcher, lock, reboot, power blocks
 [[block]]
 block = "custom"
-command = 'echo ""'
+command = 'echo ""'
 on_click = 'swaymsg "exec alacritty"'
 [block.theme_overrides]
 idle_bg = "#d79921"
