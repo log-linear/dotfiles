@@ -13,6 +13,7 @@ disable r                       # Disable zsh built-in command `r`
 stty -ixon                      # Disable ctrl+s ctrl+q terminal input disabling
 
 # Tab completion settings
+zstyle ':completion:*' menu select  # Completion menu selection
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'  # Case insensitivity
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"  # Colored completion
 zstyle ':completion:*' rehash true  # automatically find new $PATH executables
@@ -52,7 +53,11 @@ bindkey '^[Od' backward-word
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word  #
 bindkey '^H' backward-kill-word # delete previous word with ctrl+backspace
-bindkey '^[[Z' undo             # Shift+tab undo last action
+
+# Menu completion navigation
+bindkey '^[[Z' reverse-menu-complete # Shift+tab undo last action
+bindkey '^n' menu-complete # Shift+tab undo last action
+bindkey '^p' reverse-menu-complete # Shift+tab undo last action
 
 # Alias section ================================================================
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && \

@@ -144,8 +144,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'morhetz/gruvbox'  " theme
   Plug 'ryanoasis/vim-devicons'  " Requires Nerd Font compatible font
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-  Plug 'ryanoasis/vim-devicons'  " Always load last
   Plug 'Yggdroot/indentLine'  " Visual line indents
+  Plug 'ryanoasis/vim-devicons'  " Always load last
 call plug#end()
 
 " fzf.vim --------------------------------------------------------------------

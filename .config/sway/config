@@ -111,7 +111,7 @@ input "type:keyboard" {
 
     # File manager
     bindsym $mod+f exec $term -e $filemgr
-    
+
     # Browser
     bindsym $mod+b exec $browser
 
@@ -307,7 +307,6 @@ bindsym $mod+S exec grim -g "$(slurp)" - | wl-copy
 # Screen select snapshot to editor
 bindsym $mod+shift+S exec grim -g "$(slurp)" - | swappy -f -
 
-
 # use xwayland
 xwayland enable
 
@@ -343,7 +342,7 @@ exec udiskie &
 
 # Clipboard
 exec wl-paste -t text --watch clipman store
-    
+
 # wlsunset - redshift-esque program
 exec wlsunset -S 06:30 -s 20:30
 

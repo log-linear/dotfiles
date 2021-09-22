@@ -1,3 +1,5 @@
+#!/bin/sh
+
 alias cp="cp -iv"                                               # Confirm before overwriting something
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
@@ -30,7 +32,7 @@ alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -l --color=auto'
+    alias ls='exa -l --color=auto'
     alias ll='exa -al --color=auto --git'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
