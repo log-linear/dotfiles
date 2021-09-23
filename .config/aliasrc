@@ -23,7 +23,6 @@ alias dlalbum='youtube-dl --ignore-errors -f bestaudio --extract-audio --audio-f
 alias kpc='keepassxc-cli clip ~/Sync/Stuff/KeePass.kdbx'
 alias deconda='conda deactivate'
 alias condact='conda activate'
-alias fzkp='. $HOME/.local/bin/fzkp.sh'
 
 # Used for $HOME cleanup
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
