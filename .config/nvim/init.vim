@@ -388,3 +388,7 @@ command! CocToggle :call CocToggle()
 nmap <leader><leader> :CocToggle<CR>
 nmap <leader>. :CocRestart<CR>
 
+" Windows-specific configs ===================================================
+if has("win64") || has("win32") || has("win16")
+  source ~/AppData/Local/nvim/win.vim
+endif
