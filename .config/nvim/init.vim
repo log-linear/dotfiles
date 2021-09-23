@@ -122,6 +122,10 @@ au VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
+" vim-polyglot settings need to run before loading
+let g:polyglot_disabled = ['markdown']
+
+" Load plugins
 call plug#begin('~/.config/nvim/plugged')
   " Functionality
   Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Code completion
@@ -139,6 +143,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf.vim'  " fzf convenience functions
 
   " Aesthetics
+  Plug 'sheerun/vim-polyglot'  " General syntax highlighting
   Plug 'vim-airline/vim-airline'  " status bar
   Plug 'junegunn/goyo.vim'  " zen mode
   Plug 'morhetz/gruvbox'  " theme
