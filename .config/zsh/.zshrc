@@ -227,9 +227,6 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 # Import colorscheme from 'wal'
 [ -f /usr/bin/wal ] && cat ~/.cache/wal/sequences
 
-# Run conda init script if exists
-[ -f "${HOME}/.local/bin/conda_init" ] && source "${HOME}/.local/bin/conda_init"
-
 # Keychain - Stores ssh pw's per each login, needed when using e.g. sway
 eval $(keychain --eval --quiet id_ed25519)
 
