@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Visidata
+Exec=/usr/bin/alacritty -e visidata %u
