@@ -15,6 +15,7 @@ text/html=firefox.desktop
 text/csv=vd.desktop
 text/tsv=vd.desktop
 text/tab-separated-values=vd.desktop
+application/xml=text.desktop
 text/xml=text.desktop
 text/x-script.python=text.desktop
 text/x-awk=text.desktop
