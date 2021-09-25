@@ -1,4 +1,0 @@
-[Desktop Entry]
-Name=Calendar
-Type=Application
-Exec=/usr/bin/termite -e calcurse %u

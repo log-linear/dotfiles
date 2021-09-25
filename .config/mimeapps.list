@@ -1,7 +1,6 @@
 [Default Applications]
 application/pdf=pdf.desktop
 application/postscript=pdf.desktop
-application/R=rstudio.desktop
 application/x-extension-htm=firefox.desktop
 application/x-extension-html=firefox.desktop
 application/x-extension-shtml=firefox.desktop
@@ -16,6 +15,7 @@ text/html=firefox.desktop
 text/csv=vd.desktop
 text/tsv=vd.desktop
 text/tab-separated-values=vd.desktop
+text/xml=text.desktop
 text/x-script.python=text.desktop
 text/x-awk=text.desktop
 text/x-ruby=text.desktop
