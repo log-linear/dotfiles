@@ -9,12 +9,10 @@ map - zoom out
 map f display_link
 map Return follow
 map p toggle_page_mode
-map [ adjust_window best-fit
-map ] adjust_window width
 map u scroll full-up
 map d scroll full-down
-map r rotate rotate-cw
-map R rotate rotate-ccw
+map ] rotate rotate-cw
+map [ rotate rotate-ccw
 
 # Gruvbox
 set default-bg                  "#282828"
