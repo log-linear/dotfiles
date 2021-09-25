@@ -168,6 +168,10 @@ bindkey '^[[B' history-substring-search-down
 # fzf
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
 
 # Apply different settings for different terminals
 case $(basename "$(cat "/proc/$PPID/comm")") in

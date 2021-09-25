@@ -132,7 +132,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-commentary'  " easy code commenting
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}  " R support
   Plug 'preservim/nerdtree'  " file browser
-  Plug 'tpope/vim-fugitive'  " git command support
   Plug 'mhinz/vim-signify'  " line-by-line git diff marks
   Plug 'karoliskoncevicius/vim-sendtowindow'  " Basic REPLing
   Plug 'tpope/vim-surround'  " Easisly change brackets, quotes, parentheses, etc
@@ -225,10 +224,7 @@ nmap <CR> <Plug>RDSendLine
 " vim-signify ----------------------------------------------------------------
 map <leader>hu :SignifyHunkUndo<CR>
 
-" vim-fugitive ---------------------------------------------------------------
-nnoremap <leader>vd :Gvdiffsplit<CR>
-
-" vim- startify --------------------------------------------------------------
+" vim-startify --------------------------------------------------------------
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
       \ { 'type': 'files',     'header': ['   Recent']            },

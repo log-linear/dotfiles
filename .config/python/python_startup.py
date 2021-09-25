@@ -26,7 +26,7 @@ def set_python_history():
         readline.set_history_length(1000)
     except FileNotFoundError:
         pass
-    
+
     atexit.register(readline.write_history_file, histfile)
 
 
@@ -65,7 +65,7 @@ def set_autoindent():
             else:
                 indent = ''.join(["    " for n in range(last_indent)])
         readline.insert_text(indent)
-    
+
     readline.set_pre_input_hook(rl_autoindent)
 
 
