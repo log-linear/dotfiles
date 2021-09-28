@@ -1,23 +1,23 @@
 " General settings ===========================================================
-let mapleader=","  " remap <leader>
-set cursorline  " Cursor line highlight 
-set showcmd  " show commands in status line
+let mapleader=","          " remap <leader>
+set cursorline             " Cursor line highlight
+set showcmd                " show commands in status line
 filetype plugin indent on  " filetype detection
-set notimeout  " No key sequence timeout
-set clipboard+=unnamedplus  " yank to system clipboard via wl-clipboard or xclip 
-set splitbelow splitright  " Splits open at the bottom and right 
-set mouse=nv  " Enable mouse support
-set scrolloff=3  " Always show one line above/below character
-set sidescroll=3  " Ditto for horizontal scrolling
+set notimeout              " No key sequence timeout
+set clipboard+=unnamedplus " yank to system clipboard via wl-clipboard or xclip
+set splitbelow splitright  " Splits open at the bottom and right
+set mouse=nv               " Enable mouse support
+set scrolloff=3            " Always show one line above/below character
+set sidescroll=3           " Ditto for horizontal scrolling
 set number relativenumber  " Relative line numbers
-set hidden  " Allow switching buffers before saving
-set signcolumn=auto:9  " sign column for gitgutter, coc, etc
-set cmdheight=2  " Give more space for displaying messages.
-set nobackup  " Fix breakages with certain coc lsps
-set nowritebackup  " Fix breakages with certain coc lsps
-set updatetime=300  " Reduce coc.nvim lag
-set shortmess+=c  " Don't pass messages to |ins-completion-menu|.
-set autoindent smartindent  " autoindent
+set hidden                 " Allow switching buffers before saving
+set signcolumn=auto:9      " sign column for gitgutter, coc, etc
+set cmdheight=2            " Give more space for displaying messages.
+set nobackup               " Fix breakages with certain coc lsps
+set nowritebackup          " Fix breakages with certain coc lsps
+set updatetime=300         " Reduce coc.nvim lag
+set shortmess+=c           " Don't pass messages to |ins-completion-menu|.
+set autoindent smartindent " autoindent
 
 " tabs to spaces
 set expandtab

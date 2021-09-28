@@ -23,16 +23,16 @@ set $browser firefox
 set $nag exec swaynagmode
 
 # Colors
-set $bg #282828
-set $red #cc241d
-set $green #98971a
+set $bg     #282828
+set $red    #cc241d
+set $green  #98971a
 set $yellow #d79921
-set $blue #458588
+set $blue   #458588
 set $purple #b16286
-set $aqua #689d68
-set $gray #a89984
+set $aqua   #689d68
+set $gray   #a89984
 set $bghard #1d2021
-set $white #ebdbb2#
+set $white  #ebdbb2
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -57,8 +57,7 @@ client.unfocused #000000 #282828 #7c6f64
 # Gaps
 smart_gaps on
 gaps inner 10
-gaps horizontal 0
-gaps vertical 0
+gaps outer 25
 
 #
 # Example configuration:
@@ -75,7 +74,7 @@ output HDMI-A-1 resolution 2560x1440 position 0,0
 exec swayidle -w \
         timeout 300 'swaylock -f -c 000000' \
         timeout 600 'swaymsg "output * dpms off"' \
-        resume 'swaymsg "output * dpms on"' \
+        resume  'swaymsg "output * dpms on"' \
         before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -124,7 +123,7 @@ input "type:keyboard" {
     # Mullvad
     bindsym $mod+v exec mullvad_helper
 
-    # Drag winndows by holding down $mod and left mouse button.
+    # Drag windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
     # Change normal to inverse to use left mouse button for resizing and right
@@ -177,6 +176,8 @@ input "type:keyboard" {
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+    bindsym $mod+n workspace next
+    bindsym $mod+p workspace prev
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -188,18 +189,18 @@ input "type:keyboard" {
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
+    bindsym $mod+Shift+n move container to workspace next
+    bindsym $mod+Shift+p move container to workspace prev
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
 # Layout stuff:
 #
     # Toggle new window split direction
-    bindsym $mod+u split toggle
+    bindsym $mod+d split toggle
 
     # Switch the current container between different layout styles
-    bindsym $mod+i layout tabbed
-    bindsym $mod+p layout stacking
-    bindsym $mod+o layout toggle 
+    bindsym $mod+o layout toggle splith splitv tabbed
 
     # Make the current focus fullscreen
     bindsym $mod+m fullscreen
@@ -212,6 +213,15 @@ input "type:keyboard" {
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
+
+    # Adjust gap sizes
+    bindsym $mod+bracketright gaps inner current plus 5
+    bindsym $mod+bracketleft gaps inner current minus 5
+    bindsym $mod+equal gaps inner current set 0
+
+    bindsym $mod+braceright gaps outer current plus 5
+    bindsym $mod+braceleft gaps outer current minus 5
+    bindsym $mod+plus gaps outer current set 0
 #
 # Scratchpad:
 #
@@ -246,39 +256,40 @@ mode "resize" {
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym $mod+Return mode "default"
+    bindsym ctrl+bracketleft mode "default"
 }
 bindsym $mod+return mode "resize"
 #
 # Custom keys (e.g. volume controls)
 #
-    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    bindsym XF86AudioRaiseVolume  exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym XF86AudioLowerVolume  exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym XF86AudioMute         exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioMicMute      exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
     bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-    bindsym XF86AudioPlay exec playerctl play-pause
-    bindsym XF86AudioNext exec playerctl next
-    bindsym XF86AudioPrev exec playerctl previous
-    bindsym XF86Search exec bemenu-run
+    bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
+    bindsym XF86AudioPlay         exec playerctl play-pause
+    bindsym XF86AudioNext         exec playerctl next
+    bindsym XF86AudioPrev         exec playerctl previous
+    bindsym XF86Search            exec bemenu-run
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    font JetBrainsMono NerdFont 12.5
-    height 21
+    font JetBrainsMono NerdFont 10
     position top
     status_padding 0
     status_command i3status-rs $HOME/.config/i3status-rust/config.toml
     colors {
-        separator $bghard
-        background $bg
-    	statusline $bg
-        focused_workspace    $yellow $bghard $yellow
-        inactive_workspace   $bg $bg $yellow
-        active_workspace     $bg $bg $yellow
-        urgent_workspace     $red $red $bg
+        separator          $bghard
+        background         $bg
+    	statusline         $bg
+        focused_workspace  $yellow $yellow $bghard
+        inactive_workspace $bg $bg $yellow
+        active_workspace   $bg $bg $yellow
+        urgent_workspace   $red $red $bg
     }
 }
 

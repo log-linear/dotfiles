@@ -5,8 +5,8 @@ name = "gruvbox-dark"
 name = "material-nf_bat_patch"
 
 [theme.overrides]
-separator = ""
-idle_bg = "#3c3836"
+separator = ""
+idle_bg = "#504945"
 
 [[block]]
 block = "pacman"
@@ -52,7 +52,6 @@ interval = 10
 hide_missing = true
 allow_missing = true
 [block.theme_overrides]
-idle_bg = "#504945"
 
 [[block]]
 block = "networkmanager"
@@ -66,8 +65,6 @@ good_bg = "#504945"
 [[block]]
 block = "sound"
 step_width = 5
-[block.theme_overrides]
-idle_bg = "#504945"
 
 [[block]]
 block = "time"
@@ -113,11 +110,4 @@ command = 'echo ""'
 on_click = "exec swaynagmode -t warning -m '' -b ' Lock ' 'swaylock -f -c 000000' -b ' Logout ' 'swaymsg exit' -b ' Reboot ' 'systemctl reboot' -b ' Power off ' 'systemctl -i poweroff'"
 [block.theme_overrides]
 idle_bg = "#d79921"
-
-# Empty block for tray separator
-[[block]]
-block = "custom"
-command = 'echo ""'
-[block.theme_overrides]
-idle_bg = "#282828"
 
