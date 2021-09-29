@@ -263,13 +263,13 @@ bindsym $mod+return mode "resize"
 #
 # Custom keys (e.g. volume controls)
 #
-    bindsym XF86AudioRaiseVolume  exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-    bindsym XF86AudioLowerVolume  exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-    bindsym XF86AudioMute         exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioRaiseVolume  exec pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "🔊 $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo -m 1 "[[:digit:]]+\%" | head -1)"
+    bindsym XF86AudioLowerVolume  exec pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send "🔉 $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo -m 1 "[[:digit:]]+\%" | head -1)"
+    bindsym XF86AudioMute         exec pactl set-sink-mute @DEFAULT_SINK@ toggle && notify-send "🔇"
     bindsym XF86AudioMicMute      exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-    bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
-    bindsym XF86AudioPlay         exec playerctl play-pause
+    bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && notify-send "🔆"
+    bindsym XF86MonBrightnessUp   exec brightnessctl set +5% && notify-send "🔅"
+    bindsym XF86AudioPlay         exec playerctl play-pause && notify-send
     bindsym XF86AudioNext         exec playerctl next
     bindsym XF86AudioPrev         exec playerctl previous
     bindsym XF86Search            exec bemenu-run
@@ -287,9 +287,9 @@ bar {
         background         $bg
     	statusline         $bg
         focused_workspace  $yellow $yellow $bghard
-        inactive_workspace $bg $bg $yellow
-        active_workspace   $bg $bg $yellow
-        urgent_workspace   $red $red $bg
+        inactive_workspace $bg     $bg     $yellow
+        active_workspace   $bg     $bg     $yellow
+        urgent_workspace   $red    $red    $bg
     }
 }
 
@@ -307,15 +307,15 @@ input * xkb_numlock enable
 #
 
 # Fullscreen snapshot to clipboard
-bindsym Print exec grim - | wl-copy
+bindsym Print exec grim - | wl-copy && notify-send "Fullscreen snapshot copied to clipboard"
 
 # Fullscreen snapshot to png
-bindsym Alt+Print exec grim $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png
+bindsym Alt+Print exec grim $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png && notify-send "Fullscreen snapshot saved to file"
 
 # Screen select snapshot
-bindsym $mod+S exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+S exec grim -g "$(slurp)" - | wl-copy && notify-send "Snapshot copied to clipboard"
 
-# Screen select snapshot to editor
+# Screen select snapshot to screenshot editor
 bindsym $mod+shift+S exec grim -g "$(slurp)" - | swappy -f -
 
 # use xwayland
@@ -360,8 +360,12 @@ exec wlsunset -S 06:30 -s 20:30
 # mullvad
 exec mullvad-vpn
 
+# Inactive window transparency
+exec --no-startup-id python ~/.local/bin/inactive-window-transparency.py
+
 # Workspace programs
 workspace 1
+exec $term
 exec $term
 exec $browser
 
@@ -369,7 +373,6 @@ workspace 2
 exec electron-mail
 exec electron-mail
 exec keepassxc
-exec $term
 
 workspace 3
 exec discord

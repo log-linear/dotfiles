@@ -96,6 +96,8 @@ export FZF_DEFAULT_OPTS="--reverse --bind=ctrl-d:half-page-down,ctrl-u:half-page
 
 # auto-start sway
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+  export XDG_CURRENT_DESKTOP=sway
+  export XDG_SESSION_TYPE=wayland
   exec sway
 fi
 

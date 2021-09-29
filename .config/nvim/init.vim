@@ -153,7 +153,10 @@ call plug#begin('~/.config/nvim/plugged')
 call plug#end()
 
 " fzf.vim --------------------------------------------------------------------
-nnoremap <leader>f :Files<CR>
+nnoremap gff :Files<CR>
+nnoremap gfgf :GFiles<CR>
+nnoremap gfal :Lines<CR>
+nnoremap gfbl :BLines<CR>
 
 " vim-easy-align -------------------------------------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)

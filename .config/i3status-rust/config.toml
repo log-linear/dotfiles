@@ -25,6 +25,16 @@ driver = "sway"
 format = "\u2328 {variant}"
 
 [[block]]
+block = "disk_space"
+path = "/"
+info_type = "available"
+format = "{icon} {available}"
+interval = 60
+alert = 25
+warning = 50
+alert_absolute = true
+
+[[block]]
 block = "memory"
 format_mem = "{mem_used_percents}"
 format_swap = "{swap_used_percents}"
@@ -60,7 +70,7 @@ on_click = "nm-connection-editor"
 ap_format = "{freq}"
 device_format = "{icon}{name}"
 [block.theme_overrides]
-good_bg = "#504945"
+info_bg = "#504945"
 
 [[block]]
 block = "sound"
