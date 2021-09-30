@@ -1,26 +1,24 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
+# config for sway
 #
 # Read `man 5 sway` for a complete reference.
 
 ### Variables
 
 # Logo key. Use Mod1 for Alt.
-set $mod Mod4
+set $mod     Mod4
 # Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
+set $left    h
+set $down    j
+set $up      k
+set $right   l
 # Your preferred terminal emulator
-set $term alacritty
+set $term    alacritty
 # File Manager
 set $filemgr ranger
 # Browser
 set $browser firefox
 # swaynagmode
-set $nag exec swaynagmode
+set $nag     exec swaynagmode
 
 # Colors
 set $bg     #282828
@@ -51,7 +49,7 @@ default_border pixel 3
 default_floating_border pixel 3
 
 # Window colorscheme
-client.focused #d79921 #d79921 #fbf1c7 #fb4934
+client.focused   #d79921 #d79921 #fbf1c7 #fb4934
 client.unfocused #000000 #282828 #7c6f64
 
 # Gaps
@@ -134,7 +132,7 @@ input "type:keyboard" {
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynagmode -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec swaynagmode --font 'SF Pro Display' -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
     # Lock sway
     bindsym $mod+escape exec swaylock -f -c 000000
@@ -142,26 +140,26 @@ input "type:keyboard" {
 # Moving around:
 
     # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
+    bindsym $mod+$left        focus left
+    bindsym $mod+$down        focus down
+    bindsym $mod+$up          focus up
+    bindsym $mod+$right       focus right
     # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+    bindsym $mod+Left         focus left
+    bindsym $mod+Down         focus down
+    bindsym $mod+Up           focus up
+    bindsym $mod+Right        focus right
 
     # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$left  move left
+    bindsym $mod+Shift+$down  move down
+    bindsym $mod+Shift+$up    move up
     bindsym $mod+Shift+$right move right
     # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+    bindsym $mod+Shift+Left   move left
+    bindsym $mod+Shift+Down   move down
+    bindsym $mod+Shift+Up     move up
+    bindsym $mod+Shift+Right  move right
 #
 # Workspaces:
 #
@@ -180,7 +178,7 @@ input "type:keyboard" {
     bindsym $mod+p workspace prev
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+2 move container to workspace number
     bindsym $mod+Shift+3 move container to workspace number 3
     bindsym $mod+Shift+4 move container to workspace number 4
     bindsym $mod+Shift+5 move container to workspace number 5
@@ -216,12 +214,12 @@ input "type:keyboard" {
 
     # Adjust gap sizes
     bindsym $mod+bracketright gaps inner current plus 5
-    bindsym $mod+bracketleft gaps inner current minus 5
-    bindsym $mod+equal gaps inner current set 0
+    bindsym $mod+bracketleft  gaps inner current minus 5
+    bindsym $mod+equal        gaps inner current set 0
 
-    bindsym $mod+braceright gaps outer current plus 5
-    bindsym $mod+braceleft gaps outer current minus 5
-    bindsym $mod+plus gaps outer current set 0
+    bindsym $mod+braceright   gaps outer current plus 5
+    bindsym $mod+braceleft    gaps outer current minus 5
+    bindsym $mod+plus         gaps outer current set 0
 #
 # Scratchpad:
 #
@@ -242,21 +240,21 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 50px
-    bindsym $down resize grow height 50px
-    bindsym $up resize shrink height 50px
+    bindsym $left  resize shrink width 50px
+    bindsym $down  resize grow height 50px
+    bindsym $up    resize shrink height 50px
     bindsym $right resize grow width 50px
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 50px
-    bindsym Down resize grow height 50px
-    bindsym Up resize shrink height 50px
+    bindsym Left  resize shrink width 50px
+    bindsym Down  resize grow height 50px
+    bindsym Up    resize shrink height 50px
     bindsym Right resize grow width 50px
 
     # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-    bindsym $mod+Return mode "default"
+    bindsym Return           mode "default"
+    bindsym Escape           mode "default"
+    bindsym $mod+Return      mode "default"
     bindsym ctrl+bracketleft mode "default"
 }
 bindsym $mod+return mode "resize"
@@ -344,7 +342,7 @@ mode "nag" {
     Right            $nag --select prev
 
     Up               $nag --select next
-    Down             $nag --select prev
+    Down             $ag --select prev
   }
 }
 

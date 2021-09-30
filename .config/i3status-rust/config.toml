@@ -117,7 +117,7 @@ idle_bg = "#d79921"
 [[block]]
 block = "custom"
 command = 'echo ""'
-on_click = "exec swaynagmode -t warning -m '' -b ' Lock ' 'swaylock -f -c 000000' -b ' Logout ' 'swaymsg exit' -b ' Reboot ' 'systemctl reboot' -b ' Power off ' 'systemctl -i poweroff'"
+on_click = "exec swaynagmode --font 'SF Pro Display' -t warning -m '' -b ' Lock ' 'swaylock -f -c 000000' -b ' Logout ' 'swaymsg exit' -b ' Reboot ' 'systemctl reboot' -b ' Power off ' 'systemctl -i poweroff'"
 [block.theme_overrides]
 idle_bg = "#d79921"
 
