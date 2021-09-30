@@ -46,16 +46,31 @@ noremap <C-[> :noh<CR>
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Remap split navigation to CTRL + hjkl
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
+inoremap <A-h> <Esc><C-w>h
+inoremap <A-j> <Esc><C-w>j
+inoremap <A-k> <Esc><C-w>k
+inoremap <A-l> <Esc><C-w>l
+
+vnoremap <A-h> <Esc><C-w>h
+vnoremap <A-j> <Esc><C-w>j
+vnoremap <A-k> <Esc><C-w>k
+vnoremap <A-l> <Esc><C-w>l
+
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
 
 " Remap split adjustments to CTRL + arrow keys
-noremap <silent> <A-h> :vertical resize +3<CR>
-noremap <silent> <A-l> :vertical resize -3<CR>
-noremap <silent> <A-k> :resize -3<CR>
-noremap <silent> <A-j> :resize +3<CR>
+noremap <silent> <C-h> :vertical resize +3<CR>
+noremap <silent> <C-l> :vertical resize -3<CR>
+noremap <silent> <C-k> :resize -3<CR>
+noremap <silent> <C-j> :resize +3<CR>
 
 " Simple buffer management
 nnoremap <leader>q :bp <BAR> bd #<CR>
@@ -68,9 +83,6 @@ nnoremap <leader>hs :split<CR>
 map <Leader>tt :new term://zsh<CR><C-\><C-n><C-w>k
 map <Leader>tp :new term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
 map <Leader>tr :new term://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
-
-" Escape terminal mode
-tnoremap <C-x> <C-\><C-n>
 
 " Disable ex mode
 nnoremap Q <Nop>
