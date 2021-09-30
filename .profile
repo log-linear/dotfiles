@@ -92,7 +92,7 @@ export BEMENU_BACKEND="wayland"
 
 # fzf
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-export FZF_DEFAULT_OPTS="--reverse --bind=ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-h:backward-char,ctrl-l:forward-char,ctrl-b:backward-word,ctrl-e:forward-word,ctrl-w:forward-word"
+export FZF_DEFAULT_OPTS="--reverse --bind=ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-b:backward-word,ctrl-e:forward-word,ctrl-w:forward-word"
 
 # auto-start sway
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
