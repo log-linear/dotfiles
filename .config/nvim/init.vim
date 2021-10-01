@@ -124,8 +124,8 @@ au BufEnter *.tsv setlocal noexpandtab
 " Plugins ====================================================================
 
 " Install vim-plug if not already available
-if empty(glob('~/.config/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/site/autoload/plug.vim --create-dirs
+if empty(stdpath("config") . '/site/autoload/plug.vim')
+  silent !curl -fLo stdpath("config") . '/site/autoload/plug.vim' --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
@@ -138,7 +138,7 @@ au VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 let g:polyglot_disabled = ['markdown']
 
 " Load plugins
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin(stdpath("config") . '/plugged')
   " Functionality
   Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Code completion
   Plug 'tpope/vim-commentary'  " easy code commenting
@@ -406,5 +406,5 @@ nmap <leader>. :CocRestart<CR>
 
 " Windows-specific configs ===================================================
 if has("win64") || has("win32") || has("win16")
-  source ~/AppData/Local/nvim/win.vim
+  source stdpath("config") . '/win.vim'
 endif
