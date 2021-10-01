@@ -305,16 +305,10 @@ input * xkb_numlock enable
 #
 
 # Fullscreen snapshot to clipboard
-bindsym Print exec grim - | wl-copy && notify-send "Fullscreen snapshot copied to clipboard"
+bindsym Print exec grim - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."
 
-# Fullscreen snapshot to png
-bindsym Alt+Print exec grim $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png && notify-send "Fullscreen snapshot saved to file"
-
-# Screen select snapshot
-bindsym $mod+S exec grim -g "$(slurp)" - | wl-copy && notify-send "Snapshot copied to clipboard"
-
-# Screen select snapshot to screenshot editor
-bindsym $mod+shift+S exec grim -g "$(slurp)" - | swappy -f -
+# Screen select snapshot to clipboard
+bindsym $mod+shift+S exec grim -g "$(slurp)" - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."
 
 # use xwayland
 xwayland enable
