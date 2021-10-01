@@ -67,10 +67,10 @@ tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
 
 " Remap split adjustments to CTRL + arrow keys
-noremap <silent> <C-h> :vertical resize +3<CR>
-noremap <silent> <C-l> :vertical resize -3<CR>
-noremap <silent> <C-k> :resize -3<CR>
-noremap <silent> <C-j> :resize +3<CR>
+noremap <silent> <A-H> :vertical resize +3<CR>
+noremap <silent> <A-L> :vertical resize -3<CR>
+noremap <silent> <A-K> :resize -3<CR>
+noremap <silent> <A-J> :resize +3<CR>
 
 " Simple buffer management
 nnoremap <leader>q :bp <BAR> bd #<CR>
@@ -80,9 +80,9 @@ nnoremap <leader>vs :vsplit<CR>
 nnoremap <leader>hs :split<CR>
 
 " Start terminals
-map <Leader>tt :new term://zsh<CR><C-\><C-n><C-w>k
-map <Leader>tp :new term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
-map <Leader>tr :new term://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
+map <Leader>tt :split terminal://zsh<CR><C-\><C-n><C-w>k
+map <Leader>tp :split terminal://zsh<CR>ipython<CR><C-\><C-n><C-w>k
+map <Leader>tr :split terminal://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
 
 " Disable ex mode
 nnoremap Q <Nop>
@@ -164,6 +164,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'ryanoasis/vim-devicons'  " Always load last
 call plug#end()
 
+" vim-sendtowindow -----------------------------------------------------------
+
 " fzf.vim --------------------------------------------------------------------
 nnoremap gff :Files<CR>
 nnoremap gfgf :GFiles<CR>
@@ -222,8 +224,11 @@ let R_objbr_place = 'script,right'  " Open obj explorer on right
 let R_objbr_opendf = 0  " Don't expand a dataframe to show columns by default
 let R_pdfviewer = 'zathura'  " zathura as default PDF reader
 let R_csv_app = 'terminal:vd'  " Use visidata as data.frame/matrix viewer
-let R_esc_term = 0
-let r_indent_align_args = 0
+let R_esc_term = 0  " Don't use <Esc> or <C-[> to exit terminal mode
+let r_indent_align_args = 0  " Disable weird indenting rules
+let R_rconsole_width = 1000  " Ensure console splits below
+let R_objbr_allnames = 1  " Show hidden objects 
+let R_show_args = 1  " show function args during omnicompletion
 
 " Use radian console
 let R_app = 'radian --no-history'
