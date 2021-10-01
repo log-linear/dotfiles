@@ -1,12 +1,9 @@
 #!/bin/sh
 
-alias cp="cp -iv"                                               # Confirm before overwriting something
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
 alias ..='cd ..'
-alias mv='mv -iv'
-alias rm='rm -I'
 alias du='du -h'
 alias ls='ls -l'
 alias ll='ls -al'
