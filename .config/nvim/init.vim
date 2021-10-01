@@ -406,5 +406,5 @@ nmap <leader>. :CocRestart<CR>
 
 " Windows-specific configs ===================================================
 if has("win64") || has("win32") || has("win16")
-  source stdpath("config") . '/win.vim'
+  exec 'source ' . stdpath("config") . '\win.vim'
 endif
