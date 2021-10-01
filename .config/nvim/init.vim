@@ -1,5 +1,5 @@
 " General settings ===========================================================
-let mapleader=","          " remap <leader>
+let mapleader=" "          " remap <leader>
 set cursorline             " Cursor line highlight
 set showcmd                " show commands in status line
 filetype plugin indent on  " filetype detection
@@ -34,9 +34,6 @@ set smartcase
 " Visual line guide at 80 characters
 set colorcolumn=80
 highlight ColorColumn ctermbg=238
-
-" Replace all aliased to S.
-nnoremap S :%s//g<Left><Left>
 
 " Esc/Ctrl + [ clears last search highlighting
 noremap <esc> :noh<CR>
@@ -80,9 +77,9 @@ nnoremap <leader>vs :vsplit<CR>
 nnoremap <leader>hs :split<CR>
 
 " Start terminals
-map <Leader>tt :split terminal://zsh<CR><C-\><C-n><C-w>k
-map <Leader>tp :split terminal://zsh<CR>ipython<CR><C-\><C-n><C-w>k
-map <Leader>tr :split terminal://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
+map <Leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
+map <Leader>tp :split term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
+map <Leader>tr :split term://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
 
 " Disable ex mode
 nnoremap Q <Nop>
@@ -401,7 +398,7 @@ function! CocToggle()
     endif
 endfunction
 command! CocToggle :call CocToggle()
-nmap <leader><leader> :CocToggle<CR>
+nmap <leader>, :CocToggle<CR>
 nmap <leader>. :CocRestart<CR>
 
 " Windows-specific configs ===================================================
