@@ -70,6 +70,7 @@ on_click = "nm-connection-editor"
 ap_format = "{freq}"
 device_format = "{icon}{name}"
 [block.theme_overrides]
+good_bg = "#504945"
 info_bg = "#504945"
 
 [[block]]

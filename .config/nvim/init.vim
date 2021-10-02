@@ -69,6 +69,12 @@ noremap <silent> <A-L> :vertical resize -3<CR>
 noremap <silent> <A-K> :resize -3<CR>
 noremap <silent> <A-J> :resize +3<CR>
 
+" Alt + q to close windows
+nnoremap <A-q> :q<CR>
+inoremap <A-q> <Esc>:q<CR>
+tnoremap <A-q> <C-\><C-n>:q<CR>
+vnoremap <A-q> <Esc>:q<CR>
+
 " Simple buffer management
 nnoremap <leader>q :bp <BAR> bd #<CR>
 nnoremap ]b :bn<CR>
@@ -183,7 +189,6 @@ au FileType markdown
 " vim-airline ----------------------------------------------------------------
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_powerline_fonts = 1
 
 " indentline -----------------------------------------------------------------
 let g:indentLine_char = '▏'
