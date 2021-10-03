@@ -95,6 +95,7 @@ nnoremap Q <Nop>
 " >> hotkey for R base pipe |>
 au FileType r imap -- <space><-<space>
 au FileType r imap >> <space>\|><space>
+au FileType rmd imap -- <space><-<space>
 au FileType rmd imap >> <space>\|><space>
 
 " adjust R tab widths
