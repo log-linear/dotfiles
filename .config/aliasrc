@@ -1,12 +1,8 @@
 #!/bin/sh
 
-alias df='df -h'                                                # Human-readable sizes
-alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
 alias ..='cd ..'
-alias du='du -h'
-alias ls='ls -l'
-alias ll='ls -al'
+alias ll='exa -al'
 alias open='swallow xdg-open'
 alias o='swallow xdg-open'
 alias vim='nvim'
@@ -28,7 +24,7 @@ alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='exa -l --color=auto'
+    alias ls='ls --color=auto'
     alias ll='exa -al --color=auto --git'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
