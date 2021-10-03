@@ -87,7 +87,6 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 
 # Wayland support
 export MOZ_ENABLE_WAYLAND=1
-export SDL_VIDEODRIVER="wayland"
 export BEMENU_BACKEND="wayland"
 
 # fzf
