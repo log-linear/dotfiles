@@ -42,7 +42,7 @@ noremap <C-[> :noh<CR>
 " Save file as sudo on files that require root permission
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
-" Remap split navigation to CTRL + hjkl
+" Remap split navigation to ALTR + hjkl
 nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
@@ -63,7 +63,7 @@ tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
 
-" Remap split adjustments to CTRL + arrow keys
+" Remap split adjustments to ALT + HJKL
 noremap <silent> <A-H> :vertical resize +3<CR>
 noremap <silent> <A-L> :vertical resize -3<CR>
 noremap <silent> <A-K> :resize -3<CR>
@@ -79,8 +79,8 @@ vnoremap <A-q> <Esc>:q<CR>
 nnoremap <leader>q :bp <BAR> bd #<CR>
 nnoremap ]b :bn<CR>
 nnoremap [b :bp<CR>
-nnoremap <leader>vs :vsplit<CR>
-nnoremap <leader>hs :split<CR>
+nnoremap <leader>sv :vsplit<CR>
+nnoremap <leader>sh :split<CR>
 
 " Start terminals
 map <Leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
@@ -143,11 +143,12 @@ let g:polyglot_disabled = ['markdown']
 " Load plugins
 call plug#begin(stdpath("config") . '/plugged')
   " Functionality
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Code completion
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}  " completion, linting, etc
   Plug 'tpope/vim-commentary'  " easy code commenting
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}  " R support
   Plug 'preservim/nerdtree'  " file browser
   Plug 'mhinz/vim-signify'  " line-by-line git diff marks
+  Plug 'tpope/vim-fugitive'  " git integration
   Plug 'karoliskoncevicius/vim-sendtowindow'  " Basic REPLing
   Plug 'tpope/vim-surround'  " Easisly change brackets, quotes, parentheses, etc
   Plug 'tpope/vim-repeat'  " Use . to repeat plugin keymaps
@@ -170,10 +171,15 @@ call plug#end()
 " vim-sendtowindow -----------------------------------------------------------
 
 " fzf.vim --------------------------------------------------------------------
-nnoremap gff :Files<CR>
-nnoremap gfgf :GFiles<CR>
-nnoremap gfal :Lines<CR>
-nnoremap gfbl :BLines<CR>
+nnoremap <Leader>/f :Files<CR>
+nnoremap <Leader>/g :GFiles<CR>
+nnoremap <Leader>/c :BCommits<CR>
+nnoremap <Leader>/h :Help<CR>
+nnoremap <Leader>/s :History<CR>
+nnoremap <Leader>// :BLines<CR>
+nnoremap <Leader>/b :BLines<CR>
+nnoremap <Leader>/l :BLines<CR>
+nnoremap <Leader>/m :Maps<CR>
 
 " vim-easy-align -------------------------------------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -230,13 +236,12 @@ let R_esc_term = 0  " Don't use <Esc> or <C-[> to exit terminal mode
 let r_indent_align_args = 0  " Disable weird indenting rules
 let R_rconsole_width = 1000  " Ensure console splits below
 let R_objbr_allnames = 1  " Show hidden objects 
-let R_show_args = 1  " show function args during omnicompletion
 
 " Use radian console
-let R_app = 'radian --no-history'
+let R_app = 'radian'
 let R_cmd = 'R'
 let R_hl_term = 0
-let R_args = []  " if you had set any
+let R_args = ['--no-history']  " if you had set any
 let R_bracketed_paste = 1
 
 " Press return to send lines and selection to R console
@@ -244,7 +249,7 @@ vmap <CR> <Plug>RDSendSelection
 nmap <CR> <Plug>RDSendLine
 
 " vim-signify ----------------------------------------------------------------
-map <leader>hu :SignifyHunkUndo<CR>
+map <leader>uh :SignifyHunkUndo<CR>
 
 " vim-startify --------------------------------------------------------------
 let g:startify_lists = [
@@ -308,8 +313,8 @@ au CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader><space>f <Plug>(coc-format-selected)
-nmap <leader><space>f <Plug>(coc-format-selected)
+xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
 
 augroup mygroup
   au!
@@ -356,11 +361,6 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
     \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
@@ -376,24 +376,6 @@ command! -nargs=0 OR
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>J  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>K  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
 " Helper function + mapping to disable COC on the fly
 function! CocToggle()
     if g:coc_enabled
@@ -403,8 +385,8 @@ function! CocToggle()
     endif
 endfunction
 command! CocToggle :call CocToggle()
-nmap <leader>, :CocToggle<CR>
-nmap <leader>. :CocRestart<CR>
+nmap <leader>,, :CocToggle<CR>
+nmap <leader>,. :CocRestart<CR>
 
 " Windows-specific configs ===================================================
 if has("win64") || has("win32") || has("win16")
