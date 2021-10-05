@@ -35,7 +35,7 @@ set smartcase
 set colorcolumn=80
 highlight ColorColumn ctermbg=238
 
-" Esc/Ctrl + [ clears last search highlighting
+" Esc/Ctrl+[ clears last search highlighting
 noremap <esc> :noh<CR>
 noremap <C-[> :noh<CR>
 
@@ -144,29 +144,30 @@ let g:polyglot_disabled = ['markdown']
 " Load plugins
 call plug#begin(stdpath("config") . '/plugged')
   " Functionality
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}  " completion, linting, etc
-  Plug 'tpope/vim-commentary'  " easy code commenting
-  Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}  " R support
-  Plug 'preservim/nerdtree'  " file browser
-  Plug 'mhinz/vim-signify'  " line-by-line git diff marks
-  Plug 'tpope/vim-fugitive'  " git integration
-  Plug 'karoliskoncevicius/vim-sendtowindow'  " Basic REPLing
-  Plug 'tpope/vim-surround'  " Easisly change brackets, quotes, parentheses, etc
-  Plug 'tpope/vim-repeat'  " Use . to repeat plugin keymaps
-  Plug 'mhinz/vim-startify'  " fancy startup menu
-  Plug 'ferrine/md-img-paste.vim'  " Paste images into md files
-  Plug 'junegunn/vim-easy-align'  " Text alignment
-  Plug 'junegunn/fzf.vim'  " fzf convenience functions
+  Plug 'neoclide/coc.nvim', {'branch': 'release'} " completion, linting, etc
+  Plug 'tpope/vim-commentary'                     " easy code commenting
+  Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}    " R support
+  Plug 'preservim/nerdtree'                       " file browser
+  Plug 'mhinz/vim-signify'                        " line-by-line git diff marks
+  Plug 'tpope/vim-fugitive'                       " git integration
+  Plug 'karoliskoncevicius/vim-sendtowindow'      " Basic REPLing
+  Plug 'tpope/vim-surround'                       " surround text objects
+  Plug 'tpope/vim-repeat'                         " Use . to repeat plugin cmds
+  Plug 'mhinz/vim-startify'                       " fancy startup menu
+  Plug 'ferrine/md-img-paste.vim'                 " Paste images into md files
+  Plug 'junegunn/vim-easy-align'                  " Text alignment
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy Finder
+  Plug 'junegunn/fzf.vim'                         " fzf convenience functions
 
-  " Aesthetics
-  Plug 'sheerun/vim-polyglot'  " General syntax highlighting
-  Plug 'vim-airline/vim-airline'  " status bar
-  Plug 'junegunn/goyo.vim'  " zen mode
-  Plug 'morhetz/gruvbox'  " theme
-  Plug 'ryanoasis/vim-devicons'  " Requires Nerd Font compatible font
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-  Plug 'Yggdroot/indentLine'  " Visual line indents
-  Plug 'ryanoasis/vim-devicons'  " Always load last
+  " Visuals
+  Plug 'sheerun/vim-polyglot'                     " General syntax highlighting
+  Plug 'vim-airline/vim-airline'                  " status bar
+  Plug 'junegunn/goyo.vim'                        " zen mode
+  Plug 'morhetz/gruvbox'                          " theme
+  Plug 'ryanoasis/vim-devicons'                   " Required: Nerd Font 
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'  " Nerd-tree highlighting
+  Plug 'Yggdroot/indentLine'                      " Visual line indents
+  Plug 'ryanoasis/vim-devicons'                   " Always load last
 call plug#end()
 
 " vim-sendtowindow -----------------------------------------------------------
@@ -178,9 +179,10 @@ nnoremap <Leader>/c :BCommits<CR>
 nnoremap <Leader>/h :Help<CR>
 nnoremap <Leader>/s :History<CR>
 nnoremap <Leader>// :BLines<CR>
-nnoremap <Leader>/b :BLines<CR>
-nnoremap <Leader>/l :BLines<CR>
+nnoremap <Leader>/b :Buffers<CR>
+nnoremap <Leader>/l :Lines<CR>
 nnoremap <Leader>/m :Maps<CR>
+nnoremap <Leader>/t :Filetypes<CR>
 
 " vim-easy-align -------------------------------------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -237,12 +239,13 @@ let R_esc_term = 0  " Don't use <Esc> or <C-[> to exit terminal mode
 let r_indent_align_args = 0  " Disable weird indenting rules
 let R_rconsole_width = 1000  " Ensure console splits below
 let R_objbr_allnames = 1  " Show hidden objects 
+let R_openpdf = 1
 
 " Use radian console
 let R_app = 'radian'
 let R_cmd = 'R'
 let R_hl_term = 0
-let R_args = ['--no-history']  " if you had set any
+let R_args = ['--no-history']
 let R_bracketed_paste = 1
 
 " Press return to send lines and selection to R console
