@@ -56,11 +56,6 @@ title_align center
 client.focused   #d79921 #d79921 #282828 #fb4934
 client.unfocused #000000 #282828 #7c6f64
 
-# Gaps
-smart_gaps on
-gaps inner 10
-gaps outer 25
-
 # Additional window rules
 for_window [class="steam_app*"] inhibit_idle focus
 for_window [app_id = "nm-openconnect-auth-dialog"] floating enable
