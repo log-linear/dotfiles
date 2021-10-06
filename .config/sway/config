@@ -58,8 +58,9 @@ client.unfocused #000000 #282828 #7c6f64
 
 # Additional window rules
 for_window [class="steam_app*"] inhibit_idle focus
-for_window [app_id = "nm-openconnect-auth-dialog"] floating enable
-for_window [app_id = "blueman-manager"] floating enable
+for_window [app_id="nm-connection-editor"] floating enable
+for_window [app_id="nm-openconnect-auth-dialog"] floating enable
+for_window [app_id="blueman-manager"] floating enable
 for_window [title="nmtui"] floating enable
 
 #
@@ -182,7 +183,7 @@ input "type:keyboard" {
     bindsym $mod+p workspace prev
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number
+    bindsym $mod+Shift+2 move container to workspace number 2
     bindsym $mod+Shift+3 move container to workspace number 3
     bindsym $mod+Shift+4 move container to workspace number 4
     bindsym $mod+Shift+5 move container to workspace number 5
@@ -202,7 +203,7 @@ input "type:keyboard" {
     bindsym $mod+d split toggle
 
     # Switch the current container between different layout styles
-    bindsym $mod+o layout toggle splith splitv tabbed
+    bindsym $mod+o layout toggle splith tabbed
 
     # Make the current focus fullscreen
     bindsym $mod+m fullscreen
@@ -366,8 +367,7 @@ exec $term
 exec $browser
 
 workspace 2
-exec electron-mail
-exec electron-mail
+exec thunderbird
 exec keepassxc
 
 workspace 3
