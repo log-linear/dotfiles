@@ -9,8 +9,8 @@ setopt nobeep            # No beep
 setopt appendhistory     # Immediately append history instead of overwriting
 setopt histignorealldups # If a new command is a duplicate, remove the older one
 setopt autocd            # if only directory path is entered, cd there.
-disable r                       # Disable zsh built-in command `r`
-stty -ixon                      # Disable ctrl+s ctrl+q terminal input disabling
+disable r                # Disable zsh built-in command `r`
+stty -ixon               # Disable ctrl+s ctrl+q terminal input disabling
 
 # Tab completion settings
 zstyle ':completion:*' menu select  # Completion menu selection
@@ -58,6 +58,15 @@ bindkey '^H' backward-kill-word # delete previous word with ctrl+backspace
 bindkey '^[[Z' reverse-menu-complete # Shift+tab undo last action
 bindkey '^n' menu-complete # Shift+tab undo last action
 bindkey '^p' reverse-menu-complete # Shift+tab undo last action
+
+# Vi-mode yank to system clipboard
+function vi-yank {
+    zle vi-yank
+   echo "$CUTBUFFER" | wl-copy
+}
+
+zle -N vi-yank
+bindkey -M vicmd 'y' vi-yank
 
 # Alias section ================================================================
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && \
@@ -219,11 +228,6 @@ function zle-keymap-select {
   fi
 }
 zle -N zle-keymap-select
-zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-    echo -ne "\e[5 q"
-}
-zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
@@ -234,19 +238,19 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 # Keychain - Stores ssh pw's per each login, needed when using e.g. sway
 eval $(keychain --eval --quiet id_ed25519)
 
-# Functions ===================================================================
+# Functions ====================================================================
 
 # rga/fzf wrapper
 fzrga() {
-	RG_PREFIX="rga --files-with-matches"
-	local file
-	file="$(
-		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
-			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
-				--phony -q "$1" \
-				--bind "change:reload:$RG_PREFIX {q}" \
-				--preview-window="70%:wrap"
-	)" &&
-	echo "opening $file" &&
-	xdg-open "$file"
+  RG_PREFIX="rga --files-with-matches"
+  local file
+  file="$(
+    FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+      fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+        --phony -q "$1" \
+        --bind "change:reload:$RG_PREFIX {q}" \
+        --preview-window="70%:wrap"
+  )" &&
+  echo "opening $file" &&
+  xdg-open "$file"
 }

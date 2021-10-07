@@ -1,15 +1,3 @@
-# This file is not read when running wayland. One workaround is to have 
-# /etc/profile source it, e.g. . ~/.profile
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
-
-# the default umask is set in /etc/profile; for setting the umask
-# for ssh logins, install and configure the libpam-umask package.
-#umask 022
-
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
@@ -20,7 +8,7 @@ fi
 
 # if running zsh
 if [ -n "$ZSH_VERSION" ]; then
-    # include .bashrc if it exists
+    # include .zshrc if it exists
     if [ -f "$HOME/.config/zsh/.zshrc" ]; then
 	. "$HOME/.config/zsh/.zshrc"
     fi
@@ -83,7 +71,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch/notmuchrc
 export NMBGIT="$XDG_DATA_HOME"/notmuch/nmbug
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc 
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export MOZ_DBUS_REMOTE=1
 
 # Wayland support
@@ -91,8 +79,8 @@ export MOZ_ENABLE_WAYLAND=1
 export BEMENU_BACKEND="wayland"
 
 # fzf
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-export FZF_DEFAULT_OPTS="--reverse --bind=ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-b:backward-word,ctrl-e:forward-word,ctrl-w:forward-word"
+export FZF_DEFAULT_COMMAND='fd -HI --type f'
+export FZF_DEFAULT_OPTS="--reverse --bind=ctrl-d:half-page-down,ctrl-u:half-page-up"
 
 # auto-start sway
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
