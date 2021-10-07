@@ -146,8 +146,7 @@ call plug#begin(stdpath("config") . '/plugged')
   " Functionality
   Plug 'neoclide/coc.nvim', {'branch': 'release'} " completion, linting, etc
   Plug 'tpope/vim-commentary'                     " easy code commenting
-  Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}    " R support
-  Plug 'preservim/nerdtree'                       " file browser
+  Plug 'jalvesaq/Nvim-R'                          " R support
   Plug 'mhinz/vim-signify'                        " line-by-line git diff marks
   Plug 'tpope/vim-fugitive'                       " git integration
   Plug 'karoliskoncevicius/vim-sendtowindow'      " Basic REPLing
@@ -156,7 +155,7 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'mhinz/vim-startify'                       " fancy startup menu
   Plug 'ferrine/md-img-paste.vim'                 " Paste images into md files
   Plug 'junegunn/vim-easy-align'                  " Text alignment
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy Finder
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }  " Fuzzy Finder
   Plug 'junegunn/fzf.vim'                         " fzf convenience functions
 
   " Visuals
@@ -165,7 +164,6 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'junegunn/goyo.vim'                        " zen mode
   Plug 'morhetz/gruvbox'                          " theme
   Plug 'ryanoasis/vim-devicons'                   " Required: Nerd Font 
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'  " Nerd-tree highlighting
   Plug 'Yggdroot/indentLine'                      " Visual line indents
   Plug 'ryanoasis/vim-devicons'                   " Always load last
 call plug#end()
@@ -208,24 +206,6 @@ let g:airline_theme = 'gruvbox'
 
 " Goyo -----------------------------------------------------------------------
 map <leader>z :Goyo \| set linebreak<CR>
-
-" Nerd tree ------------------------------------------------------------------
-map <leader>n :NERDTreeToggle<CR>
-au bufenter * if (winnr("$") == 1 
-  \ && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-if has('nvim')
-  let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
-else
-  let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
-endif
-
-" Show hidden files by default
-let NERDTreeShowHidden=1
-
-" enable relative line numbers
-let NERDTreeShowLineNumbers=1
-au FileType nerdtree setlocal relativenumber
 
 " Nvim-R ---------------------------------------------------------------------
 let R_auto_start = 2  " Auto start on all .R/.Rmd files
