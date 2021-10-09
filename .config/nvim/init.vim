@@ -72,6 +72,9 @@ inoremap <A-q> <Esc>:q<CR>
 tnoremap <A-q> <C-\><C-n>:q<CR>
 vnoremap <A-q> <Esc>:q<CR>
 
+" Auto-insert mode in terminal windows
+autocmd WinEnter term://* :startinsert
+
 " Simple buffer management
 nnoremap <leader>q :bp <BAR> bd #<CR>
 nnoremap ]b :bn<CR>
