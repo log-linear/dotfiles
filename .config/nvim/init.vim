@@ -39,9 +39,6 @@ highlight ColorColumn ctermbg=238
 noremap <esc> :noh<CR>
 noremap <C-[> :noh<CR>
 
-" Save file as sudo on files that require root permission
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
 " Remap split navigation to ALTR + hjkl
 nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
@@ -169,6 +166,9 @@ call plug#begin(stdpath("config") . '/plugged')
 call plug#end()
 
 " vim-sendtowindow -----------------------------------------------------------
+let g:sendtowindow_use_defaults=0
+nmap <Leader><Leader> <Plug>SendDown
+xmap <Leader><Leader> <Plug>SendDownV
 
 " fzf.vim --------------------------------------------------------------------
 nnoremap <Leader>/f :Files<CR>
@@ -273,7 +273,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gD <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 

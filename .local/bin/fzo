@@ -1,5 +1,6 @@
 #!/usr/bin/sh
 
-# General purpose file opener using fzf
+# General purpose CLI file-opener with window swallowing
 
-swallow xdg-open $(fzf --preview "bat --style=numbers --color=always --line-range :500 {}") 
+swallow xdg-open \
+  $(fzf --preview "bat --style=numbers --color=always --line-range :500 {}") 
