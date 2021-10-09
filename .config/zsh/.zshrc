@@ -80,8 +80,43 @@ colors
 # enable substitution for prompt
 setopt prompt_subst
 
-# Maia prompt
-PROMPT="%B%{$fg[cyan]%}%(4~|%-1~/.../%2~|%~)%u%b >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b " 
+# vi-mode indicators: cursor change + prompt
+vim_ins_mode="%{$fg_bold[magenta]%}[I]%{$reset_color%}"
+vim_cmd_mode="%{$fg_bold[green]%}[N]%{$reset_color%}"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+  # Right-side prompt
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+
+  # Cursor
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+function zle-line-finish {
+  vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
+
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+# Handle sending ^C
+function TRAPINT() {
+  vim_mode=$vim_ins_mode
+  return $(( 128 + $1 ))
+} 
+PROMPT='${vim_mode} %B%{$fg[cyan]%}%(4~|%-1~/.../%2~|%~)%u%b >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b '
 
 # Print a greeting message when shell is started
 echo $USER@$HOST  $(uname -srm) $(lsb_release -rs)
@@ -150,6 +185,8 @@ git_prompt_string() {
   [ ! -n "$git_where" ] && echo "%{$fg[red]%} %(?..[%?])"
 }
 
+RPROMPT='$(git_prompt_string)'
+
 # Color man pages
 export LESS_TERMCAP_mb=$'\E[01;32m'
 export LESS_TERMCAP_md=$'\E[01;32m'
@@ -160,8 +197,8 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-r
 
-
 # Plugins section: Enable fish style features ==================================
+
 # Syntax highlighting
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
@@ -182,56 +219,13 @@ export FZF_COMPLETION_TRIGGER=''
 bindkey '^T' fzf-completion
 bindkey '^I' $fzf_default_completion
 
-# Apply different settings for different terminals
-case $(basename "$(cat "/proc/$PPID/comm")") in
-  login)
-      RPROMPT="%{$fg[red]%} %(?..[%?])" 
-    ;;
-  'tmux: server')
-        RPROMPT='$(git_prompt_string)'
-    ## Base16 Shell color themes.
-    #possible themes: 3024, apathy, ashes, atelierdune, atelierforest, atelierhearth,
-    #atelierseaside, bespin, brewer, chalk, codeschool, colors, default, eighties, 
-    #embers, flat, google, grayscale, greenscreen, harmonic16, isotope, londontube,
-    #marrakesh, mocha, monokai, ocean, paraiso, pop (dark only), railscasts, shapesifter,
-    #solarized, summerfruit, tomorrow, twilight
-    theme="google"
-    #Possible variants: dark and light
-    shade="dark"
-    BASE16_SHELL="/usr/share/zsh/scripts/base16-shell/base16-$theme.$shade.sh"
-    [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-    
-    # Use autosuggestion
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-     ;;
-  *)
-        RPROMPT='$(git_prompt_string)'
-    # Use autosuggestion
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-    ;;
-esac
-
-# Change cursor shape for different vi modes.
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
-}
-zle -N zle-keymap-select
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+# autosuggestion
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
 # Application-specific section =================================================
+
 # Import colorscheme from 'wal'
 [ -f /usr/bin/wal ] && cat ~/.cache/wal/sequences
 
@@ -254,3 +248,4 @@ fzrga() {
   echo "opening $file" &&
   xdg-open "$file"
 }
+
