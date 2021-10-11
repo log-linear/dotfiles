@@ -1,0 +1,32 @@
+#!/usr/bin/sh
+
+# General-purpose file previewer script. Pairs well with fzf --preview
+
+file=$(readlink -f "$1")
+xdg_type=$(xdg-mime query filetype $file)
+fcat=$(echo $xdg_type | sed 's/\/.*//g')
+ftype=$(echo $xdg_type | sed 's/.*\///g')
+
+case "$fcat" in
+
+  text) 
+    case "$ftype" in
+      html) pandoc $1 -t markdown | bat --style=numbers --color=always --line-range :500 -l md ;;
+      *) bat --style=numbers --color=always --line-range :500 $1 ;;
+    esac ;;
+
+  application) 
+    case "$ftype" in
+      pdf|postscript)
+        pdftotext $1 - | bat --style=numbers --color=always --line-range :500 ;;
+      x-extension-html|x-extension-htm|x-extension-shtml|x-extension-xhtml|x-extension-xht) 
+        pandoc $1 -t markdown | bat --style=numbers --color=always --line-range :500 ;;
+      json|xml|x-shellscript|javascript) 
+        bat --style=numbers --color=always --line-range :500 $1 ;;
+    esac ;;
+
+  inode) tree -C $1 | head -200 ;;
+  image) img2txt $1 ;; 
+  *) bat --style=numbers --color=always --line-range :500 $1 ;;
+esac
+
