@@ -109,6 +109,7 @@ input "type:keyboard" {
 # Basics:
 
     # Start a terminal
+    bindsym $mod+return exec $term
     bindsym $mod+t exec $term
 
     # File manager
@@ -200,7 +201,7 @@ input "type:keyboard" {
 # Layout stuff:
 #
     # Toggle new window split direction
-    bindsym $mod+d split toggle
+    bindsym $mod+s split toggle
 
     # Switch the current container between different layout styles
     bindsym $mod+o layout toggle splith tabbed
@@ -216,6 +217,17 @@ input "type:keyboard" {
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
+
+    # Resizing windows
+    bindsym $mod+Ctrl+$left  resize shrink width 50px
+    bindsym $mod+Ctrl+$down  resize grow height 50px
+    bindsym $mod+Ctrl+$up    resize shrink height 50px
+    bindsym $mod+Ctrl+$right resize grow width 50px
+    # Ditto, with arrow keys
+    bindsym $mod+Ctrl+Left   resize shrink width 50px
+    bindsym $mod+Ctrl+Down   resize grow height 50px
+    bindsym $mod+Ctrl+Up     resize shrink height 50px
+    bindsym $mod+Ctrl+Right  resize grow width 50px
 
     # Adjust gap sizes
     bindsym $mod+bracketright gaps inner current plus 5
@@ -238,32 +250,6 @@ input "type:keyboard" {
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 #
-# Resizing containers:
-#
-mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left  resize shrink width 50px
-    bindsym $down  resize grow height 50px
-    bindsym $up    resize shrink height 50px
-    bindsym $right resize grow width 50px
-
-    # Ditto, with arrow keys
-    bindsym Left  resize shrink width 50px
-    bindsym Down  resize grow height 50px
-    bindsym Up    resize shrink height 50px
-    bindsym Right resize grow width 50px
-
-    # Return to default mode
-    bindsym Return           mode "default"
-    bindsym Escape           mode "default"
-    bindsym $mod+Return      mode "default"
-    bindsym ctrl+bracketleft mode "default"
-}
-bindsym $mod+return mode "resize"
-#
 # Custom keys (e.g. volume controls)
 #
     bindsym XF86AudioRaiseVolume  exec pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "🔊 $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo -m 1 "[[:digit:]]+\%" | head -1)"
@@ -276,6 +262,17 @@ bindsym $mod+return mode "resize"
     bindsym XF86AudioNext         exec playerctl next
     bindsym XF86AudioPrev         exec playerctl previous
     bindsym XF86Search            exec bemenu-run
+
+#
+# Screen capture
+#
+
+# Fullscreen snapshot to clipboard
+bindsym Print exec grim - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."
+
+# Screen select snapshot to clipboard
+bindsym $mod+shift+S exec grim -g "$(slurp)" - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."
+
 #
 # Status Bar:
 #
@@ -304,16 +301,6 @@ include /etc/sway/config.d/*
 
 # Enable numlock on start
 input * xkb_numlock enable
-    
-#
-# Screen capture
-#
-
-# Fullscreen snapshot to clipboard
-bindsym Print exec grim - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."
-
-# Screen select snapshot to clipboard
-bindsym $mod+shift+S exec grim -g "$(slurp)" - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."
 
 # use xwayland
 xwayland enable
