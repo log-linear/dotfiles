@@ -27,7 +27,6 @@ HISTSIZE=1000
 SAVEHIST=500
 WORDCHARS=${WORDCHARS//\/[&.;]} # Ignore certain characters for word parsing
 
-
 # Keybindings section ==========================================================
 bindkey -v                                 # Vim keybindings  
 bindkey '^[[7~' beginning-of-line          # Home key
@@ -199,10 +198,10 @@ export LESS=-r
 
 # Plugins section: Enable fish style features ==================================
 
-# Syntax highlighting
+### Syntax highlighting
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
-# History substring search
+### History substring search
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 # bind UP and DOWN arrow keys to history substring search
 zmodload zsh/terminfo
@@ -211,15 +210,27 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up      
 bindkey '^[[B' history-substring-search-down
 
-# fzf
+### fzf
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 export FZF_COMPLETION_TRIGGER=''
 export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_OPTS="--preview 'preview {}'"
 bindkey '^T' fzf-completion
 bindkey '^I' $fzf_default_completion
 
-# autosuggestion
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd -HI --type f . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd -HI --type d . "$1"
+}
+
+### autosuggestion
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'

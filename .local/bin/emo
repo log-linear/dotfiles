@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#
+# fzf emoji selector
+#
+
+emoji="$(cat ~/.local/bin/emoji | fzf)" 
+
+echo $emoji | cut -d ' ' -f1 | wl-copy
+if [ -n $emoji ]; then
+  exit 0
+else 
+  notify-send "$(echo $emoji | cut -d ';' -f1) copied to clipboard"
+fi
+
