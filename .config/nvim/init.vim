@@ -59,10 +59,10 @@ nnoremap <silent> <A-L> :vertical resize -3<CR>
 nnoremap <silent> <A-K> :resize -3<CR>
 nnoremap <silent> <A-J> :resize +3<CR>
 
-tnoremap <silent> <A-H> :vertical resize +3<CR>
-tnoremap <silent> <A-L> :vertical resize -3<CR>
-tnoremap <silent> <A-K> :resize -3<CR>
-tnoremap <silent> <A-J> :resize +3<CR>
+tnoremap <silent> <A-H> <C-\><C-n>:vertical resize +3<CR>a
+tnoremap <silent> <A-L> <C-\><C-n>:vertical resize -3<CR>a
+tnoremap <silent> <A-K> <C-\><C-n>:resize -3<CR>a
+tnoremap <silent> <A-J> <C-\><C-n>:resize +3<CR>a
 
 " Alt + q to close windows
 nnoremap <A-q> :q<CR>
