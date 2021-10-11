@@ -35,6 +35,9 @@ set smartcase
 set colorcolumn=80
 highlight ColorColumn ctermbg=238
 
+" Auto-insert when navigating to terminal windows
+au WinEnter term://* :startinsert
+
 " Esc/Ctrl+[ clears last search highlighting
 noremap <esc> :noh<CR>
 noremap <C-[> :noh<CR>
@@ -45,42 +48,31 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
-inoremap <A-h> <Esc><C-w>h
-inoremap <A-j> <Esc><C-w>j
-inoremap <A-k> <Esc><C-w>k
-inoremap <A-l> <Esc><C-w>l
-
-vnoremap <A-h> <Esc><C-w>h
-vnoremap <A-j> <Esc><C-w>j
-vnoremap <A-k> <Esc><C-w>k
-vnoremap <A-l> <Esc><C-w>l
-
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
 
 " Remap split adjustments to ALT + HJKL
-noremap <silent> <A-H> :vertical resize +3<CR>
-noremap <silent> <A-L> :vertical resize -3<CR>
-noremap <silent> <A-K> :resize -3<CR>
-noremap <silent> <A-J> :resize +3<CR>
+nnoremap <silent> <A-H> :vertical resize +3<CR>
+nnoremap <silent> <A-L> :vertical resize -3<CR>
+nnoremap <silent> <A-K> :resize -3<CR>
+nnoremap <silent> <A-J> :resize +3<CR>
+
+tnoremap <silent> <A-H> :vertical resize +3<CR>
+tnoremap <silent> <A-L> :vertical resize -3<CR>
+tnoremap <silent> <A-K> :resize -3<CR>
+tnoremap <silent> <A-J> :resize +3<CR>
 
 " Alt + q to close windows
 nnoremap <A-q> :q<CR>
-inoremap <A-q> <Esc>:q<CR>
 tnoremap <A-q> <C-\><C-n>:q<CR>
-vnoremap <A-q> <Esc>:q<CR>
 
-" Auto-insert mode in terminal windows
-autocmd WinEnter term://* :startinsert
-
-" Simple buffer management
-nnoremap <leader>q :bp <BAR> bd #<CR>
-nnoremap ]b :bn<CR>
-nnoremap [b :bp<CR>
-nnoremap <leader>sv :vsplit<CR>
-nnoremap <leader>sh :split<CR>
+" Buffer navigation/management
+nnoremap <A-d> :bn <BAR> bd #<CR>
+nnoremap <A-n> :bn<CR>
+nnoremap <A-p> :bp<CR>
+nnoremap <A-s> :split<CR>
 
 " Start terminals
 map <Leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
@@ -122,7 +114,7 @@ au FileType markdown
 " Run current python file
 au FileType python nmap <leader>py :w! \| !python %<CR>
 
-" Use actual tsv tabs
+" Use actual tabs in tsv files
 au BufEnter *.tsv setlocal noexpandtab
 
 " Plugins ====================================================================
