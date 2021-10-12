@@ -84,32 +84,50 @@ nnoremap Q <Nop>
 
 " Filetype-specific settings =================================================
 
-" >> hotkey for R base pipe |>
-au FileType r imap -- <space><-<space>
-au FileType r imap >> <space>\|><space>
-au FileType rmd imap -- <space><-<space>
-au FileType rmd imap >> <space>\|><space>
+" R 
+augroup r_conf
+  au!
+  " assignment + pipe maps
+  au FileType r,rmd nnoremap <A--> a<space><-<space>
+  au FileType r,rmd nnoremap <A-_> a<space>\|><space>
+  au FileType r,rmd inoremap <A--> <space><-<space>
+  au FileType r,rmd inoremap <A-_> <space>\|><space>
+  au FileType r,rmd tnoremap <A--> <space><-<space>
+  au FileType r,rmd tnoremap <A-_> <space>\|><space>
+  " binary operators maps
+  au FileType r,rmd inoremap ;in %in%
+  au FileType r,rmd inoremap ;; %%
+  au FileType r,rmd inoremap ;/ %/%
+  au FileType r,rmd inoremap :* %*%
+  au FileType r,rmd inoremap ;* %*%
+  au FileType r,rmd inoremap ;o %o%
+  au FileType r,rmd inoremap ;x %x%
+  au FileType r,rmd tnoremap ;in %in%
+  au FileType r,rmd tnoremap ;; %%
+  au FileType r,rmd tnoremap ;/ %/%
+  au FileType r,rmd tnoremap :* %*%
+  au FileType r,rmd tnoremap ;* %*%
+  au FileType r,rmd tnoremap ;o %o%
+  au FileType r,rmd tnoremap ;x %x%
+  " adjust tab widths
+  au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2
+  au FileType r,rmd setlocal autoindent cindent
+augroup END
 
-" adjust R tab widths
-au FileType r setlocal expandtab shiftwidth=2 tabstop=2
-au FileType r setlocal autoindent cindent
-au FileType rmd setlocal expandtab shiftwidth=2 tabstop=2
-au FileType rmd setlocal autoindent cindent
-
-" adjust sh tab widths
+" Shell
 au FileType sh setlocal expandtab shiftwidth=2 tabstop=2
 
-" adjust md tab widths
-au FileType markdown setlocal expandtab shiftwidth=2 tabstop=2
-
-" Run markdown preview, requires mlp python package, only works on nvim, not vim
-au FileType markdown nmap <leader>mlp :call jobstart('mlp '.expand('%'))<CR>
-
-" Convert md to html, pdf, or docx using pandoc
-au FileType markdown nmap <leader>mh :w! \| !pandoc "%" -o "%:r.html"<CR>
-au FileType markdown nmap <leader>mw :w! \| !pandoc "%" -o "%:r.docx"<CR>
-au FileType markdown 
-  \ nmap <leader>mp :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
+" Markdown
+augroup md_conf
+  au FileType markdown setlocal expandtab shiftwidth=2 tabstop=2
+  " Run markdown preview, requires mlp python package
+  au FileType markdown nmap <leader>mlp :call jobstart('mlp '.expand('%'))<CR>
+  " Convert md to html, pdf, or docx using pandoc
+  au FileType markdown nmap <leader>mh :w! \| !pandoc "%" -o "%:r.html"<CR>
+  au FileType markdown nmap <leader>mw :w! \| !pandoc "%" -o "%:r.docx"<CR>
+  au FileType markdown 
+    \ nmap <leader>mp :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
+augroup END
 
 " Run current python file
 au FileType python nmap <leader>py :w! \| !python %<CR>
@@ -204,7 +222,7 @@ map <leader>z :Goyo \| set linebreak<CR>
 
 " Nvim-R ---------------------------------------------------------------------
 let R_auto_start = 2  " Auto start on all .R/.Rmd files
-let R_assign = 0  " Disable assignment operator in favor of set local above
+let R_assign = 0  " Disable assignment operator in favor of filetype maps
 let R_min_editor_width = 80  " set a minimum source editor width
 let R_objbr_place = 'script,right'  " Open obj explorer on right
 let R_objbr_opendf = 0  " Don't expand a dataframe to show columns by default
@@ -224,13 +242,14 @@ let R_args = ['--no-history']
 let R_bracketed_paste = 1
 
 " Press return to send lines and selection to R console
-vmap <CR> <Plug>RDSendSelection
-nmap <CR> <Plug>RDSendLine
+vmap <A-Space> <Plug>RDSendSelection
+nmap <A-Space> <Plug>RDSendLine
+imap <A-Space> <esc><Plug>RDSendLine<CR>
 
 " vim-signify ----------------------------------------------------------------
 map <leader>uh :SignifyHunkUndo<CR>
 
-" vim-startify --------------------------------------------------------------
+" vim-startify ---------------------------------------------------------------
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
       \ { 'type': 'files',     'header': ['   Recent']            },
