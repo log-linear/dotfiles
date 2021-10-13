@@ -43,21 +43,25 @@ for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
   execute mapcmd . ' <silent> <A-k> <C-\><C-n><C-w>k'
   execute mapcmd . ' <silent> <A-l> <C-\><C-n><C-w>l'
   " Remap split adjustments to ALT + HJKL
-  execute mapcmd . ' <silent> <A-H> <C-\><C-n><C-w> :vertical resize +3'
-  execute mapcmd . ' <silent> <A-J> <C-\><C-n><C-w> :vertical resize -3'
-  execute mapcmd . ' <silent> <A-K> <C-\><C-n><C-w> :resize +3'
-  execute mapcmd . ' <silent> <A-J> <C-\><C-n><C-w> :resize -3'
+  execute mapcmd . ' <silent> <A-H> <C-\><C-n><C-w>:vertical resize -3<CR>'
+  execute mapcmd . ' <silent> <A-J> <C-\><C-n><C-w>:resize -3<CR>'
+  execute mapcmd . ' <silent> <A-K> <C-\><C-n><C-w>:resize +3<CR>'
+  execute mapcmd . ' <silent> <A-L> <C-\><C-n><C-w>:vertical resize +3<CR>'
   " Alt + q to close windows
   execute mapcmd . ' <silent> <A-q> <C-\><C-n>:q<CR>'
 endfor
 
 for mapcmd in ['noremap', 'inoremap', 'vnoremap']
   " Buffer navigation/management
-  nnoremap <A-d> :bn <BAR> bd #<CR>
-  nnoremap <A-n> :bn<CR>
-  nnoremap <A-p> :bp<CR>
-  nnoremap <A-s> :split<CR>
+  execute mapcmd . ' <A-d> :bn <BAR> bd #<CR>'
+  execute mapcmd . ' <A-n> :bn<CR>'
+  execute mapcmd . ' <A-p> :bp<CR>'
+  execute mapcmd . ' <A-s> :split<CR>'
 endfor
+
+" Code line headers
+nnoremap <leader>= <Esc>80A=<Esc>d80\|
+nnoremap <leader>- <Esc>80A-<Esc>d80\|
 
 " Start terminals
 map <Leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
@@ -76,7 +80,7 @@ augroup r_conf
   " map assignment + pipe operators
   for mapcmd in ['noremap', 'inoremap', 'tnoremap']
     execute 'au FileType r,rmd ' . mapcmd . ' <A--> <C-\><C-n>a<space><-<space>'
-    execute 'au FileType r,rmd ' . mapcmd . ' <A-=> <C-\><C-n>a<space>\|><space>'
+    execute 'au FileType r,rmd ' . mapcmd . ' <A-_> <C-\><C-n>a<space>\|><space>'
     execute 'au FileType r,rmd ' . mapcmd . ' <A-M> <C-\><C-n>a<space>%>%<space>'
   endfor
   " map infix operators
@@ -219,18 +223,18 @@ let R_args = ['--no-history']
 let R_bracketed_paste = 1
 
 " Press Alt + Return to send lines and selection to R console
-vmap <A-CR> <Plug>RDSendSelection
-nmap <A-CR> <Plug>RDSendLine
-imap <A-CR> <esc><Plug>RDSendLine<CR>
+vmap <A-Space> <Plug>RDSendSelection
+nmap <A-Space> <Plug>RDSendLine
+imap <A-Space> <esc><Plug>RDSendLine<CR>
 
 " vim-signify ----------------------------------------------------------------
 map <leader>uh :SignifyHunkUndo<CR>
 
 " vim-startify ---------------------------------------------------------------
 let g:startify_lists = [
-      \ { 'type': 'sessions',  'header': ['   Sessions']       },
-      \ { 'type': 'files',     'header': ['   Recent']            },
-      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ { 'type': 'sessions',  'header': ['   Sessions'] },
+      \ { 'type': 'files',     'header': ['   Recent']   },
+      \ { 'type': 'commands',  'header': ['   Commands'] },
       \ ]
 
 " coc.nvim -------------------------------------------------------------------
