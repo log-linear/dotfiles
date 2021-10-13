@@ -78,13 +78,11 @@ augroup r_conf
   au!
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
   " map assignment + pipe operators
-  for mapcmd in ['noremap', 'inoremap', 'tnoremap']
-    execute 'au FileType r,rmd ' . mapcmd . ' <A--> <C-\><C-n>a<space><-<space>'
-    execute 'au FileType r,rmd ' . mapcmd . ' <A-_> <C-\><C-n>a<space>\|><space>'
-    execute 'au FileType r,rmd ' . mapcmd . ' <A-M> <C-\><C-n>a<space>%>%<space>'
-  endfor
-  " map infix operators
   for mapcmd in ['inoremap', 'tnoremap']
+    execute 'au FileType r,rmd ' . mapcmd . ' -- <C-\><C-n>a<space><-<space>'
+    execute 'au FileType r,rmd ' . mapcmd . ' >> <C-\><C-n>a<space>\|><space>'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;m <C-\><C-n>a<space>%>%<space>'
+    " map infix operators
     execute 'au FileType r,rmd ' . mapcmd . ' ;i %in%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;; %%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;/ %/%'
