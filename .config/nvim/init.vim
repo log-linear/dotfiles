@@ -1,35 +1,28 @@
 " General settings ===========================================================
-let mapleader=" "          " remap <leader>
-set cursorline             " Cursor line highlight
-set showcmd                " show commands in status line
-filetype plugin indent on  " filetype detection
-set notimeout              " No key sequence timeout
-set clipboard+=unnamedplus " yank to system clipboard via wl-clipboard or xclip
-set splitbelow splitright  " Splits open at the bottom and right
-set mouse=nv               " Enable mouse support
-set scrolloff=3            " Always show one line above/below character
-set sidescroll=3           " Ditto for horizontal scrolling
-set number relativenumber  " Relative line numbers
-set hidden                 " Allow switching buffers before saving
-set signcolumn=auto:9      " sign column for gitgutter, coc, etc
-set cmdheight=2            " Give more space for displaying messages.
-set nobackup               " Fix breakages with certain coc lsps
-set nowritebackup          " Fix breakages with certain coc lsps
-set updatetime=300         " Reduce coc.nvim lag
-set shortmess+=c           " Don't pass messages to |ins-completion-menu|.
-set autoindent smartindent " autoindent
+let mapleader=" "            " remap <leader>
+set cursorline               " Cursor line highlight
+set showcmd                  " show commands in status line
+filetype plugin indent on    " filetype detection
+set notimeout                " No key sequence timeout
+set clipboard+=unnamedplus   " Use system clipboard for yank/paste
+set splitbelow splitright    " Splits open at the bottom and right
+set mouse=nv                 " Enable mouse support
+set scrolloff=3 sidescroll=3 " Always show 3 horiz/vert lines on scroll
+set number relativenumber    " Relative line numbers
+set hidden                   " Allow switching buffers before saving
+set signcolumn=auto:9        " sign column for gitgutter, coc, etc
+set cmdheight=2              " Give more space for displaying messages.
+set nobackup                 " Fix breakages with certain coc lsps
+set nowritebackup            " Fix breakages with certain coc lsps
+set updatetime=300           " Reduce coc.nvim lag
+set shortmess+=c             " Don't pass messages to |ins-completion-menu|.
+set autoindent smartindent   " autoindent
 
-" tabs to spaces
-set expandtab
-set tabstop=4
-set shiftwidth=4
+" tabs to spaces, default 4
+set expandtab tabstop=4 shiftwidth=4
 
 " search tweaks - highlighting, semi-case-insensitive search, etc
-set incsearch
-set showmatch
-set hlsearch
-set ignorecase
-set smartcase
+set incsearch showmatch hlsearch ignorecase smartcase
 
 " Visual line guide at 80 characters
 set colorcolumn=80
@@ -42,37 +35,29 @@ au WinEnter term://* :startinsert
 noremap <esc> :noh<CR>
 noremap <C-[> :noh<CR>
 
-" Remap split navigation to ALTR + hjkl
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+" Multi-mode mappings
+for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
+  " Remap split navigation to ALT + hjkl
+  execute mapcmd . ' <silent> <A-h> <C-\><C-n><C-w>h'
+  execute mapcmd . ' <silent> <A-j> <C-\><C-n><C-w>j'
+  execute mapcmd . ' <silent> <A-k> <C-\><C-n><C-w>k'
+  execute mapcmd . ' <silent> <A-l> <C-\><C-n><C-w>l'
+  " Remap split adjustments to ALT + HJKL
+  execute mapcmd . ' <silent> <A-H> <C-\><C-n><C-w> :vertical resize +3'
+  execute mapcmd . ' <silent> <A-J> <C-\><C-n><C-w> :vertical resize -3'
+  execute mapcmd . ' <silent> <A-K> <C-\><C-n><C-w> :resize +3'
+  execute mapcmd . ' <silent> <A-J> <C-\><C-n><C-w> :resize -3'
+  " Alt + q to close windows
+  execute mapcmd . ' <silent> <A-q> <C-\><C-n>:q<CR>'
+endfor
 
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-
-" Remap split adjustments to ALT + HJKL
-nnoremap <silent> <A-H> :vertical resize +3<CR>
-nnoremap <silent> <A-L> :vertical resize -3<CR>
-nnoremap <silent> <A-K> :resize -3<CR>
-nnoremap <silent> <A-J> :resize +3<CR>
-
-tnoremap <silent> <A-H> <C-\><C-n>:vertical resize +3<CR>a
-tnoremap <silent> <A-L> <C-\><C-n>:vertical resize -3<CR>a
-tnoremap <silent> <A-K> <C-\><C-n>:resize -3<CR>a
-tnoremap <silent> <A-J> <C-\><C-n>:resize +3<CR>a
-
-" Alt + q to close windows
-nnoremap <A-q> :q<CR>
-tnoremap <A-q> <C-\><C-n>:q<CR>
-
-" Buffer navigation/management
-nnoremap <A-d> :bn <BAR> bd #<CR>
-nnoremap <A-n> :bn<CR>
-nnoremap <A-p> :bp<CR>
-nnoremap <A-s> :split<CR>
+for mapcmd in ['noremap', 'inoremap', 'vnoremap']
+  " Buffer navigation/management
+  nnoremap <A-d> :bn <BAR> bd #<CR>
+  nnoremap <A-n> :bn<CR>
+  nnoremap <A-p> :bp<CR>
+  nnoremap <A-s> :split<CR>
+endfor
 
 " Start terminals
 map <Leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
@@ -87,31 +72,23 @@ nnoremap Q <Nop>
 " R 
 augroup r_conf
   au!
-  " assignment + pipe maps
-  au FileType r,rmd nnoremap <A--> a<space><-<space>
-  au FileType r,rmd nnoremap <A-_> a<space>\|><space>
-  au FileType r,rmd inoremap <A--> <space><-<space>
-  au FileType r,rmd inoremap <A-_> <space>\|><space>
-  au FileType r,rmd tnoremap <A--> <space><-<space>
-  au FileType r,rmd tnoremap <A-_> <space>\|><space>
-  " binary operators maps
-  au FileType r,rmd inoremap ;in %in%
-  au FileType r,rmd inoremap ;; %%
-  au FileType r,rmd inoremap ;/ %/%
-  au FileType r,rmd inoremap :* %*%
-  au FileType r,rmd inoremap ;* %*%
-  au FileType r,rmd inoremap ;o %o%
-  au FileType r,rmd inoremap ;x %x%
-  au FileType r,rmd tnoremap ;in %in%
-  au FileType r,rmd tnoremap ;; %%
-  au FileType r,rmd tnoremap ;/ %/%
-  au FileType r,rmd tnoremap :* %*%
-  au FileType r,rmd tnoremap ;* %*%
-  au FileType r,rmd tnoremap ;o %o%
-  au FileType r,rmd tnoremap ;x %x%
-  " adjust tab widths
-  au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2
-  au FileType r,rmd setlocal autoindent cindent
+  au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
+  " map assignment + pipe operators
+  for mapcmd in ['noremap', 'inoremap', 'tnoremap']
+    execute 'au FileType r,rmd ' . mapcmd . ' <A--> <C-\><C-n>a<space><-<space>'
+    execute 'au FileType r,rmd ' . mapcmd . ' <A-=> <C-\><C-n>a<space>\|><space>'
+    execute 'au FileType r,rmd ' . mapcmd . ' <A-M> <C-\><C-n>a<space>%>%<space>'
+  endfor
+  " map infix operators
+  for mapcmd in ['inoremap', 'tnoremap']
+    execute 'au FileType r,rmd ' . mapcmd . ' ;i %in%'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;; %%'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;/ %/%'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;* %*%'
+    execute 'au FileType r,rmd ' . mapcmd . ' :* %*%'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
+  endfor
 augroup END
 
 " Shell
@@ -125,8 +102,8 @@ augroup md_conf
   " Convert md to html, pdf, or docx using pandoc
   au FileType markdown nmap <leader>mh :w! \| !pandoc "%" -o "%:r.html"<CR>
   au FileType markdown nmap <leader>mw :w! \| !pandoc "%" -o "%:r.docx"<CR>
-  au FileType markdown 
-    \ nmap <leader>mp :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
+  au FileType markdown nmap 
+    \<leader>mp :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
 augroup END
 
 " Run current python file
@@ -241,10 +218,10 @@ let R_hl_term = 0
 let R_args = ['--no-history']
 let R_bracketed_paste = 1
 
-" Press return to send lines and selection to R console
-vmap <A-Space> <Plug>RDSendSelection
-nmap <A-Space> <Plug>RDSendLine
-imap <A-Space> <esc><Plug>RDSendLine<CR>
+" Press Alt + Return to send lines and selection to R console
+vmap <A-CR> <Plug>RDSendSelection
+nmap <A-CR> <Plug>RDSendLine
+imap <A-CR> <esc><Plug>RDSendLine<CR>
 
 " vim-signify ----------------------------------------------------------------
 map <leader>uh :SignifyHunkUndo<CR>
