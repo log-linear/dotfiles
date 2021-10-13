@@ -15,7 +15,7 @@ set cmdheight=2                      " Give more space for displaying messages.
 set nobackup                         " Fix breakages with certain coc lsps
 set nowritebackup                    " Fix breakages with certain coc lsps
 set updatetime=300                   " Reduce coc.nvim lag
-set shortmess+=c                     " no |ins-completion-menu| message passage
+set shortmess+=c                     " no ins-completion-menu messages
 set autoindent smartindent           " autoindent
 set expandtab tabstop=4 shiftwidth=4 " tabs to spaces, default 4
 
@@ -53,11 +53,11 @@ endfor
 
 for mapcmd in ['noremap', 'inoremap', 'vnoremap']
   " Buffer navigation/management
-  execute mapcmd . ' <A-d> :bn <BAR> bd #<CR>'
-  execute mapcmd . ' <A-n> :bn<CR>'
-  execute mapcmd . ' <A-p> :bp<CR>'
-  execute mapcmd . ' <A-s> :split<CR>'
-  execute mapcmd . ' <A-v> :vsplit<CR>'
+  execute mapcmd . ' <A-d> <Esc>:bn <BAR> bd #<CR>'
+  execute mapcmd . ' <A-n> <Esc>:bn<CR>'
+  execute mapcmd . ' <A-p> <Esc>:bp<CR>'
+  execute mapcmd . ' <A-s> <Esc>:split<CR>'
+  execute mapcmd . ' <A-v> <Esc>:vsplit<CR>'
 endfor
 
 " Code line headers
