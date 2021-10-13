@@ -1,25 +1,23 @@
 " General settings ===========================================================
-let mapleader=" "            " remap <leader>
-set cursorline               " Cursor line highlight
-set showcmd                  " show commands in status line
-filetype plugin indent on    " filetype detection
-set notimeout                " No key sequence timeout
-set clipboard+=unnamedplus   " Use system clipboard for yank/paste
-set splitbelow splitright    " Splits open at the bottom and right
-set mouse=nv                 " Enable mouse support
-set scrolloff=3 sidescroll=3 " Always show 3 horiz/vert lines on scroll
-set number relativenumber    " Relative line numbers
-set hidden                   " Allow switching buffers before saving
-set signcolumn=auto:9        " sign column for gitgutter, coc, etc
-set cmdheight=2              " Give more space for displaying messages.
-set nobackup                 " Fix breakages with certain coc lsps
-set nowritebackup            " Fix breakages with certain coc lsps
-set updatetime=300           " Reduce coc.nvim lag
-set shortmess+=c             " Don't pass messages to |ins-completion-menu|.
-set autoindent smartindent   " autoindent
-
-" tabs to spaces, default 4
-set expandtab tabstop=4 shiftwidth=4
+let mapleader=" "                    " remap <leader>
+set cursorline                       " Cursor line highlight
+set showcmd                          " show commands in status line
+filetype plugin indent on            " filetype detection
+set notimeout                        " No key sequence timeout
+set clipboard+=unnamedplus           " Use system clipboard for yank/paste
+set splitbelow splitright            " Splits open at the bottom and right
+set mouse=nv                         " Enable mouse support
+set scrolloff=3 sidescroll=3         " Always show 3 horiz/vert lines on scroll
+set number relativenumber            " Relative line numbers
+set hidden                           " Allow switching buffers before saving
+set signcolumn=auto:9                " sign column for gitgutter, coc, etc
+set cmdheight=2                      " Give more space for displaying messages.
+set nobackup                         " Fix breakages with certain coc lsps
+set nowritebackup                    " Fix breakages with certain coc lsps
+set updatetime=300                   " Reduce coc.nvim lag
+set shortmess+=c                     " no |ins-completion-menu| message passage
+set autoindent smartindent           " autoindent
+set expandtab tabstop=4 shiftwidth=4 " tabs to spaces, default 4
 
 " search tweaks - highlighting, semi-case-insensitive search, etc
 set incsearch showmatch hlsearch ignorecase smartcase
@@ -30,6 +28,8 @@ highlight ColorColumn ctermbg=238
 
 " Auto-insert when navigating to terminal windows
 au WinEnter term://* :startinsert
+
+" Maps -----------------------------------------------------------------------
 
 " Esc/Ctrl+[ clears last search highlighting
 noremap <esc> :noh<CR>
@@ -42,7 +42,7 @@ for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
   execute mapcmd . ' <silent> <A-j> <C-\><C-n><C-w>j'
   execute mapcmd . ' <silent> <A-k> <C-\><C-n><C-w>k'
   execute mapcmd . ' <silent> <A-l> <C-\><C-n><C-w>l'
-  " Remap split adjustments to ALT + HJKL
+  " Remap split adjustment to ALT + HJKL
   execute mapcmd . ' <silent> <A-H> <C-\><C-n><C-w>:vertical resize -3<CR>'
   execute mapcmd . ' <silent> <A-J> <C-\><C-n><C-w>:resize -3<CR>'
   execute mapcmd . ' <silent> <A-K> <C-\><C-n><C-w>:resize +3<CR>'
@@ -57,11 +57,12 @@ for mapcmd in ['noremap', 'inoremap', 'vnoremap']
   execute mapcmd . ' <A-n> :bn<CR>'
   execute mapcmd . ' <A-p> :bp<CR>'
   execute mapcmd . ' <A-s> :split<CR>'
+  execute mapcmd . ' <A-v> :vsplit<CR>'
 endfor
 
 " Code line headers
-nnoremap <leader>= <Esc>80A=<Esc>d80\|
-nnoremap <leader>- <Esc>80A-<Esc>d80\|
+nnoremap <leader>H 80A=<Esc>d80\|
+nnoremap <leader>h 80A-<Esc>d80\|
 
 " Start terminals
 map <Leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
@@ -77,13 +78,13 @@ nnoremap Q <Nop>
 augroup r_conf
   au!
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
-  " map assignment + pipe operators
   for mapcmd in ['inoremap', 'tnoremap']
-    execute 'au FileType r,rmd ' . mapcmd . ' -- <C-\><C-n>a<space><-<space>'
-    execute 'au FileType r,rmd ' . mapcmd . ' >> <C-\><C-n>a<space>\|><space>'
-    execute 'au FileType r,rmd ' . mapcmd . ' ;m <C-\><C-n>a<space>%>%<space>'
+    " map assignment + pipe operators
+    execute 'au FileType r,rmd ' . mapcmd . ' -- <space><-<space>'
+    execute 'au FileType r,rmd ' . mapcmd . ' >> <space>\|><space>'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;m <space>%>%<space>'
     " map infix operators
-    execute 'au FileType r,rmd ' . mapcmd . ' ;i %in%'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;in %in%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;; %%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;/ %/%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;* %*%'
@@ -93,7 +94,7 @@ augroup r_conf
   endfor
 augroup END
 
-" Shell
+" Shell tab widths
 au FileType sh setlocal expandtab shiftwidth=2 tabstop=2
 
 " Markdown
@@ -133,28 +134,28 @@ let g:polyglot_disabled = ['markdown']
 " Load plugins
 call plug#begin(stdpath("config") . '/plugged')
   " Functionality
-  Plug 'neoclide/coc.nvim', {'branch': 'release'} " completion, linting, etc
-  Plug 'tpope/vim-commentary'                     " easy code commenting
-  Plug 'jalvesaq/Nvim-R'                          " R support
-  Plug 'mhinz/vim-signify'                        " line-by-line git diff marks
-  Plug 'tpope/vim-fugitive'                       " git integration
-  Plug 'karoliskoncevicius/vim-sendtowindow'      " Basic REPLing
-  Plug 'tpope/vim-surround'                       " surround text objects
-  Plug 'tpope/vim-repeat'                         " Use . to repeat plugin cmds
-  Plug 'mhinz/vim-startify'                       " fancy startup menu
-  Plug 'ferrine/md-img-paste.vim'                 " Paste images into md files
-  Plug 'junegunn/vim-easy-align'                  " Text alignment
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }  " Fuzzy Finder
-  Plug 'junegunn/fzf.vim'                         " fzf convenience functions
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}     " completion, linting, etc
+  Plug 'tpope/vim-commentary'                         " easy code commenting
+  Plug 'jalvesaq/Nvim-R'                              " R support
+  Plug 'tpope/vim-fugitive'                           " git integration
+  Plug 'mhinz/vim-signify'                            " git diff markers
+  Plug 'karoliskoncevicius/vim-sendtowindow'          " Basic REPLing
+  Plug 'tpope/vim-surround'                           " surround text objects
+  Plug 'tpope/vim-repeat'                             " repeat plugin commands
+  Plug 'mhinz/vim-startify'                           " fancy startup menu
+  Plug 'ferrine/md-img-paste.vim'                     " Paste images to md files
+  Plug 'junegunn/vim-easy-align'                      " Text alignment
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy Finder
+  Plug 'junegunn/fzf.vim'                             " fzf functions
 
   " Visuals
-  Plug 'sheerun/vim-polyglot'                     " General syntax highlighting
-  Plug 'vim-airline/vim-airline'                  " status bar
-  Plug 'junegunn/goyo.vim'                        " zen mode
-  Plug 'morhetz/gruvbox'                          " theme
-  Plug 'ryanoasis/vim-devicons'                   " Required: Nerd Font 
-  Plug 'Yggdroot/indentLine'                      " Visual line indents
-  Plug 'ryanoasis/vim-devicons'                   " Always load last
+  Plug 'sheerun/vim-polyglot'                         " syntax highlighting
+  Plug 'vim-airline/vim-airline'                      " status bar
+  Plug 'junegunn/goyo.vim'                            " zen mode
+  Plug 'morhetz/gruvbox'                              " theme
+  Plug 'ryanoasis/vim-devicons'                       " Required: Nerd Font
+  Plug 'Yggdroot/indentLine'                          " Visual line indents
+  Plug 'ryanoasis/vim-devicons'                       " Always load last
 call plug#end()
 
 " vim-sendtowindow -----------------------------------------------------------
@@ -200,18 +201,17 @@ let g:airline_theme = 'gruvbox'
 map <leader>z :Goyo \| set linebreak<CR>
 
 " Nvim-R ---------------------------------------------------------------------
-let R_auto_start = 2  " Auto start on all .R/.Rmd files
-let R_assign = 0  " Disable assignment operator in favor of filetype maps
-let R_min_editor_width = 80  " set a minimum source editor width
-let R_objbr_place = 'script,right'  " Open obj explorer on right
-let R_objbr_opendf = 0  " Don't expand a dataframe to show columns by default
-let R_pdfviewer = 'zathura'  " zathura as default PDF reader
-let R_csv_app = 'terminal:vd'  " Use visidata as data.frame/matrix viewer
-let R_esc_term = 0  " Don't use <Esc> or <C-[> to exit terminal mode
-let r_indent_align_args = 0  " Disable weird indenting rules
-let R_rconsole_width = 1000  " Ensure console splits below
-let R_objbr_allnames = 1  " Show hidden objects 
-let R_openpdf = 1
+let R_auto_start = 2               " Auto start on all .R/.Rmd files
+let R_assign = 0                   " Disable assignment operator, use au above
+let R_min_editor_width = 80        " set a minimum source editor width
+let R_objbr_place = 'script,right' " Open obj explorer on right
+let R_objbr_opendf = 0             " Don't show df cols in obj explorer 
+let R_csv_app = 'terminal:vd'      " Use visidata as data.frame/matrix viewer
+let R_esc_term = 0                 " Don't use <Esc>/<C-[> to exit terminal mode
+let r_indent_align_args = 0        " Disable weird indenting rules
+let R_rconsole_width = 1000        " Ensure console splits below
+let R_objbr_allnames = 1           " Show hidden objects
+let R_openpdf = 1                  " Only auto-open knit-ed PDFs once
 
 " Use radian console
 let R_app = 'radian'
@@ -237,26 +237,10 @@ let g:startify_lists = [
 
 " coc.nvim -------------------------------------------------------------------
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location 
@@ -309,7 +293,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>cf  <Plug>(coc-fix-current)
+nmap <leader>af  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -353,7 +337,7 @@ command! -nargs=0 OR
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Helper function + mapping to disable COC on the fly
+" Helper function + mapping to disable Coc on the fly
 function! CocToggle()
   if g:coc_enabled
     CocDisable
