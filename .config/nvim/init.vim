@@ -1,4 +1,4 @@
-" General settings ===========================================================
+"============================== General settings  ==============================
 let mapleader=" "                    " remap <leader>
 set cursorline                       " Cursor line highlight
 set showcmd                          " show commands in status line
@@ -29,8 +29,7 @@ highlight ColorColumn ctermbg=238
 " Auto-insert when navigating to terminal windows
 au WinEnter term://* :startinsert
 
-" Maps -----------------------------------------------------------------------
-
+"------------------------------------ Maps  ------------------------------------
 " Esc/Ctrl+[ clears last search highlighting
 noremap <esc> :noh<CR>
 noremap <C-[> :noh<CR>
@@ -61,8 +60,10 @@ for mapcmd in ['noremap', 'inoremap', 'vnoremap']
 endfor
 
 " Code line headers
-nnoremap <leader>H 80A=<Esc>d80\|
-nnoremap <leader>h 80A-<Esc>d80\|
+nnoremap <leader>bH 80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+nnoremap <leader>bh 80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+nnoremap <leader>H <esc>:center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
+nnoremap <leader>h <esc>:center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
 
 " Start terminals
 map <Leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
@@ -72,7 +73,9 @@ map <Leader>tr :split term://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
 " Disable ex mode
 nnoremap Q <Nop>
 
-" Filetype-specific settings =================================================
+"========================= Filetype-specific settings ==========================
+" vimscript
+au BufEnter *.vim* setlocal tw=0 
 
 " R 
 augroup r_conf
@@ -88,7 +91,6 @@ augroup r_conf
     execute 'au FileType r,rmd ' . mapcmd . ' ;; %%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;/ %/%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;* %*%'
-    execute 'au FileType r,rmd ' . mapcmd . ' :* %*%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
   endfor
@@ -115,8 +117,7 @@ au FileType python nmap <leader>py :w! \| !python %<CR>
 " Use actual tabs in tsv files
 au BufEnter *.tsv setlocal noexpandtab
 
-" Plugins ====================================================================
-
+"================================== Plugins ====================================
 " Install vim-plug if not already available
 if empty(stdpath("config") . '/site/autoload/plug.vim')
   silent !curl -fLo stdpath("config") . '/site/autoload/plug.vim' --create-dirs
@@ -158,12 +159,12 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'ryanoasis/vim-devicons'                       " Always load last
 call plug#end()
 
-" vim-sendtowindow -----------------------------------------------------------
+"------------------------------ vim-sendtowindow -------------------------------
 let g:sendtowindow_use_defaults=0
 nmap <Leader><Leader> <Plug>SendDown
 xmap <Leader><Leader> <Plug>SendDownV
 
-" fzf.vim --------------------------------------------------------------------
+"---------------------------------- fzf.vim ------------------------------------
 nnoremap <Leader>/f :Files<CR>
 nnoremap <Leader>/g :GFiles<CR>
 nnoremap <Leader>/c :BCommits<CR>
@@ -175,32 +176,32 @@ nnoremap <Leader>/l :Lines<CR>
 nnoremap <Leader>/m :Maps<CR>
 nnoremap <Leader>/t :Filetypes<CR>
 
-" vim-easy-align -------------------------------------------------------------
+"------------------------------- vim-easy-align --------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" md-img-paste ---------------------------------------------------------------
+"-------------------------------- md-img-paste ---------------------------------
 au FileType markdown 
   \ nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 
-" vim-airline ----------------------------------------------------------------
+"-------------------------------- vim-airline ----------------------------------
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-" indentline -----------------------------------------------------------------
+"--------------------------------- indentline ----------------------------------
 let g:indentLine_char = '▏'
 
-" gruvbox --------------------------------------------------------------------
+"---------------------------------- gruvbox ------------------------------------
 colorscheme gruvbox
 let g:airline_theme = 'gruvbox'
 
-" Goyo -----------------------------------------------------------------------
+"------------------------------------ Goyo -------------------------------------
 map <leader>z :Goyo \| set linebreak<CR>
 
-" Nvim-R ---------------------------------------------------------------------
+"----------------------------------- Nvim-R ------------------------------------
 let R_auto_start = 2               " Auto start on all .R/.Rmd files
 let R_assign = 0                   " Disable assignment operator, use au above
 let R_min_editor_width = 80        " set a minimum source editor width
@@ -221,22 +222,21 @@ let R_args = ['--no-history']
 let R_bracketed_paste = 1
 
 " Press Alt + Return to send lines and selection to R console
-vmap <A-Space> <Plug>RDSendSelection
-nmap <A-Space> <Plug>RDSendLine
-imap <A-Space> <esc><Plug>RDSendLine<CR>
+vmap <C-Space> <Plug>RDSendSelection
+nmap <C-Space> <Plug>RDSendLine
+imap <C-Space> <esc><Plug>RDSendLine<CR>
 
-" vim-signify ----------------------------------------------------------------
+"-------------------------------- vim-signify ----------------------------------
 map <leader>uh :SignifyHunkUndo<CR>
 
-" vim-startify ---------------------------------------------------------------
+"-------------------------------- vim-startify ---------------------------------
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': ['   Sessions'] },
       \ { 'type': 'files',     'header': ['   Recent']   },
       \ { 'type': 'commands',  'header': ['   Commands'] },
       \ ]
 
-" coc.nvim -------------------------------------------------------------------
-
+"---------------------------------- coc.nvim -----------------------------------
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -349,7 +349,7 @@ command! CocToggle :call CocToggle()
 nmap <leader>, :CocToggle<CR>
 nmap <leader>. :CocRestart<CR>
 
-" Windows-specific configs ===================================================
+"========================== Windows-specific configs ===========================
 if has("win64") || has("win32") || has("win16")
   exec 'source ' . stdpath("config") . '\win.vim'
 endif
