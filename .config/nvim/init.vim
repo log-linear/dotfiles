@@ -1,4 +1,4 @@
-"============================== General settings  ==============================
+"============================== General settings ===============================
 let mapleader=" "                    " remap <leader>
 set cursorline                       " Cursor line highlight
 set showcmd                          " show commands in status line
@@ -6,7 +6,7 @@ filetype plugin indent on            " filetype detection
 set notimeout                        " No key sequence timeout
 set clipboard+=unnamedplus           " Use system clipboard for yank/paste
 set splitbelow splitright            " Splits open at the bottom and right
-set mouse=nv                         " Enable mouse support
+set mouse=a                          " Enable mouse support
 set scrolloff=3 sidescroll=3         " Always show 3 horiz/vert lines on scroll
 set number relativenumber            " Relative line numbers
 set hidden                           " Allow switching buffers before saving
@@ -26,10 +26,7 @@ set incsearch showmatch hlsearch ignorecase smartcase
 set colorcolumn=80
 highlight ColorColumn ctermbg=238
 
-" Auto-insert when navigating to terminal windows
-au WinEnter term://* :startinsert
-
-"------------------------------------ Maps  ------------------------------------
+"------------------------------------ Maps -------------------------------------
 " Esc/Ctrl+[ clears last search highlighting
 noremap <esc> :noh<CR>
 noremap <C-[> :noh<CR>
@@ -37,33 +34,30 @@ noremap <C-[> :noh<CR>
 " Multi-mode mappings
 for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
   " Remap split navigation to ALT + hjkl
-  execute mapcmd . ' <silent> <A-h> <C-\><C-n><C-w>h'
-  execute mapcmd . ' <silent> <A-j> <C-\><C-n><C-w>j'
-  execute mapcmd . ' <silent> <A-k> <C-\><C-n><C-w>k'
-  execute mapcmd . ' <silent> <A-l> <C-\><C-n><C-w>l'
+  execute mapcmd . ' <A-h> <C-\><C-n><C-w>h'
+  execute mapcmd . ' <A-j> <C-\><C-n><C-w>j'
+  execute mapcmd . ' <A-k> <C-\><C-n><C-w>k'
+  execute mapcmd . ' <A-l> <C-\><C-n><C-w>l'
   " Remap split adjustment to ALT + HJKL
-  execute mapcmd . ' <silent> <A-H> <C-\><C-n><C-w>:vertical resize -3<CR>'
-  execute mapcmd . ' <silent> <A-J> <C-\><C-n><C-w>:resize -3<CR>'
-  execute mapcmd . ' <silent> <A-K> <C-\><C-n><C-w>:resize +3<CR>'
-  execute mapcmd . ' <silent> <A-L> <C-\><C-n><C-w>:vertical resize +3<CR>'
+  execute mapcmd . ' <A-H> <C-\><C-n><C-w>:vertical resize -3<CR>'
+  execute mapcmd . ' <A-J> <C-\><C-n><C-w>:resize -3<CR>'
+  execute mapcmd . ' <A-K> <C-\><C-n><C-w>:resize +3<CR>'
+  execute mapcmd . ' <A-L> <C-\><C-n><C-w>:vertical resize +3<CR>'
   " Alt + q to close windows
-  execute mapcmd . ' <silent> <A-q> <C-\><C-n>:q<CR>'
-endfor
-
-for mapcmd in ['noremap', 'inoremap', 'vnoremap']
+  execute mapcmd . ' <A-q> <C-\><C-n>:q<CR>'
   " Buffer navigation/management
-  execute mapcmd . ' <A-d> <Esc>:bn <BAR> bd #<CR>'
-  execute mapcmd . ' <A-n> <Esc>:bn<CR>'
-  execute mapcmd . ' <A-p> <Esc>:bp<CR>'
-  execute mapcmd . ' <A-s> <Esc>:split<CR>'
-  execute mapcmd . ' <A-v> <Esc>:vsplit<CR>'
+  execute mapcmd . ' <A-d> <C-\><C-n>:bn <BAR> bd #<CR>'
+  execute mapcmd . ' <A-n> <C-\><C-n>:bn<CR>'
+  execute mapcmd . ' <A-p> <C-\><C-n>:bp<CR>'
+  execute mapcmd . ' <A-s> <C-\><C-n>:split<CR>'
+  execute mapcmd . ' <A-v> <C-\><C-n>:vsplit<CR>'
 endfor
 
-" Code line headers
-nnoremap <leader>bH 80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
-nnoremap <leader>bh 80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
-nnoremap <leader>H <esc>:center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
-nnoremap <leader>h <esc>:center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
+" Headers
+nnoremap <leader>B D80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+nnoremap <leader>b D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+nnoremap <leader>H :center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
+nnoremap <leader>h :center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
 
 " Start terminals
 map <Leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
@@ -73,11 +67,13 @@ map <Leader>tr :split term://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
 " Disable ex mode
 nnoremap Q <Nop>
 
-"========================= Filetype-specific settings ==========================
-" vimscript
-au BufEnter *.vim* setlocal tw=0 
+"====================== Filetype/buffer/window settings ========================
+au FileType sh,bash,zsh setlocal expandtab shiftwidth=2 tabstop=2 " Shell tabs
+au FileType vim setlocal tw=0          " No text-wrapping
+au BufEnter *.tsv setlocal noexpandtab " Use actual tabs in tsvs
+au WinEnter term://* :startinsert      " Always insert mode in terminals
 
-" R 
+" R settings
 augroup r_conf
   au!
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
@@ -96,12 +92,9 @@ augroup r_conf
   endfor
 augroup END
 
-" Shell tab widths
-au FileType sh setlocal expandtab shiftwidth=2 tabstop=2
-
 " Markdown
 augroup md_conf
-  au FileType markdown setlocal expandtab shiftwidth=2 tabstop=2
+  au FileType markdown setlocal expandtab shiftwidth=4 tabstop=4
   " Run markdown preview, requires mlp python package
   au FileType markdown nmap <leader>mlp :call jobstart('mlp '.expand('%'))<CR>
   " Convert md to html, pdf, or docx using pandoc
@@ -113,9 +106,6 @@ augroup END
 
 " Run current python file
 au FileType python nmap <leader>py :w! \| !python %<CR>
-
-" Use actual tabs in tsv files
-au BufEnter *.tsv setlocal noexpandtab
 
 "================================== Plugins ====================================
 " Install vim-plug if not already available
