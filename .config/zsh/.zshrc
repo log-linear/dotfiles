@@ -243,6 +243,9 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 # Keychain - Stores ssh pw's per each login, needed when using e.g. sway
 eval $(keychain --eval --quiet id_ed25519)
 
+# Smart cd replacement
+eval "$(zoxide init zsh)"
+
 # Functions ====================================================================
 
 # rga/fzf wrapper

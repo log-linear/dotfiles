@@ -43,6 +43,7 @@ for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
   execute mapcmd . ' <A-J> <C-\><C-n><C-w>:resize -3<CR>'
   execute mapcmd . ' <A-K> <C-\><C-n><C-w>:resize +3<CR>'
   execute mapcmd . ' <A-L> <C-\><C-n><C-w>:vertical resize +3<CR>'
+  execute mapcmd . ' <A-=> <C-\><C-n><C-w>='
   " Alt + q to close windows
   execute mapcmd . ' <A-q> <C-\><C-n>:q<CR>'
   " Buffer navigation/management
@@ -54,8 +55,8 @@ for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
 endfor
 
 " Headers
-nnoremap <leader>B D80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
-nnoremap <leader>b D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+nnoremap <leader>B 0D80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+nnoremap <leader>b 0D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
 nnoremap <leader>H :center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
 nnoremap <leader>h :center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
 
@@ -94,6 +95,7 @@ augroup END
 
 " Markdown
 augroup md_conf
+  au BufEnter *.md setlocal conceallevel=0
   au FileType markdown setlocal expandtab shiftwidth=4 tabstop=4
   " Run markdown preview, requires mlp python package
   au FileType markdown nmap <leader>mlp :call jobstart('mlp '.expand('%'))<CR>
@@ -127,7 +129,7 @@ call plug#begin(stdpath("config") . '/plugged')
   " Functionality
   Plug 'neoclide/coc.nvim', {'branch': 'release'}     " completion, linting, etc
   Plug 'tpope/vim-commentary'                         " easy code commenting
-  Plug 'jalvesaq/Nvim-R'                              " R support
+  Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}        " R support
   Plug 'tpope/vim-fugitive'                           " git integration
   Plug 'mhinz/vim-signify'                            " git diff markers
   Plug 'karoliskoncevicius/vim-sendtowindow'          " Basic REPLing
@@ -139,20 +141,20 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy Finder
   Plug 'junegunn/fzf.vim'                             " fzf functions
 
-  " Visuals
+  " Aesthetics/visual aids
   Plug 'sheerun/vim-polyglot'                         " syntax highlighting
   Plug 'vim-airline/vim-airline'                      " status bar
   Plug 'junegunn/goyo.vim'                            " zen mode
   Plug 'morhetz/gruvbox'                              " theme
   Plug 'ryanoasis/vim-devicons'                       " Required: Nerd Font
   Plug 'Yggdroot/indentLine'                          " Visual line indents
-  Plug 'ryanoasis/vim-devicons'                       " Always load last
+  Plug 'ryanoasis/vim-devicons'                       " Icons, always load last
 call plug#end()
 
 "------------------------------ vim-sendtowindow -------------------------------
 let g:sendtowindow_use_defaults=0
-nmap <Leader><Leader> <Plug>SendDown
-xmap <Leader><Leader> <Plug>SendDownV
+nmap <A-Space> <Plug>SendDown
+xmap <A-Space> <Plug>SendDownV
 
 "---------------------------------- fzf.vim ------------------------------------
 nnoremap <Leader>/f :Files<CR>
@@ -212,9 +214,9 @@ let R_args = ['--no-history']
 let R_bracketed_paste = 1
 
 " Press Alt + Return to send lines and selection to R console
-vmap <C-Space> <Plug>RDSendSelection
-nmap <C-Space> <Plug>RDSendLine
-imap <C-Space> <esc><Plug>RDSendLine<CR>
+vmap <A-CR> <Plug>RDSendSelection
+nmap <A-CR> <Plug>RDSendLine
+imap <A-CR> <esc><Plug>RDSendLine<CR>
 
 "-------------------------------- vim-signify ----------------------------------
 map <leader>uh :SignifyHunkUndo<CR>
