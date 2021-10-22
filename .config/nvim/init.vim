@@ -68,33 +68,33 @@ map <Leader>tr :split term://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
 " Disable ex mode
 nnoremap Q <Nop>
 
-"====================== Filetype/buffer/window settings ========================
-au FileType sh,bash,zsh setlocal expandtab shiftwidth=2 tabstop=2 " Shell tabs
-au FileType vim setlocal tw=0          " No text-wrapping
-au BufEnter *.tsv setlocal noexpandtab " Use actual tabs in tsvs
-au WinEnter term://* :startinsert      " Always insert mode in terminals
+" Always enter terminals in insert mode
+au WinEnter term://* :startinsert
 
-" R settings
-augroup r_conf
+"============================= Filetype settings ===============================
+augroup ft_conf
   au!
+  au FileType sh,bash,zsh setlocal expandtab shiftwidth=2 tabstop=2 " Shell tabs
+  au FileType vim setlocal tw=0          " No text-wrapping
+  au BufEnter *.tsv setlocal noexpandtab " Use actual tabs in tsvs
+  
+  " R settings
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
   for mapcmd in ['inoremap', 'tnoremap']
     " map assignment + pipe operators
-    execute 'au FileType r,rmd ' . mapcmd . ' -- <space><-<space>'
-    execute 'au FileType r,rmd ' . mapcmd . ' >> <space>\|><space>'
-    execute 'au FileType r,rmd ' . mapcmd . ' ;m <space>%>%<space>'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;; <-'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;n \|>'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;m %>%'
     " map infix operators
     execute 'au FileType r,rmd ' . mapcmd . ' ;in %in%'
-    execute 'au FileType r,rmd ' . mapcmd . ' ;; %%'
+    execute 'au FileType r,rmd ' . mapcmd . ' ;: %%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;/ %/%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;* %*%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
   endfor
-augroup END
-
-" Markdown
-augroup md_conf
+  
+  " Markdown
   au BufEnter *.md setlocal conceallevel=0
   au FileType markdown setlocal expandtab shiftwidth=4 tabstop=4
   " Run markdown preview, requires mlp python package
@@ -104,10 +104,10 @@ augroup md_conf
   au FileType markdown nmap <leader>mw :w! \| !pandoc "%" -o "%:r.docx"<CR>
   au FileType markdown nmap 
     \<leader>mp :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
+  
+  " Run current python file
+  au FileType python nmap <leader>py :w! \| !python %<CR>
 augroup END
-
-" Run current python file
-au FileType python nmap <leader>py :w! \| !python %<CR>
 
 "================================== Plugins ====================================
 " Install vim-plug if not already available
@@ -155,6 +155,7 @@ call plug#end()
 let g:sendtowindow_use_defaults=0
 nmap <A-Space> <Plug>SendDown
 xmap <A-Space> <Plug>SendDownV
+imap <A-Space> <esc><Plug>SendDownV
 
 "---------------------------------- fzf.vim ------------------------------------
 nnoremap <Leader>/f :Files<CR>
