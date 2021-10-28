@@ -159,14 +159,8 @@ call plug#end()
 let g:coq_settings = {
   \ 'auto_start': v:true, 
   \ 'keymap.recommended': v:false,
-  \ 'keymap.jump_to_mark': 'null'
+  \ 'keymap.jump_to_mark': ''
 \ }
-
-" Keybindings
-ino <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
-ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
-ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
-ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 
 "------------------------------ vim-sendtowindow -------------------------------
 let g:sendtowindow_use_defaults=0
