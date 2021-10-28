@@ -2,5 +2,5 @@ tray: auto
 menu: nested
 automount: true
 notify: true
-file_manager: 'alacritty -e ranger'
-terminal: 'alacritty'
+file_manager: 'footclient -e ranger'
+terminal: 'footclient'

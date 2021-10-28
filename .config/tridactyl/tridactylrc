@@ -1,7 +1,7 @@
 " General Settings
 set newtab about:blank
 set theme dark
-set editorcmd alacritty -e nvim 
+set editorcmd footclient -e nvim 
 
 " Bindings
 bind O fillcmdline tabopen

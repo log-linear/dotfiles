@@ -13,7 +13,7 @@ set $down    j
 set $up      k
 set $right   l
 # Your preferred terminal emulator
-set $term    alacritty
+set $term    footclient
 # File Manager
 set $filemgr ranger
 # Browser
@@ -23,7 +23,9 @@ set $nag     exec swaynagmode
 
 # Colors
 set $bg     #282828
+set $bg4    #7c6f64
 set $red    #cc241d
+set $orange #d65d0e
 set $green  #98971a
 set $yellow #d79921
 set $blue   #458588
@@ -37,7 +39,7 @@ set $white  #fbf1c7
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
-set $menu exec $term --class=launcher -e /usr/bin/sway-launcher-desktop
+set $menu exec $term --app-id=launcher -e /usr/bin/sway-launcher-desktop
 
 #===============================================================================
 # Output configuration
@@ -54,8 +56,8 @@ font SF Pro Display 10
 title_align center
 
 # Window colorscheme
-client.focused   #d79921 #d79921 #282828 #fb4934
-client.unfocused #000000 #282828 #7c6f64
+client.focused   $yellow $yellow $bg  $red
+client.unfocused $bg     $bg     $bg4
 
 # Additional window rules
 for_window [class="steam_app*"] inhibit_idle focus
@@ -64,6 +66,10 @@ for_window [app_id="nm-openconnect-auth-dialog"] floating enable
 for_window [app_id="blueman-manager"] floating enable
 for_window [title="nmtui"] floating enable
 
+# Gaps
+gaps inner 5
+smart_gaps on
+
 #===============================================================================
 # Idle configuration
 #===============================================================================
@@ -71,7 +77,7 @@ exec swayidle -w \
         timeout 300 'swaylock -f -c 000000' \
         timeout 600 'swaymsg "output * dpms off"' \
         resume  'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock -f -c 000000'
+        before-sleep 'swaylock --font "SF Pro Display" -f -c 000000'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -96,6 +102,7 @@ input "type:keyboard" {
 # Start a terminal
 bindsym $mod+return exec $term
 bindsym $mod+t exec $term
+bindsym $mod+shift+t exec notify-send "foot server launched" && foot --server 
 
 # File manager
 bindsym $mod+f exec $term -e $filemgr
@@ -126,7 +133,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynagmode --font 'SF Pro Display' -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 # Lock sway
-bindsym $mod+escape exec swaylock -f -c 000000
+bindsym $mod+escape exec swaylock --font 'SF Pro Display' -f -c 000000
 
 # MOVEMENT: --------------------------------------------------------------------
 
@@ -223,18 +230,6 @@ bindsym $mod+braceright   gaps outer current plus 5
 bindsym $mod+braceleft    gaps outer current minus 5
 bindsym $mod+plus         gaps outer current set 0
 
-# SCRATCHPAD: ------------------------------------------------------------------
-
-# Sway has a "scratchpad", which is a bag of holding for windows.
-# You can send windows there and get them back later.
-
-# Move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
-
 # CUSTOM KEYS (e.g. volume controls) -------------------------------------------
 
 bindsym XF86AudioRaiseVolume  exec pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "🔊 $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo -m 1 "[[:digit:]]+\%" | head -1)"
@@ -269,7 +264,7 @@ bar {
     colors {
         separator          $bghard
         background         $bg
-    	statusline         $bg
+        statusline         $bg
         focused_workspace  $yellow $yellow $bghard
         inactive_workspace $bg     $bg     $yellow
         active_workspace   $bg     $bg     $yellow
@@ -289,8 +284,7 @@ input * xkb_numlock enable
 # use xwayland
 xwayland enable
 
-# STARTUP/EXTERNAL PROGRAMS ----------------------------------------------------
-
+#----------------------------------- Modes -------------------------------------
 # swaynagmode
 mode "nag" {
   bindsym {
@@ -313,6 +307,11 @@ mode "nag" {
     Down             $ag --select prev
   }
 }
+
+#------------------------- Startup/External programs ---------------------------
+
+# Daemonize foot
+exec foot --server
 
 # udiskie - automounting
 exec udiskie &

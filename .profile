@@ -2,7 +2,7 @@
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+  . "$HOME/.bashrc"
     fi
 fi
 
@@ -10,7 +10,7 @@ fi
 if [ -n "$ZSH_VERSION" ]; then
     # include .zshrc if it exists
     if [ -f "$HOME/.config/zsh/.zshrc" ]; then
-	. "$HOME/.config/zsh/.zshrc"
+  . "$HOME/.config/zsh/.zshrc"
     fi
 fi
 
@@ -25,10 +25,17 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Include cargo/bin
+if [ -d "$HOME/.local/share/cargo/bin" ] ; then
+    PATH="$HOME/.local/share/cargo/bin:$PATH"
+fi
+
 # Defaults
-export TERMINAL="alacritty"
+export TERMINAL="footclient"
 export EDITOR="nvim"
 export BROWSER="firefox"
+export TERMINAL_COMMAND="$TERMINAL -e"  # Use footclient with sway-launcher-desktop
+export LANG=en_US.UTF-8
 
 # $HOME cleanup
 export XDG_CONFIG_HOME="$HOME/.config"

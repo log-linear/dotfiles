@@ -89,7 +89,7 @@ idle_bg = "#665c54"
 [[block]]
 block = "custom"
 command = 'echo ""'
-on_click = 'swaymsg "exec alacritty"'
+on_click = 'swaymsg "exec foot"'
 [block.theme_overrides]
 idle_bg = "#d79921"
 
@@ -103,14 +103,14 @@ idle_bg = "#d79921"
 [[block]]
 block = "custom"
 command = 'echo ""'
-on_click = 'exec alacritty -e ranger'
+on_click = 'exec foot -e ranger'
 [block.theme_overrides]
 idle_bg = "#d79921"
 
 [[block]]
 block = "custom"
 command = 'echo ""'
-on_click = 'swaymsg "exec alacritty --class=launcher -e /usr/bin/sway-launcher-desktop"'
+on_click = 'swaymsg "exec foot --app-id=launcher -e /usr/bin/sway-launcher-desktop"'
 [block.theme_overrides]
 idle_bg = "#d79921"
 
