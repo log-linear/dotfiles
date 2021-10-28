@@ -127,7 +127,6 @@ let g:polyglot_disabled = ['markdown']
 " Load plugins
 call plug#begin(stdpath("config") . '/plugged')
   " Functionality
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}     " completion, linting, etc
   Plug 'tpope/vim-commentary'                         " easy code commenting
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}        " R support
   Plug 'tpope/vim-fugitive'                           " git integration
@@ -141,6 +140,11 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy Finder
   Plug 'junegunn/fzf.vim'                             " fzf functions
 
+  " IDE features
+  Plug 'neovim/nvim-lspconfig'                        " Language Server Protocol
+  Plug 'ray-x/lsp_signature.nvim'                     " Function param popup
+  Plug 'ms-jpq/coq_nvim', { 'branch': 'coq' }         " Auto-completion
+
   " Aesthetics/visual aids
   Plug 'sheerun/vim-polyglot'                         " syntax highlighting
   Plug 'vim-airline/vim-airline'                      " status bar
@@ -150,6 +154,19 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'Yggdroot/indentLine'                          " Visual line indents
   Plug 'ryanoasis/vim-devicons'                       " Icons, always load last
 call plug#end()
+
+"---------------------------------- coq_nvim -----------------------------------
+let g:coq_settings = {
+  \ 'auto_start': v:true, 
+  \ 'keymap.recommended': v:false,
+  \ 'keymap.jump_to_mark': 'null'
+\ }
+
+" Keybindings
+ino <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
+ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
+ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
+ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 
 "------------------------------ vim-sendtowindow -------------------------------
 let g:sendtowindow_use_defaults=0
@@ -229,118 +246,75 @@ let g:startify_lists = [
       \ { 'type': 'commands',  'header': ['   Commands'] },
       \ ]
 
-"---------------------------------- coc.nvim -----------------------------------
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+"---------------------------- LSP, auto-completion -----------------------------
+lua << EOF
+local nvim_lsp = require('lspconfig')
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location 
-" list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gD <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+  -- Function signature
+  require "lsp_signature".on_attach()
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
 
-" Highlight the symbol and its references when holding the cursor.
-au CursorHold * silent call CocActionAsync('highlight')
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+end
 
-" Formatting selected code.
-xmap <leader>f <Plug>(coc-format-selected)
-nmap <leader>f <Plug>(coc-format-selected)
+-- Hide in-line diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+      virtual_text = false
+  }
+)
 
-augroup mygroup
-  au!
-  " Setup formatexpr specified filetype(s).
-  au FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pyright', 'r_language_server', 'bashls', 'vimls' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
 
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>af  <Plug>(coc-fix-current)
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
 
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> 
-    \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> 
-    \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> 
-    \ coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> 
-    \ coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> 
-    \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> 
-    \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR 
-  \ :call CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Helper function + mapping to disable Coc on the fly
-function! CocToggle()
-  if g:coc_enabled
-    CocDisable
-  else
-    CocEnable
-  endif
-endfunction
-command! CocToggle :call CocToggle()
-nmap <leader>, :CocToggle<CR>
-nmap <leader>. :CocRestart<CR>
+-- nvim_coq
+local coq = require "coq" 
+EOF
 
 "========================== Windows-specific configs ===========================
 if has("win64") || has("win32") || has("win16")
