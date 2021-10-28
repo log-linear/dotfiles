@@ -1,4 +1,4 @@
-# Options section ==============================================================
+#============================== Options section ================================
 setopt correct           # Auto correct mistakes
 setopt extendedglob      # Allow using regex with *
 setopt nocaseglob        # Case insensitive globbing
@@ -27,7 +27,7 @@ HISTSIZE=1000
 SAVEHIST=500
 WORDCHARS=${WORDCHARS//\/[&.;]} # Ignore certain characters for word parsing
 
-# Keybindings section ==========================================================
+#============================ Keybindings section ==============================
 bindkey -v                                 # Vim keybindings  
 bindkey '^[[7~' beginning-of-line          # Home key
 bindkey '^[[H' beginning-of-line           # Home key
@@ -45,18 +45,19 @@ bindkey '^[[C'  forward-char                      # Right key
 bindkey '^[[D'  backward-char                     # Left key
 bindkey '^[[5~' history-beginning-search-backward # Page up key
 bindkey '^[[6~' history-beginning-search-forward  # Page down key
+bindkey '^b' backward-char
+bindkey '^f' forward-char
 
 # Navigate words with ctrl+arrow keys
 bindkey '^[Oc' forward-word
 bindkey '^[Od' backward-word
 bindkey '^[[1;5D' backward-word
-bindkey '^[[1;5C' forward-word  #
-bindkey '^H' backward-kill-word # delete previous word with ctrl+backspace
+bindkey '^[[1;5C' forward-word
 
 # Menu completion navigation
 bindkey '^[[Z' reverse-menu-complete # Shift+tab undo last action
-bindkey '^n' menu-complete # Shift+tab undo last action
-bindkey '^p' reverse-menu-complete # Shift+tab undo last action
+bindkey '^n' menu-complete           # Shift+tab undo last action
+bindkey '^p' reverse-menu-complete   # Shift+tab undo last action
 
 # Vi-mode yank to system clipboard
 function vi-yank {
@@ -67,28 +68,37 @@ function vi-yank {
 zle -N vi-yank
 bindkey -M vicmd 'y' vi-yank
 
-# Alias section ================================================================
+#=============================== Alias section =================================
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && \
     source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
  
-# Theming section ==============================================================
+#============================== Theming section ================================
 autoload -U compinit colors zcalc
 compinit -d ${XDG_CACHE_HOME}/.zcompdump
 colors
+setopt prompt_subst                                # enable prompt substition
+echo $USER@$HOST  $(uname -srm) $(lsb_release -rs) # prompt greeting msg
 
-# enable substitution for prompt
-setopt prompt_subst
+# Color man pages
+export LESS_TERMCAP_mb=$'\E[01;32m'
+export LESS_TERMCAP_md=$'\E[01;32m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;47;34m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;36m'
+export LESS=-r
 
-# vi-mode indicators: cursor change + prompt
+#----------------------------- vi-mode indicators ------------------------------
 vim_ins_mode="%{$fg_bold[magenta]%}[I]%{$reset_color%}"
-vim_cmd_mode="%{$fg_bold[green]%}[N]%{$reset_color%}"
+vim_nor_mode="%{$fg_bold[green]%}[N]%{$reset_color%}"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
-  # Right-side prompt
-  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  # Show mode [N|I] in prompt
+  vim_mode="${${KEYMAP/vicmd/${vim_nor_mode}}/(main|viins)/${vim_ins_mode}}"
 
-  # Cursor
+  # Block for Normal, beam for Insert mode
   if [[ ${KEYMAP} == vicmd ]] ||
      [[ $1 = 'block' ]]; then
     echo -ne '\e[1 q'
@@ -117,10 +127,7 @@ function TRAPINT() {
 } 
 PROMPT='${vim_mode} %B%{$fg[cyan]%}%(4~|%-1~/.../%2~|%~)%u%b >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b '
 
-# Print a greeting message when shell is started
-echo $USER@$HOST  $(uname -srm) $(lsb_release -rs)
-
-## Prompt on right side:
+#----------------------------- Right side prompt -------------------------------
 # - shows status of git when in git repository (code adapted from 
 # https://joshdick.net/2017/06/08/my_git_prompt_for_zsh_revisited.html)
 # - shows exit status of previous command (if previous command finished with 
@@ -186,22 +193,12 @@ git_prompt_string() {
 
 RPROMPT='$(git_prompt_string)'
 
-# Color man pages
-export LESS_TERMCAP_mb=$'\E[01;32m'
-export LESS_TERMCAP_md=$'\E[01;32m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;47;34m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;36m'
-export LESS=-r
+#============================== Plugins section ================================
 
-# Plugins section: Enable fish style features ==================================
-
-### Syntax highlighting
+#---------------------------- Syntax highlighting ------------------------------
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
-### History substring search
+#-------------------------- History substring search ---------------------------
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 # bind UP and DOWN arrow keys to history substring search
 zmodload zsh/terminfo
@@ -210,7 +207,7 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up      
 bindkey '^[[B' history-substring-search-down
 
-### fzf
+#------------------------------------ fzf --------------------------------------
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 export FZF_COMPLETION_TRIGGER=''
@@ -230,13 +227,12 @@ _fzf_compgen_dir() {
   fd -HI --type d . "$1"
 }
 
-### autosuggestion
+#------------------------------- autosuggestion --------------------------------
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
-# Application-specific section =================================================
-
+#======================== Application-specific section =========================
 # Import colorscheme from 'wal'
 [ -f /usr/bin/wal ] && cat ~/.cache/wal/sequences
 
@@ -246,8 +242,7 @@ eval $(keychain --eval --quiet id_ed25519)
 # Smart cd replacement
 eval "$(zoxide init zsh)"
 
-# Functions ====================================================================
-
+#================================= Functions ===================================
 # rga/fzf wrapper
 fzrga() {
   RG_PREFIX="rga --files-with-matches"
