@@ -10,14 +10,10 @@ set mouse=a                          " Enable mouse support
 set scrolloff=3 sidescroll=3         " Always show 3 horiz/vert lines on scroll
 set number relativenumber            " Relative line numbers
 set hidden                           " Allow switching buffers before saving
-set signcolumn=auto:9                " sign column for gitgutter, coc, etc
-set cmdheight=2                      " Give more space for displaying messages.
-set nobackup                         " Fix breakages with certain coc lsps
-set nowritebackup                    " Fix breakages with certain coc lsps
-set updatetime=300                   " Reduce coc.nvim lag
-set shortmess+=c                     " no ins-completion-menu messages
+set signcolumn=auto:2                " sign column for gitgutter, lsp, etc
 set autoindent smartindent           " autoindent
 set expandtab tabstop=4 shiftwidth=4 " tabs to spaces, default 4
+set termguicolors                    " Enable 24-big RGB
 
 " search tweaks - highlighting, semi-case-insensitive search, etc
 set incsearch showmatch hlsearch ignorecase smartcase
@@ -61,9 +57,9 @@ nnoremap <leader>H :center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "nor
 nnoremap <leader>h :center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
 
 " Start terminals
-map <Leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
-map <Leader>tp :split term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
-map <Leader>tr :split term://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
+map <leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
+map <leader>tp :split term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
+map <leader>tr :split term://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
 
 " Disable ex mode
 nnoremap Q <Nop>
@@ -103,7 +99,7 @@ augroup ft_conf
   au FileType markdown nmap <leader>mh :w! \| !pandoc "%" -o "%:r.html"<CR>
   au FileType markdown nmap <leader>mw :w! \| !pandoc "%" -o "%:r.docx"<CR>
   au FileType markdown nmap 
-    \<leader>mp :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
+    \ <leader>mp :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
   
   " Run current python file
   au FileType python nmap <leader>py :w! \| !python %<CR>
@@ -121,13 +117,12 @@ au VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
-" vim-polyglot settings need to run before loading
+" Pre-load settings for certain plugins
 let g:polyglot_disabled = ['markdown']
 
 " Load plugins
 call plug#begin(stdpath("config") . '/plugged')
   " Functionality
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}     " completion, linting, etc
   Plug 'tpope/vim-commentary'                         " easy code commenting
   Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}        " R support
   Plug 'tpope/vim-fugitive'                           " git integration
@@ -141,15 +136,37 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy Finder
   Plug 'junegunn/fzf.vim'                             " fzf functions
 
+  " IDE features
+  Plug 'neovim/nvim-lspconfig'                        " Language Server Protocol
+  Plug 'ray-x/lsp_signature.nvim'                     " Function param popup
+  Plug 'ms-jpq/coq_nvim', { 'branch': 'coq' }         " Auto-completion
+
   " Aesthetics/visual aids
   Plug 'sheerun/vim-polyglot'                         " syntax highlighting
   Plug 'vim-airline/vim-airline'                      " status bar
   Plug 'junegunn/goyo.vim'                            " zen mode
-  Plug 'morhetz/gruvbox'                              " theme
+  Plug 'lifepillar/vim-gruvbox8'                      " theme
   Plug 'ryanoasis/vim-devicons'                       " Required: Nerd Font
   Plug 'Yggdroot/indentLine'                          " Visual line indents
+  Plug 'norcalli/nvim-colorizer.lua'                  " Highlight hex colors
+  Plug 'sunjon/shade.nvim'                            " Dim inactive windows
   Plug 'ryanoasis/vim-devicons'                       " Icons, always load last
 call plug#end()
+
+"----------------------------- nvim-colorizer.lua ------------------------------
+lua require'colorizer'.setup()
+
+"---------------------------------- coq_nvim -----------------------------------
+let g:coq_settings = {
+  \ 'auto_start': v:true, 
+  \ 'keymap.recommended': v:false,
+  \ 'keymap.jump_to_mark': ''
+\ }
+"
+" Keybindings
+ino <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
+ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
+ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
 
 "------------------------------ vim-sendtowindow -------------------------------
 let g:sendtowindow_use_defaults=0
@@ -158,16 +175,16 @@ xmap <A-Space> <Plug>SendDownV
 imap <A-Space> <esc><Plug>SendDownV
 
 "---------------------------------- fzf.vim ------------------------------------
-nnoremap <Leader>/f :Files<CR>
-nnoremap <Leader>/g :GFiles<CR>
-nnoremap <Leader>/c :BCommits<CR>
-nnoremap <Leader>/h :Help<CR>
-nnoremap <Leader>/s :History<CR>
-nnoremap <Leader>// :BLines<CR>
-nnoremap <Leader>/b :Buffers<CR>
-nnoremap <Leader>/l :Lines<CR>
-nnoremap <Leader>/m :Maps<CR>
-nnoremap <Leader>/t :Filetypes<CR>
+nnoremap <leader>/f :Files<CR>
+nnoremap <leader>/g :GFiles<CR>
+nnoremap <leader>/c :BCommits<CR>
+nnoremap <leader>/h :Help<CR>
+nnoremap <leader>/s :History<CR>
+nnoremap <leader>// :BLines<CR>
+nnoremap <leader>/b :Buffers<CR>
+nnoremap <leader>/l :Lines<CR>
+nnoremap <leader>/m :Maps<CR>
+nnoremap <leader>/t :Filetypes<CR>
 
 "------------------------------- vim-easy-align --------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -188,8 +205,8 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:indentLine_char = '▏'
 
 "---------------------------------- gruvbox ------------------------------------
-colorscheme gruvbox
-let g:airline_theme = 'gruvbox'
+colorscheme gruvbox8
+let g:airline_theme = 'gruvbox8'
 
 "------------------------------------ Goyo -------------------------------------
 map <leader>z :Goyo \| set linebreak<CR>
@@ -205,7 +222,7 @@ let R_esc_term = 0                 " Don't use <Esc>/<C-[> to exit terminal mode
 let r_indent_align_args = 0        " Disable weird indenting rules
 let R_rconsole_width = 1000        " Ensure console splits below
 let R_objbr_allnames = 1           " Show hidden objects
-let R_openpdf = 1                  " Only auto-open knit-ed PDFs once
+let R_openpdf = 1                  " Only auto-open knit'ed PDFs once
 
 " Use radian console
 let R_app = 'radian'
@@ -224,123 +241,13 @@ map <leader>uh :SignifyHunkUndo<CR>
 
 "-------------------------------- vim-startify ---------------------------------
 let g:startify_lists = [
-      \ { 'type': 'sessions',  'header': ['   Sessions'] },
-      \ { 'type': 'files',     'header': ['   Recent']   },
-      \ { 'type': 'commands',  'header': ['   Commands'] },
-      \ ]
+  \ { 'type': 'sessions',  'header': ['   Sessions'] },
+  \ { 'type': 'files',     'header': ['   Recent']   },
+  \ { 'type': 'commands',  'header': ['   Commands'] },
+\ ]
 
-"---------------------------------- coc.nvim -----------------------------------
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location 
-" list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gD <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-au CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f <Plug>(coc-format-selected)
-nmap <leader>f <Plug>(coc-format-selected)
-
-augroup mygroup
-  au!
-  " Setup formatexpr specified filetype(s).
-  au FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>af  <Plug>(coc-fix-current)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> 
-    \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> 
-    \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> 
-    \ coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> 
-    \ coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> 
-    \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> 
-    \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR 
-  \ :call CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Helper function + mapping to disable Coc on the fly
-function! CocToggle()
-  if g:coc_enabled
-    CocDisable
-  else
-    CocEnable
-  endif
-endfunction
-command! CocToggle :call CocToggle()
-nmap <leader>, :CocToggle<CR>
-nmap <leader>. :CocRestart<CR>
+"================================ lua configs ==================================
+lua require('config')
 
 "========================== Windows-specific configs ===========================
 if has("win64") || has("win32") || has("win16")
