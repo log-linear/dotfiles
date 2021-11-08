@@ -120,9 +120,6 @@ au VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
-" Pre-load settings for certain plugins
-let g:polyglot_disabled = ['markdown']
-
 " Load plugins
 call plug#begin(stdpath("config") . '/plugged')
 
