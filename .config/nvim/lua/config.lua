@@ -48,7 +48,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'r_language_server', 'bashls', 'powershell_es' }
+local servers = { 
+  'jedi_language_server', 
+  'r_language_server', 
+  'bashls', 
+  'powershell_es' 
+}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -75,4 +80,18 @@ require'shade'.setup({
     toggle           = '<Leader>s',
   }
 })
+
+------------------------------ nvim-colorizer.lua ------------------------------
+require'colorizer'.setup()
+
+------------------------------- nvim-treesitter --------------------------------
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",
+  ignore_install = { "r" },  -- Not as good as default highlighting
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = true,
+  },
+}
+
 

@@ -4,11 +4,11 @@
 
 # Never save on exit.
 utils::assignInNamespace(
-  "q", 
-  function(save = "no", status = 0, runLast = TRUE) 
+  "q",
+  function(save = "no", status = 0, runLast = TRUE)
   {
     .Internal(quit(save, status, runLast))
-  }, 
+  },
   "base"
 )
 
@@ -25,6 +25,8 @@ local({
   options(repos = r)
 })
 
+# Helper packages for interactive mode
+require(jsonlite)
 require(rvisidata)
 
 #===============================================================================

@@ -13,7 +13,7 @@ set hidden                           " Allow switching buffers before saving
 set signcolumn=auto:2                " sign column for gitgutter, lsp, etc
 set autoindent smartindent           " autoindent
 set expandtab tabstop=4 shiftwidth=4 " tabs to spaces, default 4
-set termguicolors                    " Enable 24-big RGB
+set termguicolors                    " Enable 24-bit RGB
 
 " search tweaks - highlighting, semi-case-insensitive search, etc
 set incsearch showmatch hlsearch ignorecase smartcase
@@ -42,6 +42,8 @@ for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
   execute mapcmd . ' <A-=> <C-\><C-n><C-w>='
   " Alt + q to close windows
   execute mapcmd . ' <A-q> <C-\><C-n>:q<CR>'
+  " netrw
+  execute mapcmd . '<A-f> <C-\><C-n>:Vexplore<CR>'
   " Buffer navigation/management
   execute mapcmd . ' <A-d> <C-\><C-n>:bn <BAR> bd #<CR>'
   execute mapcmd . ' <A-n> <C-\><C-n>:bn<CR>'
@@ -58,8 +60,8 @@ nnoremap <leader>h :center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "nor
 
 " Start terminals
 map <leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
-map <leader>tp :split term://zsh<CR>ipython<CR><C-\><C-n><C-w>k
-map <leader>tr :split term://zsh<CR>iradian --no-history<CR><C-\><C-n><C-w>k
+map <leader>tp :split term://python<CR><C-\><C-n><C-w>k
+map <leader>tr :split term://radian --no-history<CR><C-\><C-n><C-w>k
 
 " Disable ex mode
 nnoremap Q <Nop>
@@ -89,7 +91,8 @@ augroup ft_conf
     execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
   endfor
-  
+  au FileType rmd nnoremap <leader>k :w<CR>:!Rscript -e "rmarkdown::render('%:p')"<CR>:!zathura %:p:r.pdf<CR>
+
   " Markdown
   au BufEnter *.md setlocal conceallevel=0
   au FileType markdown setlocal expandtab shiftwidth=4 tabstop=4
@@ -122,15 +125,14 @@ let g:polyglot_disabled = ['markdown']
 
 " Load plugins
 call plug#begin(stdpath("config") . '/plugged')
+
   " Functionality
   Plug 'tpope/vim-commentary'                         " easy code commenting
-  Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}        " R support
   Plug 'tpope/vim-fugitive'                           " git integration
   Plug 'mhinz/vim-signify'                            " git diff markers
   Plug 'karoliskoncevicius/vim-sendtowindow'          " Basic REPLing
   Plug 'tpope/vim-surround'                           " surround text objects
   Plug 'tpope/vim-repeat'                             " repeat plugin commands
-  Plug 'mhinz/vim-startify'                           " fancy startup menu
   Plug 'ferrine/md-img-paste.vim'                     " Paste images to md files
   Plug 'junegunn/vim-easy-align'                      " Text alignment
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy Finder
@@ -140,21 +142,18 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'neovim/nvim-lspconfig'                        " Language Server Protocol
   Plug 'ray-x/lsp_signature.nvim'                     " Function param popup
   Plug 'ms-jpq/coq_nvim', { 'branch': 'coq' }         " Auto-completion
+  Plug 'nvim-treesitter/nvim-treesitter',             " syntax highlighting
+    \ {'do': ':TSUpdate'}  " Update on start
 
   " Aesthetics/visual aids
-  Plug 'sheerun/vim-polyglot'                         " syntax highlighting
   Plug 'vim-airline/vim-airline'                      " status bar
-  Plug 'junegunn/goyo.vim'                            " zen mode
   Plug 'lifepillar/vim-gruvbox8'                      " theme
-  Plug 'ryanoasis/vim-devicons'                       " Required: Nerd Font
   Plug 'Yggdroot/indentLine'                          " Visual line indents
   Plug 'norcalli/nvim-colorizer.lua'                  " Highlight hex colors
   Plug 'sunjon/shade.nvim'                            " Dim inactive windows
   Plug 'ryanoasis/vim-devicons'                       " Icons, always load last
-call plug#end()
 
-"----------------------------- nvim-colorizer.lua ------------------------------
-lua require'colorizer'.setup()
+call plug#end()
 
 "---------------------------------- coq_nvim -----------------------------------
 let g:coq_settings = {
@@ -170,9 +169,9 @@ ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
 
 "------------------------------ vim-sendtowindow -------------------------------
 let g:sendtowindow_use_defaults=0
-nmap <A-Space> <Plug>SendDown
-xmap <A-Space> <Plug>SendDownV
-imap <A-Space> <esc><Plug>SendDownV
+nmap <A-CR> <Plug>SendDown
+xmap <A-CR> <Plug>SendDownV
+imap <A-CR> <esc><Plug>SendDownV
 
 "---------------------------------- fzf.vim ------------------------------------
 nnoremap <leader>/f :Files<CR>
@@ -185,6 +184,7 @@ nnoremap <leader>/b :Buffers<CR>
 nnoremap <leader>/l :Lines<CR>
 nnoremap <leader>/m :Maps<CR>
 nnoremap <leader>/t :Filetypes<CR>
+nnoremap <leader>/w :Windows<CR>
 
 "------------------------------- vim-easy-align --------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -207,34 +207,7 @@ let g:indentLine_char = '▏'
 "---------------------------------- gruvbox ------------------------------------
 colorscheme gruvbox8
 let g:airline_theme = 'gruvbox8'
-
-"------------------------------------ Goyo -------------------------------------
-map <leader>z :Goyo \| set linebreak<CR>
-
-"----------------------------------- Nvim-R ------------------------------------
-let R_auto_start = 2               " Auto start on all .R/.Rmd files
-let R_assign = 0                   " Disable assignment operator, use au above
-let R_min_editor_width = 80        " set a minimum source editor width
-let R_objbr_place = 'script,right' " Open obj explorer on right
-let R_objbr_opendf = 0             " Don't show df cols in obj explorer 
-let R_csv_app = 'terminal:vd'      " Use visidata as data.frame/matrix viewer
-let R_esc_term = 0                 " Don't use <Esc>/<C-[> to exit terminal mode
-let r_indent_align_args = 0        " Disable weird indenting rules
-let R_rconsole_width = 1000        " Ensure console splits below
-let R_objbr_allnames = 1           " Show hidden objects
-let R_openpdf = 1                  " Only auto-open knit'ed PDFs once
-
-" Use radian console
-let R_app = 'radian'
-let R_cmd = 'R'
-let R_hl_term = 0
-let R_args = ['--no-history']
-let R_bracketed_paste = 1
-
-" Press Alt + Return to send lines and selection to R console
-vmap <A-CR> <Plug>RDSendSelection
-nmap <A-CR> <Plug>RDSendLine
-imap <A-CR> <esc><Plug>RDSendLine<CR>
+hi Function guifg=#689d6a guibg=NONE gui=bold cterm=bold  " function hi group
 
 "-------------------------------- vim-signify ----------------------------------
 map <leader>uh :SignifyHunkUndo<CR>
