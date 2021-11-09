@@ -340,4 +340,4 @@ exec keepassxc
 
 workspace 3
 exec discord
-
+exec telegram-desktop

@@ -62,7 +62,7 @@ bindkey '^p' reverse-menu-complete   # Shift+tab undo last action
 # Vi-mode yank to system clipboard
 function vi-yank {
     zle vi-yank
-   echo "$CUTBUFFER" | wl-copy
+    echo "$CUTBUFFER" | wl-copy
 }
 
 zle -N vi-yank
@@ -90,8 +90,8 @@ export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-r
 
 #----------------------------- vi-mode indicators ------------------------------
-vim_ins_mode="%{$fg_bold[magenta]%}[I]%{$reset_color%}"
-vim_nor_mode="%{$fg_bold[green]%}[N]%{$reset_color%}"
+vim_ins_mode="%{$fg_bold[cyan]%}[I]%{$reset_color%}"
+vim_nor_mode="%{$fg_bold[gray]%}[N]%{$reset_color%}"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
@@ -99,13 +99,13 @@ function zle-keymap-select {
   vim_mode="${${KEYMAP/vicmd/${vim_nor_mode}}/(main|viins)/${vim_ins_mode}}"
 
   # Block for Normal, beam for Insert mode
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
+  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
     echo -ne '\e[1 q'
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
+  elif 
+    [[ ${KEYMAP} == main ]] ||
+    [[ ${KEYMAP} == viins ]] ||
+    [[ ${KEYMAP} = '' ]] ||
+    [[ $1 = 'beam' ]]; then
     echo -ne '\e[5 q'
   fi
   zle reset-prompt
@@ -233,9 +233,6 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
 #======================== Application-specific section =========================
-# Import colorscheme from 'wal'
-[ -f /usr/bin/wal ] && cat ~/.cache/wal/sequences
-
 # Keychain - Stores ssh pw's per each login, needed when using e.g. sway
 eval $(keychain --eval --quiet id_ed25519)
 

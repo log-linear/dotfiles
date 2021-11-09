@@ -139,7 +139,7 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'neovim/nvim-lspconfig'                        " Language Server Protocol
   Plug 'ray-x/lsp_signature.nvim'                     " Function param popup
   Plug 'ms-jpq/coq_nvim', { 'branch': 'coq' }         " Auto-completion
-  Plug 'nvim-treesitter/nvim-treesitter',             " syntax highlighting
+  Plug 'nvim-treesitter/nvim-treesitter',             " syntax highlighting, etc
     \ {'do': ':TSUpdate'}  " Update on start
 
   " Aesthetics/visual aids

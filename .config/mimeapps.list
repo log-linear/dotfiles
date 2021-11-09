@@ -52,4 +52,7 @@ x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/ftp=firefox.desktop
 x-scheme-handler/chrome=firefox.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-7TM8B1.desktop
 
+[Added Associations]
+x-scheme-handler/tg=userapp-Telegram Desktop-7TM8B1.desktop;
