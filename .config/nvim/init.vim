@@ -84,7 +84,7 @@ augroup ft_conf
     execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
   endfor
-  au FileType rmd nnoremap <leader>k :w<CR>:!Rscript -e "rmarkdown::render('%:p')"<CR>:!zathura %:p:r.pdf<CR>
+  au FileType rmd nnoremap <leader>k :w<CR>:!Rscript -e "rmarkdown::render('%:p')"<CR>
 
   " Markdown
   au BufEnter *.md setlocal conceallevel=0
@@ -151,7 +151,7 @@ let g:coq_settings = {
   \ 'keymap.recommended': v:false,
   \ 'keymap.jump_to_mark': ''
 \ }
-"
+
 " Keybindings
 ino <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
 ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
