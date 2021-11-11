@@ -21,6 +21,7 @@ set incsearch showmatch hlsearch ignorecase smartcase
 " Visual line guide at 80 characters
 set colorcolumn=80
 highlight ColorColumn ctermbg=238
+au WinEnter term://* :startinsert  " Always enter terminals in insert mode
 
 "------------------------------------ Maps -------------------------------------
 " Esc/Ctrl+[ clears last search highlighting
@@ -58,16 +59,8 @@ nnoremap <leader>b 0D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
 nnoremap <leader>H :center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
 nnoremap <leader>h :center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
 
-" Start terminals
-map <leader>tt :split term://zsh<CR><C-\><C-n><C-w>k
-map <leader>tp :split term://python<CR><C-\><C-n><C-w>k
-map <leader>tr :split term://radian --no-history<CR><C-\><C-n><C-w>k
-
 " Disable ex mode
 nnoremap Q <Nop>
-
-" Always enter terminals in insert mode
-au WinEnter term://* :startinsert
 
 "============================= Filetype settings ===============================
 augroup ft_conf
@@ -127,7 +120,7 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'tpope/vim-commentary'                         " easy code commenting
   Plug 'tpope/vim-fugitive'                           " git integration
   Plug 'mhinz/vim-signify'                            " git diff markers
-  Plug 'karoliskoncevicius/vim-sendtowindow'          " Basic REPLing
+  Plug 'kassio/neoterm'                               " Basic REPLing
   Plug 'tpope/vim-surround'                           " surround text objects
   Plug 'tpope/vim-repeat'                             " repeat plugin commands
   Plug 'ferrine/md-img-paste.vim'                     " Paste images to md files
@@ -164,11 +157,20 @@ ino <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
 ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
 ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
 
-"------------------------------ vim-sendtowindow -------------------------------
-let g:sendtowindow_use_defaults=0
-nmap <A-CR> <Plug>SendDown
-xmap <A-CR> <Plug>SendDownV
-imap <A-CR> <esc><Plug>SendDownV
+"---------------------------------- neoterm ------------------------------------
+let g:neoterm_default_mod = 'botright'
+nmap <A-CR> <Plug>(neoterm-repl-send)
+vmap <A-CR> <Plug>(neoterm-repl-send)
+imap <A-CR> <Plug>(neoterm-repl-send)
+let g:neoterm_repl_r = 'radian'
+let g:neoterm_bracketed_paste = 1
+let g:neoterm_direct_open_repl = 1
+let g:neoterm_autoinsert = 1
+
+" Start terminals
+map <leader>tt :Tnew<CR><C-\><C-n><C-w>k
+map <leader>tp :T python<CR><C-\><C-n><C-w>k
+map <leader>tr :T radian<CR><C-\><C-n><C-w>k
 
 "---------------------------------- fzf.vim ------------------------------------
 nnoremap <leader>/f :Files<CR>
