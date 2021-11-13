@@ -14,6 +14,7 @@ set signcolumn=auto:2                " sign column for gitgutter, lsp, etc
 set autoindent smartindent           " autoindent
 set expandtab tabstop=4 shiftwidth=4 " tabs to spaces, default 4
 set termguicolors                    " Enable 24-bit RGB
+set list lcs=tab:\▏\                 " Show tab indentlines
 
 " search tweaks - highlighting, semi-case-insensitive search, etc
 set incsearch showmatch hlsearch ignorecase smartcase
@@ -84,7 +85,7 @@ augroup ft_conf
     execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
   endfor
-  au FileType rmd nnoremap <leader>k :w<CR>:!Rscript -e "rmarkdown::render('%:p')"<CR>
+  au FileType rmd nnoremap <leader>k :w<CR>:!Rscript -e "rmarkdown::render(r'(%:p)')"<CR>
 
   " Markdown
   au BufEnter *.md setlocal conceallevel=0
@@ -156,16 +157,18 @@ let g:coq_settings = {
 ino <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
 ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
 ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
+ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 
 "---------------------------------- neoterm ------------------------------------
 let g:neoterm_default_mod = 'botright'
 nmap <A-CR> <Plug>(neoterm-repl-send)
 vmap <A-CR> <Plug>(neoterm-repl-send)
-imap <A-CR> <Plug>(neoterm-repl-send)
+imap <A-CR> <Esc><Plug>(neoterm-repl-send)
 let g:neoterm_repl_r = 'radian'
 let g:neoterm_bracketed_paste = 1
 let g:neoterm_direct_open_repl = 1
 let g:neoterm_autoinsert = 1
+let g:neoterm_autoscroll = 1
 
 " Start terminals
 map <leader>tt :Tnew<CR><C-\><C-n><C-w>k
@@ -206,7 +209,7 @@ let g:indentLine_char = '▏'
 "---------------------------------- gruvbox ------------------------------------
 colorscheme gruvbox8
 let g:airline_theme = 'gruvbox8'
-hi Function guifg=#689d6a guibg=NONE gui=bold cterm=bold  " function hi group
+hi Function guifg=#98971a guibg=NONE gui=bold cterm=bold  " function hi group
 
 "-------------------------------- vim-signify ----------------------------------
 map <leader>uh :SignifyHunkUndo<CR>

@@ -2,22 +2,6 @@
 # .Rprofile
 #===============================================================================
 
-# Never save on exit.
-utils::assignInNamespace(
-  "q",
-  function(save = "no", status = 0, runLast = TRUE)
-  {
-    .Internal(quit(save, status, runLast))
-  },
-  "base"
-)
-
-# Limit use of scientific notation for large/small numbers
-options(scipen = 10)
-
-# Enable tab-completion for library() and require() calls
-utils::rc.settings(ipck = T)
-
 # Set CRAN mirror:
 local({
   r <- getOption("repos")
@@ -25,15 +9,71 @@ local({
   options(repos = r)
 })
 
-# Helper packages for interactive mode
-require(jsonlite)
-require(rvisidata)
+if (interactive()) {
+  # Never save on exit.
+  utils::assignInNamespace(
+    "q",
+    function(save = "no", status = 0, runLast = TRUE) {
+      .Internal(quit(save, status, runLast))
+    },
+    "base"
+  )
 
-#===============================================================================
-# Sources:
-#===============================================================================
+  # Limit use of scientific notation for large/small numbers
+  options(scipen = 10)
 
-# stackoverflow.com/questions/4996090/how-to-disable-save-workspace-image-prompt-in-r
-# https://www.r-bloggers.com/fun-with-rprofile-and-customizing-r-startup/
-# https://wiki.archlinux.org/index.php/R#Adding_a_graphical_frontend_to_R
+  # Enable tab-completion for library() and require() calls
+  utils::rc.settings(ipck = T)
+
+  # Show all loaded objects
+  assign(
+    "objs",
+    function() {
+      napply <- function(names, fn) {
+        sapply(names, function(x) fn(get(x, pos = 1)))
+      }
+      names <- ls(pos = 1)
+      obj_class <- napply(names, function(x) as.character(class(x))[1])
+      obj_mode <- napply(names, mode)
+      obj_type <- ifelse(is.na(obj_class), obj_mode, obj_class)
+      obj_size <- napply(names, object.size)
+      obj_size_hr <- napply(
+        names, function(x) format(utils::object.size(x), units = "MB")
+      )
+      obj_dim <- t(napply(names, function(x) as.numeric(dim(x))[1:2]))
+      vec <- is.na(obj_dim)[, 1] & (obj_type != "function")
+      obj_dim[vec, 1] <- napply(names, length)[vec]
+      out <- data.frame(obj_type, obj_size, obj_size_hr, obj_dim)
+      names(out) <- c("Type", "Size", "Size MB", "Rows", "Columns")
+      # Ignore .Rprofile funcs
+      out <- out[
+        !rownames(out) %in% c(
+          "cd",
+          "pwd",
+          "h",
+          "libs",
+          "objs",
+          "ll"
+        ),
+      ]
+      # Sort in descending order by size
+      # out <- out[order(out[[order.by]], decreasing = T), ]
+      out
+    },
+    envir = globalenv()
+  )
+
+  # Show all loaded packages
+  assign("libs", function() (.packages()), envir = globalenv())
+
+  # useful aliases
+  assign("cd", function() base::setwd(), envir = globalenv())
+  assign("pwd", function() base::getwd(), envir = globalenv())
+  assign("h", function() base::getwd(), envir = globalenv())
+  assign("ll", function() objs(), envir = globalenv())
+
+  # Helper packages
+  require(jsonlite)  # Dependency for rvisidata
+  require(rvisidata)
+}
 
