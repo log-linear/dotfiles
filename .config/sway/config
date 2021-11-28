@@ -92,7 +92,7 @@ exec swayidle -w \
 # Swap caps ctrl, lalt/lwin, lshift+rshift = switch to intl keyboard
 input "type:keyboard" {
     xkb_layout us,us(intl)
-    xkb_options altwin:swap_lalt_lwin,ctrl:swapcaps,grp:shifts_toggle
+    xkb_options grp:shifts_toggle
 }
 
 # KEY BINDINGS =================================================================

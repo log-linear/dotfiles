@@ -166,6 +166,7 @@ bind / fillcmdline find
 bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
+bind <Escape> nohlsearch
 bind <C-[> nohlsearch
 
 " For syntax highlighting see https://github.com/tridactyl/vim-tridactyl
