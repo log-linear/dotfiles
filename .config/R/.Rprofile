@@ -28,7 +28,7 @@ if (interactive()) {
   # Show all loaded objects
   assign(
     "objs",
-    function() {
+    function(size = F) {
       napply <- function(names, fn) {
         sapply(names, function(x) fn(get(x, pos = 1)))
       }
@@ -36,15 +36,21 @@ if (interactive()) {
       obj_class <- napply(names, function(x) as.character(class(x))[1])
       obj_mode <- napply(names, mode)
       obj_type <- ifelse(is.na(obj_class), obj_mode, obj_class)
-      obj_size <- napply(names, object.size)
-      obj_size_hr <- napply(
-        names, function(x) format(utils::object.size(x), units = "MB")
-      )
       obj_dim <- t(napply(names, function(x) as.numeric(dim(x))[1:2]))
       vec <- is.na(obj_dim)[, 1] & (obj_type != "function")
       obj_dim[vec, 1] <- napply(names, length)[vec]
-      out <- data.frame(obj_type, obj_size, obj_size_hr, obj_dim)
-      names(out) <- c("Type", "Size", "Size MB", "Rows", "Columns")
+      if (size) {
+        obj_size <- napply(names, object.size)
+        obj_size_hr <- napply(
+          names, function(x) format(utils::object.size(x), units = "MB")
+        )
+        out <- data.frame(obj_type, obj_size, obj_size_hr, obj_dim)
+        names(out) <- c("Type", "Size", "Size MB", "Rows", "Columns")
+      }
+      else {
+        out <- data.frame(obj_type, obj_dim)
+        names(out) <- c("Type", "Rows", "Columns")
+      }
       # Ignore .Rprofile funcs
       out <- out[
         !rownames(out) %in% c(
@@ -56,8 +62,6 @@ if (interactive()) {
           "ll"
         ),
       ]
-      # Sort in descending order by size
-      # out <- out[order(out[[order.by]], decreasing = T), ]
       out
     },
     envir = globalenv()
@@ -70,10 +74,9 @@ if (interactive()) {
   assign("cd", function() base::setwd(), envir = globalenv())
   assign("pwd", function() base::getwd(), envir = globalenv())
   assign("h", function() base::getwd(), envir = globalenv())
-  assign("ll", function() objs(), envir = globalenv())
+  assign("ll", function(size = F) objs(size), envir = globalenv())
 
   # Helper packages
   require(jsonlite)  # Dependency for rvisidata
   require(rvisidata)
 }
-
