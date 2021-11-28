@@ -82,7 +82,7 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd -HI --type f'
-export FZF_DEFAULT_OPTS="--reverse --bind=ctrl-d:half-page-down,ctrl-u:half-page-up"
+export FZF_DEFAULT_OPTS="--reverse"
 
 # auto-start sway
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then

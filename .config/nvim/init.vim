@@ -44,9 +44,9 @@ for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
   execute mapcmd . ' <A-=> <C-\><C-n><C-w>='
   " Alt + q to close windows
   execute mapcmd . ' <A-q> <C-\><C-n>:q<CR>'
-  execute mapcmd . ' <A-Q> <C-\><C-n>:Q<CR>'
+  execute mapcmd . ' <A-Q> <C-\><C-n>:q!<CR>'
   " netrw
-  execute mapcmd . '<A-f> <C-\><C-n>:Vexplore<CR>'
+  execute mapcmd . ' <A-f> <C-\><C-n>:Vexplore<CR>'
   " Buffer navigation/management
   execute mapcmd . ' <A-n> <C-\><C-n>:bn<CR>'
   execute mapcmd . ' <A-p> <C-\><C-n>:bp<CR>'
@@ -75,6 +75,8 @@ augroup ft_conf
   
   " R settings
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
+  let g:r_indent_op_pattern = get(g:, 'r_indent_op_pattern',
+      \ '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\||>\)\s*$')
   for mapcmd in ['inoremap', 'tnoremap']
     " map assignment + pipe operators
     execute 'au FileType r,rmd ' . mapcmd . ' ;; <-'
