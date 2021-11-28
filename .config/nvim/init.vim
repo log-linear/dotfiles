@@ -44,10 +44,10 @@ for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
   execute mapcmd . ' <A-=> <C-\><C-n><C-w>='
   " Alt + q to close windows
   execute mapcmd . ' <A-q> <C-\><C-n>:q<CR>'
+  execute mapcmd . ' <A-Q> <C-\><C-n>:Q<CR>'
   " netrw
   execute mapcmd . '<A-f> <C-\><C-n>:Vexplore<CR>'
   " Buffer navigation/management
-  execute mapcmd . ' <A-d> <C-\><C-n>:bn <BAR> bd #<CR>'
   execute mapcmd . ' <A-n> <C-\><C-n>:bn<CR>'
   execute mapcmd . ' <A-p> <C-\><C-n>:bp<CR>'
   execute mapcmd . ' <A-s> <C-\><C-n>:split<CR>'
@@ -66,9 +66,12 @@ nnoremap Q <Nop>
 "============================= Filetype settings ===============================
 augroup ft_conf
   au!
-  au FileType sh,bash,zsh setlocal expandtab shiftwidth=2 tabstop=2 " Shell tabs
   au FileType vim setlocal tw=0          " No text-wrapping
   au BufEnter *.tsv setlocal noexpandtab " Use actual tabs in tsvs
+
+  " Shell
+  au FileType sh,bash,zsh inoremap ;s $
+  au FileType sh,bash,zsh setlocal expandtab shiftwidth=2 tabstop=2
   
   " R settings
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
@@ -89,13 +92,14 @@ augroup ft_conf
 
   " Markdown
   au BufEnter *.md setlocal conceallevel=0
+  au BufEnter *.rmd setlocal conceallevel=0
   au FileType markdown setlocal expandtab shiftwidth=4 tabstop=4
   " Run markdown preview, requires mlp python package
   au FileType markdown nmap <leader>mlp :call jobstart('mlp '.expand('%'))<CR>
   " Convert md to html, pdf, or docx using pandoc
   au FileType markdown nmap <leader>mh :w! \| !pandoc "%" -o "%:r.html"<CR>
   au FileType markdown nmap <leader>mw :w! \| !pandoc "%" -o "%:r.docx"<CR>
-  au FileType markdown nmap 
+  au FileType markdown nmap
     \ <leader>mp :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
   
   " Run current python file
@@ -176,17 +180,17 @@ map <leader>tp :T python<CR><C-\><C-n><C-w>k
 map <leader>tr :T radian<CR><C-\><C-n><C-w>k
 
 "---------------------------------- fzf.vim ------------------------------------
-nnoremap <leader>/f :Files<CR>
-nnoremap <leader>/g :GFiles<CR>
-nnoremap <leader>/c :BCommits<CR>
-nnoremap <leader>/h :Help<CR>
-nnoremap <leader>/s :History<CR>
-nnoremap <leader>// :BLines<CR>
-nnoremap <leader>/b :Buffers<CR>
-nnoremap <leader>/l :Lines<CR>
-nnoremap <leader>/m :Maps<CR>
-nnoremap <leader>/t :Filetypes<CR>
-nnoremap <leader>/w :Windows<CR>
+nnoremap zf :Files<CR>
+nnoremap zg :GFiles<CR>
+nnoremap zc :BCommits<CR>
+nnoremap zh :Help<CR>
+nnoremap zs :History<CR>
+nnoremap z/ :BLines<CR>
+nnoremap zb :Buffers<CR>
+nnoremap zl :Lines<CR>
+nnoremap zm :Maps<CR>
+nnoremap zt :Filetypes<CR>
+nnoremap zw :Windows<CR>
 
 "------------------------------- vim-easy-align --------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -213,13 +217,6 @@ hi Function guifg=#98971a guibg=NONE gui=bold cterm=bold  " function hi group
 
 "-------------------------------- vim-signify ----------------------------------
 map <leader>uh :SignifyHunkUndo<CR>
-
-"-------------------------------- vim-startify ---------------------------------
-let g:startify_lists = [
-  \ { 'type': 'sessions',  'header': ['   Sessions'] },
-  \ { 'type': 'files',     'header': ['   Recent']   },
-  \ { 'type': 'commands',  'header': ['   Commands'] },
-\ ]
 
 "================================ lua configs ==================================
 lua require('config')
