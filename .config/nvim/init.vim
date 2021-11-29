@@ -70,19 +70,18 @@ augroup ft_conf
   au BufEnter *.tsv setlocal noexpandtab " Use actual tabs in tsvs
 
   " Shell
-  au FileType sh,bash,zsh inoremap ;s $
   au FileType sh,bash,zsh setlocal expandtab shiftwidth=2 tabstop=2
+  au FileType sh,bash,zsh inoremap ;s $
+  au FileType sh,bash,zsh nmap <leader>cc :w<CR> :!%:p<CR>
   
-  " R settings
+  " R
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
   let g:r_indent_op_pattern = get(g:, 'r_indent_op_pattern',
-      \ '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\||>\)\s*$')
+      \ '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\||>\)\s*$')  " Support |> indenting
   for mapcmd in ['inoremap', 'tnoremap']
-    " map assignment + pipe operators
     execute 'au FileType r,rmd ' . mapcmd . ' ;; <-'
     execute 'au FileType r,rmd ' . mapcmd . ' ;n \|>'
     execute 'au FileType r,rmd ' . mapcmd . ' ;m %>%'
-    " map infix operators
     execute 'au FileType r,rmd ' . mapcmd . ' ;in %in%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;: %%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;/ %/%'
@@ -90,7 +89,8 @@ augroup ft_conf
     execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
   endfor
-  au FileType rmd nnoremap <leader>k :w<CR>:!Rscript -e "rmarkdown::render(r'(%:p)')"<CR>
+  au FileType r nmap <leader>cc :w<CR> :!Rscript %:p<CR>
+  au FileType rmd nmap <leader>cc :w<CR> :!Rscript -e "rmarkdown::render(r'(%:p)')"<CR>
 
   " Markdown
   au BufEnter *.md setlocal conceallevel=0
@@ -99,13 +99,17 @@ augroup ft_conf
   " Run markdown preview, requires mlp python package
   au FileType markdown nmap <leader>mlp :call jobstart('mlp '.expand('%'))<CR>
   " Convert md to html, pdf, or docx using pandoc
-  au FileType markdown nmap <leader>mh :w! \| !pandoc "%" -o "%:r.html"<CR>
-  au FileType markdown nmap <leader>mw :w! \| !pandoc "%" -o "%:r.docx"<CR>
-  au FileType markdown nmap
-    \ <leader>mp :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
+  au FileType markdown nmap <leader>ch :w! \| !pandoc "%" -o "%:r.html"<CR>
+  au FileType markdown nmap <leader>cw :w! \| !pandoc "%" -o "%:r.docx"<CR>
+  au FileType markdown nmap <leader>cp :w! \| !pandoc "%" -o "%:r.pdf"<CR>
+  au FileType markdown nmap <leader>cx :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
   
-  " Run current python file
-  au FileType python nmap <leader>py :w! \| !python %<CR>
+  " TeX
+  au FileType tex nmap <leader>cp :w<cr> :!pdflatex %:r.tex && rm %:r.aux %:r.log<cr>
+  au FileType tex nmap <leader>cx :w<cr> :!xelatex %:r.tex && rm %:r.aux %:r.log<cr>
+
+  " Python
+  au FileType python nmap <leader>cc :w! \| !python %<CR>
 augroup END
 
 "================================== Plugins ====================================
@@ -182,17 +186,17 @@ map <leader>tp :T python<CR><C-\><C-n><C-w>k
 map <leader>tr :T radian<CR><C-\><C-n><C-w>k
 
 "---------------------------------- fzf.vim ------------------------------------
-nnoremap zf :Files<CR>
-nnoremap zg :GFiles<CR>
-nnoremap zc :BCommits<CR>
-nnoremap zh :Help<CR>
-nnoremap zs :History<CR>
-nnoremap z/ :BLines<CR>
-nnoremap zb :Buffers<CR>
-nnoremap zl :Lines<CR>
-nnoremap zm :Maps<CR>
-nnoremap zt :Filetypes<CR>
-nnoremap zw :Windows<CR>
+nnoremap <leader>/f :Files<CR>
+nnoremap <leader>/g :GFiles<CR>
+nnoremap <leader>/c :BCommits<CR>
+nnoremap <leader>/h :Help<CR>
+nnoremap <leader>/s :History<CR>
+nnoremap <leader>// :BLines<CR>
+nnoremap <leader>/b :Buffers<CR>
+nnoremap <leader>/l :Lines<CR>
+nnoremap <leader>/m :Maps<CR>
+nnoremap <leader>/t :Filetypes<CR>
+nnoremap <leader>/w :Windows<CR>
 
 "------------------------------- vim-easy-align --------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -202,8 +206,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 "-------------------------------- md-img-paste ---------------------------------
-au FileType markdown 
-  \ nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+au FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 
 "-------------------------------- vim-airline ----------------------------------
 let g:airline#extensions#tabline#enabled = 1
