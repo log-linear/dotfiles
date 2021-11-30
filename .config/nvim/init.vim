@@ -15,6 +15,7 @@ set autoindent smartindent           " autoindent
 set expandtab tabstop=4 shiftwidth=4 " tabs to spaces, default 4
 set termguicolors                    " Enable 24-bit RGB
 set list lcs=tab:\▏\                 " Show tab indentlines
+au WinEnter term://* :startinsert    " Always enter terminals in insert mode
 
 " search tweaks - highlighting, semi-case-insensitive search, etc
 set incsearch showmatch hlsearch ignorecase smartcase
@@ -22,46 +23,6 @@ set incsearch showmatch hlsearch ignorecase smartcase
 " Visual line guide at 80 characters
 set colorcolumn=80
 highlight ColorColumn ctermbg=238
-au WinEnter term://* :startinsert  " Always enter terminals in insert mode
-
-"------------------------------------ Maps -------------------------------------
-" Esc/Ctrl+[ clears last search highlighting
-noremap <esc> :noh<CR>
-noremap <C-[> :noh<CR>
-
-" Multi-mode mappings
-for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
-  " Remap split navigation to ALT + hjkl
-  execute mapcmd . ' <A-h> <C-\><C-n><C-w>h'
-  execute mapcmd . ' <A-j> <C-\><C-n><C-w>j'
-  execute mapcmd . ' <A-k> <C-\><C-n><C-w>k'
-  execute mapcmd . ' <A-l> <C-\><C-n><C-w>l'
-  " Remap split adjustment to ALT + HJKL
-  execute mapcmd . ' <A-H> <C-\><C-n><C-w>:vertical resize -3<CR>'
-  execute mapcmd . ' <A-J> <C-\><C-n><C-w>:resize -3<CR>'
-  execute mapcmd . ' <A-K> <C-\><C-n><C-w>:resize +3<CR>'
-  execute mapcmd . ' <A-L> <C-\><C-n><C-w>:vertical resize +3<CR>'
-  execute mapcmd . ' <A-=> <C-\><C-n><C-w>='
-  " Alt + q to close windows
-  execute mapcmd . ' <A-q> <C-\><C-n>:q<CR>'
-  execute mapcmd . ' <A-Q> <C-\><C-n>:q!<CR>'
-  " netrw
-  execute mapcmd . ' <A-f> <C-\><C-n>:Vexplore<CR>'
-  " Buffer navigation/management
-  execute mapcmd . ' <A-n> <C-\><C-n>:bn<CR>'
-  execute mapcmd . ' <A-p> <C-\><C-n>:bp<CR>'
-  execute mapcmd . ' <A-s> <C-\><C-n>:split<CR>'
-  execute mapcmd . ' <A-v> <C-\><C-n>:vsplit<CR>'
-endfor
-
-" Headers
-nnoremap <leader>B 0D80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
-nnoremap <leader>b 0D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
-nnoremap <leader>H :center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
-nnoremap <leader>h :center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
-
-" Disable ex mode
-nnoremap Q <Nop>
 
 "============================= Filetype settings ===============================
 augroup ft_conf
@@ -109,8 +70,53 @@ augroup ft_conf
   au FileType tex nmap <leader>cx :w<cr> :!xelatex %:r.tex && rm %:r.aux %:r.log<cr>
 
   " Python
-  au FileType python nmap <leader>cc :w! \| !python %<CR>
+  au FileType python nmap <leader>cc :w<CR> :!python %<CR>
 augroup END
+
+"------------------------------------ Maps -------------------------------------
+" Esc/Ctrl+[ clears last search highlighting
+noremap <esc> :noh<CR>
+noremap <C-[> :noh<CR>
+
+" Multi-mode mappings
+for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
+  " Remap split navigation to ALT + hjkl
+  execute mapcmd . ' <A-h> <C-\><C-n><C-w>h'
+  execute mapcmd . ' <A-j> <C-\><C-n><C-w>j'
+  execute mapcmd . ' <A-k> <C-\><C-n><C-w>k'
+  execute mapcmd . ' <A-l> <C-\><C-n><C-w>l'
+  " Remap split adjustment to ALT + HJKL
+  execute mapcmd . ' <A-H> <C-\><C-n><C-w>:vertical resize -3<CR>'
+  execute mapcmd . ' <A-J> <C-\><C-n><C-w>:resize -3<CR>'
+  execute mapcmd . ' <A-K> <C-\><C-n><C-w>:resize +3<CR>'
+  execute mapcmd . ' <A-L> <C-\><C-n><C-w>:vertical resize +3<CR>'
+  execute mapcmd . ' <A-=> <C-\><C-n><C-w>='
+  " Alt + q to close windows
+  execute mapcmd . ' <A-q> <C-\><C-n>:q<CR>'
+  execute mapcmd . ' <A-Q> <C-\><C-n>:q!<CR>'
+  " netrw
+  execute mapcmd . ' <A-f> <C-\><C-n>:Vexplore<CR>'
+  " Buffer navigation/management
+  execute mapcmd . ' <A-d> <C-\><C-n>:bn <BAR> bd #<CR>'
+  execute mapcmd . ' <A-n> <C-\><C-n>:bn<CR>'
+  execute mapcmd . ' <A-p> <C-\><C-n>:bp<CR>'
+  execute mapcmd . ' <A-s> <C-\><C-n>:split<CR>'
+  execute mapcmd . ' <A-v> <C-\><C-n>:vsplit<CR>'
+endfor
+
+" Headers
+nnoremap <leader>B 0D80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+nnoremap <leader>b 0D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+nnoremap <leader>H :center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
+nnoremap <leader>h :center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
+
+" Disable ex mode
+nnoremap Q <Nop>
+
+" Open compiled documents in external programs
+nmap <leader>op :!xdg-open %:r.pdf > /dev/null 2>&1 &<cr><cr>
+nmap <leader>oh :!xdg-open %:r.html > /dev/null 2>&1 &<cr><cr>
+nmap <leader>od :!xdg-open %:r.docx > /dev/null 2>&1 &<cr><cr>
 
 "================================== Plugins ====================================
 " Install vim-plug if not already available
@@ -174,6 +180,7 @@ let g:neoterm_default_mod = 'botright'
 nmap <A-CR> <Plug>(neoterm-repl-send)
 vmap <A-CR> <Plug>(neoterm-repl-send)
 imap <A-CR> <Esc><Plug>(neoterm-repl-send)
+let g:neoterm_automap_keys = ''  " Remove default mapping for :Tmap
 let g:neoterm_repl_r = 'radian'
 let g:neoterm_bracketed_paste = 1
 let g:neoterm_direct_open_repl = 1
