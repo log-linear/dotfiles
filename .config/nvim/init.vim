@@ -24,11 +24,14 @@ set incsearch showmatch hlsearch ignorecase smartcase
 set colorcolumn=80
 highlight ColorColumn ctermbg=238
 
+" netrw
+let g:netrw_liststyle = 3                                 " Default to tree-view
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'  " relative line nums
+let g:netrw_winsize = 25
+
 "============================= Filetype settings ===============================
 augroup ft_conf
   au!
-  au FileType vim setlocal tw=0          " No text-wrapping
-  au BufEnter *.tsv setlocal noexpandtab " Use actual tabs in tsvs
 
   " Shell
   au FileType sh,bash,zsh setlocal expandtab shiftwidth=2 tabstop=2
@@ -71,9 +74,13 @@ augroup ft_conf
 
   " Python
   au FileType python nmap <leader>cc :w<CR> :!python %<CR>
+  
+  " Miscellaneous
+  au FileType vim setlocal tw=0
+  au BufEnter *.tsv setlocal noexpandtab
 augroup END
 
-"------------------------------------ Maps -------------------------------------
+"==================================== Maps =====================================
 " Esc/Ctrl+[ clears last search highlighting
 noremap <esc> :noh<CR>
 noremap <C-[> :noh<CR>
