@@ -1,0 +1,45 @@
+#!/bin/sh
+
+# Universal-ish code/doc compiler
+
+file=$(readlink -f "$1")
+dir=${file%/*}
+base="${file%.*}"
+ext="${file##*.}"
+doc="$2"
+
+cd "$dir" || exit 1
+
+case "$ext" in
+  [0-9])  preconv "$file" | refer -PS -e | groff -mandoc -T pdf > "$base".pdf ;;
+  c)      gcc "$file" -o "$base" && "$base" ;;
+  cpp)    g++ "$file" -o "$base" && "$base" ;;
+  cs)     mcs "$file" && mono "$base".exe ;;
+  go)     go run "$file" ;;
+  h)      sudo make install ;;
+  java)   javac -d classes "$file" && java -cp classes "${1%.*}" ;;
+  m)      octave "$file" ;;
+  mom)    preconv "$file" | refer -PS -e | groff -mom -kept -T pdf > "$base".pdf ;;
+  md)     case "$doc" in
+            p) pandoc "$file" -o "$base.pdf" ;;
+            h) pandoc "$file" -o "$base.html" ;;
+            d) pandoc "$file" -o "$base.docx" ;;
+            x) pandoc "$file" --pdf-engine=xelatex -o "$base.pdf" ;;
+          esac ;;
+  ms)     preconv "$file" | refer -PS -e | groff -me -ms -kept -T pdf > "$base".pdf ;;
+  org)    emacs "$file" --batch -u "$USER" -f org-latex-export-to-pdf ;;
+  py)     python "$file" ;;
+  [Rr])   Rscript "$file" ;;
+  [Rr]md) Rscript -e "rmarkdown::render('$file', quiet=TRUE)" ;;
+  rs)     cargo build ;;
+  sass)   sassc -a "$file" "$base.css" ;;
+  scad)   openscad -o "$base".stl "$file" ;;
+  sent)   setsid -f sent "$file" 2>/dev/null ;;
+  sh)     "./$file" ;;
+  tex)    case $doc in
+            p) pdflatex "$file" -o "$base.pdf" && rm "$base.aux" && rm "$base.log" ;;
+            x) xelatex "$file" -o "$base.pdf" && rm "$base.aux" && rm "$base.log" ;;
+          esac ;;
+  *)      sed -n '/^#!/s/^#!//p; q' "$file" | xargs -r -I % "$file" ;;
+esac
+

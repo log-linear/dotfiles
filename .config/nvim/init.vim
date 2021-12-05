@@ -32,13 +32,10 @@ let g:netrw_winsize = 25
 "============================= Filetype settings ===============================
 augroup ft_conf
   au!
-
-  " Shell
+"----------------------------------- Shell -------------------------------------
   au FileType sh,bash,zsh setlocal expandtab shiftwidth=2 tabstop=2
   au FileType sh,bash,zsh inoremap ;s $
-  au FileType sh,bash,zsh nmap <leader>cc :w<CR> :!%:p<CR>
-  
-  " R
+"------------------------------------- R ---------------------------------------
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
   let g:r_indent_op_pattern = get(g:, 'r_indent_op_pattern',
       \ '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\||>\)\s*$')  " Support |> indenting
@@ -53,29 +50,16 @@ augroup ft_conf
     execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
   endfor
-  au FileType r nmap <leader>cc :w<CR> :!Rscript %:p<CR>
-  au FileType rmd nmap <leader>cc :w<CR> :!Rscript -e "rmarkdown::render(r'(%:p)')"<CR>
-
-  " Markdown
+  au FileType rmd inoremap ;c ```{r}<CR>```<esc>O
+  au FileType rmd inoremap ;C ```{r}<CR>```<esc>k$i
+"---------------------------------- Markdown -----------------------------------
   au BufEnter *.md setlocal conceallevel=0
   au BufEnter *.rmd setlocal conceallevel=0
   au FileType markdown setlocal expandtab shiftwidth=4 tabstop=4
-  " Run markdown preview, requires mlp python package
-  au FileType markdown nmap <leader>mlp :call jobstart('mlp '.expand('%'))<CR>
-  " Convert md to html, pdf, or docx using pandoc
-  au FileType markdown nmap <leader>ch :w! \| !pandoc "%" -o "%:r.html"<CR>
-  au FileType markdown nmap <leader>cw :w! \| !pandoc "%" -o "%:r.docx"<CR>
-  au FileType markdown nmap <leader>cp :w! \| !pandoc "%" -o "%:r.pdf"<CR>
-  au FileType markdown nmap <leader>cx :w! \| !pandoc "%" --pdf-engine=xelatex -o "%:r.pdf"<CR>
-  
-  " TeX
-  au FileType tex nmap <leader>cp :w<cr> :!pdflatex %:r.tex && rm %:r.aux %:r.log<cr>
-  au FileType tex nmap <leader>cx :w<cr> :!xelatex %:r.tex && rm %:r.aux %:r.log<cr>
-
-  " Python
-  au FileType python nmap <leader>cc :w<CR> :!python %<CR>
-  
-  " Miscellaneous
+  au FileType markdown inoremap ;c ```<CR>```<esc>O
+  au FileType markdown inoremap ;C ```<CR>```<esc>k$a
+  au FileType markdown,rmd inoremap ;e **<left>
+"------------------------------- Miscellaneous ---------------------------------
   au FileType vim setlocal tw=0
   au BufEnter *.tsv setlocal noexpandtab
 augroup END
@@ -120,10 +104,9 @@ nnoremap <leader>h :center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "nor
 " Disable ex mode
 nnoremap Q <Nop>
 
-" Open compiled documents in external programs
-nmap <leader>op :!xdg-open %:r.pdf > /dev/null 2>&1 &<cr><cr>
-nmap <leader>oh :!xdg-open %:r.html > /dev/null 2>&1 &<cr><cr>
-nmap <leader>od :!xdg-open %:r.docx > /dev/null 2>&1 &<cr><cr>
+" Compile code/documents, etc
+nmap <leader>cc :execute '!compile "%:p"'<CR>
+au FileType tex,markdown nmap <leader>cc :execute '!compile "%:p" "'.input('What type of document would you like to compile? Choose from `h` for html, `p` for pdf, `d` for docx, or `x` for a xelatex pdf: ').'"'<CR>
 
 "================================== Plugins ====================================
 " Install vim-plug if not already available
@@ -139,7 +122,6 @@ au VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 " Load plugins
 call plug#begin(stdpath("config") . '/plugged')
-
   " Functionality
   Plug 'tpope/vim-commentary'                         " easy code commenting
   Plug 'tpope/vim-fugitive'                           " git integration
@@ -151,14 +133,12 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'junegunn/vim-easy-align'                      " Text alignment
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy Finder
   Plug 'junegunn/fzf.vim'                             " fzf functions
-
   " IDE features
   Plug 'neovim/nvim-lspconfig'                        " Language Server Protocol
   Plug 'ray-x/lsp_signature.nvim'                     " Function param popup
   Plug 'ms-jpq/coq_nvim', { 'branch': 'coq' }         " Auto-completion
   Plug 'nvim-treesitter/nvim-treesitter',             " syntax highlighting, etc
     \ {'do': ':TSUpdate'}  " Update on start
-
   " Aesthetics/visual aids
   Plug 'vim-airline/vim-airline'                      " status bar
   Plug 'lifepillar/vim-gruvbox8'                      " theme
@@ -166,7 +146,6 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'norcalli/nvim-colorizer.lua'                  " Highlight hex colors
   Plug 'sunjon/shade.nvim'                            " Dim inactive windows
   Plug 'ryanoasis/vim-devicons'                       " Icons, always load last
-
 call plug#end()
 
 "---------------------------------- coq_nvim -----------------------------------
@@ -181,6 +160,7 @@ ino <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
 ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
 ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
 ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
+ino <silent><expr> <Right> pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 
 "---------------------------------- neoterm ------------------------------------
 let g:neoterm_default_mod = 'botright'
