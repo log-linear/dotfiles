@@ -34,12 +34,12 @@ augroup ft_conf
   au!
 "----------------------------------- Shell -------------------------------------
   au FileType sh,bash,zsh setlocal expandtab shiftwidth=2 tabstop=2
-  au FileType sh,bash,zsh inoremap ;s $
+  au FileType sh,bash,zsh imap ;s $
 "------------------------------------- R ---------------------------------------
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
   let g:r_indent_op_pattern = get(g:, 'r_indent_op_pattern',
       \ '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\||>\)\s*$')  " Support |> indenting
-  for mapcmd in ['inoremap', 'tnoremap']
+  for mapcmd in ['imap', 'tmap']
     execute 'au FileType r,rmd ' . mapcmd . ' ;; <-'
     execute 'au FileType r,rmd ' . mapcmd . ' ;n \|>'
     execute 'au FileType r,rmd ' . mapcmd . ' ;m %>%'
@@ -50,15 +50,19 @@ augroup ft_conf
     execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
   endfor
-  au FileType rmd inoremap ;c ```{r}<CR>```<esc>O
-  au FileType rmd inoremap ;C ```{r}<CR>```<esc>k$i
+  au FileType rmd imap ;c ```{}<CR>```<esc>k$i
+  au FileType rmd imap ;C ```{r}<CR>```<esc>O
 "---------------------------------- Markdown -----------------------------------
+  let g:markdown_fenced_languages = ['python', 'r', 'sh', 'bash', 'zsh', 
+    \ 'powershell=ps1', 'sql', 'json', 'html']
   au BufEnter *.md setlocal conceallevel=0
   au BufEnter *.rmd setlocal conceallevel=0
   au FileType markdown setlocal expandtab shiftwidth=4 tabstop=4
-  au FileType markdown inoremap ;c ```<CR>```<esc>O
-  au FileType markdown inoremap ;C ```<CR>```<esc>k$a
-  au FileType markdown,rmd inoremap ;e **<left>
+  au FileType markdown imap ;c ```<CR>```<esc>k$a
+  au FileType markdown imap ;C ```<CR>```<esc>O
+  au FileType markdown,rmd imap ;e **<left>
+  au FileType markdown,rmd imap ;H <esc>yypv$r=o
+  au FileType markdown,rmd imap ;h <esc>yypv$r-o
 "------------------------------- Miscellaneous ---------------------------------
   au FileType vim setlocal tw=0
   au BufEnter *.tsv setlocal noexpandtab
@@ -66,11 +70,11 @@ augroup END
 
 "==================================== Maps =====================================
 " Esc/Ctrl+[ clears last search highlighting
-noremap <esc> :noh<CR>
-noremap <C-[> :noh<CR>
+nmap <esc> :noh<CR>
+nmap <C-[> :noh<CR>
 
 " Multi-mode mappings
-for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
+for mapcmd in ['nmap', 'imap', 'vmap', 'tmap']
   " Remap split navigation to ALT + hjkl
   execute mapcmd . ' <A-h> <C-\><C-n><C-w>h'
   execute mapcmd . ' <A-j> <C-\><C-n><C-w>j'
@@ -96,17 +100,17 @@ for mapcmd in ['noremap', 'inoremap', 'vnoremap', 'tnoremap']
 endfor
 
 " Headers
-nnoremap <leader>B 0D80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
-nnoremap <leader>b 0D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
-nnoremap <leader>H :center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
-nnoremap <leader>h :center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
+nmap <leader>B 0D80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+nmap <leader>b 0D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+nmap <leader>H :center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
+nmap <leader>h :center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
 
 " Disable ex mode
-nnoremap Q <Nop>
+nmap Q <Nop>
 
 " Compile code/documents, etc
-nmap <leader>cc :execute '!compile "%:p"'<CR>
-au FileType tex,markdown nmap <leader>cc :execute '!compile "%:p" "'.input('What type of document would you like to compile? Choose from `h` for html, `p` for pdf, `d` for docx, or `x` for a xelatex pdf: ').'"'<CR>
+nmap <leader>cc :w<CR> :execute '!compile "%:p"'<CR>
+au FileType tex,markdown nmap <leader>cc :w<CR> :execute '!compile "%:p" "'.input('What type of document would you like to compile? Choose from `h` for html, `p` for pdf, `d` for docx, or `x` for a xelatex pdf: ').'"'<CR>
 
 "================================== Plugins ====================================
 " Install vim-plug if not already available
@@ -160,14 +164,13 @@ ino <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
 ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
 ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
 ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
-ino <silent><expr> <Right> pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 
 "---------------------------------- neoterm ------------------------------------
-let g:neoterm_default_mod = 'botright'
 nmap <A-CR> <Plug>(neoterm-repl-send)
 vmap <A-CR> <Plug>(neoterm-repl-send)
 imap <A-CR> <Esc><Plug>(neoterm-repl-send)
-let g:neoterm_automap_keys = ''  " Remove default mapping for :Tmap
+let g:neoterm_default_mod = 'botright'
+let g:neoterm_automap_keys = '<Nop>'  " Remove default mapping for :Tmap
 let g:neoterm_repl_r = 'radian'
 let g:neoterm_bracketed_paste = 1
 let g:neoterm_direct_open_repl = 1
@@ -180,17 +183,17 @@ map <leader>tp :T python<CR><C-\><C-n><C-w>k
 map <leader>tr :T radian<CR><C-\><C-n><C-w>k
 
 "---------------------------------- fzf.vim ------------------------------------
-nnoremap <leader>/f :Files<CR>
-nnoremap <leader>/g :GFiles<CR>
-nnoremap <leader>/c :BCommits<CR>
-nnoremap <leader>/h :Help<CR>
-nnoremap <leader>/s :History<CR>
-nnoremap <leader>// :BLines<CR>
-nnoremap <leader>/b :Buffers<CR>
-nnoremap <leader>/l :Lines<CR>
-nnoremap <leader>/m :Maps<CR>
-nnoremap <leader>/t :Filetypes<CR>
-nnoremap <leader>/w :Windows<CR>
+nmap <leader>/f :Files<CR>
+nmap <leader>/g :GFiles<CR>
+nmap <leader>/c :BCommits<CR>
+nmap <leader>/h :Help<CR>
+nmap <leader>/s :History<CR>
+nmap <leader>// :BLines<CR>
+nmap <leader>/b :Buffers<CR>
+nmap <leader>/l :Lines<CR>
+nmap <leader>/m :Maps<CR>
+nmap <leader>/t :Filetypes<CR>
+nmap <leader>/w :Windows<CR>
 
 "------------------------------- vim-easy-align --------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
