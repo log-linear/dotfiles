@@ -5,21 +5,17 @@
 " Blank lines are ignored.
 " The basic format for each item is shown with an example.
 
-" ------------------------------------------------------------------------------
+"============================== General settings ===============================
 
 " Command used to edit files in various contexts.  The default is vim.
 " If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
-
 set vicmd=nvim
-" set vicmd=elvis\ -G\ termcap
-" set vicmd=vile
 
 " This makes vifm perform file operations on its own instead of relying on
 " standard utilities like `cp`.  While using `cp` and alike is a more universal
 " solution, it's also much slower when processing large amounts of files and
 " doesn't support progress measuring.
-
 set syscalls
 
 " Trash Directory
@@ -28,88 +24,70 @@ set syscalls
 " files by deleting them and then using p to put the file in the new location.
 " I recommend not changing this until you are familiar with vifm.
 " This probably shouldn't be an option.
-
 set trash
 
 " This is how many directories to store in the directory history.
-
 set history=100
 
 " Automatically resolve symbolic links on l or Enter.
-
 set nofollowlinks
 
 " With this option turned on you can run partially entered commands with
 " unambiguous beginning using :! (e.g. :!Te instead of :!Terminal or :!Te<tab>).
-
 " set fastrun
 
 " Natural sort of (version) numbers within text.
-
 set sortnumbers
 
 " Maximum number of changes that can be undone.
-
 set undolevels=100
 
 " Use Vim's format of help file (has highlighting and "hyperlinks").
 " If you would rather use a plain text help file set novimhelp.
-
 set vimhelp
 
 " If you would like to run an executable file when you
 " press Enter, l or Right Arrow, set this.
-
 set norunexec
 
 " List of color schemes to try (picks the first one supported by the terminal)
-
 colorscheme gruvbox
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
 " See man date or man strftime for details.
-
 set timefmt=%m/%d\ %H:%M
 
 " Show list of matches on tab completion in command-line mode
-
 set wildmenu
 
 " Display completions in a form of popup with descriptions of the matches
-
 set wildstyle=popup
 
 " Display suggestions in normal, visual and view modes for keys, marks and
 " registers (at most 5 files).  In other view, when available.
-
 set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
 
 " Ignore case in search patterns unless it contains at least one uppercase
 " letter
-
 set ignorecase
 set smartcase
 
 " Don't highlight search results automatically
-
 set nohlsearch
 
 " Use increment searching (search while typing)
 set incsearch
 
 " Try to leave some space from cursor to upper/lower border in lists
-
 set scrolloff=4
 
 " Don't do too many requests to slow file systems
-
 if !has('win')
     set slowfs=curlftpfs
 endif
 
 " Set custom status line look
-
 set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 
 " Show hidden files by default
@@ -118,7 +96,6 @@ set dotfiles
 " ------------------------------------------------------------------------------
 
 " :mark mark /full/directory/path [filename]
-
 mark b ~/bin/
 mark h ~/
 
@@ -135,7 +112,6 @@ mark h ~/
 " %d the current directory name.
 " %D the other window directory name.
 " %m run the command in a menu window
-
 command! df df -h %m 2> /dev/null
 command! diff vim -d %f %F
 command! zip zip -r %f.zip %f
@@ -145,8 +121,7 @@ command! mkcd :mkdir %a | cd %a
 command! vgrep vim "+grep %a"
 command! reload :write | restart full
 
-" ------------------------------------------------------------------------------
-
+"============================= Filetype settings ===============================
 " The file type is for the default programs to be used with
 " a file extension.
 " :filetype pattern1,pattern2 defaultprogram,program2
@@ -378,17 +353,13 @@ filextype */
 "
 fileviewer *[^/] pygmentize -O style=monokai -f console256 -g
 
-" Displaying pictures in terminal
-"
-" fileviewer *.jpg,*.png shellpic %c
-
 " Open all other files with default system programs (you can also remove all
 " :file[x]type commands above to ensure they don't interfere with system-wide
 " settings).  By default all unknown files are opened with 'vi[x]cmd'
 " uncommenting one of lines below will result in ignoring 'vi[x]cmd' option
 " for unknown file types.
 " For *nix:
-" filetype * xdg-open
+filetype * xdg-open
 " For OS X:
 " filetype * open
 " For Windows:
@@ -413,14 +384,13 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 "
 " filter! {*.lo,*.o,*.d,*.class,*.pyc,*.pyo,.*~}
 
-" ------------------------------------------------------------------------------
-
-" Sample mappings
+"==================================== Maps =====================================
+" Exit
+nnoremap q :q<CR>
+nnoremap <A-q> :q<CR>
 
 " Start shell in current directory
 nnoremap s :shell<cr>
-nmap q :q<CR>
-nmap <A-q> :q<CR>
 
 " Display sorting dialog
 nnoremap S :sort<cr>
@@ -443,6 +413,11 @@ if has('win')
     nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
     " Yank path to current file to Windows clipboard with forward slashes
     nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
+elseif executable('wl-copy')
+    " Yank current directory path into the clipboard
+    nnoremap yd :!echo %d | wl-copy %i<cr>
+    " Yank current file path into the clipboard
+    nnoremap yf :!echo %c:p | wl-copy %i<cr>
 elseif executable('xclip')
     " Yank current directory path into the clipboard
     nnoremap yd :!echo %d | xclip %i<cr>
@@ -463,15 +438,15 @@ nnoremap cc cw<c-u>
 nnoremap A cw
 
 " Open console in current directory
-nnoremap ,t :!xterm &<cr>
+nnoremap <space>t :!xterm &<cr>
 
 " Open editor to edit vifmrc and apply settings after returning to vifm
-nnoremap ,c :write | edit $MYVIFMRC | restart full<cr>
+nnoremap <space>c :write | edit $MYVIFMRC | restart full<cr>
 " Open gvim to edit vifmrc
-nnoremap ,C :!gvim --remote-tab-silent $MYVIFMRC &<cr>
+nnoremap <space>C :!gvim --remote-tab-silent $MYVIFMRC &<cr>
 
 " Toggle wrap setting on ,w key
-nnoremap ,w :set wrap!<cr>
+nnoremap <space>w :set wrap!<cr>
 
 " Example of standard two-panel file managers mappings
 nnoremap <f3> :!less %f<cr>
@@ -513,5 +488,4 @@ nnoremap <c-u> <c-w>x
 "     vifm --server-name "$VIFM_SERVER_NAME" --remote +"cd '$PWD'"
 "
 " let $VIFM_SERVER_NAME = v:servername
-
 
