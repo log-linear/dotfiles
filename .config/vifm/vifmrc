@@ -464,6 +464,10 @@ nnoremap <a-o> :sync %c<cr>
 " Swap panes
 nnoremap <c-u> <c-w>x
 
+"=============================== Miscellaneous =================================
+" Nerdfont icons
+source /usr/share/vifm-devicons/favicons.vifm
+
 " ------------------------------------------------------------------------------
 
 " Various customization examples
