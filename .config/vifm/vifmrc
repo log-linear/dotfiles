@@ -328,7 +328,7 @@ filetype *.tudu tudu -f %c
 
 " Keepass files
 filextype {*.kdbx},
-        \ kdbx %f
+        \ keepassxc %f
 
 " Qt projects
 filextype *.pro qtcreator %f &
