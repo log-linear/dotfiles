@@ -52,7 +52,8 @@ local servers = {
   'pyright', 
   'r_language_server', 
   'bashls', 
-  'powershell_es' 
+  'powershell_es',
+  'texlab'
 }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
@@ -93,5 +94,4 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = true,
   },
 }
-
 

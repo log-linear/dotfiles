@@ -63,8 +63,12 @@ augroup ft_conf
   au FileType markdown,rmd imap ;e **<left>
   au FileType markdown,rmd imap ;H <esc>yypv$r=o
   au FileType markdown,rmd imap ;h <esc>yypv$r-o
+"------------------------------------ TeX --------------------------------------
+  let g:tex_conceal = 0
+  au FileType tex imap ;; \
+  au FileType tex imap ;s $
 "------------------------------- Miscellaneous ---------------------------------
-  au FileType vim setlocal tw=0
+  au FileType vim setlocal tw=0 shiftwidth=2 tabstop=2
   au BufEnter *.tsv setlocal noexpandtab
 augroup END
 
