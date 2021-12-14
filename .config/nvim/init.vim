@@ -1,9 +1,7 @@
 "============================== General settings ===============================
 let mapleader=" "                    " remap <leader>
 set cursorline                       " Cursor line highlight
-set showcmd                          " show commands in status line
 filetype plugin indent on            " filetype detection
-set notimeout                        " No key sequence timeout
 set clipboard+=unnamedplus           " Use system clipboard for yank/paste
 set splitbelow splitright            " Splits open at the bottom and right
 set mouse=a                          " Enable mouse support
@@ -34,12 +32,12 @@ augroup ft_conf
   au!
 "----------------------------------- Shell -------------------------------------
   au FileType sh,bash,zsh setlocal expandtab shiftwidth=2 tabstop=2
-  au FileType sh,bash,zsh imap ;s $
+  au FileType sh,bash,zsh ino ;s $
 "------------------------------------- R ---------------------------------------
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
   let g:r_indent_op_pattern = get(g:, 'r_indent_op_pattern',
       \ '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\||>\)\s*$')  " Support |> indenting
-  for mapcmd in ['imap', 'tmap']
+  for mapcmd in ['ino', 'tno']
     execute 'au FileType r,rmd ' . mapcmd . ' ;; <-'
     execute 'au FileType r,rmd ' . mapcmd . ' ;n \|>'
     execute 'au FileType r,rmd ' . mapcmd . ' ;m %>%'
@@ -49,24 +47,20 @@ augroup ft_conf
     execute 'au FileType r,rmd ' . mapcmd . ' ;* %*%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
-  endfor
-  au FileType rmd imap ;c ```{}<CR>```<esc>k$i
-  au FileType rmd imap ;C ```{r}<CR>```<esc>O
 "---------------------------------- Markdown -----------------------------------
+  endfor
+  au FileType rmd ino ;c ```{}<CR>```<esc>k$i
+  au FileType rmd ino ;C ```{r}<CR>```<esc>O
   let g:markdown_fenced_languages = ['python', 'r', 'sh', 'bash', 'zsh', 
     \ 'powershell=ps1', 'sql', 'json', 'html']
-  au BufEnter *.md setlocal conceallevel=0
-  au BufEnter *.rmd setlocal conceallevel=0
-  au FileType markdown setlocal expandtab shiftwidth=4 tabstop=4
-  au FileType markdown imap ;c ```<CR>```<esc>k$a
-  au FileType markdown imap ;C ```<CR>```<esc>O
-  au FileType markdown,rmd imap ;e **<left>
-  au FileType markdown,rmd imap ;H <esc>yypv$r=o
-  au FileType markdown,rmd imap ;h <esc>yypv$r-o
+  au FileType markdown ino ;c ```<CR>```<esc>k$a
+  au FileType markdown ino ;C ```<CR>```<esc>O
+  au FileType markdown,rmd ino ;e **<left>
+  au FileType markdown,rmd ino ;H <esc>yypv$r=o
+  au FileType markdown,rmd ino ;h <esc>yypv$r-o
 "------------------------------------ TeX --------------------------------------
-  let g:tex_conceal = 0
-  au FileType tex imap ;; \
-  au FileType tex imap ;s $
+  au FileType tex ino ;; \
+  au FileType tex ino ;s $
 "------------------------------- Miscellaneous ---------------------------------
   au FileType vim setlocal tw=0 shiftwidth=2 tabstop=2
   au BufEnter *.tsv setlocal noexpandtab
@@ -74,11 +68,11 @@ augroup END
 
 "==================================== Maps =====================================
 " Esc/Ctrl+[ clears last search highlighting
-nmap <esc> :noh<CR>
-nmap <C-[> :noh<CR>
+nn <esc> :noh<CR>
+nn <C-[> :noh<CR>
 
 " Multi-mode mappings
-for mapcmd in ['nmap', 'imap', 'vmap', 'tmap']
+for mapcmd in ['nn', 'ino', 'vn', 'tno']
   " Remap split navigation to ALT + hjkl
   execute mapcmd . ' <A-h> <C-\><C-n><C-w>h'
   execute mapcmd . ' <A-j> <C-\><C-n><C-w>j'
@@ -97,6 +91,7 @@ for mapcmd in ['nmap', 'imap', 'vmap', 'tmap']
   execute mapcmd . ' <A-f> <C-\><C-n>:Vexplore<CR>'
   " Buffer navigation/management
   execute mapcmd . ' <A-d> <C-\><C-n>:bn <BAR> bd #<CR>'
+  execute mapcmd . ' <A-d> <C-\><C-n>:bn <BAR> bd! #<CR>'
   execute mapcmd . ' <A-n> <C-\><C-n>:bn<CR>'
   execute mapcmd . ' <A-p> <C-\><C-n>:bp<CR>'
   execute mapcmd . ' <A-s> <C-\><C-n>:split<CR>'
@@ -104,17 +99,17 @@ for mapcmd in ['nmap', 'imap', 'vmap', 'tmap']
 endfor
 
 " Headers
-nmap <leader>B 0D80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
-nmap <leader>b 0D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
-nmap <leader>H :center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
-nmap <leader>h :center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
+ino ;B <esc>0D80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+ino ;b <esc>0D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
+ino ;H <esc>:center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
+ino ;h <esc>:center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
 
 " Disable ex mode
-nmap Q <Nop>
+nn Q <Nop>
 
 " Compile code/documents, etc
-nmap <leader>cc :w<CR> :execute '!compile "%:p"'<CR>
-au FileType tex,markdown nmap <leader>cc :w<CR> :execute '!compile "%:p" "'.input('What type of document would you like to compile? Choose from `h` for html, `p` for pdf, `d` for docx, or `x` for a xelatex pdf: ').'"'<CR>
+nn <leader>cc :w<CR> :execute '!compile "%:p"'<CR>
+au FileType tex,markdown nn <leader>cc :w<CR> :execute '!compile "%:p" "'.input('What type of document would you like to compile? Choose from `h` for html, `p` for pdf, `d` for docx, or `x` for a xelatex pdf: ').'"'<CR>
 
 "================================== Plugins ====================================
 " Install vim-plug if not already available
@@ -127,6 +122,10 @@ endif
 au VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
+
+let g:gruvbox_material_palette = 'original'
+let g:gruvbox_material_statusline_style = 'original'
+let g:gruvbox_material_enable_bold = 1
 
 " Load plugins
 call plug#begin(stdpath("config") . '/plugged')
@@ -145,12 +144,14 @@ call plug#begin(stdpath("config") . '/plugged')
   Plug 'neovim/nvim-lspconfig'                        " Language Server Protocol
   Plug 'ray-x/lsp_signature.nvim'                     " Function param popup
   Plug 'ms-jpq/coq_nvim', { 'branch': 'coq' }         " Auto-completion
+  Plug 'ms-jpq/coq.artifacts',                        " Auto-completion snippets
+    \ { 'branch': 'artifacts' }
   Plug 'nvim-treesitter/nvim-treesitter',             " syntax highlighting, etc
     \ {'do': ':TSUpdate'}  " Update on start
   " Aesthetics/visual aids
   Plug 'vim-airline/vim-airline'                      " status bar
-  Plug 'lifepillar/vim-gruvbox8'                      " theme
-  Plug 'Yggdroot/indentLine'                          " Visual line indents
+  Plug 'sainnhe/gruvbox-material'                      " theme
+  Plug 'lukas-reineke/indent-blankline.nvim'                          " Visual line indents
   Plug 'norcalli/nvim-colorizer.lua'                  " Highlight hex colors
   Plug 'sunjon/shade.nvim'                            " Dim inactive windows
   Plug 'ryanoasis/vim-devicons'                       " Icons, always load last
@@ -158,7 +159,7 @@ call plug#end()
 
 "---------------------------------- coq_nvim -----------------------------------
 let g:coq_settings = {
-  \ 'auto_start': v:true, 
+  \ 'auto_start': 'shut-up', 
   \ 'keymap.recommended': v:false,
   \ 'keymap.jump_to_mark': ''
 \ }
@@ -170,9 +171,9 @@ ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
 ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 
 "---------------------------------- neoterm ------------------------------------
-nmap <A-CR> <Plug>(neoterm-repl-send)
-vmap <A-CR> <Plug>(neoterm-repl-send)
-imap <A-CR> <Esc><Plug>(neoterm-repl-send)
+nn <A-CR> <Plug>(neoterm-repl-send)
+vn <A-CR> <Plug>(neoterm-repl-send)
+ino <A-CR> <Esc><Plug>(neoterm-repl-send)
 let g:neoterm_default_mod = 'botright'
 let g:neoterm_automap_keys = '<Nop>'  " Remove default mapping for :Tmap
 let g:neoterm_repl_r = 'radian'
@@ -182,22 +183,22 @@ let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
 
 " Start terminals
-map <leader>tt :Tnew<CR><C-\><C-n><C-w>k
-map <leader>tp :T python<CR><C-\><C-n><C-w>k
-map <leader>tr :T radian<CR><C-\><C-n><C-w>k
+nn <leader>tt :Tnew<CR><C-\><C-n><C-w>k
+nn <leader>tp :T python<CR><C-\><C-n><C-w>k
+nn <leader>tr :T radian<CR><C-\><C-n><C-w>k
 
 "---------------------------------- fzf.vim ------------------------------------
-nmap <leader>/f :Files<CR>
-nmap <leader>/g :GFiles<CR>
-nmap <leader>/c :BCommits<CR>
-nmap <leader>/h :Help<CR>
-nmap <leader>/s :History<CR>
-nmap <leader>// :BLines<CR>
-nmap <leader>/b :Buffers<CR>
-nmap <leader>/l :Lines<CR>
-nmap <leader>/m :Maps<CR>
-nmap <leader>/t :Filetypes<CR>
-nmap <leader>/w :Windows<CR>
+nn <leader>/f :Files<CR>
+nn <leader>/g :GFiles<CR>
+nn <leader>/c :BCommits<CR>
+nn <leader>/h :Help<CR>
+nn <leader>/s :History<CR>
+nn <leader>// :BLines<CR>
+nn <leader>/b :Buffers<CR>
+nn <leader>/l :Lines<CR>
+nn <leader>/m :Maps<CR>
+nn <leader>/t :Filetypes<CR>
+nn <leader>/w :Windows<CR>
 
 "------------------------------- vim-easy-align --------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -217,8 +218,8 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:indentLine_char = '▏'
 
 "---------------------------------- gruvbox ------------------------------------
-colorscheme gruvbox8
-let g:airline_theme = 'gruvbox8'
+colorscheme gruvbox-material
+let g:airline_theme = 'gruvbox_material'
 hi Function guifg=#98971a guibg=NONE gui=bold cterm=bold  " function hi group
 
 "-------------------------------- vim-signify ----------------------------------
