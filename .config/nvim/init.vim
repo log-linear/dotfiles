@@ -171,9 +171,9 @@ ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
 ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 
 "---------------------------------- neoterm ------------------------------------
-nn <A-CR> <Plug>(neoterm-repl-send)
-vn <A-CR> <Plug>(neoterm-repl-send)
-ino <A-CR> <Esc><Plug>(neoterm-repl-send)
+nmap <A-CR> <Plug>(neoterm-repl-send)
+vmap <A-CR> <Plug>(neoterm-repl-send)
+imap <A-CR> <Esc><Plug>(neoterm-repl-send)
 let g:neoterm_default_mod = 'botright'
 let g:neoterm_automap_keys = '<Nop>'  " Remove default mapping for :Tmap
 let g:neoterm_repl_r = 'radian'
@@ -221,6 +221,7 @@ let g:indentLine_char = '▏'
 colorscheme gruvbox-material
 let g:airline_theme = 'gruvbox_material'
 hi Function guifg=#98971a guibg=NONE gui=bold cterm=bold  " function hi group
+hi String guifg=#8ec07c guibg=NONE                        " string hi group
 
 "-------------------------------- vim-signify ----------------------------------
 map <leader>uh :SignifyHunkUndo<CR>
