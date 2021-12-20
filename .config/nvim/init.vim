@@ -30,10 +30,10 @@ let g:netrw_winsize = 25
 "============================= Filetype settings ===============================
 augroup ft_conf
   au!
-"----------------------------------- Shell -------------------------------------
+  " Shell
   au FileType sh,bash,zsh setlocal expandtab shiftwidth=2 tabstop=2
   au FileType sh,bash,zsh ino ;s $
-"------------------------------------- R ---------------------------------------
+  " R
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
   let g:r_indent_op_pattern = get(g:, 'r_indent_op_pattern',
       \ '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\||>\)\s*$')  " Support |> indenting
@@ -47,7 +47,7 @@ augroup ft_conf
     execute 'au FileType r,rmd ' . mapcmd . ' ;* %*%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
-"---------------------------------- Markdown -----------------------------------
+  " Markdown
   endfor
   au FileType rmd ino ;c ```{}<CR>```<esc>k$i
   au FileType rmd ino ;C ```{r}<CR>```<esc>O
@@ -58,10 +58,10 @@ augroup ft_conf
   au FileType markdown,rmd ino ;e **<left>
   au FileType markdown,rmd ino ;H <esc>yypv$r=o
   au FileType markdown,rmd ino ;h <esc>yypv$r-o
-"------------------------------------ TeX --------------------------------------
+  " TeX
   au FileType tex ino ;; \
   au FileType tex ino ;s $
-"------------------------------- Miscellaneous ---------------------------------
+  " Miscellaneous
   au FileType vim setlocal tw=0 shiftwidth=2 tabstop=2
   au BufEnter *.tsv setlocal noexpandtab
 augroup END
@@ -150,8 +150,8 @@ call plug#begin(stdpath("config") . '/plugged')
     \ {'do': ':TSUpdate'}  " Update on start
   " Aesthetics/visual aids
   Plug 'vim-airline/vim-airline'                      " status bar
-  Plug 'sainnhe/gruvbox-material'                      " theme
-  Plug 'lukas-reineke/indent-blankline.nvim'                          " Visual line indents
+  Plug 'sainnhe/gruvbox-material'                     " theme
+  Plug 'lukas-reineke/indent-blankline.nvim'          " Visual line indents
   Plug 'norcalli/nvim-colorizer.lua'                  " Highlight hex colors
   Plug 'sunjon/shade.nvim'                            " Dim inactive windows
   Plug 'ryanoasis/vim-devicons'                       " Icons, always load last
