@@ -65,7 +65,7 @@ allow_missing = true
 [[block]]
 block = "networkmanager"
 primary_only = true
-on_click = "nm-connection-editor"
+on_click = "nmtui"
 ap_format = "{freq}"
 device_format = "{icon}{name}"
 [block.theme_overrides]
