@@ -95,6 +95,10 @@ input "type:keyboard" {
     xkb_options grp:shifts_toggle
 }
 
+input "type:touchpad" {
+    natural_scroll enabled
+}
+
 # KEY BINDINGS =================================================================
 
 # BASICS: ----------------------------------------------------------------------
