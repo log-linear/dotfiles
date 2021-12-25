@@ -103,7 +103,7 @@ idle_bg = "#d79921"
 [[block]]
 block = "custom"
 command = 'echo ""'
-on_click = 'exec foot -e ranger'
+on_click = 'exec foot -e vifm'
 [block.theme_overrides]
 idle_bg = "#d79921"
 

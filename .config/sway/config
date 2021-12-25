@@ -103,6 +103,7 @@ input "type:keyboard" {
 bindsym $mod+return exec $term
 bindsym $mod+t exec $term
 bindsym $mod+shift+t exec notify-send "foot server launched" && foot --server 
+bindsym $mod+shift+return exec notify-send "foot server launched" && foot --server 
 
 # File manager
 bindsym $mod+f exec $term -e $filemgr
