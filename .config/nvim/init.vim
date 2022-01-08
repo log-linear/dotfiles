@@ -99,10 +99,10 @@ for mapcmd in ['nn', 'ino', 'vn', 'tno']
 endfor
 
 " Headers
-ino ;B <esc>0D80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
-ino ;b <esc>0D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>
-ino ;H <esc>:center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
-ino ;h <esc>:center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>
+ino ;B <esc>0D80A=<esc>0:execute "normal! 0r" . &commentstring[0]<cr>o<bs>
+ino ;b <esc>0D80A-<esc>0:execute "normal! 0r" . &commentstring[0]<cr>o<bs>
+ino ;H <esc>:center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>o<bs>
+ino ;h <esc>:center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:execute "normal! 0r" . &commentstring[0]<cr><esc>o<bs>
 
 " Disable ex mode
 nn Q <Nop>
