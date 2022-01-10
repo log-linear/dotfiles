@@ -36,7 +36,7 @@ augroup ft_conf
   " R
   au FileType r,rmd setlocal expandtab shiftwidth=2 tabstop=2 autoindent cindent
   let g:r_indent_op_pattern = get(g:, 'r_indent_op_pattern',
-      \ '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\||>\)\s*$')  " Support |> indenting
+    \ '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\||>\)\s*$')  " Support |> indenting
   for mapcmd in ['ino', 'tno']
     execute 'au FileType r,rmd ' . mapcmd . ' ;; <-'
     execute 'au FileType r,rmd ' . mapcmd . ' ;n \|>'
@@ -49,12 +49,10 @@ augroup ft_conf
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
   " Markdown
   endfor
-  au FileType rmd ino ;c ```{}<CR>```<esc>k$i
-  au FileType rmd ino ;C ```{r}<CR>```<esc>O
   let g:markdown_fenced_languages = ['python', 'r', 'sh', 'bash', 'zsh', 
     \ 'powershell=ps1', 'sql', 'json', 'html']
-  au FileType markdown ino ;c ```<CR>```<esc>k$a
-  au FileType markdown ino ;C ```<CR>```<esc>O
+  au FileType markdown,rmd ino ;c ```<CR>```<esc>k$a
+  au FileType markdown,rmd ino ;C ```{}<CR>```<esc>k$i
   au FileType markdown,rmd ino ;e **<left>
   au FileType markdown,rmd ino ;H <esc>yypv$r=o
   au FileType markdown,rmd ino ;h <esc>yypv$r-o
