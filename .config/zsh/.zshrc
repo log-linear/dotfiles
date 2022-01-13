@@ -273,3 +273,7 @@ osc7_cwd() {
 
 autoload -Uz add-zsh-hook
 add-zsh-hook -Uz chpwd osc7_cwd
+
+if [ -f "$HOME/.local/bin/conda_init" ]; then
+  source "$HOME/.local/bin/conda_init"
+fi

@@ -1,3 +1,5 @@
+#!/usr/bin/sh
+
 # conda init script auto-added to .bashrc/.zshrc, segmented out for
 # portability's sake
 
