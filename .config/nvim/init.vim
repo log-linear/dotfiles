@@ -47,8 +47,10 @@ augroup ft_conf
     execute 'au FileType r,rmd ' . mapcmd . ' ;* %*%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;o %o%'
     execute 'au FileType r,rmd ' . mapcmd . ' ;x %x%'
-  " Markdown
   endfor
+  " Python
+  au FileType python ino ;c """<CR>"""<esc>ko
+  " Markdown
   let g:markdown_fenced_languages = ['python', 'r', 'sh', 'bash', 'zsh', 
     \ 'powershell=ps1', 'sql', 'json', 'html']
   au FileType markdown,rmd ino ;c ```<CR>```<esc>k$a

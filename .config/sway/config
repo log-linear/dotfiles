@@ -136,6 +136,9 @@ bindsym $mod+q kill
 # Start your launcher
 bindsym $mod+semicolon exec $menu
 
+# File opener
+bindsym $mod+colon exec $term --app-id=launcher -e fzo
+
 # Mullvad
 bindsym $mod+v exec mullvad_helper
 
