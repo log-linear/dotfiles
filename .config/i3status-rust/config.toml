@@ -14,7 +14,7 @@ interval = 600
 format = "{pacman} + {aur} = {both} updates available"
 format_singular = "{both} update available"
 format_up_to_date = "ok"
-critical_updates_regex = "(linux|linux-lts|linux-zen)"
+critical_updates_regex = "(^linux|^linux-lts|^linux-zen)"
 aur_command = "paru -Qua"
 hide_when_uptodate = true
 
@@ -82,6 +82,7 @@ format = "%Y-%m-%d │ %I:%M %p"
 timezone = "US/Central"
 interval = 60
 locale = "en_US"
+on_click = 'swaymsg "exec foot --app-id=launcher -e /usr/bin/calcurse"'
 [block.theme_overrides]
 idle_bg = "#665c54"
 

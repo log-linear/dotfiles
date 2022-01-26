@@ -88,6 +88,7 @@ require'colorizer'.setup()
 ------------------------------- nvim-treesitter --------------------------------
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
+  ignore_install = { "phpdoc" },
   highlight = {
     enable = true,
     disable = { "r" },  -- Not as good as default ft highlighting

@@ -26,6 +26,7 @@ highlight ColorColumn ctermbg=238
 let g:netrw_liststyle = 3                                 " Default to tree-view
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'  " relative line nums
 let g:netrw_winsize = 25
+let g:netrw_browse_split = 4  " Open in previous window
 
 "============================= Filetype settings ===============================
 augroup ft_conf
@@ -50,11 +51,13 @@ augroup ft_conf
   endfor
   " Python
   au FileType python ino ;c """<CR>"""<esc>ko
+  au FileType python ino ;r ->
+  let g:pyindent_open_paren=4
   " Markdown
   let g:markdown_fenced_languages = ['python', 'r', 'sh', 'bash', 'zsh', 
     \ 'powershell=ps1', 'sql', 'json', 'html']
-  au FileType markdown,rmd ino ;c ```<CR>```<esc>k$a
-  au FileType markdown,rmd ino ;C ```{}<CR>```<esc>k$i
+  au FileType markdown,rmd ino ;c ``<left>
+  au FileType markdown,rmd ino ;C ```<CR>```<esc>k$a
   au FileType markdown,rmd ino ;e **<left>
   au FileType markdown,rmd ino ;H <esc>yypv$r=o
   au FileType markdown,rmd ino ;h <esc>yypv$r-o
@@ -78,12 +81,17 @@ for mapcmd in ['nn', 'ino', 'vn', 'tno']
   execute mapcmd . ' <A-j> <C-\><C-n><C-w>j'
   execute mapcmd . ' <A-k> <C-\><C-n><C-w>k'
   execute mapcmd . ' <A-l> <C-\><C-n><C-w>l'
-  " Remap split adjustment to ALT + HJKL
-  execute mapcmd . ' <A-H> <C-\><C-n><C-w>:vertical resize -3<CR>'
-  execute mapcmd . ' <A-J> <C-\><C-n><C-w>:resize -3<CR>'
-  execute mapcmd . ' <A-K> <C-\><C-n><C-w>:resize +3<CR>'
-  execute mapcmd . ' <A-L> <C-\><C-n><C-w>:vertical resize +3<CR>'
-  execute mapcmd . ' <A-=> <C-\><C-n><C-w>='
+  " Remap 
+  execute mapcmd . ' <A-H> <C-\><C-n><C-w>H'
+  execute mapcmd . ' <A-J> <C-\><C-n><C-w>J'
+  execute mapcmd . ' <A-K> <C-\><C-n><C-w>K'
+  execute mapcmd . ' <A-L> <C-\><C-n><C-w>L'
+  " Remap split adjustment to ALT + <-+>
+  execute mapcmd . ' <A-,> <C-\><C-n><C-w>:vertical resize -3<CR>'
+  execute mapcmd . ' <A--> <C-\><C-n><C-w>:resize -3<CR>'
+  execute mapcmd . ' <A-=> <C-\><C-n><C-w>:resize +3<CR>'
+  execute mapcmd . ' <A-.> <C-\><C-n><C-w>:vertical resize +3<CR>'
+  execute mapcmd . ' <A-0> <C-\><C-n><C-w>='
   " Alt + q to close windows
   execute mapcmd . ' <A-q> <C-\><C-n>:q<CR>'
   execute mapcmd . ' <A-Q> <C-\><C-n>:q!<CR>'
@@ -91,7 +99,7 @@ for mapcmd in ['nn', 'ino', 'vn', 'tno']
   execute mapcmd . ' <A-f> <C-\><C-n>:Vexplore<CR>'
   " Buffer navigation/management
   execute mapcmd . ' <A-d> <C-\><C-n>:bn <BAR> bd #<CR>'
-  execute mapcmd . ' <A-d> <C-\><C-n>:bn <BAR> bd! #<CR>'
+  execute mapcmd . ' <A-D> <C-\><C-n>:bn <BAR> bd! #<CR>'
   execute mapcmd . ' <A-n> <C-\><C-n>:bn<CR>'
   execute mapcmd . ' <A-p> <C-\><C-n>:bp<CR>'
   execute mapcmd . ' <A-s> <C-\><C-n>:split<CR>'

@@ -2,9 +2,7 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-#===============================================================================
-# Variables
-#===============================================================================
+#================================= Variables ===================================
 # Logo key. Use Mod1 for Alt.
 set $mod     Mod4
 # Home row direction keys, like vim
@@ -14,8 +12,6 @@ set $up      k
 set $right   l
 # Your preferred terminal emulator
 set $term    footclient
-# File Manager
-set $filemgr vifm
 # Browser
 set $browser firefox
 # swaynagmode
@@ -41,14 +37,10 @@ set $white  #fbf1c7
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
 set $menu exec $term --app-id=launcher -e /usr/bin/sway-launcher-desktop
 
-#===============================================================================
-# Output configuration
-#===============================================================================
+#============================ Output configuration =============================
 output * bg ~/.local/share/backgrounds/xavier-cuenca-w4-3.jpg fill
 
-#===============================================================================
-# Appearance
-#===============================================================================
+#================================= Appearance ==================================
 # Remove title bar, set border size, font
 default_border pixel 3
 default_floating_border pixel 3
@@ -81,9 +73,7 @@ for_window [title=".*CopyQ$"] floating enable, sticky enable, resize set 30 ppt 
 gaps inner 5
 smart_gaps on
 
-#===============================================================================
-# Idle configuration
-#===============================================================================
+#============================= Idle configuration ==============================
 exec swayidle -w \
         timeout 300 'swaylock --font "SF Pro Display" -f -c 000000' \
         timeout 600 'swaymsg "output * dpms off"' \
@@ -98,9 +88,7 @@ exec swayidle -w \
 for_window [class="^.*"] inhibit_idle fullscreen 
 for_window [app_id="^.*"] inhibit_idle fullscreen
 
-#===============================================================================
-# Input configuration
-#===============================================================================
+#============================ Input configuration ==============================
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
@@ -120,33 +108,21 @@ input "type:touchpad" {
 
 # Start a terminal
 bindsym $mod+return exec $term
-bindsym $mod+t exec $term
-bindsym $mod+shift+t exec notify-send "foot server launched" && foot --server 
+bindsym $mod+colon exec $term
 bindsym $mod+shift+return exec notify-send "foot server launched" && foot --server 
 
-# File manager
-bindsym $mod+f exec $term -e $filemgr
-
-# Browser
-bindsym $mod+b exec $browser
-
 # Kill focused window
-bindsym $mod+q kill
-
+bindsym $mod+shift+q kill
 # Start your launcher
 bindsym $mod+semicolon exec $menu
-
 # File opener
-bindsym $mod+colon exec $term --app-id=launcher -e fzo
-
+bindsym $mod+slash exec $term --app-id=launcher -e fzo
 # Mullvad
-bindsym $mod+v exec mullvad_helper
-
+bindsym $mod+m exec mullvad_helper
 # Emoji selector
 bindsym $mod+e exec $term --app-id=launcher -e emo | wl-paste -t text | copyq copy
-
 # Clipboard manager
-bindsym $mod+c exec copyq --start-server show
+bindsym $mod+y exec copyq --start-server show
 
 # Drag windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -157,10 +133,8 @@ floating_modifier $mod normal
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
-
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynagmode --font 'SF Pro Display' -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-
 # Lock sway
 bindsym $mod+escape exec swaylock --font 'SF Pro Display' -f -c 000000
 
@@ -171,6 +145,9 @@ bindsym $mod+$left        focus left
 bindsym $mod+$down        focus down
 bindsym $mod+$up          focus up
 bindsym $mod+$right       focus right
+# Move focus to parent container with mod+a
+bindsym $mod+a            focus parent
+bindsym $mod+shift+a      focus child
 # Or use $mod+[up|down|left|right]
 bindsym $mod+Left         focus left
 bindsym $mod+Down         focus down
@@ -178,15 +155,15 @@ bindsym $mod+Up           focus up
 bindsym $mod+Right        focus right
 
 # Move the focused window with the same, but add Shift
-bindsym $mod+Shift+$left  move left
-bindsym $mod+Shift+$down  move down
-bindsym $mod+Shift+$up    move up
-bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+$left  move  left
+bindsym $mod+Shift+$down  move  down
+bindsym $mod+Shift+$up    move  up
+bindsym $mod+Shift+$right move  right
 # Ditto, with arrow keys
-bindsym $mod+Shift+Left   move left
-bindsym $mod+Shift+Down   move down
-bindsym $mod+Shift+Up     move up
-bindsym $mod+Shift+Right  move right
+bindsym $mod+Shift+Left   move  left
+bindsym $mod+Shift+Down   move  down
+bindsym $mod+Shift+Up     move  up
+bindsym $mod+Shift+Right  move  right
 
 # WORKSPACES: ------------------------------------------------------------------
 
@@ -201,8 +178,8 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
-bindsym $mod+n workspace next
-bindsym $mod+p workspace prev
+bindsym $mod+Mod1+l workspace next
+bindsym $mod+Mod1+h workspace prev
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
@@ -214,8 +191,8 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
-bindsym $mod+Shift+n move container to workspace next
-bindsym $mod+Shift+p move container to workspace prev
+bindsym $mod+Shift+Mod1+l move container to workspace next
+bindsym $mod+Shift+Mod1+h move container to workspace prev
 # Note: workspaces can have any name you want, not just numbers.
 # We just use 1-10 as the default.
 
@@ -225,10 +202,11 @@ bindsym $mod+Shift+p move container to workspace prev
 bindsym $mod+s split toggle
 
 # Switch the current container between different layout styles
-bindsym $mod+o layout toggle splith tabbed
+bindsym $mod+o       layout toggle split    tabbed stacking
+bindsym $mod+shift+o layout toggle stacking tabbed split
 
 # Make the current focus fullscreen
-bindsym $mod+m fullscreen
+bindsym $mod+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
@@ -236,28 +214,17 @@ bindsym $mod+Shift+space floating toggle
 # Swap focus between the tiling area and the floating area
 bindsym $mod+space focus mode_toggle
 
-# Move focus to the parent container
-bindsym $mod+a focus parent
-
 # Resizing windows
-bindsym $mod+Ctrl+$left  resize shrink width 50px
-bindsym $mod+Ctrl+$down  resize grow height 50px
-bindsym $mod+Ctrl+$up    resize shrink height 50px
-bindsym $mod+Ctrl+$right resize grow width 50px
-# Ditto, with arrow keys
-bindsym $mod+Ctrl+Left   resize shrink width 50px
-bindsym $mod+Ctrl+Down   resize grow height 50px
-bindsym $mod+Ctrl+Up     resize shrink height 50px
-bindsym $mod+Ctrl+Right  resize grow width 50px
+bindsym $mod+comma  resize shrink width  50px
+bindsym $mod+equal  resize grow   height 50px
+bindsym $mod+minus  resize shrink height 50px
+bindsym $mod+period resize grow   width  50px
 
 # Adjust gap sizes
-bindsym $mod+bracketright gaps inner current plus 5
+bindsym $mod+bracketright gaps inner current plus  5
 bindsym $mod+bracketleft  gaps inner current minus 5
-bindsym $mod+equal        gaps inner current set 0
-
-bindsym $mod+braceright   gaps outer current plus 5
+bindsym $mod+braceright   gaps outer current plus  5
 bindsym $mod+braceleft    gaps outer current minus 5
-bindsym $mod+plus         gaps outer current set 0
 
 # CUSTOM KEYS (e.g. volume controls) -------------------------------------------
 
@@ -280,9 +247,7 @@ bindsym Print exec grim - | wl-copy && notify-send "Snapshot copied to clipboard
 # Screen select snapshot to clipboard
 bindsym $mod+shift+S exec grim -g "$(slurp)" - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."
 
-#===============================================================================
-# Status Bar
-#===============================================================================
+#================================= Status Bar ==================================
 
 # Read `man 5 sway-bar` for more information about this section.
 bar {
@@ -301,9 +266,7 @@ bar {
     }
 }
 
-#===============================================================================
-# Other settings
-#===============================================================================
+#=============================== Other settings ================================
 
 include /etc/sway/config.d/*
 

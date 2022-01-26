@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+grim -g "$(slurp -b 00000000 -p)" - | convert - txt:- | awk 'END{print $3}' | wl-copy 
+notify-send "Color copied to clipboard" "$(wl-paste)"
