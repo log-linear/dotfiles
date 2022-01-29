@@ -1,9 +1,9 @@
 default-timeout=5000
 ignore-timeout=1
 font=SF Pro Display 12
-background-color=#d79921
-text-color=#282828
-border-color=#282828
+background-color=#282828
+text-color=#fbf1c7
+border-color=#fbf1c7
 border-size=1
 border-radius=5
 layer=overlay

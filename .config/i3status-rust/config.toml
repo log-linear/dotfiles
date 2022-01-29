@@ -6,7 +6,8 @@ name = "material-nf_bat_patch"
 
 [theme.overrides]
 separator = ""
-idle_bg = "#504945"
+idle_bg = "#1d2021"
+idle_fg = "#fbf1c7"
 
 [[block]]
 block = "pacman"
@@ -51,10 +52,6 @@ block = "cpu"
 interval = 1
 format = "{utilization} {frequency}"
 
-# [[block]]
-# block = "backlight"
-# device = "intel_backlight"
-
 [[block]]
 block = "battery"
 interval = 10
@@ -69,8 +66,8 @@ on_click = "foot -e nmtui"
 ap_format = "{freq}"
 device_format = "{icon}{name}"
 [block.theme_overrides]
-good_bg = "#504945"
-info_bg = "#504945"
+good_bg = "#1d2021"
+info_bg = "#1d2021"
 
 [[block]]
 block = "sound"
@@ -84,7 +81,6 @@ interval = 60
 locale = "en_US"
 on_click = 'swaymsg "exec foot --app-id=launcher -e /usr/bin/calcurse"'
 [block.theme_overrides]
-idle_bg = "#665c54"
 
 # terminal, browser, launcher, lock, reboot, power blocks
 [[block]]
@@ -92,33 +88,28 @@ block = "custom"
 command = 'echo ""'
 on_click = 'swaymsg "exec foot"'
 [block.theme_overrides]
-idle_bg = "#d79921"
 
 [[block]]
 block = "custom"
 command = 'echo "爵"'
 on_click = 'exec firefox'
 [block.theme_overrides]
-idle_bg = "#d79921"
 
 [[block]]
 block = "custom"
 command = 'echo ""'
 on_click = 'exec foot -e vifm'
 [block.theme_overrides]
-idle_bg = "#d79921"
 
 [[block]]
 block = "custom"
 command = 'echo ""'
 on_click = 'swaymsg "exec foot --app-id=launcher -e /usr/bin/sway-launcher-desktop"'
 [block.theme_overrides]
-idle_bg = "#d79921"
 
 [[block]]
 block = "custom"
 command = 'echo ""'
 on_click = "exec swaynagmode --font 'SF Pro Display' -t warning -m '' -b ' Lock ' 'swaylock -f -c 000000' -b ' Logout ' 'swaymsg exit' -b ' Reboot ' 'systemctl reboot' -b ' Power off ' 'systemctl -i poweroff'"
 [block.theme_overrides]
-idle_bg = "#d79921"
 

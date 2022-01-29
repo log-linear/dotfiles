@@ -20,6 +20,7 @@ set $nag     exec swaynagmode
 # Colors
 set $bg     #282828
 set $bg4    #7c6f64
+set $gray   #a89984
 set $red    #cc241d
 set $orange #d65d0e
 set $green  #98971a
@@ -27,9 +28,12 @@ set $yellow #d79921
 set $blue   #458588
 set $purple #b16286
 set $aqua   #689d68
-set $gray   #a89984
 set $bghard #1d2021
-set $white  #fbf1c7
+set $fg0    #fbf1c7
+set $fg1    #ebddb2
+set $fg2    #d5c4a1
+set $fg3    #bdae93
+set $fg4    #a89984
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -48,8 +52,8 @@ font SF Pro Display 10
 title_align center
 
 # Window colorscheme
-client.focused   $yellow $yellow $bg  $red
-client.unfocused $bg     $bg     $bg4
+client.focused   $fg1 $fg1 $bg  $red $fg1
+client.unfocused $bg     $bg     $gray
 
 # Additional window rules
 for_window [class="^Steam$" title="^Friends$"] floating enable
@@ -226,6 +230,9 @@ bindsym $mod+bracketleft  gaps inner current minus 5
 bindsym $mod+braceright   gaps outer current plus  5
 bindsym $mod+braceleft    gaps outer current minus 5
 
+# Border toggle
+bindsym $mod+b border toggle 
+
 # CUSTOM KEYS (e.g. volume controls) -------------------------------------------
 
 bindsym XF86AudioRaiseVolume  exec pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send "🔊 $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo -m 1 "[[:digit:]]+\%" | head -1)"
@@ -256,13 +263,13 @@ bar {
     status_padding 0
     status_command i3status-rs $HOME/.config/i3status-rust/config.toml
     colors {
-        separator          $bghard
-        background         $bg
+        separator          $bg
+        background         $bghard
         statusline         $bg
-        focused_workspace  $yellow $yellow $bghard
-        inactive_workspace $bg     $bg     $yellow
-        active_workspace   $bg     $bg     $yellow
-        urgent_workspace   $red    $red    $bg
+        focused_workspace  $fg1 $fg1 $bghard
+        inactive_workspace $bg  $bg  $fg1
+        active_workspace   $bg  $bg  $fg1
+        urgent_workspace   $red $red $bg
     }
 }
 
