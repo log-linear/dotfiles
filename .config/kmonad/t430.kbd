@@ -1,0 +1,81 @@
+#| --------------------------------------------------------------------------
+
+                         KMonad: ISO ThinkPad T430 Template
+
+   This file contains US and `defsrc' configurations for a ThinkPad T430
+   with an ISO keyboard.  Copy out the `defsrc' layer to start your own
+   keyboard configuration.  Copy out the `deflayer' template to easily start
+   a new layer with matching `transparent' buttons.
+
+(deflayer name
+       _    _    _
+_    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _     _
+  _    _    _    _    _    _    _    _    _    _    _    _    _     _
+  _    _    _    _    _    _    _    _    _    _    _    _          _
+  _    _    _    _    _    _    _    _    _    _    _               _
+  _    _    _    _              _              _    _    _     _    _    _
+                                                               _    _    _
+)
+
+;;  -------------------------------------------------------------------------- |#
+
+(defcfg
+    input (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+    output (uinput-sink "KMonad: T430"))
+
+;; aliases --------------------------------------------------------------------
+
+;; Default layout aliases
+(defalias
+    ec (tap-next esc lctl)
+)
+
+;; vi-like-mode
+(defalias
+    vl (layer-toggle vi)
+    vi (tap-next bspc @vl)
+    b (around rctl lft)
+    w (around rctl right)
+    e (around rctl right)
+    p (around lshift tab)
+)
+
+;; layers --------------------------------------------------------------------
+
+;; src layer
+(defsrc
+       mute vold volu
+esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end  ins  del
+  grv  1    2    3    4    5    6    7    8    9    0    -     =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [     ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '          ret
+  lsft z    x    c    v    b    n    m    ,    .    /               rsft
+  lctl wkup lmet lalt           spc            ralt sys  rctl  pgdn up   pgup
+                                                               left down rght
+)
+
+;; base
+(deflayer qwerty
+       mute vold volu
+esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end  ins  del
+  grv  1    2    3    4    5    6    7    8    9    0    -     =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [     ]    \
+  @ec  a    s    d    f    g    h    j    k    l    ;    '          ret
+  lsft z    x    c    v    b    n    m    ,    .    /               rsft
+  lctl wkup lmet @vi            spc            ralt sys  rctl  pgdn up   pgup
+                                                               left down rght
+)
+
+;; vi layer
+(deflayer vi
+       mute vold volu
+_    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    end  _    _    _    _    _    home _    _     _
+  _    _    @w   @e   _    _    _    pgup _    _    @p   _    _     _
+  _    _    _    pgdn _    _    left down up   rght _    _          _
+  _    _    _    _    _    @b   tab  ret  _    _    _               _
+  _    _    _    _              spc            _    _    _     _    _    _
+                                                               _    _    _
+)
+
