@@ -17,6 +17,7 @@ _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    
   _    _    _    _              _              _    _    _     _    _    _
                                                                _    _    _
 )
+;;  -------------------------------------------------------------------------- |#
 
 ;;  config ------------------------------------------------------------------- |#
 
@@ -34,7 +35,8 @@ _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    
 ;; vi-like-mode
 (defalias
     vl (layer-toggle vi)    ;; Toggle Vi layer
-    vi (tap-next bspc @vl)  ;; backspace on tap, vi-layer on hold
+    vi (around spc @vl)     ;; backspace on tap, vi-layer on hold
+    bmet (around bspc lmet) ;; 
     b (around rctl lft)     ;; Vi back-word
     w (around rctl right)   ;; Vi forward-word
     e (around rctl right)   ;; Vi end-word
@@ -64,8 +66,8 @@ esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end  ins  
   tab  q    w    e    r    t    y    u    i    o    p    [     ]    \
   @ec  a    s    d    f    g    h    j    k    l    ;    '          ret
   lsft z    x    c    v    b    n    m    ,    .    /               rsft
-  caps wkup lmet @vi            spc            ralt sys  rctl  pgdn up   pgup
-                                                               left down rght
+  caps wkup lalt @bmet           @vi            ralt sys  rctl  pgdn up   pgup
+                                                                left down rght
 )
 
 ;; vi layer
