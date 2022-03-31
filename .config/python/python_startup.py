@@ -71,6 +71,7 @@ def set_autoindent():
 
 # Run configs
 from pprint import pprint  # auto-import pprint
+import visidata as vd
 set_tab_complete()
 set_python_history()
 set_autoindent()
@@ -78,11 +79,12 @@ set_autoindent()
 # Use ptpython, if available
 import sys
 try:
-    from ptpython.repl import embed
+    import IPython
+    os.environ['PYTHONSTARTUP'] = ''  # Prevent running this again
+    IPython.start_ipython()
+    raise SystemExit
 except ImportError:
-    print("ptpython is not available: falling back to standard prompt")
-else:
-    sys.exit(embed(globals(), locals(), vi_mode=True))
+    print("IPython is not available: falling back to standard prompt")
 
 #===============================================================================
 # Sources
