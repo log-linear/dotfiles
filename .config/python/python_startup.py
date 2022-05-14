@@ -76,13 +76,18 @@ set_tab_complete()
 set_python_history()
 set_autoindent()
 
-# Use ptpython, if available
+# Use ipython, if available
 import sys
 try:
+    from traitlets.config import Config
     import IPython
+
     os.environ['PYTHONSTARTUP'] = ''  # Prevent running this again
-    IPython.start_ipython()
+    c = Config()
+    c.TerminalInteractiveShell.editing_mode = 'vi'
+    IPython.start_ipython(config=c)
     raise SystemExit
+
 except ImportError:
     print("IPython is not available: falling back to standard prompt")
 
