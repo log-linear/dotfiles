@@ -46,8 +46,8 @@ output * bg ~/.local/share/backgrounds/xavier-cuenca-w4-3.jpg fill
 
 #================================= Appearance ==================================
 # Remove title bar, set border size, font
-default_border pixel 3
-default_floating_border pixel 3
+default_border pixel 4
+default_floating_border pixel 4
 font SF Pro Display 10
 title_align center
 
@@ -56,21 +56,26 @@ client.focused   $fg1 $fg1 $bg  $red $fg1
 client.unfocused $bg     $bg     $gray
 
 # Additional window rules
-for_window [class="^Steam$" title="^Friends$"] floating enable
-for_window [class="^Steam$" title="^Friends List$"] floating enable
-for_window [class="^Steam$" title="Steam - News"] floating enable
-for_window [class="^Steam$" title=".* - Chat"] floating enable
-for_window [class="^Steam$" title="^Settings$"] floating enable
-for_window [class="^Steam$" title=".* - event started"] floating enable
-for_window [class="^Steam$" title=".* CD key"] floating enable
-for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
-for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
-for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
-for_window [title="^Steam Keyboard$"] floating enable
-for_window [app_id="nm-connection-editor"] floating enable
-for_window [app_id="nm-openconnect-auth-dialog"] floating enable
-for_window [app_id="blueman-manager"] floating enable
-for_window [title="nmtui"] floating enable
+for_window [class="^Steam$" title="^Friends$"] floating enable, border normal 
+for_window [class="^Steam$" title="^Friends List$"] floating enable, border normal 
+for_window [class="^Steam$" title="Steam - News"] floating enable, border normal 
+for_window [class="^Steam$" title=".* - Chat"] floating enable, border normal 
+for_window [class="^Steam$" title="^Settings$"] floating enable, border normal 
+for_window [class="^Steam$" title=".* - event started"] floating enable, border normal 
+for_window [class="^Steam$" title=".* CD key"] floating enable, border normal 
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable, border normal 
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable, border normal 
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] float, border normal ing enable
+for_window [title="^Steam Keyboard$"] floating enable, border normal 
+for_window [app_id="nm-connection-editor"] floating enable, border normal 
+for_window [app_id="nm-openconnect-auth-dialog"] floating enable, border normal 
+for_window [app_id="blueman-manager"] floating enable, border normal 
+for_window [app_id="org.gnome.Nautilus"] floating enable, border normal 
+for_window [app_id="wdisplays"] floating enable, border normal 
+for_window [app_id="pavucontrol"] floating enable, border normal 
+for_window [app_id="system-config-printer"] floating enable, border normal 
+for_window [app_id="pamac-manager"] floating enable, border normal 
+for_window [title="nmtui"] floating enable, border normal 
 for_window [title=".*CopyQ$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
 
 # Gaps
@@ -96,7 +101,7 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
-# Swap caps ctrl, lalt/lwin, lshift+rshift = switch to intl keyboard
+# lshift+rshift = switch to intl keyboard
 input "type:keyboard" {
     xkb_layout us,us(intl)
     xkb_options grp:shifts_toggle
@@ -134,6 +139,8 @@ bindsym $mod+y exec copyq --start-server show
 # Change normal to inverse to use left mouse button for resizing and right
 # mouse button for dragging.
 floating_modifier $mod normal
+# Kill windows by middle clicking on borders
+bindsym --border button2 kill
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -172,18 +179,32 @@ bindsym $mod+Shift+Right  move  right
 # WORKSPACES: ------------------------------------------------------------------
 
 # Switch to workspace
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
-bindsym $mod+Mod1+l workspace next
-bindsym $mod+Mod1+h workspace prev
+bindsym --no-repeat $mod+1 workspace number 1; exec "echo 1 > /tmp/sovpipe"
+bindsym --no-repeat $mod+2 workspace number 2; exec "echo 1 > /tmp/sovpipe"
+bindsym --no-repeat $mod+3 workspace number 3; exec "echo 1 > /tmp/sovpipe"
+bindsym --no-repeat $mod+4 workspace number 4; exec "echo 1 > /tmp/sovpipe"
+bindsym --no-repeat $mod+5 workspace number 5; exec "echo 1 > /tmp/sovpipe"
+bindsym --no-repeat $mod+6 workspace number 6; exec "echo 1 > /tmp/sovpipe"
+bindsym --no-repeat $mod+7 workspace number 7; exec "echo 1 > /tmp/sovpipe"
+bindsym --no-repeat $mod+8 workspace number 8; exec "echo 1 > /tmp/sovpipe"
+bindsym --no-repeat $mod+9 workspace number 9; exec "echo 1 > /tmp/sovpipe"
+bindsym --no-repeat $mod+0 workspace number 10; exec "echo 1 > /tmp/sovpipe"
+bindsym --no-repeat $mod+Mod1+l workspace next; exec "echo 1 > /tmp/sovpipe"
+bindsym --no-repeat $mod+Mod1+h workspace prev; exec "echo 1 > /tmp/sovpipe"
+
+bindsym --release $mod+1      exec "echo 0 > /tmp/sovpipe"
+bindsym --release $mod+2      exec "echo 0 > /tmp/sovpipe"
+bindsym --release $mod+3      exec "echo 0 > /tmp/sovpipe"
+bindsym --release $mod+4      exec "echo 0 > /tmp/sovpipe"
+bindsym --release $mod+5      exec "echo 0 > /tmp/sovpipe"
+bindsym --release $mod+6      exec "echo 0 > /tmp/sovpipe"
+bindsym --release $mod+7      exec "echo 0 > /tmp/sovpipe"
+bindsym --release $mod+8      exec "echo 0 > /tmp/sovpipe"
+bindsym --release $mod+9      exec "echo 0 > /tmp/sovpipe"
+bindsym --release $mod+0      exec "echo 0 > /tmp/sovpipe"
+bindsym --release $mod+Mod1+l exec "echo 0 > /tmp/sovpipe"
+bindsym --release $mod+Mod1+h exec "echo 0 > /tmp/sovpipe"
+
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
@@ -257,21 +278,22 @@ bindsym $mod+shift+S exec grim -g "$(slurp)" - | wl-copy && notify-send "Snapsho
 #================================= Status Bar ==================================
 
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    font JetBrainsMono NerdFont 10
-    position top
-    status_padding 0
-    status_command i3status-rs $HOME/.config/i3status-rust/config.toml
-    colors {
-        separator          $bg
-        background         $bghard
-        statusline         $bg
-        focused_workspace  $fg1 $fg1 $bghard
-        inactive_workspace $bg  $bg  $fg1
-        active_workspace   $bg  $bg  $fg1
-        urgent_workspace   $red $red $bg
-    }
-}
+bar swaybar_command waybar
+# bar {
+#     font JetBrainsMono NerdFont 10
+#     position top
+#     status_padding 0
+#     status_command i3status-rs $HOME/.config/i3status-rust/config.toml
+#     colors {
+#         separator          $bg
+#         background         $bghard
+#         statusline         $bg
+#         focused_workspace  $fg1 $fg1 $bghard
+#         inactive_workspace $bg  $bg  $fg1
+#         active_workspace   $bg  $bg  $fg1
+#         urgent_workspace   $red $red $bg
+#     }
+# }
 
 #=============================== Other settings ================================
 
@@ -323,6 +345,15 @@ exec mullvad-vpn
 
 # Inactive window transparency
 exec --no-startup-id python ~/.local/bin/inactive-window-transparency.py
+
+# Sway Overview
+exec rm -f /tmp/sovpipe && mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov
+
+# Network Manager
+exec nm-applet --indicator
+
+# Bluetooth Manager
+exec blueman-applet
 
 # Workspace programs
 workspace 1

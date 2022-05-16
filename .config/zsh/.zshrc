@@ -271,6 +271,10 @@ osc7_cwd() {
   printf '\e]7;file://%s%s\e\\' "$HOSTNAME" "$(_urlencode "$PWD")"
 }
 
+show_color() {
+    perl -e 'foreach $a(@ARGV){print "\e[48:2::".join(":",unpack("C*",pack("H*",$a)))."m \e[49m "};print "\n"' "$@"
+}
+
 autoload -Uz add-zsh-hook
 add-zsh-hook -Uz chpwd osc7_cwd
 
