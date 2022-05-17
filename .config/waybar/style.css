@@ -2,14 +2,14 @@
     border: none;
     border-radius: 0;
     font-family: SF-Pro-Display;
-    font-size: 14px;
+    font-size: 13px;
     min-height: 0;
     padding: 0;
     margin: 0;
 }
 
 window#waybar {
-    background: rgba(0, 0, 0, 0);
+    background: rgba(43, 48, 59, 0.5);
     border-bottom: 3px solid rgba(100, 114, 125, 0.5);
     color: #ebdbb2;
 }
@@ -26,7 +26,7 @@ tooltip label {
 #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: white;
+    color: #ebdbb2;
     border-bottom: 3px solid transparent;
 }
 
