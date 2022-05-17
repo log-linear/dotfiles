@@ -10,19 +10,16 @@ idle_bg = "#1d2021"
 idle_fg = "#fbf1c7"
 
 [[block]]
-block = "pacman"
-interval = 600
-format = "{pacman} + {aur} = {both} updates available"
-format_singular = "{both} update available"
-format_up_to_date = "ok"
-critical_updates_regex = "(^linux|^linux-lts|^linux-zen)"
-aur_command = "paru -Qua"
-hide_when_uptodate = true
-
-[[block]]
 block = "keyboard_layout"
 driver = "sway"
 format = "\u2328 {variant}"
+[block.theme_overrides]
+
+[[block]]
+block = "cpu"
+interval = 1
+format = "{utilization} {frequency}"
+[block.theme_overrides]
 
 [[block]]
 block = "disk_space"
@@ -33,6 +30,7 @@ interval = 60
 alert = 25
 warning = 50
 alert_absolute = true
+[block.theme_overrides]
 
 [[block]]
 block = "memory"
@@ -46,11 +44,7 @@ warning_mem = 80
 warning_swap = 80
 critical_mem = 95
 critical_swap = 95
-
-[[block]]
-block = "cpu"
-interval = 1
-format = "{utilization} {frequency}"
+[block.theme_overrides]
 
 [[block]]
 block = "battery"
@@ -59,57 +53,99 @@ hide_missing = true
 allow_missing = true
 [block.theme_overrides]
 
+# Launcher blocks
+
 [[block]]
-block = "networkmanager"
-primary_only = true
-on_click = "foot -e nmtui"
-ap_format = "{freq}"
-device_format = "{icon}{name}"
-[block.theme_overrides]
-good_bg = "#1d2021"
-info_bg = "#1d2021"
+block = "pacman"
+interval = 600
+format = "{pacman} + {aur} = {both} updates available"
+format_singular = "{both} update available"
+format_up_to_date = "ok"
+critical_updates_regex = "(^linux|^linux-lts|^linux-zen)"
+on_click = "pamac-manager"
+aur_command = "paru -Qua"
+hide_when_uptodate = true
 
 [[block]]
 block = "sound"
 step_width = 5
+on_click = "pavucontrol"
+[block.theme_overrides]
+idle_bg = "#3c3836"
 
 [[block]]
-block = "time"
-format = "%Y-%m-%d │ %I:%M %p"
-timezone = "US/Central"
-interval = 60
-locale = "en_US"
-on_click = 'swaymsg "exec foot --app-id=launcher -e /usr/bin/calcurse"'
+block = "networkmanager"
+primary_only = true
+on_click = 'swaymsg "exec foot --app-id=launcher -e nmtui"'
+ap_format = "{freq}"
+device_format = "{icon}{name}"
 [block.theme_overrides]
+good_bg = "#3c3836"
+info_bg = "#3c3836"
 
-# terminal, browser, launcher, lock, reboot, power blocks
+[[block]]
+block = "custom"
+on_click = "blueman-manager"
+command = 'echo ""'
+[block.theme_overrides]
+idle_bg = "#3c3836"
+
+[[block]]
+block = "custom"
+on_click = "system-config-printer"
+command = 'echo "朗"'
+[block.theme_overrides]
+idle_bg = "#3c3836"
+
+[[block]]
+block = "custom"
+on_click = "wdisplays"
+command = 'echo ""'
+[block.theme_overrides]
+idle_bg = "#3c3836"
+
 [[block]]
 block = "custom"
 command = 'echo ""'
 on_click = 'swaymsg "exec foot"'
 [block.theme_overrides]
+idle_bg = "#3c3836"
 
 [[block]]
 block = "custom"
 command = 'echo "爵"'
 on_click = 'exec firefox'
 [block.theme_overrides]
+idle_bg = "#3c3836"
 
 [[block]]
 block = "custom"
 command = 'echo ""'
-on_click = 'exec foot -e vifm'
+on_click = 'exec nautilus'
 [block.theme_overrides]
+idle_bg = "#3c3836"
 
 [[block]]
 block = "custom"
 command = 'echo ""'
 on_click = 'swaymsg "exec foot --app-id=launcher -e /usr/bin/sway-launcher-desktop"'
 [block.theme_overrides]
+idle_bg = "#3c3836"
 
 [[block]]
 block = "custom"
 command = 'echo ""'
 on_click = "exec swaynagmode --font 'SF Pro Display' -t warning -m '' -b ' Lock ' 'swaylock -f -c 000000' -b ' Logout ' 'swaymsg exit' -b ' Reboot ' 'systemctl reboot' -b ' Power off ' 'systemctl -i poweroff'"
 [block.theme_overrides]
+idle_bg = "#3c3836"
+
+[[block]]
+block = "time"
+format = "%I:%M %p"
+timezone = "US/Central"
+interval = 60
+locale = "en_US"
+on_click = 'swaymsg "exec foot --app-id=launcher -e /usr/bin/calcurse"'
+[block.theme_overrides]
+idle_bg = "#3c3836"
 
