@@ -175,7 +175,7 @@
         "format": "  ",
         "tooltip-format": "Power/Log off",
         "escape": true,
-        "on-click": "exec swaynagmode --font 'SF Pro Display' -t warning -m '' -b ' Lock ' 'swaylock -f -c 000000' -b ' Logout ' 'swaymsg exit' -b ' Reboot ' 'systemctl reboot' -b ' Power off ' 'systemctl -i poweroff'" 
+        "on-click": "exec swaynagmode --font 'JetBrainsMono Nerd Font' -t warning -m '' -b ' Lock ' 'swaylock -f -c 000000' -b ' Logout ' 'swaymsg exit' -b ' Reboot ' 'systemctl reboot' -b ' Power off ' 'systemctl -i poweroff'" 
     },
     "custom/launcher": {
         "format": " {icon} ",
