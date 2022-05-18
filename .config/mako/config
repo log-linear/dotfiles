@@ -1,6 +1,6 @@
 default-timeout=5000
 ignore-timeout=1
-font=SF Pro Display 12
+font=JetBrainsMono Nerd Font 12
 background-color=#282828
 text-color=#fbf1c7
 border-color=#fbf1c7

@@ -48,7 +48,7 @@ output * bg ~/.local/share/backgrounds/xavier-cuenca-w4-3.jpg fill
 # Remove title bar, set border size, font
 default_border pixel 4
 default_floating_border pixel 4
-font SF Pro Display 10
+font JetBrainsMono Nerd Font 10
 title_align center
 
 # Window colorscheme
@@ -84,10 +84,10 @@ smart_gaps on
 
 #============================= Idle configuration ==============================
 exec swayidle -w \
-        timeout 300 'swaylock --font "SF Pro Display" -f -c 000000' \
+        timeout 300 'swaylock --font "JetBrainsMono Nerd Font" -f -c 000000' \
         timeout 600 'swaymsg "output * dpms off"' \
         resume  'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock --font "SF Pro Display" -f -c 000000'
+        before-sleep 'swaylock --font "JetBrainsMono Nerd Font" -f -c 000000'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -145,9 +145,9 @@ bindsym --border button2 kill
 # Reload the configuration file
 bindsym $mod+Shift+c reload
 # Exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec swaynagmode --font 'SF Pro Display' -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec swaynagmode --font 'JetBrainsMono Nerd Font' -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 # Lock sway
-bindsym $mod+escape exec swaylock --font 'SF Pro Display' -f -c 000000
+bindsym $mod+escape exec swaylock --font 'JetBrainsMono Nerd Font' -f -c 000000
 
 # MOVEMENT: --------------------------------------------------------------------
 
@@ -279,21 +279,6 @@ bindsym $mod+shift+S exec grim -g "$(slurp)" - | wl-copy && notify-send "Snapsho
 
 # Read `man 5 sway-bar` for more information about this section.
 bar swaybar_command waybar
-# bar {
-#     font JetBrainsMono NerdFont 10
-#     position top
-#     status_padding 0
-#     status_command i3status-rs $HOME/.config/i3status-rust/config.toml
-#     colors {
-#         separator          $bg
-#         background         $bghard
-#         statusline         $bg
-#         focused_workspace  $fg1 $fg1 $bghard
-#         inactive_workspace $bg  $bg  $fg1
-#         active_workspace   $bg  $bg  $fg1
-#         urgent_workspace   $red $red $bg
-#     }
-# }
 
 #=============================== Other settings ================================
 
