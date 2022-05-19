@@ -91,7 +91,7 @@ export LESS=-r
 
 #----------------------------- vi-mode indicators ------------------------------
 vim_ins_mode="%{$fg_bold[cyan]%}[I]%{$reset_color%}"
-vim_nor_mode="%{$fg_bold[gray]%}[N]%{$reset_color%}"
+vim_nor_mode="%{$fg_bold[yellow]%}[N]%{$reset_color%}"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {

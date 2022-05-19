@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: JetBrainsMono Nerd Font;
+    font-family: "SF Pro Display", "JetBrainsMono Nerd Font";
     font-size: 14px;
     min-height: 0;
     padding: 0;
@@ -15,8 +15,8 @@ window#waybar {
 }
 
 tooltip {
-  background: #1d2021;
-  border: 1px solid #1d2021;
+  background: #504945;
+  border: 1px solid #504945;
 }
 
 #workspaces button {
@@ -37,13 +37,12 @@ tooltip {
 }
 
 #mode {
-    background: #64727D;
+    background: #7c6f64;
     border-bottom: 3px solid #fbf1c7;
 }
 
 #clock {
-    background-color: #ebdbb2;
-    color: #1d2021;
+    font-weight: bold;
 }
 
 #battery {
@@ -71,4 +70,9 @@ tooltip {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+
+#tray menu {
+    background-color: #504945;
+    color: #fbf1c7;
 }

@@ -14,7 +14,7 @@
         "backlight",
     ],
     "modules-center": [
-        "sway/window",
+        "clock",
     ],
     "modules-right": [
         "tray",
@@ -30,7 +30,6 @@
         "custom/power",
         "battery",
         "battery#bat2",
-        "clock",
     ],
     "keyboard-state": {
         "numlock": true,
@@ -92,8 +91,8 @@
     },
     "clock": {
         // "timezone": "America/New_York",
-        "format": "{:%I:%M %p}",
-        "tooltip-format": "<big>{:%Y %B %d}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%a, %d %b  %I:%M %p}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
     },
     "cpu": {
         "format": "  {usage}%",
@@ -173,48 +172,62 @@
     },
     "custom/power": {
         "format": "  ",
-        "tooltip-format": "Power/Log off",
+        "return-type": "json",
+        "tooltip-format": "{}",
+        "exec": "echo '{\"tooltip\": \"Power/Log Off/Lock PC\"}'",
         "escape": true,
-        "on-click": "exec swaynagmode --font 'JetBrainsMono Nerd Font' -t warning -m '' -b ' Lock ' 'swaylock -f -c 000000' -b ' Logout ' 'swaymsg exit' -b ' Reboot ' 'systemctl reboot' -b ' Power off ' 'systemctl -i poweroff'" 
+        "on-click": "exec swaynagmode --font 'SF Pro Display' -t warning -m '' -b ' Lock ' 'swaylock -f -c 000000' -b ' Logout ' 'swaymsg exit' -b ' Reboot ' 'systemctl reboot' -b ' Power off ' 'systemctl -i poweroff'" 
     },
     "custom/launcher": {
         "format": " {icon} ",
         "format-icons": {
             "default": ""
         },
-        "tooltip-format": "Launch Application",
+        "return-type": "json",
+        "tooltip-format": "{}",
+        "exec": "echo '{\"tooltip\": \"Launch Application\"}'",
         "escape": true,
         "on-click": "exec foot --app-id=launcher -e /usr/bin/sway-launcher-desktop" 
     },
     "custom/files": {
         "format": "  ",
-        "tooltip-format": "File Manager",
+        "return-type": "json",
+        "tooltip-format": "{}",
+        "exec": "echo '{\"tooltip\": \"File Manager\"}'",
         "escape": true,
         "on-click": "exec nautilus" 
     },
     "custom/browser": {
         "format": " 爵 ",
-        "tooltip-format": "Launch Firefox",
+        "return-type": "json",
+        "tooltip-format": "{}",
+        "exec": "echo '{\"tooltip\": \"Browser\"}'",
         "escape": true,
         "on-click": "exec firefox" 
     },
     "custom/displays": {
         "format": "  ",
-        "tooltip-format": "Display Configuration",
+        "return-type": "json",
+        "tooltip-format": "{}",
+        "exec": "echo '{\"tooltip\": \"Display Configuration\"}'",
         "escape": true,
         "on-click": "exec wdisplays" 
     },
     "custom/printer": {
         "format": " 朗 ",
-        "tooltip-format": "Printer Configuration",
+        "return-type": "json",
+        "tooltip-format": "{}",
+        "exec": "echo '{\"tooltip\": \"Display Configuration\"}'",
         "escape": true,
         "on-click": "exec system-config-printer" 
     },
     "custom/pacman": {
-        "format": "   {}",
+        "format": " {} ",
         "interval": 3600,                     // every hour
-        "exec": "checkupdates | wc -l",       // # of updates
+        "return-type": "json",
+        "exec": "$HOME/.config/waybar/pacman_updates 2> /dev/null",       // # of updates
         "exec-if": "exit 0",                  // always run; consider advanced run conditions
+        "tooltip-format": "{}",
         "on-click": "foot -e 'paru'; pkill -SIGRTMIN+8 waybar", // update system
         "signal": 8,
     },
@@ -223,6 +236,9 @@
         "format-icons": {
             "default": ""
         },
+        "return-type": "json",
+        "exec": "echo '{\"tooltip\": \"Switch Keyboard layout\"}'",
+        "tooltip-format": "{}",
         "escape": true,
         "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
     },

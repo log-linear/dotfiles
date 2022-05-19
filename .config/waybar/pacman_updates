@@ -1,0 +1,21 @@
+#!/bin/sh
+
+output="Software updates available:\n\n$(checkupdates)"
+number="$(echo "$output" | wc -l)"
+if [ -z "$output" ]; then
+  text=""
+  tooltip="All packages up-to-date!"
+else
+  text=" $number"
+
+  if (( $number > 23 )); then
+      tooltip="$(echo "$output" | head -n 23 | sed -z 's/\n/\\n/g')"
+      tooltip+='...'
+  else
+      tooltip="$(echo "$output" | sed -z 's/\n/\\n/g')"
+      tooltip=${tooltip::-2}
+  fi
+fi
+
+echo "{\"text\":\""$text"\", \"tooltip\":\""$tooltip"\"}"
+exit 0
