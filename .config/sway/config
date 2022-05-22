@@ -348,6 +348,7 @@ exec $term
 exec $browser
 
 workspace 2
+exec env -u WAYLAND_DISPLAY protonmail-bridge
 exec thunderbird
 exec keepassxc
 
