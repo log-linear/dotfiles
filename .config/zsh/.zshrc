@@ -233,9 +233,6 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
 #======================== Application-specific section =========================
-# Keychain - Stores ssh pw's per each login, needed when using e.g. sway
-eval $(keychain --eval --quiet id_ed25519)
-
 # Smart cd replacement
 eval "$(zoxide init zsh)"
 

@@ -7,13 +7,13 @@ if [ -z "$output" ]; then
   tooltip="All packages up-to-date!"
 else
   text=" $number"
+  tooltip="Software updates available:\n\n"
 
   if (( $number > 23 )); then
-      tooltip="Software updates available:\n\n"
       tooltip+="$(echo "$output" | head -n 23 | sed -z 's/\n/\\n/g')"
       tooltip+='...'
   else
-      tooltip="$(echo "$output" | sed -z 's/\n/\\n/g')"
+      tooltip+="$(echo "$output" | sed -z 's/\n/\\n/g')"
       tooltip=${tooltip::-2}
   fi
 fi

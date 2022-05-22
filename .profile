@@ -90,6 +90,8 @@ if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
   export BEMENU_BACKEND="wayland"
   export XDG_CURRENT_DESKTOP=sway
   export XDG_SESSION_TYPE=wayland
+  eval $(gnome-keyring-daemon --start)
+  export SSH_AUTH_SOCK
   exec sway
 fi
 

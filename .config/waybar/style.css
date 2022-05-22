@@ -10,7 +10,6 @@
 
 window#waybar {
     background: #1d2021;
-    border-bottom: 0px;
     color: #fbf1c7;
 }
 
@@ -23,13 +22,12 @@ tooltip {
     padding: 1px;
     background: #282828;
     color: #ebdbb2;
-    border-bottom: 0px;
 }
 
 #workspaces button.focused {
-    color: #282828;
-    background: #ebdbb2;
-    border-bottom: 0px;
+    background: #7c6f64;
+    border-top: 3px solid #fbf1c7;
+    border-bottom: 3px solid #7c6f64;
 }
 
 #mode, #clock, #battery {

@@ -75,6 +75,7 @@ for_window [app_id="wdisplays"] floating enable, border normal
 for_window [app_id="pavucontrol"] floating enable, border normal 
 for_window [app_id="system-config-printer"] floating enable, border normal 
 for_window [app_id="pamac-manager"] floating enable, border normal 
+for_window [app_id="nwg-displays"] floating enable, border normal 
 for_window [title="nmtui"] floating enable, border normal 
 for_window [title=".*CopyQ$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
 
@@ -332,7 +333,7 @@ exec mullvad-vpn
 exec --no-startup-id python ~/.local/bin/inactive-window-transparency.py
 
 # Sway Overview
-exec rm -f /tmp/sovpipe && mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov
+exec_always rm -f /tmp/sovpipe && mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov
 
 # Network Manager
 exec --no-startup-id nm-applet --indicator

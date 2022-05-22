@@ -17,7 +17,7 @@ columns 5
 ratio 8
 
 # font face, use any string that is output by fc-list, recommended is Terminus (TTF):style=Bold
-font_face Terminus (TTF):style=Bold
+font_face SF Pro Display:style=Bold
 
 # margin size around text
 text_margin_size 7
@@ -29,19 +29,19 @@ text_margin_top_size 4
 text_title_size 14
 
 # title text color
-text_title_color #FFFFFFFF
+text_title_color #fbf1c7FF
 
 # description text size
 text_description_size 12
 
 # description text color
-text_description_color #999999FF
+text_description_color #ebdbb2FF
 
 # workspace number text size
 text_workspace_size 18
 
 # workspace number text color
-text_workspace_color #FFFFFFFF
+text_workspace_color #fbf1c7FF
 
 # workspace number x shift
 text_workspace_xshift 11
@@ -50,13 +50,13 @@ text_workspace_xshift 11
 text_workspace_yshift -17
 
 # border color
-border_color #BCBCBCFF
+border_color #fbf1c7FF
 
 # background color
-background_color #222222FF
+background_color #1d2021FF
 
 # focused background color
-background_color_focused #444444FF
+background_color_focused #7c6f64FF
 
 # window color
 window_color #000000AA

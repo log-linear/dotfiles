@@ -23,6 +23,7 @@
         "sway/language",
         "pulseaudio",
         "custom/pacman",
+        "custom/printer",
         "custom/displays",
         "custom/browser",
         "custom/files",
@@ -211,7 +212,7 @@
         "tooltip-format": "{}",
         "exec": "echo '{\"tooltip\": \"Display Configuration\"}'",
         "escape": true,
-        "on-click": "exec wdisplays" 
+        "on-click": "exec nwg-displays" 
     },
     "custom/printer": {
         "format": " 朗 ",
