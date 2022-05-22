@@ -321,7 +321,7 @@ mode "nag" {
 exec foot --server
 
 # udiskie - automounting
-exec udiskie &
+exec udiskie -t &
 
 # wlsunset - redshift-esque program
 exec wlsunset -S 06:30 -s 20:30
