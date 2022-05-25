@@ -18,7 +18,10 @@ set $browser firefox
 set $nag     exec swaynagmode
 
 # Colors
-set $bg     #282828
+set $bg0    #282828
+set $bg1    #3c3836
+set $bg2    #504945
+set $bg3    #665c54
 set $bg4    #7c6f64
 set $gray   #a89984
 set $red    #cc241d
@@ -29,6 +32,7 @@ set $blue   #458588
 set $purple #b16286
 set $aqua   #689d68
 set $bghard #1d2021
+set $fghard #f9f5d7
 set $fg0    #fbf1c7
 set $fg1    #ebddb2
 set $fg2    #d5c4a1
@@ -52,8 +56,10 @@ font SF Pro Display 10
 title_align center
 
 # Window colorscheme
-client.focused   $fg1 $fg1 $bg  $red $fg1
-client.unfocused $bg     $bg     $gray
+# class                 border  background text indicator child_border
+client.focused          $fghard $fghard $bg0 $red $fghard
+client.focused_inactive $gray   $gray   $bg0 $red $gray
+client.unfocused        $bg2    $bg2    $fg2
 
 # Additional window rules
 for_window [class="^Steam$" title="^Friends$"] floating enable, border normal 

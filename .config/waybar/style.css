@@ -9,25 +9,27 @@
 }
 
 window#waybar {
-    background: #1d2021;
-    color: #fbf1c7;
+    background: rgba(29, 32, 33, 0.5);
+    color: #f9f5d7;
 }
 
 tooltip {
-  background: #504945;
-  border: 1px solid #504945;
+    background: #504945;
+    border: 1px solid #504945;
+    color: #f9f5d7;
 }
 
 #workspaces button {
     padding: 1px;
-    background: #282828;
-    color: #ebdbb2;
+    background: rgba(80, 73, 69, 0.5);
+    color: #f9f5d7;
+    font-weight: bold;
 }
 
 #workspaces button.focused {
-    background: #7c6f64;
-    border-top: 3px solid #fbf1c7;
-    border-bottom: 3px solid #7c6f64;
+    background: #f9f5d7;
+    color: #504945;
+    font-weight: bold;
 }
 
 #mode, #clock, #battery {
@@ -72,5 +74,5 @@ tooltip {
 
 #tray menu {
     background-color: #504945;
-    color: #fbf1c7;
+    color: #f9f5d7;
 }

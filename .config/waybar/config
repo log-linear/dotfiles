@@ -12,15 +12,15 @@
         "memory",
         "temperature",
         "backlight",
+        "idle_inhibitor",
+        "custom/keyboard_icon",
+        "sway/language",
     ],
     "modules-center": [
         "clock",
     ],
     "modules-right": [
         "tray",
-        "idle_inhibitor",
-        "custom/keyboard_icon",
-        "sway/language",
         "pulseaudio",
         "custom/pacman",
         "custom/printer",
