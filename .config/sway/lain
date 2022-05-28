@@ -1,0 +1,8 @@
+# Daemonize foot
+exec foot --server
+
+bindsym $mod+shift+return exec notify-send "foot server launched" && foot --server 
+
+workspace 1
+exec $term
+exec $term

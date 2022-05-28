@@ -1,0 +1,8 @@
+# Daemonize foot
+exec foot --server --font="JetBrainsMono Nerd Font:size=6.5"
+
+bindsym $mod+shift+return exec notify-send "foot server launched" && foot --server --font="JetBrainsMono Nerd Font:size=6.5"
+
+workspace 1
+exec $term
+exec $term

@@ -125,7 +125,6 @@ input "type:touchpad" {
 # Start a terminal
 bindsym $mod+return exec $term
 bindsym $mod+colon exec $term
-bindsym $mod+shift+return exec notify-send "foot server launched" && foot --server 
 
 # Kill focused window
 bindsym $mod+shift+q kill
@@ -289,8 +288,6 @@ bar swaybar_command waybar
 
 #=============================== Other settings ================================
 
-include /etc/sway/config.d/*
-
 # Enable numlock on start
 input * xkb_numlock enable
 
@@ -323,9 +320,6 @@ mode "nag" {
 
 #------------------------- Startup/External programs ---------------------------
 
-# Daemonize foot
-exec foot --server
-
 # udiskie - automounting
 exec udiskie -t &
 
@@ -349,8 +343,6 @@ exec --no-startup-id blueman-applet
 
 # Workspace programs
 workspace 1
-exec $term
-exec $term
 exec $browser
 
 workspace 2
@@ -361,3 +353,6 @@ exec keepassxc
 workspace 3
 exec discord
 exec telegram-desktop
+
+include /etc/sway/config.d/*
+include ~/.config/sway/`hostname`
