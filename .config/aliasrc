@@ -1,6 +1,5 @@
 #!/bin/sh
 
-alias gitu='git add . && git commit && git push'
 alias ..='cd ..'
 alias ll='exa -al'
 alias open='swallow xdg-open'
