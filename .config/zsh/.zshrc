@@ -28,7 +28,6 @@ SAVEHIST=500
 WORDCHARS=${WORDCHARS//\/[&.;]} # Ignore certain characters for word parsing
 
 #============================ Keybindings section ==============================
-bindkey -v                                 # Vim keybindings  
 bindkey '^[[7~' beginning-of-line          # Home key
 bindkey '^[[H' beginning-of-line           # Home key
 if [[ "${terminfo[khome]}" != "" ]]; then  # [Home] - Go to beginning of line
@@ -58,15 +57,6 @@ bindkey '^[[1;5C' forward-word
 bindkey '^[[Z' reverse-menu-complete # Shift+tab undo last action
 bindkey '^n' menu-complete           # Shift+tab undo last action
 bindkey '^p' reverse-menu-complete   # Shift+tab undo last action
-
-# Vi-mode yank to system clipboard
-function vi-yank {
-    zle vi-yank
-    echo "$CUTBUFFER" | wl-copy
-}
-
-zle -N vi-yank
-bindkey -M vicmd 'y' vi-yank
 
 #=============================== Alias section =================================
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && \
@@ -195,6 +185,9 @@ RPROMPT='$(git_prompt_string)'
 
 #============================== Plugins section ================================
 
+#-------------------------- Better vi-mode bindings ----------------------------
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 #---------------------------- Syntax highlighting ------------------------------
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
@@ -237,43 +230,20 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 eval "$(zoxide init zsh)"
 
 #================================= Functions ===================================
-# rga/fzf wrapper
-fzrga() {
-  RG_PREFIX="rga --files-with-matches"
-  local file
-  file="$(
-    FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
-      fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
-        --phony -q "$1" \
-        --bind "change:reload:$RG_PREFIX {q}" \
-        --preview-window="70%:wrap"
-  )" &&
-  echo "opening $file" &&
-  xdg-open "$file"
-}
 
 # Allow foot to open term in same dir
-_urlencode() {
-  local length="${#1}"
-  for (( i = 0; i < length; i++ )); do
-    local c="${1:$i:1}"
-    case $c in
-      %) printf '%%%02X' "'$c" ;;
-      *) printf "%s" "$c" ;;
-    esac
-  done
+function osc7 {
+    setopt localoptions extendedglob
+    input=( ${(s::)PWD} )
+    uri=${(j::)input/(#b)([^A-Za-z0-9_.\!~*\'\(\)-\/])/%${(l:2::0:)$(([##16]#match))}}
+    print -n "\e]7;file://${HOSTNAME}${uri}\e\\"
 }
+add-zsh-hook -Uz chpwd osc7
 
-osc7_cwd() {
-  printf '\e]7;file://%s%s\e\\' "$HOSTNAME" "$(_urlencode "$PWD")"
-}
-
+# Show colors
 show_color() {
     perl -e 'foreach $a(@ARGV){print "\e[48:2::".join(":",unpack("C*",pack("H*",$a)))."m \e[49m "};print "\n"' "$@"
 }
-
-autoload -Uz add-zsh-hook
-add-zsh-hook -Uz chpwd osc7_cwd
 
 if [ -f "$HOME/.local/bin/conda_init" ]; then
   source "$HOME/.local/bin/conda_init"
