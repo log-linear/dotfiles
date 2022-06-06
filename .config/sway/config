@@ -330,7 +330,7 @@ exec wlsunset -S 06:30 -s 20:30
 exec mullvad-vpn
 
 # Inactive window transparency
-exec --no-startup-id python ~/.local/bin/inactive-window-transparency.py
+exec --no-startup-id python ~/.config/sway/inactive-window-transparency.py
 
 # Sway Overview
 exec_always rm -f /tmp/sovpipe && mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov

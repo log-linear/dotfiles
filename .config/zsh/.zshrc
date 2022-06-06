@@ -240,11 +240,7 @@ function osc7 {
 }
 add-zsh-hook -Uz chpwd osc7
 
-# Show colors
-show_color() {
-    perl -e 'foreach $a(@ARGV){print "\e[48:2::".join(":",unpack("C*",pack("H*",$a)))."m \e[49m "};print "\n"' "$@"
-}
-
-if [ -f "$HOME/.local/bin/conda_init" ]; then
+# Source conda init, if available
+if [ -f "$HOME/.local/bin/conda_init" ] && command -v; then
   source "$HOME/.local/bin/conda_init"
 fi
