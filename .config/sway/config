@@ -57,9 +57,9 @@ title_align center
 
 # Window colorscheme
 # class                 border  background text indicator child_border
-client.focused          $fghard $fghard $bg0 $red $fghard
-client.focused_inactive $gray   $gray   $bg0 $red $gray
-client.unfocused        $bg2    $bg2    $fg2
+client.focused          $fghard $fghard    $bg0 $red      $fghard
+client.focused_inactive $gray   $gray      $bg0 $red      $gray
+client.unfocused        $bg2    $bg2       $fg2 $red      $gray
 
 # Additional window rules
 for_window [class="^Steam$" title="^Friends$"] floating enable, border normal 
@@ -71,7 +71,7 @@ for_window [class="^Steam$" title=".* - event started"] floating enable, border 
 for_window [class="^Steam$" title=".* CD key"] floating enable, border normal 
 for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable, border normal 
 for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable, border normal 
-for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] float, border normal ing enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable, border normal
 for_window [title="^Steam Keyboard$"] floating enable, border normal 
 for_window [app_id="nm-connection-editor"] floating enable, border normal 
 for_window [app_id="nm-openconnect-auth-dialog"] floating enable, border normal 
@@ -212,16 +212,16 @@ bindsym --release $mod+Mod1+l exec "echo 0 > /tmp/sovpipe"
 bindsym --release $mod+Mod1+h exec "echo 0 > /tmp/sovpipe"
 
 # Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+1      move container to workspace number 1
+bindsym $mod+Shift+2      move container to workspace number 2
+bindsym $mod+Shift+3      move container to workspace number 3
+bindsym $mod+Shift+4      move container to workspace number 4
+bindsym $mod+Shift+5      move container to workspace number 5
+bindsym $mod+Shift+6      move container to workspace number 6
+bindsym $mod+Shift+7      move container to workspace number 7
+bindsym $mod+Shift+8      move container to workspace number 8
+bindsym $mod+Shift+9      move container to workspace number 9
+bindsym $mod+Shift+0      move container to workspace number 10
 bindsym $mod+Shift+Mod1+l move container to workspace next
 bindsym $mod+Shift+Mod1+h move container to workspace prev
 # Note: workspaces can have any name you want, not just numbers.

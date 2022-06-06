@@ -1,3 +1,40 @@
+#============================== Plugins section ================================
+
+#-------------------------- Better vi-mode bindings ----------------------------
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+#---------------------------- Syntax highlighting ------------------------------
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+#-------------------------- History substring search ---------------------------
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+# bind UP and DOWN arrow keys to history substring search
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey '^[[A' history-substring-search-up      
+bindkey '^[[B' history-substring-search-down
+
+#------------------------------------ fzf --------------------------------------
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_OPTS="--preview 'preview {}'"
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
+
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd -HI --type f . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd -HI --type d . "$1"
+}
+
 #============================== Options section ================================
 setopt correct           # Auto correct mistakes
 setopt extendedglob      # Allow using regex with *
@@ -182,43 +219,6 @@ git_prompt_string() {
 }
 
 RPROMPT='$(git_prompt_string)'
-
-#============================== Plugins section ================================
-
-#-------------------------- Better vi-mode bindings ----------------------------
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
-#---------------------------- Syntax highlighting ------------------------------
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-
-#-------------------------- History substring search ---------------------------
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-# bind UP and DOWN arrow keys to history substring search
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey '^[[A' history-substring-search-up      
-bindkey '^[[B' history-substring-search-down
-
-#------------------------------------ fzf --------------------------------------
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-export FZF_COMPLETION_TRIGGER=''
-export FZF_COMPLETION_TRIGGER=''
-export FZF_COMPLETION_OPTS="--preview 'preview {}'"
-bindkey '^T' fzf-completion
-bindkey '^I' $fzf_default_completion
-
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
-  fd -HI --type f . "$1"
-}
-
-# Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd -HI --type d . "$1"
-}
 
 #------------------------------- autosuggestion --------------------------------
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

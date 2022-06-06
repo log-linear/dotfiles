@@ -46,24 +46,24 @@ tooltip {
 }
 
 #battery {
-    background-color: #ffffff;
-    color: black;
+    background-color: #f9f5d7;
+    color: #1d2021;
 }
 
 #battery.charging {
-    color: white;
-    background-color: #26A65B;
+    color: #f9f5d7;
+    background-color: #79740e;
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: black;
+        background-color: #f9f5d7;
+        color: #1d2021;
     }
 }
 
 #battery.warning:not(.charging) {
-    background: #f53c3c;
+    background: #9d0006;
     color: white;
     animation-name: blink;
     animation-duration: 1s;
