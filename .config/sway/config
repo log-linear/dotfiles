@@ -238,6 +238,7 @@ bindsym $mod+shift+o layout toggle stacking tabbed split
 
 # Make the current focus fullscreen
 bindsym $mod+f fullscreen
+bindsym $mod+shift+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
