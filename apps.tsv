@@ -80,3 +80,4 @@ gnome-keyring	extra	Keyring manager, used for storing passwords for protonmail-b
 foot	community	terminal emulator
 foot-terminfo	community	terminfo files for foot
 bottom	community	TUI process/system monitor
+pynvim	community	Python client for Neovim
