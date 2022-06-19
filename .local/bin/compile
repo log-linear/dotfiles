@@ -25,6 +25,7 @@ case "$ext" in
             h) pandoc "$file" -o "$base.html" ;;
             d) pandoc "$file" -o "$base.docx" ;;
             x) pandoc "$file" --pdf-engine=xelatex -o "$base.pdf" ;;
+            *) pandoc "$file" -o "$base.html" ;;
           esac ;;
   ms)     preconv "$file" | refer -PS -e | groff -me -ms -kept -T pdf > "$base".pdf ;;
   org)    emacs "$file" --batch -u "$USER" -f org-latex-export-to-pdf ;;
@@ -39,6 +40,7 @@ case "$ext" in
   tex)    case $doc in
             p) pdflatex "$file" -o "$base.pdf" && rm "$base.aux" && rm "$base.log" ;;
             x) xelatex "$file" -o "$base.pdf" && rm "$base.aux" && rm "$base.log" ;;
+            *) xelatex "$file" -o "$base.pdf" && rm "$base.aux" && rm "$base.log" ;;
           esac ;;
   *)      sed -n '/^#!/s/^#!//p; q' "$file" | xargs -r -I % "$file" ;;
 esac
