@@ -138,6 +138,8 @@ bindsym $mod+m exec mullvad_helper
 bindsym $mod+e exec $term --app-id=launcher -e emo | wl-paste -t text | copyq copy
 # Clipboard manager
 bindsym $mod+y exec copyq --start-server show
+# wlsunset
+bindsym $mod+n exec wlsunset -t 4000 -T 4001
 
 # Drag windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
