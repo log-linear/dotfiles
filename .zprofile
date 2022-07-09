@@ -1,1 +1,1 @@
-/home/victor/.profile
+.profile
