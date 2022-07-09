@@ -12,6 +12,7 @@
         "memory",
         "temperature",
         "backlight",
+        "custom/nightlight",
         "idle_inhibitor",
         "custom/keyboard_icon",
         "sway/language",
@@ -242,6 +243,15 @@
         "tooltip-format": "{}",
         "escape": true,
         "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+    },
+    "custom/nightlight": {
+        "format": " {icon} ",
+        "format-icons": [""],
+        "return-type": "json",
+        "tooltip-format": "{}",
+        "exec": "echo '{\"tooltip\": \"Toggle night light\"}'",
+        "escape": true,
+        "on-click": "exec wlsunset -t 4000 -T 4001" 
     },
 }
 

@@ -324,9 +324,6 @@ mode "nag" {
 # udiskie - automounting
 exec udiskie -t &
 
-# wlsunset - redshift-esque program
-exec wlsunset -S 06:30 -s 20:30
-
 # mullvad
 exec mullvad-vpn
 

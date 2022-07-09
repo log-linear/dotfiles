@@ -35,7 +35,7 @@ feh	extra	image viewer
 i3status-rust-git	aur	status bar generator, switched to AUR to handle missing battery issues
 radian	aur	fancy R console
 ipython	community	fancy python REPL
-r	extra	statistical programming language
+R	extra	statistical programming language
 pandoc	community	universal doc converter
 pulseaudio	extra	audio server system
 blueman	community	bluetooth manager
