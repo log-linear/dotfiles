@@ -329,6 +329,9 @@ exec udiskie -t &
 # mullvad
 exec mullvad-vpn
 
+# wlsunset
+exec wlsunset -t 4000 -T 4001
+
 # Inactive window transparency
 exec --no-startup-id python ~/.config/sway/inactive-window-transparency.py
 
