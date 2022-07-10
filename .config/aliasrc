@@ -1,5 +1,4 @@
 #!/bin/sh
-
 alias ..='cd ..'
 alias ll='exa -al'
 alias open='swallow xdg-open'
@@ -11,7 +10,6 @@ alias r='radian --no-history'
 alias mutt='mbsync vfaner && neomutt'
 alias tmux='tmux -f ${XDG_CONFIG_HOME}/tmux/tmux.conf'
 alias unlock='loginctl unlock-sessions'
-alias dlalbum='yt-dlp --ignore-errors -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 -o "%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"'
 alias kpc='keepassxc-cli clip ~/Sync/Stuff/KeePass.kdbx'
 alias deconda='conda deactivate'
 alias condact='conda activate'
@@ -23,13 +21,13 @@ alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias ll='exa -al --color=auto --git'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-    alias diff='diff --color=auto'
-    alias ip='ip -color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias ll='exa -al --color=auto --git'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+  alias diff='diff --color=auto'
+  alias ip='ip -color=auto'
 fi
 

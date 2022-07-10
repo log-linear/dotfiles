@@ -1,41 +1,42 @@
-#============================== Plugins section ================================
+#================================== Plug-ins ===================================
+# Zinit plugin manager: https://github.com/zdharma-continuum/zinit
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
 
-#-------------------------- Better vi-mode bindings ----------------------------
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-#---------------------------- Syntax highlighting ------------------------------
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
-#-------------------------- History substring search ---------------------------
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+### End of Zinit's installer chunk
+
+zinit load jeffreytse/zsh-vi-mode
+zinit load zdharma/fast-syntax-highlighting
+zinit load zsh-users/zsh-history-substring-search
 # bind UP and DOWN arrow keys to history substring search
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey '^[[A' history-substring-search-up      
+bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+zinit load zsh-users/zsh-autosuggestions
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
-#------------------------------------ fzf --------------------------------------
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-export FZF_COMPLETION_TRIGGER=''
-export FZF_COMPLETION_TRIGGER=''
-export FZF_COMPLETION_OPTS="--preview 'preview {}'"
-bindkey '^T' fzf-completion
-bindkey '^I' $fzf_default_completion
-
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
-  fd -HI --type f . "$1"
-}
-
-# Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd -HI --type d . "$1"
-}
-
-#============================== Options section ================================
+#================================== Options ====================================
 setopt correct           # Auto correct mistakes
 setopt extendedglob      # Allow using regex with *
 setopt nocaseglob        # Case insensitive globbing
@@ -64,7 +65,7 @@ HISTSIZE=1000
 SAVEHIST=500
 WORDCHARS=${WORDCHARS//\/[&.;]} # Ignore certain characters for word parsing
 
-#============================ Keybindings section ==============================
+#================================ Keybindings ==================================
 bindkey '^[[7~' beginning-of-line          # Home key
 bindkey '^[[H' beginning-of-line           # Home key
 if [[ "${terminfo[khome]}" != "" ]]; then  # [Home] - Go to beginning of line
@@ -95,11 +96,11 @@ bindkey '^[[Z' reverse-menu-complete # Shift+tab undo last action
 bindkey '^n' menu-complete           # Shift+tab undo last action
 bindkey '^p' reverse-menu-complete   # Shift+tab undo last action
 
-#=============================== Alias section =================================
+#================================== Aliases ====================================
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && \
     source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
  
-#============================== Theming section ================================
+#================================== Theming ====================================
 autoload -U compinit colors zcalc
 compinit -d ${XDG_CACHE_HOME}/.zcompdump
 colors
@@ -210,28 +211,17 @@ parse_git_state() {
 
 git_prompt_string() {
   local git_where="$(parse_git_branch)"
-  
   # If inside a Git repository, print its branch and state
   [ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state)$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX"
-  
   # If not inside the Git repo, print exit codes of last command (only if it failed)
   [ ! -n "$git_where" ] && echo "%{$fg[red]%} %(?..[%?])"
 }
 
 RPROMPT='$(git_prompt_string)'
 
-#------------------------------- autosuggestion --------------------------------
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-
-#======================== Application-specific section =========================
-# Smart cd replacement
-eval "$(zoxide init zsh)"
-
 #================================= Functions ===================================
 
-# Allow foot to open term in same dir
+# Allow foot to open new terminals in the same directory
 function osc7 {
     setopt localoptions extendedglob
     input=( ${(s::)PWD} )
@@ -240,7 +230,31 @@ function osc7 {
 }
 add-zsh-hook -Uz chpwd osc7
 
+#============================= External programs ===============================
+# Smart cd replacement
+eval "$(zoxide init zsh)"
+
 # Source conda init, if available
 if [ -f "$HOME/.local/bin/conda_init" ] && command -v; then
   source "$HOME/.local/bin/conda_init"
 fi
+
+# fzf
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_OPTS="--preview 'preview {}'"
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
+
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd -HI --type f . "$1"
+}
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd -HI --type d . "$1"
+}
+

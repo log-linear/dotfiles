@@ -10,11 +10,6 @@ grim	community	screenshot utility
 clipman	aur	wayland-native clipboard
 wl-clipboard	community	wayland-native CLI clipboard utilities
 zsh	extra	command shell
-zsh-autosuggestions	community	fish-like autosuggestions for zsh
-zsh-completions	community	autocompletions for zsh
-zsh-history-substring-search	community	command history scrollback for zsh
-zsh-fast-syntax-highlighting	aur	zsh syntax highlighting
-zsh-vi-mode	aur	better vi-mode plugin
 exa	community	better ls
 fzf	community	CLI fuzzy finder
 visidata	aur	fancy spreadsheet tool

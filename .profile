@@ -67,23 +67,23 @@ export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export LESSHISTFILE=-
-export R_ENVIRON=$XDG_CONFIG_HOME/R/.Renviron
+export R_ENVIRON="$XDG_CONFIG_HOME"/R/.Renviron
 export PYLINTHOME="$XDG_CACHE_HOME"/pylint
 export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
-export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/python_startup.py
+export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/python_startup.py
 export IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
-export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
+export SQLITE_HISTORY="$XDG_DATA_HOME"/sqlite_history
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export CONDA_ROOT="$XDG_DATA_HOME/miniconda3/"
-export CONDARC=$XDG_CONFIG_HOME/conda/.condarc
+export CONDARC="$XDG_CONFIG_HOME"/conda/.condarc
 export CONDA_ENVS_PATH=$XDG_DATA_HOME/conda/envs
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/.java
 export _JAVA_AWT_WM_NONREPARENTING=1
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch/notmuchrc
 export NMBGIT="$XDG_DATA_HOME"/notmuch/nmbug
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd -HI --type f'
