@@ -35,6 +35,11 @@ if uname -r | grep WSL -; then
   wsl.exe -d wsl-vpnkit service wsl-vpnkit start
 fi
 
+# Work-related startup configs
+if [ -f "$HOME/work.sh" ]; then
+  source "$HOME/work.sh"
+fi
+
 # Defaults
 export TERMINAL="footclient"
 export EDITOR="nvim"
