@@ -207,7 +207,7 @@ fileviewer {*.docx},
 "
 " Or leave it for automatic detection
 "
-fileviewer *[^/] pygmentize -O style=monokai -f console256 -g
+fileviewer *[^/] pygmentize -O style=gruvbox -f console256 -g
 
 " For OS X:
 " filetype * open
