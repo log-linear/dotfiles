@@ -29,17 +29,6 @@ if [ -d "$HOME/.local/share/cargo/bin" ] ; then
   PATH="$HOME/.local/share/cargo/bin:$PATH"
 fi
 
-# if running wsl
-if uname -r | grep WSL -; then
-  # Workaround for tunneling WSL through a VPN. See https://github.com/sakai135/wsl-vpnkit
-  wsl.exe -d wsl-vpnkit service wsl-vpnkit start
-fi
-
-# Work-related startup configs
-if [ -f "$HOME/work.sh" ]; then
-  source "$HOME/work.sh"
-fi
-
 # Defaults
 export TERMINAL="footclient"
 export EDITOR="nvim"
@@ -104,5 +93,19 @@ if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
   eval "$(gnome-keyring-daemon --start)"
   export SSH_AUTH_SOCK
   exec sway
+fi
+
+# if running wsl
+if uname -r | grep WSL -; then
+  # Workaround for tunneling WSL through a VPN. See https://github.com/sakai135/wsl-vpnkit
+  wsl.exe -d wsl-vpnkit service wsl-vpnkit start
+  # Run GUI apps (mainly R plots). See https://stackoverflow.com/a/43399827
+  # GWSL should work as a substitute for vcXsrv
+  export DISPLAY=$(grep -oP "(?<=nameserver ).+" /etc/resolv.conf):0.0
+fi
+
+# Work-related startup configs
+if [ -f "$HOME/work.sh" ]; then
+  source "$HOME/work.sh"
 fi
 
