@@ -87,7 +87,7 @@ for_window [title=".*CopyQ$"] floating enable, sticky enable, resize set 30 ppt 
 
 # Gaps
 gaps inner 5
-smart_gaps on
+smart_gaps off
 
 #============================= Idle configuration ==============================
 exec swayidle -w \

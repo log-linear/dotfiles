@@ -1,32 +1,68 @@
 #!/usr/bin/sh
 
-# General-purpose file previewer script. Pairs well with fzf --preview
+# General-purpose CLI file previewer script. Pairs well with fzf --preview
 
 file=$(readlink -f "$1")
-xdg_type=$(xdg-mime query filetype $file)
-fcat=$(echo $xdg_type | sed 's/\/.*//g')
-ftype=$(echo $xdg_type | sed 's/.*\///g')
+xdg_type=$(xdg-mime query filetype "$file")
+fcat=$(echo "$xdg_type" | sed 's/\/.*//g')
+ftype=$(echo "$xdg_type" | sed 's/.*\///g')
 
 case "$fcat" in
-
-  text) 
+  text)
     case "$ftype" in
-      html) pandoc $1 -t markdown | bat --theme=gruvbox-dark --style=numbers --color=always --line-range :500 -l md ;;
-      *) bat --theme=gruvbox-dark --style=numbers --color=always --line-range :500 $1 ;;
+      html)
+        pandoc "$1" -t markdown \
+        | bat --theme=gruvbox-dark --style=numbers --color=always -l md ;;
+      tab-separated-values|\
+      csv)
+        tidy-viewer -a -c 3 -n 90 "$1" ;;
+      rtf)
+        catdoc "$1" | bat --theme=gruvbox-dark --style=numbers --color=always ;;
+      *)
+        bat --theme=gruvbox-dark --style=numbers --color=always "$1" ;;
     esac ;;
-
-  application) 
+  application)
     case "$ftype" in
-      pdf|postscript)
-        pdftotext $1 - | bat --theme=gruvbox-dark --style=numbers --color=always --line-range :500 ;;
-      x-extension-html|x-extension-htm|x-extension-shtml|x-extension-xhtml|x-extension-xht) 
-        pandoc $1 -t markdown | bat --theme=gruvbox-dark --style=numbers --color=always --line-range :500 ;;
-      json|xml|x-shellscript|javascript) 
-        bat --theme=gruvbox-dark --style=numbers --color=always --line-range :500 $1 ;;
+      pdf|\
+      postscript)
+        pdftotext "$1" - \
+        | bat --theme=gruvbox-dark --style=numbers --color=always ;;
+      x-extension-html|\
+      x-extension-htm|\
+      x-extension-shtml|\
+      x-extension-xhtml|\
+      x-extension-xht)
+        pandoc "$1" -t markdown \
+        | bat --theme=gruvbox-dark --style=numbers --color=always ;;
+      json|\
+      xml|\
+      x-shellscript|\
+      javascript|\
+      sql|\
+      x-perl)
+        bat --theme=gruvbox-dark --style=numbers --color=always "$1" ;;
+      rtf|\
+      msword)
+        catdoc "$1" | bat --theme=gruvbox-dark --style=numbers --color=always ;;
+      vnd.openxmlformats-officedocument.wordprocessingml.document)
+        pandoc "$1" -t markdown \
+        | bat --theme=gruvbox-dark --style=numbers --color=always -l md ;;
+      vnd.ms-excel)
+        xls2csv "$1" | tidy-viewer -a -c 3 -n 90 ;;
+      vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+        xlsx2csv "$1" | tidy-viewer -a -c 3 -n 90 ;;
+      vnd.openxmlformats-officedocument.presentationml.presentation)
+        unzip -qc "$1" ppt/slides/slide*.xml \
+        | grep -oP '(?<=\<a:t\>).*?(?=\</a:t\>)' \
+        | bat --theme=gruvbox-dark --style=numbers --color=always ;;
+      *)
+        exiftool "$1" ;;
     esac ;;
-
-  inode) tree -C $1 | head -200 ;;
-  image) img2txt $1 ;; 
-  *) bat --theme=gruvbox-dark --style=numbers --color=always --line-range :500 $1 ;;
+  inode)
+    tree -C "$1" | head -200 ;;
+  image)
+    catimg -w "$(tput cols)" "$1" ;;
+  *)
+    exiftool "$1" ;;
 esac
 

@@ -167,7 +167,7 @@ fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 
 " Images
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-        \ show-sixel %c %pw %ph %pd
+        \ chafa %c --font-ratio=1 --size=%pw"x"%ph %pd
 
 " Torrent
 fileviewer {*.torrent},<application/x-bittorrent> dumptorrent -v %c
@@ -206,8 +206,7 @@ fileviewer {*.docx},
 " fileviewer *.c,*.h highlight -O ansi -s dante %c
 "
 " Or leave it for automatic detection
-"
-fileviewer *[^/] pygmentize -O style=gruvbox -f console256 -g
+fileviewer *[^/] preview %c -p
 
 " For OS X:
 " filetype * open

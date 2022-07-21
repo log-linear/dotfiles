@@ -79,3 +79,9 @@ pynvim	community	Python client for Neovim
 bash-language-server	community	Language server for bash
 shellcheck	community	Shell script analysis tool
 btm	community	Graphical process/system monitor, `top` alternative
+tidy-viewer	aur	CLI csv pretty printer (cat for tables)
+catdoc	community	convert .doc to txt, also includes xls2csv, for xls > csv conversions
+xlsx2csv	aur	convert xlsx files to csv
+perl-image-exiftool	extra	Read EXIF info from raw files
+catimg	community	Print images in a terminal with 256 colors support
+chafa	community	Image-to-text converter with terminal graphics protocol (e.g. sixel) support
