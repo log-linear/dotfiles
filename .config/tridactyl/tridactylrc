@@ -1,6 +1,6 @@
 " General Settings
 set newtab about:blank
-set theme dark
+set theme light
 set editorcmd footclient -e nvim 
 
 " Bindings

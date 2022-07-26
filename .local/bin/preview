@@ -12,49 +12,49 @@ case "$fcat" in
     case "$ftype" in
       html)
         pandoc "$1" -t markdown \
-        | bat --theme=gruvbox-dark --style=numbers --color=always -l md ;;
+        | bat --theme=gruvbox-light --style=numbers --color=always -l md ;;
       tab-separated-values|\
       csv)
-        tidy-viewer -a -c 3 -n 90 "$1" ;;
+        tidy-viewer -c 5 -a -n 90 "$1" ;;
       rtf)
-        catdoc "$1" | bat --theme=gruvbox-dark --style=numbers --color=always ;;
+        catdoc "$1" | bat --theme=gruvbox-light --style=numbers --color=always ;;
       *)
-        bat --theme=gruvbox-dark --style=numbers --color=always "$1" ;;
+        bat --theme=gruvbox-light --style=numbers --color=always "$1" ;;
     esac ;;
   application)
     case "$ftype" in
       pdf|\
       postscript)
         pdftotext "$1" - \
-        | bat --theme=gruvbox-dark --style=numbers --color=always ;;
+        | bat --theme=gruvbox-light --style=numbers --color=always ;;
       x-extension-html|\
       x-extension-htm|\
       x-extension-shtml|\
       x-extension-xhtml|\
       x-extension-xht)
         pandoc "$1" -t markdown \
-        | bat --theme=gruvbox-dark --style=numbers --color=always ;;
+        | bat --theme=gruvbox-light --style=numbers --color=always ;;
       json|\
       xml|\
       x-shellscript|\
       javascript|\
       sql|\
       x-perl)
-        bat --theme=gruvbox-dark --style=numbers --color=always "$1" ;;
+        bat --theme=gruvbox-light --style=numbers --color=always "$1" ;;
       rtf|\
       msword)
-        catdoc "$1" | bat --theme=gruvbox-dark --style=numbers --color=always ;;
+        catdoc "$1" | bat --theme=gruvbox-light --style=numbers --color=always ;;
       vnd.openxmlformats-officedocument.wordprocessingml.document)
         pandoc "$1" -t markdown \
-        | bat --theme=gruvbox-dark --style=numbers --color=always -l md ;;
+        | bat --theme=gruvbox-light --style=numbers --color=always -l md ;;
       vnd.ms-excel)
-        xls2csv "$1" | tidy-viewer -a -c 3 -n 90 ;;
+        xls2csv "$1" | tidy-viewer -c 5 -a -n 90 ;;
       vnd.openxmlformats-officedocument.spreadsheetml.sheet)
-        xlsx2csv "$1" | tidy-viewer -a -c 3 -n 90 ;;
+        xlsx2csv "$1" | tidy-viewer -c 5 -a -n 90 ;;
       vnd.openxmlformats-officedocument.presentationml.presentation)
         unzip -qc "$1" ppt/slides/slide*.xml \
         | grep -oP '(?<=\<a:t\>).*?(?=\</a:t\>)' \
-        | bat --theme=gruvbox-dark --style=numbers --color=always ;;
+        | bat --theme=gruvbox-light --style=numbers --color=always ;;
       *)
         exiftool "$1" ;;
     esac ;;

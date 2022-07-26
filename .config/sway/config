@@ -42,7 +42,7 @@ set $fg4    #a89984
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
+for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 1
 set $menu exec $term --app-id=launcher -e /usr/bin/sway-launcher-desktop
 
 #============================ Output configuration =============================
@@ -50,7 +50,7 @@ output * bg ~/.local/share/backgrounds/xavier-cuenca-w4-3.jpg fill
 
 #================================= Appearance ==================================
 # Remove title bar, set border size, font
-default_border pixel 4
+default_border pixel 2
 default_floating_border pixel 4
 font SF Pro Display 10
 title_align center
@@ -83,7 +83,7 @@ for_window [app_id="system-config-printer"] floating enable, border normal
 for_window [app_id="pamac-manager"] floating enable, border normal 
 for_window [app_id="nwg-displays"] floating enable, border normal 
 for_window [title="nmtui"] floating enable, border normal 
-for_window [title=".*CopyQ$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
+for_window [title=".*CopyQ$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 1
 
 # Gaps
 gaps inner 5
@@ -139,7 +139,7 @@ bindsym $mod+e exec $term --app-id=launcher -e emo | wl-paste -t text | copyq co
 # Clipboard manager
 bindsym $mod+y exec copyq --start-server show
 # wlsunset
-bindsym $mod+n exec wlsunset -t 4000 -T 4001
+bindsym $mod+n exec wlsunset -t 4500 -T 4501
 
 # Drag windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -334,7 +334,7 @@ exec udiskie -t &
 exec mullvad-vpn
 
 # wlsunset
-exec wlsunset -t 4000 -T 4001
+exec wlsunset -t 4500 -T 4501
 
 # Inactive window transparency
 exec --no-startup-id python ~/.config/sway/inactive-window-transparency.py
