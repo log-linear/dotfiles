@@ -1,5 +1,0 @@
-#!/usr/bin/sh
-
-# General purpose CLI file-opener with window swallowing
-
-swallow xdg-open $(fzf --preview "preview {}") 

@@ -1,8 +1,8 @@
 #!/bin/sh
 alias ..='cd ..'
 alias ll='exa -al'
-alias open='xdg-open'
-alias o='swallow xdg-open'
+alias o='open'
+alias fzo='open $(fzf --preview "preview {}")'
 alias vim='nvim'
 alias v='nvim'
 alias e='$EDITOR'
