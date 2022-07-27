@@ -20,6 +20,8 @@ if [ "$file" != "" ]; then
       sql|\
       x-perl)
         $EDITOR "$file" ;;
+      *)
+        swallow xdg-open "$file"
     esac
   else
     swallow xdg-open "$file"
