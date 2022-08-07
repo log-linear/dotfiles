@@ -249,14 +249,14 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # Resizing windows
-bindsym $mod+equal  resize grow   height 50px
-bindsym $mod+minus  resize shrink height 50px
-bindsym $mod+plus  resize grow   height 50px
-bindsym $mod+underscore  resize shrink height 50px
-bindsym $mod+period resize grow   width  50px
-bindsym $mod+comma  resize shrink width  50px
-bindsym $mod+greater resize grow   width  50px
-bindsym $mod+less  resize shrink width  50px
+bindsym $mod+equal      resize grow   height 50px
+bindsym $mod+minus      resize shrink height 50px
+bindsym $mod+plus       resize grow   height 50px
+bindsym $mod+underscore resize shrink height 50px
+bindsym $mod+period     resize grow   width  50px
+bindsym $mod+comma      resize shrink width  50px
+bindsym $mod+greater    resize grow   width  50px
+bindsym $mod+less       resize shrink width  50px
 
 # Adjust gap sizes
 bindsym $mod+bracketright gaps inner current plus  5
@@ -286,7 +286,7 @@ bindsym XF86Search            exec bemenu-run
 bindsym Print exec grim - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."
 
 # Screen select snapshot to clipboard
-bindsym $mod+shift+S exec grim -g "$(slurp)" - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."
+bindsym $mod+shift+S exec grim -g "$(slurp)" - | wl-copy & notify-send "Snapshot copied to clipboard. Click here to edit."
 
 #================================= Status Bar ==================================
 

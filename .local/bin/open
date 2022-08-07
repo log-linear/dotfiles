@@ -7,11 +7,17 @@ file="$1"
 if [ "$file" != "" ]; then
   xdg_type=$(xdg-mime query filetype "$file")
   fcat=$(echo "$xdg_type" | sed 's/\/.*//g')
+  ftype=$(echo "$xdg_type" | sed 's/.*\///g')
 
   if [ "$fcat" = "text" ]; then
-    $EDITOR "$file"
+    case "$ftype" in
+      tab-separated-values|\
+      csv)
+        vd "$file" ;;
+      *)
+        $EDITOR "$file"
+    esac
   elif [ "$fcat" = "application" ]; then
-    ftype=$(echo "$xdg_type" | sed 's/.*\///g')
     case "$ftype" in
       json|\
       xml|\

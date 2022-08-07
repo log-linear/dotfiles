@@ -2,7 +2,6 @@
 alias ..='cd ..'
 alias ll='exa -al'
 alias o='open'
-alias vim='nvim'
 alias v='nvim'
 alias e='$EDITOR'
 alias r='radian --no-history'
