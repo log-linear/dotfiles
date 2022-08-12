@@ -85,3 +85,4 @@ xlsx2csv	aur	convert xlsx files to csv
 perl-image-exiftool	extra	Read EXIF info from raw files
 catimg	community	Print images in a terminal with 256 colors support
 chafa	community	Image-to-text converter with terminal graphics protocol (e.g. sixel) support
+usql	aur	universal SQL cli
