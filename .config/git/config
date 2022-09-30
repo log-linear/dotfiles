@@ -8,6 +8,7 @@
     log = delta
     reflog = delta
     show = delta
+	difftool = true
 [interactive]
     diffFilter = delta --color-only --features=interactive
 [delta]
@@ -26,5 +27,13 @@
     hunk-header-file-style = red
     hunk-header-line-number-style = "#067a00"
     hunk-header-style = file line-number syntax
+[diff]
+	tool = difftastic
+[difftool]
+	prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+[alias]
+        dft = difftool
 [init]
 	defaultBranch = master
