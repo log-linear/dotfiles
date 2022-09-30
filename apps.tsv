@@ -1,88 +1,86 @@
 app	source	description
-sway	community	window manager
-sway-launcher-dekstop	community	launcher
-neovim	community	text editor
-swaylock	community	screen locking utility
-swaynagmode	aur	wrapper enabling keybindings in swaynag
-udiskie	community	drive auto-mount utility
-mako	community	notification daemon
-grim	community	screenshot utility
-clipman	aur	wayland-native clipboard
-wl-clipboard	community	wayland-native CLI clipboard utilities
-zsh	extra	command shell
-exa	community	better ls
-fzf	community	CLI fuzzy finder
-visidata	aur	fancy spreadsheet tool
-markdown_live_preview	pip	generates live markdown previews in any text editor
-keepassxc	community	password manager
-steam	multilib	vidya
-vifm	community	TUI file manager
-firefox	extra	browser
-thunderbird	extra	Email client
-protonmail-bridge	aur	Access protonmail via e.g. thunderbird
-mullvad-vpn	aur	VPN
-conda	manual	package manager tailored to data science
-zathura	community	PDF viewer
-npm	community	Node Package Manager for COC and other miscellaneous tools
-firefox-tridactyl	community	extension implementing vi-like bindings in firefox
-firefox-tridactyl-native	aur	tridactyl extension allowing config file use
-feh	extra	image viewer
-i3status-rust-git	aur	status bar generator, switched to AUR to handle missing battery issues
-radian	aur	fancy R console
-ipython	community	fancy python REPL
-R	extra	statistical programming language
-pandoc	community	universal doc converter
-pulseaudio	extra	audio server system
-blueman	community	bluetooth manager
-networkmanager	extra	manages network (wifi/ethernet etc) connections
-keychain	extra	ssh key manager
-wdisplays	aur	GUI app for adjusting displays
-slurp	community	app for selecting regions and printing to stdout, best paired with grim
-reflector	community	script to retrie & filter latest Pacman mirror list
-ripgrep	community	super fast grep replacement, useful for fzf
-nerd-fonts-jetbrains-mono	aur	JetBrainsMono with NerdFonts support for fancy glyphs
-bat	community	cat clone with syntax highlighting and git integration
-networkmanager-dmenu-git	aur	dmenu frontend for NetworkManager
-bemenu	community	dmenu replacement, used as launcher for networkmanager-dmenu
-powerline-fonts	community	patched fonts for vim-airline
-code-minimap	aur	tool to generate scrollbars with mini-previews in e.g. vim
-jq	community	CLI JSON processor
-swayidle	community	system idle manager for sway
-git-delta	community	better git diff viewer/pager
-paru	aur	AUR helper
-paruz	aur	fzf ineterface for paru
-xdg-utils	extra	CLI utils for XDG desktop tasks
-perl-file-mimeinfo	extra	Detect filetypes for XDG-mime
-noto-fonts-emoji-blob	aur	Android blob emojis
-libpipewire02	extra	Library to handle Wayland screensharing in chromium
-mupdf-tools	community	PDF editing tools
-zathura-pdf-mupdf	community	PDF backend for zathura
-fd	community	faster alternative to find
-zoxide 	community 	smarter cd
-poppler	extra	pdf editing tools
-libsecret	core	Library for storing and retrieving passwords and other secrets
-libnotify	extra	Library for sending desktop notifications
-python-pywal	community	Generate and change colorschemes on the fly
-perl-image-exiftool	extra	Exif info reader/writer, used to preview images with vifm + sixel
-wdisplays|	AUR	xrandr-like display manager
-system-config-printer	extra	CUPS printer configuration frontend
-onlyoffice-bin	AUR	Office Software Suite
-pacman-contrib	community	Contributed scripts and tools for pacman
-sov	AUR	Overview applications for sway
-waybar	community	Wayland bar for sway and other wlroots compositors
-vscode-langservers-extracted	AUR	Language Servers extracted from VSCode
-gnome-keyring	extra	Keyring manager, used for storing passwords for protonmail-bridge and SSH manager
-foot	community	terminal emulator
-foot-terminfo	community	terminfo files for foot
-bottom	community	TUI process/system monitor
-pynvim	community	Python client for Neovim
 bash-language-server	community	Language server for bash
-shellcheck	community	Shell script analysis tool
+bat	community	cat clone with syntax highlighting and git integration
+bemenu	community	dmenu replacement, used as launcher for networkmanager-dmenu
+blueman	community	bluetooth manager
+bottom	community	TUI process/system monitor
 btm	community	Graphical process/system monitor, `top` alternative
-tidy-viewer	aur	CLI csv pretty printer (cat for tables)
 catdoc	community	convert .doc to txt, also includes xls2csv, for xls > csv conversions
-xlsx2csv	aur	convert xlsx files to csv
-perl-image-exiftool	extra	Read EXIF info from raw files
 catimg	community	Print images in a terminal with 256 colors support
 chafa	community	Image-to-text converter with terminal graphics protocol (e.g. sixel) support
+clipman	aur	wayland-native clipboard
+conda	manual	package manager tailored to data science
+difftastic	community	Treesitter-based difftool
+exa	community	better ls
+fd	community	faster alternative to find
+feh	extra	image viewer
+firefox	extra	browser
+firefox-tridactyl	community	extension implementing vi-like bindings in firefox
+firefox-tridactyl-native	aur	tridactyl extension allowing config file use
+foot	community	terminal emulator
+foot-terminfo	community	terminfo files for foot
+fzf	community	CLI fuzzy finder
+git-delta	community	better git diff viewer/pager
+gnome-keyring	extra	Keyring manager, used for storing passwords for protonmail-bridge and SSH manager
+grim	community	screenshot utility
+i3status-rust-git	aur	status bar generator, switched to AUR to handle missing battery issues
+ipython	community	fancy python REPL
+jq	community	CLI JSON processor
+keepassxc	community	password manager
+keychain	extra	ssh key manager
+libnotify	extra	Library for sending desktop notifications
+libpipewire02	extra	Library to handle Wayland screensharing in chromium
+libsecret	core	Library for storing and retrieving passwords and other secrets
+mako	community	notification daemon
+markdown_live_preview	pip	generates live markdown previews in any text editor
+mullvad-vpn	aur	VPN
+mupdf-tools	community	PDF editing tools
+neovim	community	text editor
+nerd-fonts-jetbrains-mono	aur	JetBrainsMono with NerdFonts support for fancy glyphs
+networkmanager-dmenu-git	aur	dmenu frontend for NetworkManager
+networkmanager	extra	manages network (wifi/ethernet etc) connections
+noto-fonts-emoji-blob	aur	Android blob emojis
+npm	community	Node Package Manager for COC and other miscellaneous tools
+onlyoffice-bin	aur	Office Software Suite
+pacman-contrib	community	Contributed scripts and tools for pacman
+pandoc	community	universal doc converter
+paru	aur	AUR helper
+paruz	aur	fzf ineterface for paru
+perl-file-mimeinfo	extra	Detect filetypes for XDG-mime
+perl-image-exiftool	extra	Read EXIF info from raw files
+poppler	extra	pdf editing tools
+powerline-fonts	community	patched fonts for vim-airline
+protonmail-bridge	aur	Access protonmail via e.g. thunderbird
+pulseaudio	extra	audio server system
+pynvim	community	Python client for Neovim
+python-pywal	community	Generate and change colorschemes on the fly
+radian	aur	fancy R console
+reflector	community	script to retrie & filter latest Pacman mirror list
+R	extra	statistical programming language
+ripgrep	community	super fast grep replacement
+shellcheck	community	Shell script analysis tool
+slurp	community	app for selecting regions and printing to stdout, best paired with grim
+sov	aur	Overview applications for sway
+steam	multilib	vidya
+sway	community	window manager
+swayidle	community	system idle manager for sway
+sway-launcher-dekstop	community	launcher
+swaylock	community	screen locking utility
+swaynagmode	aur	wrapper enabling keybindings in swaynag
+system-config-printer	extra	CUPS printer configuration frontend
+thunderbird	extra	Email client
+tidy-viewer	aur	CLI csv pretty printer (cat for tables)
+udiskie	community	drive auto-mount utility
 usql	aur	universal SQL cli
+vifm	community	TUI file manager
+visidata	aur	fancy spreadsheet tool
+vscode-langservers-extracted	aur	Language Servers extracted from VSCode
+waybar	community	Wayland bar for sway and other wlroots compositors
+wdisplays	aur	GUI app for adjusting displays
+wl-clipboard	community	wayland-native CLI clipboard utilities
+xdg-utils	extra	CLI utils for XDG desktop tasks
+xlsx2csv	aur	convert xlsx files to csv
+zathura	community	PDF viewer
+zathura-pdf-mupdf	community	PDF backend for zathura
+zoxide 	community 	smarter cd
+zsh	extra	command shell
