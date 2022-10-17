@@ -81,7 +81,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd -HI --type f'
-export FZF_DEFAULT_OPTS="--reverse --color=bg+:#f9f5d7,hl+:#076678,fg+:#cc241d,hl:#076678"
+export FZF_DEFAULT_OPTS="--reverse --color=bg+:#EEEEEE,hl+:#88507d,fg+:#353535,hl:#88507d"
 
 # auto-start sway
 if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
