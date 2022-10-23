@@ -18,26 +18,16 @@ set $browser firefox
 set $nag     exec swaynagmode
 
 # Colors
-set $bg0    #282828
-set $bg1    #3c3836
-set $bg2    #504945
-set $bg3    #665c54
-set $bg4    #7c6f64
-set $gray   #a89984
-set $red    #cc241d
-set $orange #d65d0e
-set $green  #98971a
-set $yellow #d79921
-set $blue   #458588
-set $purple #b16286
-set $aqua   #689d68
-set $bghard #1d2021
-set $fghard #f9f5d7
-set $fg0    #fbf1c7
-set $fg1    #ebddb2
-set $fg2    #d5c4a1
-set $fg3    #bdae93
-set $fg4    #a89984
+set $bg0    #EEEEEE
+set $bg1    #C6C3C3
+set $gray   #5C5C5C
+set $red    #A8334C
+set $orange #944927
+set $green  #4F6C31
+set $blue   #286486
+set $purple #88507D
+set $fg0    #353535
+set $fg1    #5C5C5C
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -46,7 +36,7 @@ for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 p
 set $menu exec $term --app-id=launcher -e /usr/bin/sway-launcher-desktop
 
 #============================ Output configuration =============================
-output * bg ~/.local/share/backgrounds/xavier-cuenca-w4-3.jpg fill
+output * bg ~/.local/share/backgrounds/benjamin-voros-yrwpJwDNSHE-unsplash.jpg fill
 
 #================================= Appearance ==================================
 # Remove title bar, set border size, font
@@ -56,10 +46,10 @@ font SF Pro Display 10
 title_align center
 
 # Window colorscheme
-# class                 border  background text indicator child_border
-client.focused          $fghard $fghard    $bg0 $red      $fghard
-client.focused_inactive $gray   $gray      $bg0 $red      $gray
-client.unfocused        $bg2    $bg2       $fg2 $red      $gray
+# class                 border background text indicator child_border
+client.focused          $bg0   $bg0       $fg0 $red      $bg0
+client.focused_inactive $gray  $gray      $bg0 $red      $gray
+client.unfocused        $bg1   $bg1       $fg1 $red      $gray
 
 # Additional window rules
 for_window [class="^Steam$" title="^Friends$"] floating enable, border normal 
