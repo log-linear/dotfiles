@@ -12,41 +12,41 @@ case "$fcat" in
     case "$ftype" in
       html)
         pandoc "$file" -t markdown \
-        | bat --theme=base16 --style=numbers --color=always -l md ;;
+        | bat --style=numbers --color=always -l md ;;
       tab-separated-values|\
       csv)
         tidy-viewer -c 5 -a -n 90 "$file" ;;
       rtf)
-        catdoc "$file" | bat --theme=base16 --style=numbers --color=always ;;
+        catdoc "$file" | bat --style=numbers --color=always ;;
       *)
-        bat --theme=base16 --style=numbers --color=always "$file" ;;
+        bat --style=numbers --color=always "$file" ;;
     esac ;;
   application)
     case "$ftype" in
       pdf|\
       postscript)
         pdftotext "$file" - \
-        | bat --theme=base16 --style=numbers --color=always ;;
+        | bat --style=numbers --color=always ;;
       x-extension-html|\
       x-extension-htm|\
       x-extension-shtml|\
       x-extension-xhtml|\
       x-extension-xht)
         pandoc "$file" -t markdown \
-        | bat --theme=base16 --style=numbers --color=always ;;
+        | bat --style=numbers --color=always ;;
       json|\
       xml|\
       x-shellscript|\
       javascript|\
       sql|\
       x-perl)
-        bat --theme=base16 --style=numbers --color=always "$file" ;;
+        bat --style=numbers --color=always "$file" ;;
       rtf|\
       msword)
-        catdoc "$file" | bat --theme=base16 --style=numbers --color=always ;;
+        catdoc "$file" | bat --style=numbers --color=always ;;
       vnd.openxmlformats-officedocument.wordprocessingml.document)
         pandoc "$file" -t markdown \
-        | bat --theme=base16 --style=numbers --color=always -l md ;;
+        | bat --style=numbers --color=always -l md ;;
       vnd.ms-excel)
         xls2csv "$file" | tidy-viewer -c 5 -a -n 90 ;;
       vnd.openxmlformats-officedocument.spreadsheetml.sheet)
@@ -54,7 +54,7 @@ case "$fcat" in
       vnd.openxmlformats-officedocument.presentationml.presentation)
         unzip -qc "$file" ppt/slides/slide*.xml \
         | grep -oP '(?<=\<a:t\>).*?(?=\</a:t\>)' \
-        | bat --theme=base16 --style=numbers --color=always ;;
+        | bat --style=numbers --color=always ;;
       *)
         exiftool "$file" ;;
     esac ;;

@@ -26,6 +26,10 @@ if [ "$file" != "" ]; then
       sql|\
       x-perl)
         $EDITOR "$file" ;;
+      vnd.openxmlformats-officedocument.spreadsheetml.sheet|\
+      vnd.sqlite3|\
+      vnd.ms-excel)
+        vd "$file" ;;
       *)
         swallow xdg-open "$file"
     esac

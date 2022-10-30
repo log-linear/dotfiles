@@ -35,6 +35,9 @@ export EDITOR="nvim"
 export BROWSER="firefox"
 export TERMINAL_COMMAND="$TERMINAL -e"  # Use footclient with sway-launcher-desktop
 export LANG="en_US.UTF-8"
+export FZF_DEFAULT_COMMAND='fd -HI --type f'
+export FZF_DEFAULT_OPTS="--reverse --color=bg+:#EEEEEE,hl+:#88507d,fg+:#353535,hl:#88507d"
+export BAT_THEME="base16"
 
 # $HOME cleanup
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -78,10 +81,7 @@ export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
 export NMBGIT="$XDG_DATA_HOME/notmuch/nmbug"
 export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-
-# fzf
-export FZF_DEFAULT_COMMAND='fd -HI --type f'
-export FZF_DEFAULT_OPTS="--reverse --color=bg+:#EEEEEE,hl+:#88507d,fg+:#353535,hl:#88507d"
+export VPYTHON_VIRTUALENV_ROOT="$XDG_DATA_HOME/vpython_root"
 
 # auto-start sway
 if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
