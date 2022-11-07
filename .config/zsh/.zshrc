@@ -217,6 +217,25 @@ if [ -f "$HOME/.local/bin/conda_init" ] && command -v; then
   source "$HOME/.local/bin/conda_init"
 fi
 
+# fzf
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_OPTS="--preview 'preview {}'"
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
+
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd -HI --type f . "$1"
+}
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd -HI --type d . "$1"
+}
+
 #================================== Aliases ====================================
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && \
     source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
