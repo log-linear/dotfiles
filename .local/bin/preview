@@ -59,7 +59,7 @@ case "$fcat" in
         exiftool "$file" ;;
     esac ;;
   inode)
-    tree -C "$file" | head -200 ;;
+    exa -1 --color=always "$file" | head -200 ;;
   image)
     catimg -w "$(tput cols)" "$file" ;;
   *)

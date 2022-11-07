@@ -37,7 +37,8 @@ export TERMINAL_COMMAND="$TERMINAL -e"  # Use footclient with sway-launcher-desk
 export LANG="en_US.UTF-8"
 export FZF_DEFAULT_COMMAND='fd -HI --type f'
 export FZF_DEFAULT_OPTS="--reverse --color=bg+:#EEEEEE,hl+:#88507d,fg+:#353535,hl:#88507d"
-export BAT_THEME="base16"
+export BAT_THEME="GitHub"
+export DFT_BACKGROUND="light"
 
 # $HOME cleanup
 export XDG_CONFIG_HOME="$HOME/.config"

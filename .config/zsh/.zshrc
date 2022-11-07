@@ -1,4 +1,4 @@
-#================================== Plug-ins ===================================
+#=================================== zinit =====================================
 # Zinit plugin manager: https://github.com/zdharma-continuum/zinit
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -23,19 +23,6 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-zinit load jeffreytse/zsh-vi-mode
-zinit load zdharma/fast-syntax-highlighting
-zinit load zsh-users/zsh-history-substring-search
-# bind UP and DOWN arrow keys to history substring search
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-zinit load zsh-users/zsh-autosuggestions
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-
 #================================== Options ====================================
 setopt correct           # Auto correct mistakes
 setopt extendedglob      # Allow using regex with *
@@ -49,6 +36,10 @@ setopt histignorealldups # If a new command is a duplicate, remove the older one
 setopt autocd            # if only directory path is entered, cd there.
 disable r                # Disable zsh built-in command `r`
 stty -ixon               # Disable ctrl+s ctrl+q terminal input disabling
+
+# Completion
+autoload -U compinit colors zcalc
+compinit -d ${XDG_CACHE_HOME}/.zcompdump
 
 # Tab completion settings
 zstyle ':completion:*' menu select  # Completion menu selection
@@ -97,8 +88,6 @@ bindkey '^n' menu-complete           # Shift+tab undo last action
 bindkey '^p' reverse-menu-complete   # Shift+tab undo last action
 
 #================================== Theming ====================================
-autoload -U compinit colors zcalc
-compinit -d ${XDG_CACHE_HOME}/.zcompdump
 colors
 setopt prompt_subst                                # enable prompt substition
 echo $USER@$HOST  $(uname -srm) $(lsb_release -rs) # prompt greeting msg
@@ -228,26 +217,33 @@ if [ -f "$HOME/.local/bin/conda_init" ] && command -v; then
   source "$HOME/.local/bin/conda_init"
 fi
 
-# fzf
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-export FZF_COMPLETION_TRIGGER=''
-export FZF_COMPLETION_TRIGGER=''
-export FZF_COMPLETION_OPTS="--preview 'preview {}'"
-bindkey '^T' fzf-completion
-bindkey '^I' $fzf_default_completion
-
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
-  fd -HI --type f . "$1"
-}
-# Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd -HI --type d . "$1"
-}
-
 #================================== Aliases ====================================
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && \
     source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
  
+#================================== Plug-ins ===================================
+zinit light Aloxaf/fzf-tab  # Run `build-fzf-tab-module` after install to speed things up
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':fzf-tab:*' fzf-min-height 50
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'preview $realpath'
+zstyle ':fzf-tab:complete:-command-:*' fzf-preview
+zstyle ':fzf-tab:complete:*:options' fzf-preview 
+zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+zinit load jeffreytse/zsh-vi-mode
+zinit load zdharma/fast-syntax-highlighting
+zinit load zsh-users/zsh-history-substring-search
+zinit load wfxr/forgit
+
+# bind UP and DOWN arrow keys to history substring search
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+zinit load zsh-users/zsh-autosuggestions
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'

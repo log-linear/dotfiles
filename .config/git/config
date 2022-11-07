@@ -13,6 +13,7 @@
     diffFilter = delta --color-only --features=interactive
 [delta]
     features = decorations
+	theme = GitHub
     side-by-side = true
     line-numbers-left-format = ""
     line-numbers-right-format = "│ "
