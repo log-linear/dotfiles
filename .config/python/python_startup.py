@@ -84,7 +84,6 @@ try:
 
     os.environ['PYTHONSTARTUP'] = ''  # Prevent running this again
     c = Config()
-    c.TerminalInteractiveShell.editing_mode = 'vi'
     IPython.start_ipython(config=c)
     raise SystemExit
 
