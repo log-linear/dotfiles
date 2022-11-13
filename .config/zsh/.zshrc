@@ -57,6 +57,7 @@ SAVEHIST=500
 WORDCHARS=${WORDCHARS//\/[&.;]} # Ignore certain characters for word parsing
 
 #================================ Keybindings ==================================
+bindkey -e
 bindkey '^[[7~' beginning-of-line          # Home key
 bindkey '^[[H' beginning-of-line           # Home key
 if [[ "${terminfo[khome]}" != "" ]]; then  # [Home] - Go to beginning of line
