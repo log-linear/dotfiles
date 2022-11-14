@@ -36,6 +36,7 @@ markdown_live_preview	pip	generates live markdown previews in any text editor
 mullvad-vpn	aur	VPN
 mupdf-tools	community	PDF editing tools
 neovim	community	text editor
+neovim-remote	AUR	Support --remote and friends for Neovim
 nerd-fonts-jetbrains-mono	aur	JetBrainsMono with NerdFonts support for fancy glyphs
 networkmanager-dmenu-git	aur	dmenu frontend for NetworkManager
 networkmanager	extra	manages network (wifi/ethernet etc) connections

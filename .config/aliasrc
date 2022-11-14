@@ -2,7 +2,7 @@
 alias ..='cd ..'
 alias ll='exa -al'
 alias o='open'
-alias v='nvim'
+alias v='$EDITOR'
 alias e='$EDITOR'
 alias r='radian --no-history'
 alias mutt='mbsync vfaner && neomutt'
