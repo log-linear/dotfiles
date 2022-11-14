@@ -1,0 +1,4 @@
+#!/bin/sh
+# Wrapper script to always open files with nvr in a new split
+
+nvr -l "$1"
