@@ -348,7 +348,6 @@ exec thunderbird
 exec keepassxc
 
 workspace 3
-exec discord
 exec telegram-desktop
 
 include /etc/sway/config.d/*
