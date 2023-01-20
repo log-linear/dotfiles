@@ -6,3 +6,5 @@ bindsym $mod+shift+return exec notify-send "foot server launched" && foot --serv
 workspace 1
 exec $term
 exec $term
+
+include ~/.config/sway/outputs

@@ -13,7 +13,6 @@ conda	manual	package manager tailored to data science
 difftastic	community	Treesitter-based difftool
 exa	community	better ls
 fd	community	faster alternative to find
-feh	extra	image viewer
 firefox	extra	browser
 firefox-tridactyl	community	extension implementing vi-like bindings in firefox
 firefox-tridactyl-native	aur	tridactyl extension allowing config file use
@@ -24,6 +23,7 @@ git-delta	community	better git diff viewer/pager
 gnome-keyring	extra	Keyring manager, used for storing passwords for protonmail-bridge and SSH manager
 grim	community	screenshot utility
 i3status-rust-git	aur	status bar generator, switched to AUR to handle missing battery issues
+imv	extra	image viewer
 ipython	community	fancy python REPL
 jq	community	CLI JSON processor
 keepassxc	community	password manager
@@ -33,6 +33,7 @@ libpipewire02	extra	Library to handle Wayland screensharing in chromium
 libsecret	core	Library for storing and retrieving passwords and other secrets
 mako	community	notification daemon
 markdown_live_preview	pip	generates live markdown previews in any text editor
+mpv	community	video player
 mullvad-vpn	aur	VPN
 mupdf-tools	community	PDF editing tools
 neovim	community	text editor
@@ -40,6 +41,7 @@ neovim-remote	AUR	Support --remote and friends for Neovim
 nerd-fonts-jetbrains-mono	aur	JetBrainsMono with NerdFonts support for fancy glyphs
 networkmanager-dmenu-git	aur	dmenu frontend for NetworkManager
 networkmanager	extra	manages network (wifi/ethernet etc) connections
+nwg-displays	aur	Output management utility for sway
 noto-fonts-emoji-blob	aur	Android blob emojis
 npm	community	Node Package Manager for COC and other miscellaneous tools
 onlyoffice-bin	aur	Office Software Suite

@@ -1,0 +1,18 @@
+output "DP-1" {
+    mode --custom 2560x1440@59.865Hz
+    pos 1600 0
+    transform normal
+    scale 1.0
+    scale_filter nearest
+    adaptive_sync off
+    dpms on
+}
+output "LVDS-2" {
+    mode  1600x900@60.007Hz
+    pos 4160 0
+    transform normal
+    scale 1.0
+    scale_filter smart
+    adaptive_sync off
+    dpms on
+}
