@@ -57,6 +57,7 @@ protonmail-bridge	aur	Access protonmail via e.g. thunderbird
 pulseaudio	extra	audio server system
 pynvim	community	Python client for Neovim
 python-pywal	community	Generate and change colorschemes on the fly
+python-radicale-decsync	aur	decsync plugin for syncing tasks/calendar with e.g. thunderbird
 radian	aur	fancy R console
 reflector	community	script to retrie & filter latest Pacman mirror list
 R	extra	statistical programming language

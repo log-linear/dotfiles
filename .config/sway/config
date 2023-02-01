@@ -338,6 +338,9 @@ exec --no-startup-id nm-applet --indicator
 # Bluetooth Manager
 exec --no-startup-id blueman-applet
 
+# Radicale
+exec python3 -m radicale --config ~/.config/radicale/config
+
 # Workspace programs
 workspace 1
 exec $browser

@@ -1,0 +1,9 @@
+[storage]
+type = radicale_storage_decsync
+filesystem_folder = ~/.local/share/radicale/collections
+decsync_dir = ~/Sync/Stuff
+
+[auth]
+type = htpasswd
+htpasswd_filename = ~/.config/radicale/users
+htpasswd_encryption = plain
