@@ -63,6 +63,7 @@ reflector	community	script to retrie & filter latest Pacman mirror list
 R	extra	statistical programming language
 ripgrep	community	super fast grep replacement
 shellcheck	community	Shell script analysis tool
+shfmt	community	Shell script formatter
 slurp	community	app for selecting regions and printing to stdout, best paired with grim
 sov	aur	Overview applications for sway
 steam	multilib	vidya
