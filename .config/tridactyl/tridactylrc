@@ -164,8 +164,8 @@ bind gC tabduplicate
 bind <C-p> pin
 bind / fillcmdline find
 bind ? fillcmdline find -?
-bind n findnext 1
-bind N findnext -1
+bind n findnext --search-from-view 1
+bind N findnext --search-from-view --reverse -1
 bind <Escape> nohlsearch
 bind <C-[> nohlsearch
 
