@@ -24,6 +24,7 @@ gnome-keyring	extra	Keyring manager, used for storing passwords for protonmail-b
 grim	community	screenshot utility
 i3status-rust-git	aur	status bar generator, switched to AUR to handle missing battery issues
 imv	extra	image viewer
+imagemagick	extra	CLI image viewing/manipulation program
 ipython	community	fancy python REPL
 jq	community	CLI JSON processor
 keepassxc	community	password manager

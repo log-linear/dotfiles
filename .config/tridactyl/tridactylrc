@@ -164,9 +164,10 @@ bind gC tabduplicate
 bind <C-p> pin
 bind / fillcmdline find
 bind ? fillcmdline find -?
-bind n findnext --search-from-view 1
-bind N findnext --search-from-view --reverse -1
-bind <Escape> nohlsearch
+bind n findnext
+bind N findnext --reverse
+bind <C-l> nohlsearch
+bind <Esc> nohlsearch
 bind <C-[> nohlsearch
 
 " For syntax highlighting see https://github.com/tridactyl/vim-tridactyl
