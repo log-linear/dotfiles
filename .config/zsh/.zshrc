@@ -188,8 +188,17 @@ if [ -f "$HOME/.local/bin/conda_init" ] && command -v; then
 fi
 
 # fzf
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+if [ -f /usr/share/fzf/key-bindings.zsh ]; then
+  source /usr/share/fzf/key-bindings.zsh
+else
+  source $PREFIX/share/fzf/key-bindings.zsh
+fi
+
+if [ -f /usr/share/fzf/completion.zsh ]; then
+  source /usr/share/fzf/completion.zsh
+else
+  source $PREFIX/share/fzf/completion.zsh
+fi
 export FZF_COMPLETION_TRIGGER=''
 export FZF_COMPLETION_TRIGGER=''
 export FZF_COMPLETION_OPTS="--preview 'preview {}'"
@@ -230,8 +239,6 @@ zinit load wfxr/forgit
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
 zinit load zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
