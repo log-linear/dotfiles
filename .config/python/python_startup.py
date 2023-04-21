@@ -44,7 +44,8 @@ def set_autoindent():
         last_input = readline.get_history_item(hist_len)
         try:
             last_indent_index = last_input.rindex("    ")
-        except:        last_indent = 0
+        except:
+            last_indent = 0
         else:
             last_indent = int(last_indent_index / 4) + 1
         if len(last_input.strip()) > 1:
@@ -84,6 +85,7 @@ try:
 
     os.environ['PYTHONSTARTUP'] = ''  # Prevent running this again
     c = Config()
+    c.TerminalInteractiveShell.editing_mode = "vi"
     IPython.start_ipython(config=c)
     raise SystemExit
 

@@ -103,6 +103,44 @@ export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
 PROMPT='%B%{$fg[cyan]%}%(4~|%-1~/.../%2~|%~)%u%b >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b '
 
+#----------------------------- vi-mode indicators ------------------------------
+vim_ins_mode="%{$fg_bold[cyan]%}[I]%{$reset_color%}"
+vim_nor_mode="%{$fg_bold[yellow]%}[N]%{$reset_color%}"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+  # Show mode [N|I] in prompt
+  vim_mode="${${KEYMAP/vicmd/${vim_nor_mode}}/(main|viins)/${vim_ins_mode}}"
+
+  # Block for Normal, beam for Insert mode
+  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif 
+    [[ ${KEYMAP} == main ]] ||
+    [[ ${KEYMAP} == viins ]] ||
+    [[ ${KEYMAP} = '' ]] ||
+    [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+function zle-line-finish {
+  vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
+
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+# Handle sending ^C
+function TRAPINT() {
+  vim_mode=$vim_ins_mode
+  return $(( 128 + $1 ))
+} 
+PROMPT='${vim_mode} %B%{$fg[cyan]%}%(4~|%-1~/.../%2~|%~)%u%b >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b '
+
 #----------------------------- Right side prompt -------------------------------
 # - shows status of git when in git repository (code adapted from 
 # https://joshdick.net/2017/06/08/my_git_prompt_for_zsh_revisited.html)
@@ -231,6 +269,7 @@ zstyle ':fzf-tab:complete:*:options' fzf-preview
 zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
+zinit load jeffreytse/zsh-vi-mode
 zinit load zdharma/fast-syntax-highlighting
 zinit load zsh-users/zsh-history-substring-search
 zinit load wfxr/forgit
