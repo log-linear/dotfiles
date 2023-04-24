@@ -103,8 +103,8 @@ if uname -r | grep WSL -; then
   wsl.exe -d wsl-vpnkit service wsl-vpnkit start
   # Run GUI apps (mainly R plots). See https://stackoverflow.com/a/43399827
   # GWSL should work as a substitute for vcXsrv
-  export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
-  export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
+  export DISPLAY=$(cmd /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
+  export PULSE_SERVER=tcp:$(cmd /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
 fi
 
 # Work-related startup configs

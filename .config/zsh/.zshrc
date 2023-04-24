@@ -1,4 +1,4 @@
-#=================================== zinit =====================================
+#================================== Plug-ins ===================================
 # Zinit plugin manager: https://github.com/zdharma-continuum/zinit
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -22,6 +22,30 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
+
+zinit light Aloxaf/fzf-tab  # Run `build-fzf-tab-module` after install to speed things up
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':fzf-tab:*' fzf-min-height 50
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'preview $realpath'
+zstyle ':fzf-tab:complete:-command-:*' fzf-preview
+zstyle ':fzf-tab:complete:*:options' fzf-preview 
+zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+zinit load jeffreytse/zsh-vi-mode
+zinit load zdharma/fast-syntax-highlighting
+zinit load zsh-users/zsh-history-substring-search
+zinit load wfxr/forgit
+
+# bind UP and DOWN arrow keys to history substring search
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+zinit load zsh-users/zsh-autosuggestions
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
 #================================== Options ====================================
 setopt correct           # Auto correct mistakes
@@ -237,6 +261,8 @@ if [ -f /usr/share/fzf/completion.zsh ]; then
 else
   source $PREFIX/share/fzf/completion.zsh
 fi
+export FZF_CTRL_T_COMMAND="fd"
+export FZF_CTRL_T_OPTIONS=$FZF_DEFAULT_OPTS
 export FZF_COMPLETION_TRIGGER=''
 export FZF_COMPLETION_TRIGGER=''
 export FZF_COMPLETION_OPTS="--preview 'preview {}'"
@@ -246,38 +272,14 @@ bindkey '^I' $fzf_default_completion
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
 _fzf_compgen_path() {
-  fd -HI --type f . "$1"
+  fd -u --follow f . "$1"
 }
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-  fd -HI --type d . "$1"
+  fd -u --follow --type d . "$1"
 }
 
 #================================== Aliases ====================================
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && \
     source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
  
-#================================== Plug-ins ===================================
-zinit light Aloxaf/fzf-tab  # Run `build-fzf-tab-module` after install to speed things up
-zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':fzf-tab:*' fzf-min-height 50
-zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':fzf-tab:complete:*:*' fzf-preview 'preview $realpath'
-zstyle ':fzf-tab:complete:-command-:*' fzf-preview
-zstyle ':fzf-tab:complete:*:options' fzf-preview 
-zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
-zstyle ':fzf-tab:*' switch-group ',' '.'
-
-zinit load jeffreytse/zsh-vi-mode
-zinit load zdharma/fast-syntax-highlighting
-zinit load zsh-users/zsh-history-substring-search
-zinit load wfxr/forgit
-
-# bind UP and DOWN arrow keys to history substring search
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-zinit load zsh-users/zsh-autosuggestions
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
