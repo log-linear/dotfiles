@@ -89,7 +89,9 @@ export FZF_CTRL_T_OPTIONS=$FZF_DEFAULT_OPTS
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ]; then
+  source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

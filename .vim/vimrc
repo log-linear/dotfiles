@@ -1,0 +1,190 @@
+"=========================== neovim-like settngs ===============================
+" OPTIONS
+set nocompatible
+if has('autocmd')
+  filetype plugin indent on
+endif
+
+set backspace=indent,eol,start
+set encoding=utf-8
+set incsearch
+set nolangremap
+let &nrformats="bin,hex"
+set showcmd
+set ruler
+set wildmenu
+set autoindent
+set autoread
+set background=light
+set belloff=all
+set cdpath=,.,~/src,~/
+set clipboard=unnamed,unnamedplus
+set cmdheight=1
+set complete=.,w,b,u,t
+set cscopeverbose
+set diffopt=internal,filler
+set display=lastline
+" TODO: 'fillchars' defaults (in effect) to "vert:│,fold:·,sep:│"
+set fillchars=
+set formatoptions=tcqj
+let &keywordprg=":Man"
+set nofsync
+set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
+set hidden
+set history=10000
+set hlsearch
+set nojoinspaces
+set laststatus=2
+set listchars=tab:>\ ,trail:-,nbsp:+
+set maxcombine=6
+set mouse=a
+set scroll=13
+set scrolloff=0
+set sessionoptions-=options
+set shortmess=filnxtToOF
+set sidescroll=1
+set smarttab
+set nostartofline
+set tabpagemax=50
+set tags=./tags;,tags
+set notitle
+set switchbuf=uselast
+set titleold=
+set ttimeout
+set ttimeoutlen=50
+set ttyfast
+"TODO: set viewoptions+=unix,slash
+set viewoptions-=options
+let &viminfo='!,'.&viminfo
+let &wildoptions="pum,tagfile"
+
+" DEFAULT-MAPPINGS
+" :help default-mappings
+nnoremap Y y$
+nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<CR><C-L>
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
+
+" Implement Q
+let g:qreg='@'
+function! RecordOrStop()
+  if reg_recording() == ''
+    echo 'Enter register to record to: '
+    let g:qreg=getcharstr()
+    if g:qreg != "\e"
+      execute 'normal! q'.g:qreg
+    endif
+  else
+    normal! q
+    call setreg(g:qreg, substitute(getreg(g:qreg), "q$", "", ""))
+  endif
+endfunction
+
+" :MapQ will activate the Q mapping
+command! MapQ noremap q <cmd>call RecordOrStop()<cr>
+noremap Q <cmd>execute 'normal! @'.g:qreg<cr>
+
+" DEFAULT PLUGINS
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
+if exists(":Man") != 2
+  runtime! ftplugin/man.vim
+endif
+
+"============================== General settings ===============================
+set cursorline
+set clipboard+=unnamedplus
+set splitbelow splitright
+set mouse=a
+set scrolloff=5 sidescroll=5
+set number relativenumber
+set signcolumn=yes
+set autoindent smartindent
+set tabstop=4 shiftwidth=4
+set termguicolors
+set list lcs+=tab:\▸\ ,extends:→,precedes:←,nbsp:·,trail:·
+au WinEnter term://* :startinsert
+au TextYankPost * silent! lua vim.highlight.on_yank({timeout=250})
+set incsearch showmatch hlsearch ignorecase smartcase
+set colorcolumn=80
+set nowrap
+set noea
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+let mapleader=" "
+let $EDITOR='nvrl'
+
+"================================== Mappings ===================================
+nmap <esc> :noh<CR>
+tno <esc> <C-\><C-n>
+nn <leader>s :%s//g<left><left>
+nn <leader>S :%s/\<<C-r><C-w>\>/
+nn <leader>bs :bufdo %s//gc<left><left><left>
+ino ;B <esc>0D80A=<esc>0:exec "normal! 0r" . &cms<cr>o<bs>
+ino ;b <esc>0D80A-<esc>0:exec "normal! 0r" . &cms<cr>o<bs>
+ino ;H <esc>:center<cr>2hv0r=A<space><esc>40A=<esc>d80<bar>0:exec "normal! 0r" . &cms<cr><esc>o<bs>
+ino ;h <esc>:center<cr>2hv0r-A<space><esc>40A-<esc>d80<bar>0:exec "normal! 0r" . &cms<cr><esc>o<bs>
+ino ;todo <esc>:exec "normal! 0i" . &cms[0]<cr>$a TODO: 
+nn <cr><cr> :w<CR> :15sp<CR> :term compile %<CR>
+nn <leader>tt <C-\><C-n>:call term_start('zsh')<CR><C-w>k
+nn <leader>tp <C-\><C-n>:call term_start('python')<CR><C-w>k
+nn <leader>tr <C-\><C-n>:call term_start('radian')<CR><C-w>k
+nn <leader>cd :cd %:p:h<CR>:pwd<CR>
+nn <leader>.. :cd ..<CR>:pwd<CR>
+
+for mapcmd in ['nn', 'ino', 'vn', 'tno']
+  exec mapcmd . ' <A-h> <C-\><C-n><C-w>h'
+  exec mapcmd . ' <A-j> <C-\><C-n><C-w>j'
+  exec mapcmd . ' <A-k> <C-\><C-n><C-w>k'
+  exec mapcmd . ' <A-l> <C-\><C-n><C-w>l'
+  exec mapcmd . ' <A-H> <C-\><C-n><C-w>H'
+  exec mapcmd . ' <A-J> <C-\><C-n><C-w>J'
+  exec mapcmd . ' <A-K> <C-\><C-n><C-w>K'
+  exec mapcmd . ' <A-L> <C-\><C-n><C-w>L'
+  exec mapcmd . ' <A-,> <C-\><C-n><C-w>:vertical resize -3<CR>'
+  exec mapcmd . ' <A--> <C-\><C-n><C-w>:resize -3<CR>'
+  exec mapcmd . ' <A-=> <C-\><C-n><C-w>:resize +3<CR>'
+  exec mapcmd . ' <A-.> <C-\><C-n><C-w>:vertical resize +3<CR>'
+  exec mapcmd . ' <A-0> <C-\><C-n><C-w>='
+  exec mapcmd . ' <A-q> <C-\><C-n>:quit<CR>'
+  exec mapcmd . ' <C-6> <C-\><C-n><C-^>'
+  exec mapcmd . ' <C-^> <C-\><C-n><C-^>'
+  exec mapcmd . ' <A-s> <C-\><C-n>:sp<CR>'
+  exec mapcmd . ' <A-v> <C-\><C-n>:vs<CR>'
+  exec mapcmd . ' <A-S> <C-\><C-n><C-w>:horizontal winc =<CR>'
+  exec mapcmd . ' <A-V> <C-\><C-n><C-w>:vertical winc =<CR>'
+endfor
+
+"=========================== File-specific settings ============================
+au FileType sh,bash,zsh,vim,lua,r,rmd setlocal expandtab shiftwidth=2 tabstop=2
+au FileType python,markdown,sql setlocal expandtab shiftwidth=4 tabstop=4
+au FileType markdown setlocal wrap linebreak
+au BufEnter *.ipynb nn <leader>jp :w<CR> :!jupyter nbconvert --to script %:p<CR> \| :e %:p:r.py<CR>
+au BufEnter *.ipynb nn <leader>jm :w<CR> :!jupyter nbconvert --to markdown %:p<CR> \| :e %:p:r.md<CR>
+au FileType json nn <leader>bf :w<CR> :%!python -m json.tool<CR>
+au FileType markdown,rmd ino ;e **<left>
+au FileType markdown,rmd ino ;H <esc>yypv$r=o
+au FileType markdown,rmd ino ;h <esc>yypv$r-o
+au FileType tex ino ;; \
+au FileType tex,markdown nn <CR><CR> :w<CR> :execute '!compile "%:p" "'.input('What type of document would you like to compile? Choose from `h` for html, `p` for pdf, `d` for docx, or `x` for a xelatex pdf: ').'"'<CR>
+for mapcmd in ['ino', 'tno']
+  exec 'au FileType sh,bash,zsh,tex,r,rmd ' . mapcmd . ' ;s $'
+  exec 'au FileType r,rmd ' . mapcmd . ' ;; <-'
+  exec 'au FileType r,rmd ' . mapcmd . ' ;n \|>'
+  exec 'au FileType r,rmd ' . mapcmd . ' ;m %>%'
+  exec 'au FileType r,rmd ' . mapcmd . ' ;in %in%'
+  exec 'au FileType r,rmd ' . mapcmd . ' ;r %%'
+  exec 'au FileType r,rmd ' . mapcmd . ' ;v <space>\|> vd()'
+  exec 'au FileType r,rmd ' . mapcmd . ' ;V <space>\|> View()'
+  exec 'au FileType r,rmd ' . mapcmd . ' ;c <space>\|> colnames()'
+  exec 'au FileType r,rmd ' . mapcmd . ' ;o objs()'
+  exec 'au FileType python ' . mapcmd . ' ;l ->'
+endfor
+

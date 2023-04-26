@@ -280,6 +280,7 @@ _fzf_compgen_dir() {
 }
 
 #================================== Aliases ====================================
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ] && \
-    source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ]; then
+  source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
+fi
  
