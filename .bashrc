@@ -77,9 +77,13 @@ fi
 if [ -f /usr/share/fzf/completion.bash ]; then
   source /usr/share/fzf/completion.bash
 fi
-
 export FZF_CTRL_T_COMMAND="fd"
 export FZF_CTRL_T_OPTIONS=$FZF_DEFAULT_OPTS
+
+# zoxide
+if command -v zoxide; then
+  eval "$(zoxide init bash)"
+fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
@@ -89,8 +93,8 @@ export FZF_CTRL_T_OPTIONS=$FZF_DEFAULT_OPTS
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ]; then
-  source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
+if [ -f "$HOME/.config/aliasrc" ]; then
+  source "$HOME/.config/aliasrc"
 fi
 
 # enable programmable completion features (you don't need to enable
