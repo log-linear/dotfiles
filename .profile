@@ -108,3 +108,9 @@ if [ -f "$HOME/work.sh" ]; then
   source "$HOME/work.sh"
 fi
 
+# Shell init logic for pyenv
+if [ -f /usr/sbin/pyenv ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi

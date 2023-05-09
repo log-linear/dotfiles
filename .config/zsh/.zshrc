@@ -279,6 +279,13 @@ _fzf_compgen_dir() {
   fd -u --follow --type d . "$1"
 }
 
+# Shell init logic for pyenv
+if [ -f /usr/sbin/pyenv ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
 #================================== Aliases ====================================
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ]; then
   source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
