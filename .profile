@@ -84,6 +84,7 @@ export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export VPYTHON_VIRTUALENV_ROOT="$XDG_DATA_HOME/vpython_root"
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+export RUFF_CACHE_DIR=$XDG_CACHE_HOME/ruff
 
 # auto-start sway
 if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
@@ -109,8 +110,5 @@ if [ -f "$HOME/work.sh" ]; then
 fi
 
 # Shell init logic for pyenv
-if [ -f /usr/sbin/pyenv ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
-fi
+export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH" || eval "$(pyenv init -)"
