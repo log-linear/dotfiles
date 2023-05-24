@@ -219,7 +219,7 @@
         "format": " 󰐪 ",
         "return-type": "json",
         "tooltip-format": "{}",
-        "exec": "echo '{\"tooltip\": \"Display Configuration\"}'",
+        "exec": "echo '{\"tooltip\": \"Printer Settings\"}'",
         "escape": true,
         "on-click": "exec system-config-printer" 
     },

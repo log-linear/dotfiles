@@ -30,7 +30,7 @@ jq	community	CLI JSON processor
 keepassxc	community	password manager
 keychain	extra	ssh key manager
 libnotify	extra	Library for sending desktop notifications
-libpipewire02	extra	Library to handle Wayland screensharing in chromium
+libpipewire	extra	Library to handle Wayland screensharing in chromium
 libsecret	core	Library for storing and retrieving passwords and other secrets
 mako	community	notification daemon
 markdown_live_preview	pip	generates live markdown previews in any text editor
@@ -52,6 +52,8 @@ paru	aur	AUR helper
 paruz	aur	fzf ineterface for paru
 perl-file-mimeinfo	extra	Detect filetypes for XDG-mime
 perl-image-exiftool	extra	Read EXIF info from raw files
+pipewire	extra	Low-latency audio/video router and processor
+polkit-dumb-agent-git	aur	authentication agent, prompts for PW when GUI apps need root
 poppler	extra	pdf editing tools
 powerline-fonts	community	patched fonts for vim-airline
 protonmail-bridge	aur	Access protonmail via e.g. thunderbird

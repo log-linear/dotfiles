@@ -341,6 +341,9 @@ exec --no-startup-id blueman-applet
 # Radicale
 exec python3 -m radicale --config ~/.config/radicale/config
 
+# Authentication agent - prompt for PW when GUI apps need root
+exec /usr/bin/polkit-dumb-agent
+
 # Workspace programs
 workspace 1
 exec $browser
