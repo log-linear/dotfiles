@@ -103,7 +103,7 @@ if uname -r | grep WSL -; then
   # Manually add Windows paths here. Helps with zsh performance 
   # when setting `appendWindowsPath = False` in `/etc/wsl.conf`
   PATH="/mnt/c/Windows:$PATH"
-  PATH="/mnt/c/Users/vfaner/AppData/Local/Microsoft/WindowsApps:$PATH"
+  PATH="/mnt/c/Windows/System32:$PATH"
   # Workaround for tunneling WSL through a VPN. See https://github.com/sakai135/wsl-vpnkit
   wsl.exe -d wsl-vpnkit --cd /app service wsl-vpnkit status >/dev/null || wsl.exe -d wsl-vpnkit --cd /app service wsl-vpnkit start
 fi
