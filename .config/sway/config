@@ -276,7 +276,7 @@ bindsym XF86Search            exec bemenu-run
 bindsym Print exec grim - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."
 
 # Screen select snapshot to clipboard
-bindsym $mod+shift+S exec grim -g "$(slurp)" - | wl-copy & notify-send "Snapshot copied to clipboard. Click here to edit."
+bindsym $mod+shift+S exec grim -g "$(slurp)" - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."
 
 #================================= Status Bar ==================================
 
