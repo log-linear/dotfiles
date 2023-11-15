@@ -52,6 +52,7 @@ client.focused_inactive $gray  $gray      $bg0 $red      $gray
 client.unfocused        $bg1   $bg1       $fg1 $red      $gray
 
 # Additional window rules
+for_window [class="steam" ] floating enable, border normal 
 for_window [class="^Steam$" title="^Friends$"] floating enable, border normal 
 for_window [class="^Steam$" title="^Friends List$"] floating enable, border normal 
 for_window [class="^Steam$" title="Steam - News"] floating enable, border normal 
@@ -63,6 +64,7 @@ for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable, bor
 for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable, border normal 
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable, border normal
 for_window [title="^Steam Keyboard$"] floating enable, border normal 
+for_window [class="steam_app_22380"] floating enable, border normal 
 for_window [app_id="nm-connection-editor"] floating enable, border normal 
 for_window [app_id="nm-openconnect-auth-dialog"] floating enable, border normal 
 for_window [app_id="blueman-manager"] floating enable, border normal 
@@ -72,6 +74,7 @@ for_window [app_id="pavucontrol"] floating enable, border normal
 for_window [app_id="system-config-printer"] floating enable, border normal 
 for_window [app_id="pamac-manager"] floating enable, border normal 
 for_window [app_id="nwg-displays"] floating enable, border normal 
+for_window [title="nmtui"] floating enable, border normal 
 for_window [title="nmtui"] floating enable, border normal 
 for_window [title=".*CopyQ$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 1
 
@@ -106,6 +109,10 @@ input "type:keyboard" {
 
 input "type:touchpad" {
     natural_scroll enabled
+}
+
+input "type:mouse" {
+    accel_profile "flat"
 }
 
 # KEY BINDINGS =================================================================
@@ -352,9 +359,10 @@ workspace 2
 exec env -u WAYLAND_DISPLAY protonmail-bridge
 exec thunderbird
 exec keepassxc
+exec chromium
 
 workspace 3
-exec telegram-desktop
+exec discord
 
 include /etc/sway/config.d/*
 include ~/.config/sway/`hostname`
