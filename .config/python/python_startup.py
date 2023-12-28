@@ -5,7 +5,6 @@ import atexit
 import os
 import readline
 import rlcompleter
-import sys
 
 
 def set_tab_complete():
@@ -50,21 +49,21 @@ def set_autoindent():
             last_indent = int(last_indent_index / 4) + 1
         if len(last_input.strip()) > 1:
             if last_input.count("(") > last_input.count(")"):
-                indent = ''.join(["    " for n in range(last_indent + 2)])
+                indent = ''.join(["    " for _ in range(last_indent + 2)])
             elif last_input.count(")") > last_input.count("("):
-                indent = ''.join(["    " for n in range(last_indent - 1)])
+                indent = ''.join(["    " for _ in range(last_indent - 1)])
             elif last_input.count("[") > last_input.count("]"):
-                indent = ''.join(["    " for n in range(last_indent + 2)])
+                indent = ''.join(["    " for _ in range(last_indent + 2)])
             elif last_input.count("]") > last_input.count("["):
-                indent = ''.join(["    " for n in range(last_indent - 1)])
+                indent = ''.join(["    " for _ in range(last_indent - 1)])
             elif last_input.count("{") > last_input.count("}"):
-                indent = ''.join(["    " for n in range(last_indent + 2)])
+                indent = ''.join(["    " for _ in range(last_indent + 2)])
             elif last_input.count("}") > last_input.count("{"):
-                indent = ''.join(["    " for n in range(last_indent - 1)])
+                indent = ''.join(["    " for _ in range(last_indent - 1)])
             elif last_input[-1] == ":":
-                indent = ''.join(["    " for n in range(last_indent + 1)])
+                indent = ''.join(["    " for _ in range(last_indent + 1)])
             else:
-                indent = ''.join(["    " for n in range(last_indent)])
+                indent = ''.join(["    " for _ in range(last_indent)])
         readline.insert_text(indent)
 
     readline.set_pre_input_hook(rl_autoindent)
@@ -78,7 +77,6 @@ set_python_history()
 set_autoindent()
 
 # Use ipython, if available
-import sys
 try:
     from traitlets.config import Config
     import IPython
@@ -92,9 +90,9 @@ try:
 except ImportError:
     print("IPython is not available: falling back to standard prompt")
 
-#===============================================================================
+#==============================================================================
 # Sources
-#===============================================================================
+#==============================================================================
 
 # https://docs.python.org/3/library/readline.html?highlight=readline#example
 # https://github.com/brandoninvergo/python-startup/blob/master/python-startup.py

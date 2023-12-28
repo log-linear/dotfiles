@@ -79,10 +79,12 @@ system-config-printer	extra	CUPS printer configuration frontend
 thunderbird	extra	Email client
 tidy-viewer	aur	CLI csv pretty printer (cat for tables)
 udiskie	community	drive auto-mount utility
+ueberzugpp	aur	CLI util to display images, X11/Wayland supported
 usql	aur	universal SQL cli
 vifm	community	TUI file manager
 visidata	aur	fancy spreadsheet tool
 vscode-langservers-extracted	aur	Language Servers extracted from VSCode
+yazi	auur	TUI file manager
 waybar	community	Wayland bar for sway and other wlroots compositors
 wdisplays	aur	GUI app for adjusting displays
 wl-clipboard	community	wayland-native CLI clipboard utilities

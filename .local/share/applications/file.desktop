@@ -1,4 +1,4 @@
 [Desktop Entry]
 Name=File Manager
 Type=Application
-Exec=/usr/bin/footclient -e ranger %u
+Exec=/usr/bin/alacritty -e yazi %u
