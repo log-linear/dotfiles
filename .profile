@@ -30,7 +30,7 @@ if [ -d "$HOME/.local/share/cargo/bin" ] ; then
 fi
 
 # Defaults
-export TERMINAL="footclient"
+export TERMINAL="alacritty"
 export EDITOR="nvim"
 export BROWSER="firefox"
 export TERMINAL_COMMAND="$TERMINAL -e"  # Use footclient with sway-launcher-desktop
