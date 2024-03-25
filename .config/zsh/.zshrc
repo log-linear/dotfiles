@@ -249,6 +249,11 @@ if [ -f "$HOME/.local/bin/conda_init" ] && command -v; then
   source "$HOME/.local/bin/conda_init"
 fi
 
+# keychain
+if command -v keychain; then
+  eval "$(keychain --eval --quiet id_ed25519 id_rsa ~/.keys/my_custom_key)"
+fi
+
 # fzf
 if [ -f /usr/share/fzf/key-bindings.zsh ]; then
   source /usr/share/fzf/key-bindings.zsh
