@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+enabled=$(hyprpm list | grep -A 1 hyprbars | grep --only-matching false)
+
+if [ "$enabled" = "false" ]; then
+  hyprpm enable hyprbars
+else
+  hyprpm disable hyprbars
+fi
