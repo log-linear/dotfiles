@@ -53,3 +53,5 @@ program = "/bin/zsh"
 
 [window]
 decorations = "none"
+padding = { x = 30, y = 30 }
+
