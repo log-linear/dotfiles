@@ -36,8 +36,8 @@ export BROWSER="firefox"
 export TERMINAL_COMMAND="$TERMINAL -e"  # Use footclient with sway-launcher-desktop
 export LANG="en_US.UTF-8"
 export FZF_DEFAULT_COMMAND='fd --type f'
-export FZF_DEFAULT_OPTS="--reverse --color=bg+:#EEEEEE,hl+:#88507d,fg+:#353535,hl:#88507d --preview 'preview {}'"
-export BAT_THEME="GitHub"
+export FZF_DEFAULT_OPTS="--reverse --color=bg+:#F9F5D6,hl+:#903F71,fg+:#3C3836,hl:#903F71 --preview 'preview {}'"
+export BAT_THEME="gruvbox-light"
 export DFT_BACKGROUND="light"
 
 # $HOME cleanup

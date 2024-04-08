@@ -31,10 +31,10 @@ if [ "$file" != "" ]; then
       vnd.ms-excel)
         vd "$file" ;;
       *)
-        swallow xdg-open "$file"
+        xdg-open "$file"
     esac
   else
-    swallow xdg-open "$file"
+    xdg-open "$file"
   fi
 fi
 
