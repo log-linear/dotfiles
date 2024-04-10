@@ -27,6 +27,7 @@ hyprland	extra	window manager
 hypridle	extra	hyprland/wayland idle manager
 hyprlock	extra	hyprland/wayland lock manager
 hyprlang	extra	implementation library for the hypr config language
+hyprpaper	extra	hyprland wallpaper util
 hyprcursor	extra	hyprland cursor format
 i3status-rust-git	aur	status bar generator, switched to AUR to handle missing battery issues
 imv	extra	image viewer
