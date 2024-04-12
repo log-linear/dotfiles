@@ -91,11 +91,11 @@ if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
   export MOZ_DBUS_REMOTE=1
   export MOZ_ENABLE_WAYLAND=1
   export BEMENU_BACKEND="wayland"
-  export XDG_CURRENT_DESKTOP="sway"
+  export XDG_CURRENT_DESKTOP="hyprland"
   export XDG_SESSION_TYPE="wayland"
   eval "$(gnome-keyring-daemon --start)"
   export SSH_AUTH_SOCK
-  exec sway
+  exec Hyprland
 fi
 
 # if running wsl

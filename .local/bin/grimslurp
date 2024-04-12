@@ -1,0 +1,2 @@
+#!/usr/bin/sh
+grim -g "$(slurp)" - | wl-copy && notify-send "Snapshot copied to clipboard. Click here to edit."

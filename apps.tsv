@@ -96,6 +96,7 @@ waybar	community	Wayland bar for sway and other wlroots compositors
 wdisplays	aur	GUI app for adjusting displays
 wireplumber	extra	Session/policy manager implementation for pipewire
 wl-clipboard	community	wayland-native CLI clipboard utilities
+xdg-desktop-portal-wlr	extra	xdg-desktop-portal-backend for wlroots
 xdg-utils	extra	CLI utils for XDG desktop tasks
 xlsx2csv	aur	convert xlsx files to csv
 zathura	community	PDF viewer
