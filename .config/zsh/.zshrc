@@ -47,6 +47,8 @@ zinit load zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
+unalias zi
+
 #================================== Options ====================================
 setopt correct           # Auto correct mistakes
 setopt extendedglob      # Allow using regex with *

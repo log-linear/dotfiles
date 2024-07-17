@@ -46,8 +46,7 @@ if (interactive()) {
         )
         out <- data.frame(obj_type, obj_size, obj_size_hr, obj_dim)
         names(out) <- c("Type", "Size", "Size MB", "Rows", "Columns")
-      }
-      else {
+      } else {
         out <- data.frame(obj_type, obj_dim)
         names(out) <- c("Type", "Rows", "Columns")
       }
@@ -76,7 +75,24 @@ if (interactive()) {
   assign("h", function() base::getwd(), envir = globalenv())
   assign("ll", function(size = F) objs(size), envir = globalenv())
 
-  # Helper packages
-  require(jsonlite)  # Dependency for rvisidata
-  require(rvisidata)
+  # Default packages
+  if (Sys.getenv("RNVIM_TMPDIR") == "") {
+    options(defaultPackages = c(
+      "datasets", "utils", "grDevices", "graphics", "stats", "methods",  # Base defaults
+      "rvisidata", "jsonlite"  # 3rd party
+    ))
+  } else {
+    options(defaultPackages = c(
+      "datasets", "utils", "grDevices", "graphics", "stats", "methods",
+      "rvisidata", "jsonlite",
+      "nvimcom"  # For R.nvim
+    ))
+  }
+
+  # Disable completion from the language server
+  options(
+    languageserver.server_capabilities = list(
+      completionProvider = FALSE, completionItemResolve = FALSE
+    )
+  )
 }

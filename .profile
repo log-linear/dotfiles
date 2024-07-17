@@ -114,5 +114,6 @@ if [ -f "$HOME/work.sh" ]; then
 fi
 
 # Shell init logic for pyenv
-export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH" || eval "$(pyenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
