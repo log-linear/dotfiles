@@ -136,7 +136,7 @@ bindsym $mod+e exec $term --class launcher -e emo | wl-paste -t text | copyq cop
 # Clipboard manager
 bindsym $mod+y exec copyq --start-server show
 # wlsunset
-bindsym $mod+n exec wlsunset -t 4500 -T 4501
+bindsym $mod+n exec wlsunset-toggle -t 4500 -T 4501
 
 # Drag windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.

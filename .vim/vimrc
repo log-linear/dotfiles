@@ -137,6 +137,7 @@ nn <leader>tp <C-\><C-n>:call term_start('python')<CR><C-w>k
 nn <leader>tr <C-\><C-n>:call term_start('radian')<CR><C-w>k
 nn <leader>cd :cd %:p:h<CR>:pwd<CR>
 nn <leader>.. :cd ..<CR>:pwd<CR>
+vno p "_dP
 
 for mapcmd in ['nn', 'ino', 'vn', 'tno']
   exec mapcmd . ' <A-h> <C-\><C-n><C-w>h'

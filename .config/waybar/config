@@ -230,7 +230,7 @@
         "exec": "$HOME/.config/waybar/pacman_updates 2> /dev/null",       // # of updates
         "exec-if": "exit 0",                  // always run; consider advanced run conditions
         "tooltip-format": "{}",
-        "on-click": "foot -e 'paru'; pkill -SIGRTMIN+8 waybar", // update system
+        "on-click": "alacritty -e 'paru'; pkill -SIGRTMIN+8 waybar", // update system
         "signal": 8,
     },
     "custom/keyboard_icon": {
