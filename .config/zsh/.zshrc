@@ -253,7 +253,7 @@ fi
 
 # keychain
 if command -v keychain; then
-  eval "$(keychain --eval --quiet id_ed25519 id_rsa ~/.keys/my_custom_key)"
+  eval "$(keychain --eval --quiet id_ed25519)"
 fi
 
 # fzf

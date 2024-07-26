@@ -1,0 +1,10 @@
+#!/bin/sh
+while true ; do
+  sleep "$(shuf --head-count=1 --input-range=1-10)"  
+  echo "wiggle"
+  ydotool mousemove -a "$(shuf --head-count=1 --input-range=300-500)" "$(shuf --head-count=1 --input-range=300-500)" &
+  echo "click"
+  ydotool click 0xC0 &
+  echo "wiggle"
+  ydotool mousemove -a "$(shuf --head-count=1 --input-range=300-500)" "$(shuf --head-count=1 --input-range=300-500)" &
+done

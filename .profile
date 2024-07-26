@@ -86,12 +86,12 @@ export VPYTHON_VIRTUALENV_ROOT="$XDG_DATA_HOME/vpython_root"
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export RUFF_CACHE_DIR=$XDG_CACHE_HOME/ruff
 
-# auto-start sway
+# auto-start desktop environment
 if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
   export MOZ_DBUS_REMOTE=1
   export MOZ_ENABLE_WAYLAND=1
   export BEMENU_BACKEND="wayland"
-  export XDG_CURRENT_DESKTOP="hyprland"
+  export XDG_CURRENT_DESKTOP="sway"
   export XDG_SESSION_TYPE="wayland"
   eval "$(gnome-keyring-daemon --start)"
   export SSH_AUTH_SOCK

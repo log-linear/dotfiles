@@ -91,7 +91,8 @@ usql	aur	universal SQL cli
 vifm	community	TUI file manager
 visidata	aur	fancy spreadsheet tool
 vscode-langservers-extracted	aur	Language Servers extracted from VSCode
-yazi	auur	TUI file manager
+yazi	aur	TUI file manager
+ydotool	extra	Generic command-line automation tool
 waybar	community	Wayland bar for sway and other wlroots compositors
 wdisplays	aur	GUI app for adjusting displays
 wireplumber	extra	Session/policy manager implementation for pipewire
