@@ -118,7 +118,3 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# keychain
-if command -v keychain; then
-  eval "$(keychain --eval --quiet id_ed25519)"
-fi

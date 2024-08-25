@@ -111,3 +111,8 @@ fi
 # Shell init logic for pyenv
 export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH" || eval "$(pyenv init -)"
+
+# SSH keychain management
+if command -v keychain; then
+  eval "$(keychain --eval --quiet id_ed25519)"
+fi
