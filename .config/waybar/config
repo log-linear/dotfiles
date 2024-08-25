@@ -189,7 +189,7 @@
         "tooltip-format": "{}",
         "exec": "echo '{\"tooltip\": \"Launch Application\"}'",
         "escape": true,
-        "on-click": "exec foot --app-id=launcher -e /usr/bin/sway-launcher-desktop" 
+        "on-click": "exec alacritty --app-id=launcher -e /usr/bin/sway-launcher-desktop" 
     },
     "custom/files": {
         "format": "  ",

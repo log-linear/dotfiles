@@ -95,7 +95,7 @@ if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
   export XDG_SESSION_TYPE="wayland"
   eval "$(gnome-keyring-daemon --start)"
   export SSH_AUTH_SOCK
-  exec sway
+  exec Hyprland
 fi
 
 # if running wsl
@@ -117,3 +117,8 @@ fi
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# keychain
+if command -v keychain; then
+  eval "$(keychain --eval --quiet id_ed25519)"
+fi

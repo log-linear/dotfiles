@@ -55,6 +55,8 @@ x-scheme-handler/chrome=firefox.desktop
 x-scheme-handler/tg=org.telegram.desktop.desktop
 x-scheme-handler/nxm=ModOrganizer-steamtinkerlaunch-dl.desktop
 x-scheme-handler/nxm-protocol=ModOrganizer-steamtinkerlaunch-dl.desktop
+x-scheme-handler/tonsite=org.telegram.desktop.desktop
 
 [Added Associations]
 x-scheme-handler/tg=userapp-Telegram Desktop-7TM8B1.desktop;org.telegram.desktop.desktop;
+x-scheme-handler/tonsite=org.telegram.desktop.desktop;

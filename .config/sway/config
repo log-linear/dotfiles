@@ -359,10 +359,9 @@ workspace 2
 exec env -u WAYLAND_DISPLAY protonmail-bridge
 exec thunderbird
 exec keepassxc
-exec chromium
 
 workspace 3
-exec discord
+exec chromium
 
 include /etc/sway/config.d/*
 include ~/.config/sway/`hostname`
