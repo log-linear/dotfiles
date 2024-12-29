@@ -47,7 +47,7 @@ style = "Regular"
 [scrolling]
 history = 50000
 
-[shell]
+[terminal.shell]
 program = "/bin/zsh"
 
 [window]

@@ -8,6 +8,7 @@ application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
 application/vnd.ms-excel=vd.desktop
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=vd.desktop
+application/vnd.sqlite3=vd.desktop
 application/json=text.desktop
 application/javascript=text.desktop
 application/x-shellscript=text.desktop

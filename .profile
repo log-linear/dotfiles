@@ -29,6 +29,11 @@ if [ -d "$HOME/.local/share/cargo/bin" ] ; then
   PATH="$HOME/.local/share/cargo/bin:$PATH"
 fi
 
+# Include cargo/bin
+if [ -d "$HOME/dev/flutter/bin" ] ; then
+  PATH="$HOME/dev/flutter/bin:$PATH"
+fi
+
 # Defaults
 export TERMINAL="alacritty"
 export EDITOR="nvim"
@@ -95,7 +100,7 @@ if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
   export XDG_SESSION_TYPE="wayland"
   eval "$(gnome-keyring-daemon --start)"
   export SSH_AUTH_SOCK
-  exec Hyprland
+  exec sway
 fi
 
 # if running wsl

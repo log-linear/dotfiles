@@ -4,7 +4,6 @@ bat	community	cat clone with syntax highlighting and git integration
 bemenu	community	dmenu replacement, used as launcher for networkmanager-dmenu
 blueman	community	bluetooth manager
 bottom	community	TUI process/system monitor
-btm	community	Graphical process/system monitor, `top` alternative
 catdoc	community	convert .doc to txt, also includes xls2csv, for xls > csv conversions
 catimg	community	Print images in a terminal with 256 colors support
 chafa	community	Image-to-text converter with terminal graphics protocol (e.g. sixel) support
@@ -12,6 +11,7 @@ clipman	aur	wayland-native clipboard
 conda	manual	package manager tailored to data science
 cpio	extra	tool to copy files into or out of a cpio or tar archive - needed for hyprpm
 difftastic	community	Treesitter-based difftool
+dust	extra	A more intuitive version of du in rust
 exa	community	better ls
 fd	community	faster alternative to find
 firefox	extra	browser
@@ -22,6 +22,7 @@ foot-terminfo	community	terminfo files for foot
 fzf	community	CLI fuzzy finder
 git-delta	community	better git diff viewer/pager
 gnome-keyring	extra	Keyring manager, used for storing passwords for protonmail-bridge and SSH manager
+gocryptfs	extra	Encrypted overlay filesystem
 grim	community	screenshot utility
 hyprland	extra	window manager
 hypridle	extra	hyprland/wayland idle manager
@@ -88,7 +89,6 @@ tidy-viewer	aur	CLI csv pretty printer (cat for tables)
 udiskie	community	drive auto-mount utility
 ueberzugpp	aur	CLI util to display images, X11/Wayland supported
 usql	aur	universal SQL cli
-vifm	community	TUI file manager
 visidata	aur	fancy spreadsheet tool
 vscode-langservers-extracted	aur	Language Servers extracted from VSCode
 yazi	aur	TUI file manager
