@@ -1,19 +1,3 @@
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-  # include .bashrc if it exists
-  if [ -f "$HOME/.bashrc" ]; then
-  . "$HOME/.bashrc"
-  fi
-fi
-
-# if running zsh
-if [ -n "$ZSH_VERSION" ]; then
-  # include .zshrc if it exists
-  if [ -f "$HOME/.config/zsh/.zshrc" ]; then
-  . "$HOME/.config/zsh/.zshrc"
-  fi
-fi
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
   PATH="$HOME/bin:$PATH"
@@ -119,7 +103,9 @@ if [ -f "$HOME/work.sh" ]; then
 fi
 
 # Shell init logic for pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+if [ -d "$HOME/bin" ] ; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
 

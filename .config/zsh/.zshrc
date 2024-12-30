@@ -1,3 +1,8 @@
+# Check if running in distrobox, which doesn't seem to source .profile/.zprofile
+if [[ -v CONTAINER_ID ]]; then
+    source "$HOME/.zprofile"
+fi
+
 #================================== Plug-ins ===================================
 # Zinit plugin manager: https://github.com/zdharma-continuum/zinit
 ### Added by Zinit's installer
