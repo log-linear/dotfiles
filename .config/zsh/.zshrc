@@ -127,7 +127,7 @@ bindkey '^e' edit-command-line
 #================================== Theming ====================================
 colors
 setopt prompt_subst                                # enable prompt substition
-echo $USER@$HOST  $(uname -srm) $(lsb_release -rs) # prompt greeting msg
+# echo $USER@$HOST  $(uname -srm) $(lsb_release -rs) # prompt greeting msg
 
 # Color man pages
 export MANPAGER="less -R --use-color -Dd+r -Du+b"

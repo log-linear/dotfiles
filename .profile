@@ -88,13 +88,11 @@ if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
 fi
 
 # if running wsl
-if uname -r | grep WSL -; then
+if [ -f "/etc/wsl.conf" ]; then
   # Manually add Windows paths here. Helps with zsh performance 
   # when setting `appendWindowsPath = False` in `/etc/wsl.conf`
   PATH="/mnt/c/Windows:$PATH"
   PATH="/mnt/c/Windows/System32:$PATH"
-  # Workaround for tunneling WSL through a VPN. See https://github.com/sakai135/wsl-vpnkit
-  wsl.exe -d wsl-vpnkit --cd /app service wsl-vpnkit status >/dev/null || wsl.exe -d wsl-vpnkit --cd /app service wsl-vpnkit start
 fi
 
 # Work-related startup configs
