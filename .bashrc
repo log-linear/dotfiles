@@ -114,5 +114,5 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH" || eval "$(py
 
 # SSH keychain management
 if command -v keychain; then
-  eval "$(keychain --eval --quiet id_ed25519 --noask)"
+  eval $(keychain --eval --quiet id_ed25519)
 fi
