@@ -1,6 +1,6 @@
 #!/bin/sh
 alias ..='cd ..'
-alias ll='exa -al'
+alias ll='eza -al'
 alias o='open'
 alias v='$EDITOR'
 alias e='$EDITOR'

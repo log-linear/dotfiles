@@ -74,8 +74,9 @@ export VPYTHON_VIRTUALENV_ROOT="$XDG_DATA_HOME/vpython_root"
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export RUFF_CACHE_DIR=$XDG_CACHE_HOME/ruff
 
-# auto-start desktop environment
+# Linux configuration
 if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+  # Set-up desktop environment
   export MOZ_DBUS_REMOTE=1
   export MOZ_ENABLE_WAYLAND=1
   export BEMENU_BACKEND="wayland"
@@ -86,7 +87,7 @@ if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
   exec sway
 fi
 
-# if running wsl
+# WSL configuration
 if [ -f "/etc/wsl.conf" ]; then
   # Manually add Windows paths here. Helps with zsh performance 
   # when setting `appendWindowsPath = False` in `/etc/wsl.conf`
@@ -94,7 +95,14 @@ if [ -f "/etc/wsl.conf" ]; then
   PATH="/mnt/c/Windows/System32:$PATH"
 fi
 
-# Work-related startup configs
+# MacOS configuration
+if [ -f /opt/homebrew/bin/brew ]; then
+  # Homebrew
+  eval $(/opt/homebrew/bin/brew shellenv)
+  export PREFIX="$(brew --prefix)"
+fi
+
+# Work configuration
 if [ -f "$HOME/work.sh" ]; then
   source "$HOME/work.sh"
 fi
@@ -106,3 +114,11 @@ if [ -d $PYENV_ROOT/bin ]; then
   eval "$(pyenv init -)"
 fi
 
+# mise-en-place init-logic
+if [ -f /opt/homebrew/bin/mise ]; then
+  eval "$(mise activate zsh)"
+fi
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/vfaner/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

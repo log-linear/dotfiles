@@ -257,16 +257,16 @@ if [ -f "$HOME/.local/bin/conda_init" ] && command -v; then
 fi
 
 # fzf
-if [ -f /usr/share/fzf/key-bindings.zsh ]; then
+if [ -f /usr/share/fzf/key-bindings.zsh ]; then  # Arch
   source /usr/share/fzf/key-bindings.zsh
-else
-  source $PREFIX/share/fzf/key-bindings.zsh
+elif [ -f $PREFIX/opt/fzf/shell/key-bindings.zsh ]; then  # MacOS
+  source $PREFIX/opt/fzf/shell/key-bindings.zsh
 fi
 
-if [ -f /usr/share/fzf/completion.zsh ]; then
+if [ -f /usr/share/fzf/completion.zsh ]; then  # Arch
   source /usr/share/fzf/completion.zsh
-else
-  source $PREFIX/share/fzf/completion.zsh
+elif [ -f $PREFIX/opt/fzf/shell/completion.zsh ]; then  # MacOS
+  source $PREFIX/opt/fzf/shell/completion.zsh
 fi
 export FZF_CTRL_T_COMMAND="fd"
 export FZF_CTRL_T_OPTIONS=$FZF_DEFAULT_OPTS

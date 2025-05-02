@@ -1,0 +1,28 @@
+[tools]
+fzf = "latest"
+ripgrep = "latest"
+bat = "latest"
+bottom = "latest"
+dust = "latest"
+eza = "latest"
+fd = "latest"
+jq = "latest"
+rust = "latest"
+go = "latest"
+node = "latest"
+python = "latest"
+pipx = "latest"
+uv = "latest"
+
+"npm:vscode-langservers-extracted" = "latest"
+"npm:bash-language-server" = "latest"
+
+"pipx:ruff" = "latest"
+"pipx:black" = "latest"
+"pipx:visidata" = "latest"
+"pipx:radian" = "latest"
+"pipx:debugpy" = "latest"
+"pipx:basedpyright" = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["python"]
