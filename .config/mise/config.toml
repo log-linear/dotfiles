@@ -16,13 +16,18 @@ uv = "latest"
 
 "npm:vscode-langservers-extracted" = "latest"
 "npm:bash-language-server" = "latest"
+"npm:@fsouza/prettierd" = "latest"
+"npm:prettier" = "latest"
 
 "pipx:ruff" = "latest"
+"pipx:isort" = "latest"
 "pipx:black" = "latest"
+"pipx:sqlfluff" = "latest"
 "pipx:visidata" = "latest"
 "pipx:radian" = "latest"
 "pipx:debugpy" = "latest"
 "pipx:basedpyright" = "latest"
+"pipx:pylyzer" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]

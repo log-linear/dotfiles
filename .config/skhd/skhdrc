@@ -1,0 +1,60 @@
+ctrl + shift - space : yabai -m space --layout "$(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "stack" else "bsp" end')"
+
+cmd - return : open -na /Applications/iTerm.app/Contents/MacOS/iTerm2
+
+# focus window in bsp mode
+cmd - h : yabai -m window --focus west
+cmd - j : yabai -m window --focus south
+cmd - k : yabai -m window --focus north
+cmd - l : yabai -m window --focus east
+
+# swap windows
+shift + cmd - h : yabai -m window --warp west
+shift + cmd - j : yabai -m window --warp south
+shift + cmd - k : yabai -m window --warp north
+shift + cmd - l : yabai -m window --warp east
+
+# Make window native fullscreen
+cmd - f         : yabai -m window --toggle zoom-fullscreen
+shift + cmd - f : yabai -m window --toggle native-fullscreen
+
+# Float / Unfloat window
+cmd - space : \
+    yabai -m window --toggle float; \
+    yabai -m window --toggle border
+
+# Rotate windows clockwise and anticlockwise
+cmd - r         : yabai -m space --rotate 270
+shift + cmd - r : yabai -m space --rotate 90
+
+# Close window
+shift + cmd - q : yabai -m window --close
+
+# Launcher
+# cmd - 0x29 : osascript -e 'tell application "System Events" to key code 41 using {command down}'
+
+# Resize windows
+# shift + cmd - 0x2b : yabai -m window --resize left:-50:0; \
+#                   yabai -m window --resize right:-50:0
+# shift + cmd - 0x1b : yabai -m window --resize bottom:0:50; \
+#                   yabai -m window --resize top:0:50
+# shift + cmd - 0x18 : yabai -m window --resize top:0:-50; \
+#                   yabai -m window --resize bottom:0:-50
+# shift + cmd - 0x2f : yabai -m window --resize right:50:0; \
+#                   yabai -m window --resize left:50:0
+
+# shift + alt - p : yabai -m window --focus stack.prev
+# shift + alt - n : yabai -m window --focus stack.next
+# shift + alt - f : yabai -m window --focus stack.first
+# shift + alt - g : yabai -m window --focus stack.last
+
+# ctrl + shift - 1 : yabai -m window --space  1; yabai -m space --focus 1
+# ctrl + shift - 2 : yabai -m window --space  2; yabai -m space --focus 2
+# ctrl + shift - 3 : yabai -m window --space  3; yabai -m space --focus 3
+# ctrl + shift - 4 : yabai -m window --space  4; yabai -m space --focus 4
+# ctrl + shift - 5 : yabai -m window --space  5; yabai -m space --focus 5
+# ctrl + shift - 6 : yabai -m window --space  6; yabai -m space --focus 6
+# ctrl + shift - 7 : yabai -m window --space  7; yabai -m space --focus 7
+# ctrl + shift - 8 : yabai -m window --space  8; yabai -m space --focus 8
+# ctrl + shift - 9 : yabai -m window --space  9; yabai -m space --focus 9
+# ctrl + shift - 0 : yabai -m window --space 10; yabai -m space --focus 10
