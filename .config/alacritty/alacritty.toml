@@ -9,11 +9,11 @@ cyan = "#2B747C"
 white = "#5C5C5C"
 
 [colors.cursor]
-cursor = "#000000"
-text = "#FFFFFF"
+cursor = "#353535"
+text = "#EEEEEE"
 
 [colors.normal]
-black = "#FFFFFF"
+black = "#EEEEEE"
 blue = "#286486"
 cyan = "#3B8992"
 green = "#4F6C31"
@@ -23,8 +23,8 @@ white = "#353535"
 yellow = "#944927"
 
 [colors.primary]
-background = "#FFFFFF"
-foreground = "#000000"
+background = "#EEEEEE"
+foreground = "#353535"
 
 [cursor]
 blink_interval = 600
