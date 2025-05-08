@@ -299,4 +299,7 @@ fi
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ]; then
   source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
 fi
- 
+
+#============================== OS integrations ================================
+test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
+

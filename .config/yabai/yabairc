@@ -14,6 +14,9 @@ yabai -m config mouse_action1 move
 # set modifier + right-click drag to resize window (default: resize)
 yabai -m config mouse_action2 resize            10
 
+# set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
+yabai -m config focus_follows_mouse off
+
 # padding set to 12px
 yabai -m config top_padding 12
 yabai -m config bottom_padding 12

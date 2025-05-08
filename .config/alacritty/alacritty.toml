@@ -31,27 +31,13 @@ blink_interval = 600
 vi_mode_style = "block"
 
 [font]
-size = 10.0
-
-[font.bold]
-family = "JetBrainsMono Nerd Font Mono"
-style = "Bold"
-
-[font.italic]
-family = "JetBrainsMono Nerd Font Mono"
-style = "Italic"
-
-[font.normal]
-family = "JetBrainsMono Nerd Font Mono"
-style = "Regular"
+size = 15.0
+normal = { family = "JetBrainsMonoNL Nerd Font Mono", style = "Regular" }
 
 [scrolling]
 history = 50000
 
-[terminal.shell]
-program = "/bin/zsh"
-
 [window]
-decorations = "none"
-padding = { x = 30, y = 30 }
+# MacOS settings
+option_as_alt = "Both"
 
