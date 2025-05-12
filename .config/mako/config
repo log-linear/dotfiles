@@ -1,12 +1,11 @@
 default-timeout=5000
 ignore-timeout=1
 font=SF Pro Text 12
-background-color=#F9F5D6
-text-color=#3C3836
-border-color=#3C3836
-border-size=1
+background-color=#dddddd
+text-color=#353535
+border-color=#353535
+border-size=2
 border-radius=5
-layer=overlay
 
 [summary~=".*🔊.*"]
 group-by=summary
@@ -39,6 +38,7 @@ max-visible=1
 [summary~="Snapshot.*"]
 group-by=summary
 on-button-left=exec wl-paste | swappy -f -
+default-timeout=10000
 
 [summary~=".*Thunderbird.*"]
 layer=top

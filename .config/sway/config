@@ -36,7 +36,7 @@ for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 p
 set $menu exec $term --class launcher -e /usr/bin/sway-launcher-desktop
 
 #============================ Output configuration =============================
-output * bg ~/.local/share/backgrounds/benjamin-voros-yrwpJwDNSHE-unsplash.jpg fill
+output * bg ~/.local/share/backgrounds/2021-08-23-19-45-35-xavier-cuenca-w4-3.jpg fill
 
 #================================= Appearance ==================================
 # Remove title bar, set border size, font
@@ -79,7 +79,7 @@ for_window [title="nmtui"] floating enable, border normal
 for_window [title=".*CopyQ$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 1
 
 # Gaps
-gaps inner 5
+gaps inner 15
 smart_gaps on
 
 #============================= Idle configuration ==============================
@@ -322,6 +322,26 @@ mode "nag" {
   }
 }
 
+#----------------------------------- swayfx ------------------------------------
+blur enable
+blur_xray enable
+shadows enable
+default_dim_inactive 0.2
+corner_radius 15
+
+# layer_effects "notifications" {
+#     blur enable;
+#     blur_xray enable;
+#     blur_ignore_transparent enable;
+#     shadows enable;
+# }
+layer_effects "waybar" {
+    blur enable;
+    blur_xray enable;
+    blur_ignore_transparent enable;
+    shadows enable;
+}
+
 #------------------------- Startup/External programs ---------------------------
 
 # udiskie - automounting
@@ -330,8 +350,8 @@ exec udiskie -t &
 # mullvad
 exec mullvad-vpn
 
-# wlsunset
-exec wlsunset -t 4500 -T 4501
+# # wlsunset
+# exec wlsunset -t 4500 -T 4501
 
 # Inactive window transparency
 exec --no-startup-id python ~/.config/sway/inactive-window-transparency.py
@@ -350,6 +370,9 @@ exec python3 -m radicale --config ~/.config/radicale/config
 
 # Authentication agent - prompt for PW when GUI apps need root
 exec /usr/bin/polkit-dumb-agent
+
+# Autotiling
+exec_always autotiling-rs
 
 # Workspace programs
 workspace 1
