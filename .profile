@@ -114,11 +114,6 @@ if [ -d $PYENV_ROOT/bin ]; then
   eval "$(pyenv init -)"
 fi
 
-# mise-en-place init-logic
-if [ -f /opt/homebrew/bin/mise ]; then
-  eval "$(mise activate zsh)"
-fi
-
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/vfaner/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

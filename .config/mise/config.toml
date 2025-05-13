@@ -13,6 +13,7 @@ node = "latest"
 python = "latest"
 pipx = "latest"
 uv = "latest"
+ollama = "latest"
 
 "npm:vscode-langservers-extracted" = "latest"
 "npm:bash-language-server" = "latest"

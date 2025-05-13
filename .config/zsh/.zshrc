@@ -295,6 +295,13 @@ if command -v keychain; then
   eval $(keychain --eval --quiet id_ed25519)
 fi
 
+# mise-en-place init-logic
+if [ -f /opt/homebrew/bin/mise ]; then
+  eval "$(mise activate zsh)"
+elif [ -f /usr/bin/mise ]; then
+  eval "$(mise activate zsh)"
+fi
+
 #================================== Aliases ====================================
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" ]; then
   source "${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc"
