@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Universal-ish code/doc compiler
 
@@ -15,6 +15,7 @@ case "$ext" in
   c)      gcc "$file" -o "$base" && "$base" ;;
   cpp)    g++ "$file" -o "$base" && "$base" ;;
   cs)     mcs "$file" && mono "$base".exe ;;
+  dot)    dot -Tjpeg "$file" > /tmp/output.jpeg && open /tmp/output.jpeg ;;
   go)     go run "$file" ;;
   h)      sudo make install ;;
   java)   javac -d classes "$file" && java -cp classes "${1%.*}" ;;

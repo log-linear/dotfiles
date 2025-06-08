@@ -1,8 +1,11 @@
-#!/usr/bin/sh
+#!/usr/bin/env sh
 
 # General purpose CLI file-opener with window swallowing
 
 file="$1"
+if [ -f /usr/bin/open ]; then
+  /usr/bin/open "$file"
+fi
 
 if [ "$file" != "" ]; then
   xdg_type=$(xdg-mime query filetype "$file")

@@ -1,6 +1,6 @@
 cmd - o : yabai -m space --layout "$(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "stack" else "bsp" end')"
 
-cmd - return : open -na /Applications/Alacritty.app/Contents/MacOS/alacritty
+cmd - return : /usr/bin/open -na /Applications/Alacritty.app/Contents/MacOS/alacritty
 
 # focus window in bsp mode
 cmd - h : yabai -m window --focus west

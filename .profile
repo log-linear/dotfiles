@@ -73,6 +73,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export VPYTHON_VIRTUALENV_ROOT="$XDG_DATA_HOME/vpython_root"
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export RUFF_CACHE_DIR=$XDG_CACHE_HOME/ruff
+export OLLAMA_API_BASE=http://127.0.0.1:11434
 
 # Linux configuration
 if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then

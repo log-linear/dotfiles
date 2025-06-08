@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/env sh
 
 # General-purpose CLI file previewer script. Pairs well with fzf --preview
 

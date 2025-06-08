@@ -116,3 +116,7 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH" || eval "$(py
 if command -v keychain; then
   eval $(keychain --eval --quiet id_ed25519)
 fi
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/vfaner/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
