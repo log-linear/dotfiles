@@ -29,6 +29,7 @@ usql = "latest"
 "npm:@microsoft/compose-language-service" = "latest"
 "npm:dot-language-server" = "latest"
 
+"pipx:debugpy" = "latest"
 "pipx:ruff" = "latest"
 "pipx:isort" = "latest"
 "pipx:black" = "latest"

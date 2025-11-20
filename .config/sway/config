@@ -36,7 +36,7 @@ for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 p
 set $menu exec $term --class launcher -e /usr/bin/sway-launcher-desktop
 
 #============================ Output configuration =============================
-output * bg ~/.local/share/backgrounds/2021-08-23-19-45-35-xavier-cuenca-w4-3.jpg fill
+output * bg ~/.local/share/backgrounds/gruvbox_light_blue_bright.png fill
 
 #================================= Appearance ==================================
 # Remove title bar, set border size, font
@@ -370,9 +370,6 @@ exec python3 -m radicale --config ~/.config/radicale/config
 
 # Authentication agent - prompt for PW when GUI apps need root
 exec /usr/bin/polkit-dumb-agent
-
-# Autotiling
-exec_always autotiling-rs
 
 # Workspace programs
 workspace 1

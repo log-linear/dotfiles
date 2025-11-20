@@ -5,7 +5,7 @@
     // "width": 1280, // Waybar width
     // Choose the order of the modules
     "modules-left": [
-        "sway/workspaces",
+        "niri/workspaces",
         "sway/mode",
         "custom/media",
         "cpu",
