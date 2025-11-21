@@ -19,14 +19,14 @@ case "$fcat" in
       rtf)
         catdoc "$file" | bat --style=numbers --color=always ;;
       *)
-        bat --style=numbers --color=always "$file" ;;
+        bat --theme=GitHub --style=numbers --color=always "$file" ;;
     esac ;;
   application)
     case "$ftype" in
       pdf|\
       postscript)
         pdftotext "$file" - \
-        | bat --style=numbers --color=always ;;
+        | bat --theme=GitHub --style=numbers --color=always ;;
       x-extension-html|\
       x-extension-htm|\
       x-extension-shtml|\

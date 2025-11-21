@@ -27,6 +27,7 @@ export LANG="en_US.UTF-8"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_DEFAULT_OPTS="--reverse --color=bg+:#FFFFFF,hl+:#903F71,fg+:#000000,hl:#903F71 --preview 'preview {}'"
 export DFT_BACKGROUND="light"
+export BAT_THEME="GitHub"
 
 # $HOME cleanup
 export XDG_CONFIG_HOME="$HOME/.config"
