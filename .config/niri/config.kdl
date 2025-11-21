@@ -3,6 +3,7 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
 
+//------------------------------ Input configs ---------------------------------
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
@@ -79,6 +80,7 @@ input {
     position x=1280 y=0
 }
 
+//---------------------------------- Layout ------------------------------------
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
@@ -184,6 +186,7 @@ layout {
     }
 }
 
+//--------------------------------- Startup ------------------------------------
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
@@ -225,6 +228,45 @@ animations {
     // slowdown 3.0
 }
 
+//------------------------------- Layer rules ----------------------------------
+// Waybar
+layer-rule {
+    match namespace="waybar"
+    match at-startup=true
+
+    // Properties that apply continuously.
+    // opacity 0.5
+    // block-out-from "screencast"
+    // block-out-from "screen-capture"
+
+    shadow {
+        on
+        // off
+        softness 40
+        spread 5
+        offset x=0 y=5
+        draw-behind-window true
+        color "#00000064"
+        // inactive-color "#00000064"
+    }
+
+    geometry-corner-radius 12
+    place-within-backdrop true
+    // baba-is-float true
+}
+// Add a shadow for fuzzel.
+layer-rule {
+    match namespace="^launcher$"
+
+    shadow {
+        on
+    }
+
+    // Fuzzel defaults to 10 px rounded corners.
+    geometry-corner-radius 10
+}
+
+//------------------------------- Window rules ---------------------------------
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
@@ -309,6 +351,7 @@ window-rule {
     // block-out-from "screencast"
 }
 
+//--------------------------------- Keybinds -----------------------------------
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
@@ -480,6 +523,7 @@ binds {
 
     // Switches focus between the current and the previous workspace.
     // Mod+Tab { focus-workspace-previous; }
+    Mod+Tab { toggle-overview; }
 
     Mod+Comma  { consume-window-into-column; }
     Mod+Period { expel-window-from-column; }
