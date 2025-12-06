@@ -51,6 +51,8 @@ nerd-fonts-jetbrains-mono	aur	JetBrainsMono with NerdFonts support for fancy gly
 networkmanager-dmenu-git	aur	dmenu frontend for NetworkManager
 networkmanager	extra	manages network (wifi/ethernet etc) connections
 nwg-displays	aur	Output management utility for sway
+niri	extra	Scrolling window manager
+noctalia-shell	aur	Wayland-native desktop shell
 noto-fonts-emoji-blob	aur	Android blob emojis
 npm	community	Node Package Manager for COC and other miscellaneous tools
 onlyoffice-bin	aur	Office Software Suite

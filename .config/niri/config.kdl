@@ -192,10 +192,10 @@ layout {
 // which may be more convenient to use.
 spawn-at-startup "udiskie" "-t" "&"
 // spawn-at-startup "mullvad-vpn"
-spawn-at-startup "nm-applet" "--indicator"
-spawn-at-startup "blueman-applet"
+// spawn-at-startup "nm-applet" "--indicator"
+// spawn-at-startup "blueman-applet"
 spawn-at-startup "alacritty"
-spawn-at-startup "alacritty"
+// spawn-at-startup "alacritty"
 spawn-at-startup "firefox"
 spawn-at-startup "keepass"
 spawn-at-startup "protonmail-bridge"
@@ -203,6 +203,7 @@ spawn-at-startup "thunderbird"
 spawn-at-startup "chromium"
 spawn-at-startup "python3" "-m" "radicale" "--config" "~/.config/radicale/config"
 spawn-at-startup "/usr/bin/polkit-dumb-agent"
+spawn-at-startup "qs" "-c" "noctalia-shell"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -264,6 +265,12 @@ layer-rule {
 
     // Fuzzel defaults to 10 px rounded corners.
     geometry-corner-radius 10
+}
+
+// Set the overview wallpaper on the backdrop.
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
 }
 
 //------------------------------- Window rules ---------------------------------
@@ -347,6 +354,19 @@ window-rule {
     // block-out-from "screencast"
 }
 
+// noctalia
+window-rule {
+  // Rounded corners for a modern look.
+  geometry-corner-radius 20
+
+  // Clips window contents to the rounded corner boundaries.
+  clip-to-geometry true
+}
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
 //--------------------------------- Keybinds -----------------------------------
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -365,15 +385,15 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return { spawn "alacritty"; }
-    Mod+Semicolon { spawn "fuzzel"; }
-    Mod+Escape { spawn "swaylock" "--font" "'SF Pro Display'" "-f" "-c" "000000"; }
+    // Mod+Semicolon { spawn "fuzzel"; }
+    // Mod+Escape { spawn "swaylock" "--font" "'SF Pro Display'" "-f" "-c" "000000"; }
 
     // You can also use a shell:
     // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
-    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    // XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    // XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
 
     Mod+Shift+Q { close-window; }
 
@@ -447,6 +467,9 @@ binds {
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
     // ...
+    Mod+m { spawn "mullvad_helper"; }
+    Mod+n { spawn "wlsunset-toggle" "-t" "4500" "-T" "4501"; }
+    Mod+y { spawn "copyq" "--start-server" "show"; }
     // Mod+Shift+Page_Down { move-workspace-down; }
     // Mod+Shift+Page_Up   { move-workspace-up; }
     // Mod+Shift+U         { move-workspace-down; }
@@ -528,7 +551,7 @@ binds {
     Mod+R { switch-preset-column-width; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
-    Mod+C { center-column; }
+    // Mod+C { center-column; }
 
     // Finer width adjustments.
     // This command can also:
@@ -568,13 +591,23 @@ binds {
     Mod+Shift+Space { toggle-window-floating; }
     Mod+Space { switch-focus-between-floating-and-tiling; }
 
-    // Other programs
-    Mod+M { spawn "mullvad_helper"; }
-    Mod+N { spawn "wlsunset-toggle -t 4500 -T 4501"; }
+    // Noctalia
+    // Core Noctalia binds
+    Mod+Semicolon { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+S { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
+    // Mod+Comma { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle"; }
 
-    // Clipboard manager
-    Mod+E { spawn "emoji"; }
+    // Audio controls
+    XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
+    XF86AudioLowerVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+    XF86AudioMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
 
-    // Clipboard manager
-    Mod+Y { spawn "copyq" "--start-server" "show"; }
+    // Brightness controls
+    XF86MonBrightnessUp { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    XF86MonBrightnessDown { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+
+    // Utility shortcuts
+    Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+    Mod+C { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
+    Mod+Escape { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 }

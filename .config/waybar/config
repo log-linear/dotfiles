@@ -1,6 +1,6 @@
 {
     "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "position": "top", // Waybar position (top|bottom|left|right)
     "height": 25, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
@@ -101,7 +101,7 @@
         "tooltip": false
     },
     "memory": {
-        "format": " 󰍛 {}%"
+        "format": " 🖫{}%"
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -109,7 +109,7 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": " {icon} {temperatureC}°C",
-        "format-icons": ["", "", ""]
+        "format-icons": [""]
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -251,7 +251,7 @@
         "tooltip-format": "{}",
         "exec": "echo '{\"tooltip\": \"Toggle night light\"}'",
         "escape": true,
-        "on-click": "exec wlsunset -t 4000 -T 4001" 
+        "on-click": "exec wlsunset-toggle" 
     },
 }
 

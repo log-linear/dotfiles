@@ -29,6 +29,8 @@ usql = "latest"
 "npm:@microsoft/compose-language-service" = "latest"
 "npm:dot-language-server" = "latest"
 
+"pipx:ipython" = "latest"
+"pipx:ptpython" = "latest"
 "pipx:debugpy" = "latest"
 "pipx:ruff" = "latest"
 "pipx:isort" = "latest"
@@ -40,7 +42,7 @@ usql = "latest"
 "pipx:pylyzer" = "latest"
 "pipx:jupytext" = "latest"
 "pipx:nbdime" = "latest"
-"pipx:databricks-sql-cli" = "latest"
+# "pipx:databricks-sql-cli" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]
