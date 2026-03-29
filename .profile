@@ -18,6 +18,11 @@ if [ -d "$HOME/dev/flutter/bin" ] ; then
   PATH="$HOME/dev/flutter/bin:$PATH"
 fi
 
+# Include xwayland-satellite
+if [ -x "$(command -v "xwayland-satellite")" ] ; then
+  PATH="/usr/bin/xwayland-satellite:$PATH"
+fi
+
 # Defaults
 export TERMINAL="alacritty"
 export EDITOR="nvim"
