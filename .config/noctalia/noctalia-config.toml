@@ -1,0 +1,80 @@
+[accessibility]
+ui_scale = 1.0500000081956387
+
+[backdrop]
+blur_intensity = 0.0
+enabled = true
+tint_intensity = 0.0
+
+[bar]
+order = [ "default", "bar" ]
+
+    [bar.bar]
+    capsule = true
+    enabled = true
+    margin_edge = 10
+    margin_ends = 10
+
+    [bar.default]
+    enabled = false
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@DP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1280.0
+    cy = 1258.0
+    output = "DP-1"
+    placement_height = 1440.0
+    placement_width = 2560.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[shell]
+font_family = "SF Pro Text"
+niri_overview_type_to_launch_enabled = true
+
+    [shell.launcher.providers.wallpaper]
+    prefix = ""
+
+[theme]
+builtin = "Kanagawa"
+mode = "auto"
+source = "wallpaper"
+
+[wallpaper]
+directory = "/home/victor/.local/share/backgrounds"
+
+    [wallpaper.default]
+    path = "/home/victor/.local/share/backgrounds/2021-08-23-19-45-35-xavier-cuenca-w4-3.jpg"
+
+    [wallpaper.last]
+    path = "/home/victor/.local/share/backgrounds/2021-08-23-19-45-35-xavier-cuenca-w4-3.jpg"
+
+    [wallpaper.monitors.DP-1]
+    path = "/home/victor/.local/share/backgrounds/2021-08-23-19-45-35-xavier-cuenca-w4-3.jpg"
