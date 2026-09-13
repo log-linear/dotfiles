@@ -121,6 +121,9 @@ if [ -d $PYENV_ROOT/bin ]; then
   eval "$(pyenv init -)"
 fi
 
+# Goose
+export CONTEXT_FILE_NAMES='["AGENTS.md", ".goosehints", "CLAUDE.md", "project_rules.txt"]'
+
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/vfaner/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
