@@ -1,46 +1,46 @@
-cmd - o : yabai -m space --layout "$(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "stack" else "bsp" end')"
-
 cmd - return : /usr/bin/open -na /Applications/Alacritty.app/Contents/MacOS/alacritty
 
-# focus window in bsp mode
-cmd - h : yabai -m window --focus west
-cmd - j : yabai -m window --focus south
-cmd - k : yabai -m window --focus north
-cmd - l : yabai -m window --focus east
+# cmd - o : yabai -m space --layout "$(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "stack" else "bsp" end')"
 
+# # focus window in bsp mode
+# cmd - h : yabai -m window --focus west
+# cmd - j : yabai -m window --focus south
+# cmd - k : yabai -m window --focus north
+# cmd - l : yabai -m window --focus east
+#
 # swap windows
-shift + cmd - h : yabai -m window --warp west
-shift + cmd - j : yabai -m window --warp south
-shift + cmd - k : yabai -m window --warp north
-shift + cmd - l : yabai -m window --warp east
+# shift + cmd - h : yabai -m window --warp west
+# shift + cmd - j : yabai -m window --warp south
+# shift + cmd - k : yabai -m window --warp north
+# shift + cmd - l : yabai -m window --warp east
 
 # Make window native fullscreen
-shift + cmd - f         : yabai -m window --toggle zoom-fullscreen
+# shift + cmd - f         : yabai -m window --toggle zoom-fullscreen
 
-# Float / Unfloat window
-shift + cmd - space : \
-    yabai -m window --toggle float; \
-    yabai -m window --toggle border
-
+# # Float / Unfloat window
+# shift + cmd - space : \
+#     yabai -m window --toggle float; \
+#     yabai -m window --toggle border
+#
 # Rotate windows clockwise and anticlockwise
-cmd - r         : yabai -m space --rotate 270
-shift + cmd - r : yabai -m space --rotate 90
+# cmd - r         : yabai -m space --rotate 270
+# shift + cmd - r : yabai -m space --rotate 90
 
 # Close window
-shift + cmd - q : yabai -m window --close
+# shift + cmd - q : yabai -m window --close
 
 # Launcher
 # cmd - 0x29 : osascript -e 'tell application "System Events" to key code 41 using {command down}'
 
 # Resize windows
-shift + cmd - 0x2B : yabai -m window --resize left:-50:0; \
-                  yabai -m window --resize right:-50:0
-shift + cmd - 0x2F : yabai -m window --resize right:50:0; \
-                  yabai -m window --resize left:50:0
-shift + cmd - 0x1B : yabai -m window --resize bottom:0:50; \
-                  yabai -m window --resize top:0:50
-shift + cmd - 0x18 : yabai -m window --resize top:0:-50; \
-                  yabai -m window --resize bottom:0:-50
+# shift + cmd - 0x2B : yabai -m window --resize left:-50:0; \
+#                   yabai -m window --resize right:-50:0
+# shift + cmd - 0x2F : yabai -m window --resize right:50:0; \
+#                   yabai -m window --resize left:50:0
+# shift + cmd - 0x1B : yabai -m window --resize bottom:0:50; \
+#                   yabai -m window --resize top:0:50
+# rhift + cmd - 0x18 : yabai -m window --resize top:0:-50; \
+#                   yabai -m window --resize bottom:0:-50
 
 # shift + alt - p : yabai -m window --focus stack.prev
 # shift + alt - n : yabai -m window --focus stack.next
