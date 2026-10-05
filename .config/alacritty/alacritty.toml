@@ -31,7 +31,7 @@ blink_interval = 600
 vi_mode_style = "block"
 
 [font]
-size = 11.5
+size = 15
 normal = { family = "JetBrainsMonoNL Nerd Font Mono", style = "Regular" }
 
 [scrolling]

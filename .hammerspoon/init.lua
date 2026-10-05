@@ -30,16 +30,12 @@ PaperWM:bindHotkeys({
     swap_down  = {{ "cmd", "shift"}, "j"},
 
     -- position and resize focused window
-    -- center_window        = {{ "cmd"}, "c"},
+    center_window        = {{ "cmd", "shift"}, "c"},
     full_width           = {{ "cmd", "shift"}, "f"},
-    -- cycle_width          = {{ "cmd"}, "."},
-    -- reverse_cycle_width  = {{ "cmd"}, ","},
+    cycle_width          = {{ "cmd"}, "."},
+    reverse_cycle_width  = {{ "cmd"}, ","},
     -- cycle_height         = {{ "cmd"}, "="},
     -- reverse_cycle_height = {{"cmd", "shift"}, "-"},
-
-    -- increase/decrease width
-    increase_width = {{ "cmd"}, "."},
-    decrease_width = {{ "cmd"}, ","},
 
     -- move focused window into / out of a column
     slurp_in = {{ "cmd"}, "i"},
@@ -83,4 +79,5 @@ PaperWM:bindHotkeys({
     -- move_window_8 = {{ "cmd", "shift"}, "8"},
     -- move_window_9 = {{ "cmd", "shift"}, "9"}
 })
+PaperWM.window_ratios = { 1/3, 1/2, 2/3 }
 PaperWM:start()
