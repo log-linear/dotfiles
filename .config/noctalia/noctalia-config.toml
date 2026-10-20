@@ -18,6 +18,12 @@ order = [ "default", "bar" ]
     [bar.default]
     enabled = false
 
+[dock]
+concave_edge_corners = false
+enabled = true
+reserve_space = false
+smart_auto_hide = true
+
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
