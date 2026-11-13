@@ -98,3 +98,4 @@ ANTHROPIC_HOST: https://token-plan.ap-southeast-1.maas.aliyuncs.com
 GOOSE_MODE: auto
 GOOSE_TELEMETRY_ENABLED: false
 GOOSE_THINKING_EFFORT: medium
+GOOSE_MAX_TOKENS: 32768
